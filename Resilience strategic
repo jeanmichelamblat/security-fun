@@ -1,0 +1,1491 @@
+<!DOCTYPE HTML>
+        <html lang="en">
+            <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/etc/clientlibs/foundation/sitecatalyst/VisitorAPI.js"></script>
+    <!--  Headlisb css -->
+<link rel="stylesheet" href="/etc/clientlibs/aig/aemfoundationmain.min.css" type="text/css">
+<script type="text/javascript" src="/etc/clientlibs/aig/aemjs.min.js"></script>
+<script type="text/javascript" src="/etc/clientlibs/aig/aemfoundationmain.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- <meta data-sly-include="cqstyling.html" data-sly-unwrap></meta> -->    
+    <!-- Client Context js -->
+    <script type="text/javascript" src="/etc/clientlibs/foundation/personalization/kernel.min.js"></script>
+<script type="text/javascript">
+    $CQ(function() {
+        CQ_Analytics.SegmentMgr.loadSegments("\/etc\/segmentation");
+        CQ_Analytics.ClientContextUtils.init("\/etc\/clientcontext\/aigusClientContext", "\/content\/aig\/america\u002Dcanada\/us\/en\/knowledge\u002Dand\u002Dinsights\/building\u002Da\u002Dcyber\u002Dresilient\u002Dbusiness");
+    });
+</script>
+	<script src="//assets.adobedtm.com/962196b0527148dcc7759117b07639e3d5c6fb98/satelliteLib-871a5b58f8798bc24c6b1e47b7bd45bffc82ead0.js"></script>
+<link rel="stylesheet" href="/etc/clientlibs/aigus/css/aigUsaConfigCssPartOne.min.css" type="text/css">
+<link rel="stylesheet" href="/etc/clientlibs/aig/america-canada/us/css/captchaSpecific.min.css" type="text/css">
+<script type="text/javascript" src="/etc/clientlibs/aigus/js/aigUsaConfigJs.min.js"></script>
+    <title>7 Steps to a Cyber-Resilient Business - Insurance from AIG in the US</title>
+</head>
+            <body data-spy="scroll" data-target="#nav">
+    <!-- div data-sly-resource="clientcontext"></div -->
+     <div>
+   <div class="dtm_header"></div>
+<div class="individual_header">
+				  <a class="offscreen" id="skipnav-search" href="#individual-search-panel" title="Skip Navigation">Skip Navigation</a>
+				  <div><a class="offscreen" href="#aig-template-wrapper" title="Skip to Content">Skip to Content</a></div>
+</div>
+<div class="business_header">
+			  <a class="offscreen" id="skipnav-search" href="#business-search-panel" title="Skip Navigation">Skip Navigation</a>
+		  <div><a class="offscreen" href="#aig-template-wrapper" title="Skip to Content">Skip to Content</a></div>
+</div>
+<header>
+    	<input type="hidden" id="currentPagePathId" value="/content/aig/america-canada/us/en/knowledge-and-insights/building-a-cyber-resilient-business"/>
+        <input type="hidden" class="individuallinkpath" value="/content/aig/america-canada/us/en/individual"/>
+        <input type="hidden" class="businesslinkpath" value="/content/aig/america-canada/us/en/business"/>
+	<!-- Start: copy code of Utlity Bar Component-->	
+	<!--- Default header-->
+	<div class="defaultheader target_headercookie">
+	<!-- Start: copy code of Utlity Bar Component-->	
+			<div class="container-fluid">
+				<div class="row">
+				<div class="col-sm-12 utlitybar">
+					<div class="col-sm-7 no-padding headerleftlink">
+						<ul class="leftlinks"></ul>
+				   </div>
+					<div class="col-sm-5 headerrightlink">					
+								<ul class="rightlinks"></ul>
+					</div>
+				</div>
+				</div>
+			</div>
+	<!-- End: copy code of Utlity Bar Component-->	
+	<nav class="nav nav-bar headerbar">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 headerlinks">	
+					<div class="col-md-4 col-sm-4 no-padding headerleftlink">
+						<ul class="leftlinks"></ul>
+					</div>
+					<!-- End: Start code of Logo Component-->
+					<div class="col-xs-12 col-sm-4 headerlogolink">	</div>
+					<!-- End: end code of LogoComponent-->
+					<div class="rightnav col-xs-4 text-right ft-categories-white hidden-xs">
+						<ul class="rightlinks"></ul>
+					</div>
+				</div>
+		   </div>
+		   <!-- End: End code of Right Links and Search Bar Component-->
+		</div>
+	</nav>
+	<!-- Start: Start Code of Mobile UI Component-->
+	<nav class="nav nav-bar mobileheaderbar">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 text-center"></div>
+			</div>
+		</div>
+	 </nav>
+	 <div class="container-fluid mobileheaderlinks">
+		<div class="row">
+			<div>	
+				<div class="col-xs-9">
+					<ul class="leftlinks"></ul>
+				</div>  
+				<div class="col-xs-3">
+					<a href="#" data-toggle="modal" data-target="#mobheaderModal" title="Menu">
+                        <span>Menu</span>
+						<div class="togglemodalblock">
+                            <span class="togglemodal"></span>
+                            <span class="togglemodal"></span>
+                            <span class="togglemodal"></span>
+						</div>
+					</a>
+				</div>
+			</div>
+		 </div>
+	 </div>
+	<!-- Modal -->
+	 <div class="modal fade" id="mobheaderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+	  <div class="modal-dialog headerdialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+		  </div>
+		  <div class="modal-body">
+				<div class="col-xs-12 cookieselectedvalcxvxc text-center"></div>
+				<div class="col-xs-12">	
+					<ul class="mobleftlinks"></ul>
+				</div>
+				<div class="col-sm-12 clear">
+						<form name="search-box-form" method="get" action="/search-results">
+							<div class="modalsearch clear">
+								<!-- UI Team to work on the below newly added label -->
+	                            <label for="mob-default-header">Search</label>
+								<input type="text" name="q" class="header-search" id="mob-default-header" placeholder="Search">
+								<button class="search-mobile" type="submit" title="Search" value="">
+									<span class="glyphicon glyphicon-search"></span>
+								 </button>
+							</div>												
+						 </form>
+					 <div>
+						 <ul class="mobrightlinks"></ul>
+					 </div>
+				</div>
+			</div>
+		</div>
+	   </div>
+   </div>
+	</div>
+	<!--- Individual header-->
+	<div class="individual_header target_headercookie">
+        <input type="hidden" id="trackParams" value="false"/>
+        <!-- Start: copy code of Utlity Bar Component-->
+        <div class="container-fluid">
+            <div class="row">
+                        <div class="col-sm-12 utlitybar">
+                            <div class="col-sm-7 no-padding headerleftlink">
+                                <ul class="leftlinks">
+                                                <li>
+                                                    <a href="/individual" title="Individuals & Families" class="utilityleftlink0">Individuals & Families</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/business" title="Business & Enterprise" class="utilityleftlink1">Business & Enterprise</a>
+                                                </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-5 headerrightlink">
+                                <ul class="rightlinks">
+                                                <li>
+                                                    <a href="/careers" title="Careers">Careers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/investor-relations" title="Investors">Investors</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us" title="About AIG">About Us</a>
+                                                </li>
+                                        <li>
+                                                            <a title="Log in" href="/login">Log in</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+            </div>
+        </div>
+        <!-- End: copy code of Utlity Bar Component-->
+        <nav class="nav nav-bar headerbar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 headerlinks">
+                        <div class="col-md-4 col-sm-4 no-padding headerleftlink">
+                            <ul class="leftlinks">
+                                            <li>
+                                                <a href="/individual/insurance" title="Insurance">Insurance</a>
+                                            </li>
+                                            <li>
+                                                <a href="/individual/investments" title="Investments">Investments</a>
+                                            </li>
+                            </ul>
+                        </div>
+                        <!-- End: Start code of Logo Component-->
+                          <div class="col-xs-12 col-sm-4 headerlogolink">
+								  <a href="/individual" title="title" class="landingheaderlogo" target="_blank">
+                                <img src="/content/dam/global/site-level-elements/logo/logo.png" alt="Logo" class="logo">
+                             </a>
+                                <div class="logo printlogo">
+                                    <img src="/content/dam/global/site-level-elements/logo/print-logo.png" alt="Logo"/>
+                                </div>
+                        </div>
+                        <!-- End: end code of LogoComponent-->
+                        <div class="rightnav col-xs-4 text-right ft-categories-white hidden-xs">
+                            <ul class="rightlinks">
+                                            <li>
+                                                <a href="/individual/individual-claims" title="Claims">Claims</a>
+                                            </li>
+                                    <li class="headericonsearch">
+                                        <a title="Title" id="individual-search-panel" class="btn-search" href="#" data-toggle="modal" aria-haspopup="true" aria-expanded="false" data-target=".search-panel-sm-section" role="button">
+                                            <span class="glyphicon glyphicon-search search-btn"></span>
+                                            <span class="ft-categories-white">Search</span>
+                                        </a>
+                                        <a title="Close" class="close pull-right hide" href="#" aria-label="Close" data-dismiss="modal" role="button">
+                                            <span aria-hidden="true">×</span>
+                                            <span class="ft-categories-white">Close</span>
+                                        </a>
+                                        <!-- Start: copy code of Seach Panel Modal Component-->
+                                        <div class="modal fade search-panel-sm-section" role="dialog" aria-labelledby="globalSearchModal1" id="searchPanelModal1">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="modal-dialog" id="globalSearchModal1">
+                                                        <div class="modal-content">
+                                                            <div class="col-sm-12 no-padding">
+                                                                <div class="col-sm-12 search-panel-sm">
+                                                                    <form name="search-box-form" method="get" action="/search-results">
+                                                                        <div class="form-group">
+                                                                            <!-- UI Team to work on the below newly added label -->
+                                                                            <label for="individual-header-input">Search for</label>
+                                                                            <input type="text" name="q" class="form-control ft-bodycopy placeholder header-search" id="individual-header-input" placeholder="Search for" data-placeholder="Search for">
+                                                                            <input class="cta ft-buttons" type="submit" value="Search">
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End: End code of Right Links and Search Bar Component-->
+            </div>
+        </nav>
+        <!-- Start: Start Code of Mobile UI Component-->
+        <nav class="nav nav-bar mobileheaderbar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 text-center">
+								<a href="/individual" title="title" class="landingheaderlogo">
+								<img src="/content/dam/global/site-level-elements/logo/logo.png" alt="Logo" class="logo">
+								</a>
+                            <div class="logo printlogo">
+                                <img src="/content/dam/global/site-level-elements/logo/print-logo.png" alt="Logo"/>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid mobileheaderlinks">
+            <div class="row">
+                <div>
+                    <div class="col-xs-9">
+                        <ul class="leftlinks">
+                                        <li>
+                                            <a href="/individual/insurance" title="Insurance">Insurance</a>
+                                        </li>
+                                        <li>
+                                            <a href="/individual/investments" title="Investments">Investments</a>
+                                        </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-3">
+                        <a href="#" data-toggle="modal" data-target="#indvmobheaderModal" title="Menu">
+                        	<span>Menu</span>
+                            <div class="togglemodalblock">
+                                <span class="togglemodal"></span>
+                                <span class="togglemodal"></span>
+                                <span class="togglemodal"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="mobdialogmodal modal fade" id="indvmobheaderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog headerdialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close"><span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-xs-12 cookieselectedval text-center">
+                                    <a href="#" class="mobileheaderleft mobileutlilityleftlink0" title="Individuals & Families">Individuals & Families</a>
+                                    <a href="#" class="mobileheaderleft mobileutlilityleftlink1" title="Business & Enterprise">Business & Enterprise</a>
+                        </div>
+                        <div class="col-xs-12">
+                            <ul class="mobleftlinks">
+                                        <li>
+                                            <a href="/individual/insurance" title="Insurance">Insurance</a>
+                                        </li>
+                                        <li>
+                                            <a href="/individual/investments" title="Investments">Investments</a>
+                                        </li>
+                                        <li>
+                                            <a href="/individual/individual-claims" title="Claims">Claims</a>
+                                        </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 clear">
+                                <form name="search-box-form" method="get" action="/search-results">
+                                    <div class="modalsearch clear">
+                                        <!-- UI Team to work on the below newly added label -->
+                                        <label for="mob-individual-header"></label>
+                                        <input type="text" name="q" class="header-search" id="mob-individual-header" placeholder="Search">
+                                        <button class="search-mobile" type="submit" title="Search" value="">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </form>
+                            <div>
+                                <ul class="mobrightlinks">
+                                                <li>
+                                                    <a href="/careers" title="Careers">Careers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/investor-relations" title="Investors">Investors</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us" title="About AIG">About Us</a>
+                                                </li>
+                                        <li>
+                                                            <a title="Log in" href="/login">Log in</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--- Business header-->
+	<div class="business_header target_headercookie">
+        <input type="hidden" id="trackParams" value="false"/>
+        <!-- Start: copy code of Utlity Bar Component-->
+        <div class="container-fluid">
+            <div class="row">
+                        <div class="col-sm-12 utlitybar">
+                            <div class="col-sm-7 no-padding headerleftlink">
+                                <ul class="leftlinks">
+                                                <li>
+                                                    <a href="/individual" title="Individuals & Families" class="utilityleftlink0">Individuals & Families</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/business" title="Business & Enterprise" class="utilityleftlink1">Business & Enterprise</a>
+                                                </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-5 headerrightlink">
+                                <ul class="rightlinks">
+                                                <li>
+                                                    <a href="/careers" title="Careers">Careers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/investor-relations" title="Investors">Investors</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us" title="About AIG">About Us</a>
+                                                </li>
+                                        <li>
+                                                            <a title="Log in" href="/login">Log in</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+            </div>
+        </div>
+        <!-- End: copy code of Utlity Bar Component-->
+        <nav class="nav nav-bar headerbar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 headerlinks">
+                        <div class="col-md-4 col-sm-4 no-padding headerleftlink">
+                            <ul class="leftlinks">
+                                            <li>
+                                                <a href="/business/insurance" title="Insurance">Insurance</a>
+                                            </li>
+                                            <li>
+                                                <a href="/business/investments" title="Investments">Investments</a>
+                                            </li>
+                                            <li>
+                                                <a href="/business/industry" title="Industry">Industry</a>
+                                            </li>
+                            </ul>
+                        </div>
+                        <!-- End: Start code of Logo Component-->
+                        <div class="col-xs-12 col-sm-4 headerlogolink">
+								<a href="/business" title="Home" class="landingheaderlogo">
+								<img src="/content/dam/global/site-level-elements/logo/logo.png" alt="Logo" class="logo">
+								</a>
+                                <div class="logo printlogo">
+                                    <img src="/content/dam/global/site-level-elements/logo/print-logo.png" alt="Logo"/>
+                                </div>
+                        </div>
+                        <!-- End: end code of LogoComponent-->
+                        <div class="rightnav col-xs-4 text-right ft-categories-white hidden-xs">
+                            <ul class="rightlinks">
+                                            <li>
+                                                <a href="/business/business-claims" title="Claims">Claims</a>
+                                            </li>
+                                    <li class="headericonsearch">
+                                        <a title="Title" id="business-search-panel" class="btn-search" href="#" data-toggle="modal" aria-haspopup="true" aria-expanded="false" data-target=".search-panel-sm-section1" role="button">
+                                            <span class="glyphicon glyphicon-search search-btn"></span>
+                                            <span class="ft-categories-white">Search</span>
+                                        </a>
+                                        <a title="Close" class="close pull-right hide" href="#" aria-label="Close" data-dismiss="modal" role="button">
+                                            <span aria-hidden="true">×</span>
+                                            <span class="ft-categories-white">Close</span>
+                                        </a>
+                                        <!-- Start: copy code of Seach Panel Modal Component-->
+                                        <div class="modal fade search-panel-sm-section1" role="dialog" aria-labelledby="globalSearchModal" id="searchPanelModal">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="modal-dialog" id="globalSearchModal">
+                                                        <div class="modal-content">
+                                                            <div class="col-sm-12 no-padding">
+                                                                <div class="col-sm-12 search-panel-sm">
+                                                                    <form name="search-box-form" method="get" action="/search-results">
+                                                                        <div class="form-group">
+                                                                            <!-- UI Team to work on the below newly added label -->
+                                                                            <label for="business-header-input">Search for</label>
+                                                                            <input type="text" name="q" class="form-control ft-bodycopy placeholder header-search" id="business-header-input" placeholder="Search for" data-placeholder="Search for">
+                                                                            <input class="cta ft-buttons" type="submit" value="Search" title="Search">
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End: End code of Right Links and Search Bar Component-->
+            </div>
+        </nav>
+        <!-- Start: Start Code of Mobile UI Component-->
+        <nav class="nav nav-bar mobileheaderbar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 text-center">
+								<a href="/business" title="Home" class="landingheaderlogo">
+								<img src="/content/dam/global/site-level-elements/logo/logo.png" alt="Logo" class="logo">
+								</a>
+                            <div class="logo printlogo">
+                                <img src="/content/dam/global/site-level-elements/logo/print-logo.png" alt="Logo"/>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid mobileheaderlinks">
+            <div class="row">
+                <div>
+                    <div class="col-xs-9">
+                        <ul class="leftlinks">
+                                        <li>
+                                            <a href="/business/insurance" title="Insurance">Insurance</a>
+                                        </li>
+                                        <li>
+                                            <a href="/business/investments" title="Investments">Investments</a>
+                                        </li>
+                                        <li>
+                                            <a href="/business/industry" title="Industry">Industry</a>
+                                        </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-3">
+                        <a href="#" data-toggle="modal" data-target="#busmobheaderModal" title="Menu">
+                        	<span>Menu</span>
+                            <div class="togglemodalblock">
+                                <span class="togglemodal"></span>
+                                <span class="togglemodal"></span>
+                                <span class="togglemodal"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="mobdialogmodal modal fade" id="busmobheaderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+            <div class="modal-dialog headerdialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close"><span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-xs-12 buscookieselectedval text-center">
+                                    <a href="#" class="mobileheaderleft mobileutlilityleftlink0" title="Individuals & Families">Individuals & Families</a>
+                                    <a href="#" class="mobileheaderleft mobileutlilityleftlink1" title="Business & Enterprise">Business & Enterprise</a>
+                        </div>
+                        <div class="col-xs-12">
+                            <ul class="mobleftlinks">
+                                        <li>
+                                            <a href="/business/insurance" title="Insurance">Insurance</a>
+                                        </li>
+                                        <li>
+                                            <a href="/business/investments" title="Investments">Investments</a>
+                                        </li>
+                                        <li>
+                                            <a href="/business/industry" title="Industry">Industry</a>
+                                        </li>
+                                        <li>
+                                            <a href="/business/business-claims" title="Claims">Claims</a>
+                                        </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 clear">
+                                <form name="search-box-form" method="get" action="/search-results">
+                                    <div class="modalsearch clear">
+                                        <!-- UI Team to work on the below newly added label -->
+                                        <label for="mob-business-header">Search</label>
+                                        <input type="text" name="q" class="header-search" id="mob-business-header" placeholder="Search">
+                                        <button class="search-mobile" type="submit" title="Search" value="">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </form>
+                            <div>
+                                <ul class="mobrightlinks">
+                                                <li>
+                                                    <a href="/careers" title="Careers">Careers</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/investor-relations" title="Investors">Investors</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/about-us" title="About AIG">About Us</a>
+                                                </li>
+                                        <li>
+                                                            <a title="Log in" href="/login">Log in</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="newheader_secondary_nav">
+</div>
+ </header>	
+</div>
+ <div id="aig-template-wrapper">
+    <div class="two-column-template articletemp">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3">
+    <!-- Start Side Navigation-->        
+                <div>
+			<div class="side-navigation hidden-xs">
+				<ul class="nav bs-docs-sidenav side-nav">
+						<li class="tertiary-one"><a title="Back to Insights" href="/knowledge-and-insights"> <span class="glyphicon glyphicon-menu-left tone-arr"></span><span class="tone-label">Back to Insights</span></a>
+						</li>
+				</ul>
+			</div>
+			<div class="side-navigation back-to-link visible-xs">
+	            <ul class="nav bs-docs-sidenav side-nav">
+						<li class="tertiary-one"><a title="Back to Insights" href="/knowledge-and-insights"> <span class="glyphicon glyphicon-menu-left"></span>Back to Insights</a></li>
+				</ul>
+			</div>
+</div>
+    <!-- Start Side Navigation-->
+            </div>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-1">
+            <!-- Copy Code: Article Header Starts here-->
+    <div class="article-header">
+        <div class="container">
+            <div class="row">
+                <h1 class="in-page-title ft-artprodtitle">7 Steps to a Cyber-Resilient Business</h1>
+                <div class="col-xs-12 hidden-xs">
+                    <div class="col-xs-12  col-sm-4">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <p class="ft-categories"></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <p class="ft-categories">Emerging Risk</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 hidden-xs">
+                    <div class="col-xs-12  col-sm-4">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                            <p class="ft-bodycopy">Topic</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 visible-xs">
+                    <div class="col-xs-12  col-sm-4">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                            <p class="ft-categories">Emerging Risk</p>
+                            <p class="ft-bodycopy">Topic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <!-- Copy Code: Article Header Ends here-->
+            <!-- Start Insert Social Content from DMP here-->
+                <div><div>
+		<div class="sharethis">
+        	<div class="stpan ">
+                	<span class="col-sm-2 stlabel">share</span>
+                <ul>
+								<li class="sticon twitter" id="twitter"><a href="https://twitter.com/intent/tweet?text=%207%20Steps%20to%20a%20Cyber-Resilient%20Business&via=AIGInsurance&url=https://www.aig.com/knowledge-and-insights/building-a-cyber-resilient-business%3Fcmpid%3DSMC%2duser%2dtwitter%2daig:us:knowledge-and-insights:building-a-cyber-resilient-business" title="Twitter" target="_blank" onclick="s.linkTrackVars='eVar27,events';
+									s.linkTrackEvents='event10';
+									s.eVar27='twitter';
+									s.events='event10';
+									s.tl(this,'e','twitter', null, cleanupAfter);">
+									<!-- onclick="socialAnalytics('twitter')" -->
+								Twitter</a></li>
+								<li class="sticon linkedin" id="linkedin"><a href="https://www.linkedin.com/shareArticle?source=&title=7%20Steps%20to%20a%20Cyber-Resilient%20Business&summary=&mini=true&url=https://www.aig.com/knowledge-and-insights/building-a-cyber-resilient-business%3Fcmpid%3DSMC%2duser%2dlinkedin%2daig:us:knowledge-and-insights:building-a-cyber-resilient-business" title="LinkedIn" target="_blank" onclick="s.linkTrackVars='eVar27,events';
+									s.linkTrackEvents='event10';
+									s.eVar27='linkedin';
+									s.events='event10';
+									s.tl(this,'e','linkedin', null, cleanupAfter);">
+									<!-- onclick="socialAnalytics('linkedin')"> -->
+									<!--  -->
+								LinkedIn</a></li>
+								<li class="sticon googleplus" id="googleplus"><a href="https://plus.google.com/share?url=https://www.aig.com/knowledge-and-insights/building-a-cyber-resilient-business%3Fcmpid%3DSMC%2duser%2dgoogleplus%2daig:us:knowledge-and-insights:building-a-cyber-resilient-business&hl=en" title="Google Plus" target="_blank" onclick="s.linkTrackVars='eVar27,events';
+									s.linkTrackEvents='event10';
+									s.eVar27='googleplus';
+									s.events='event10';
+									s.tl(this,'e','googleplus', null, cleanupAfter);">
+									<!-- onclick="socialAnalytics('googleplus')"> -->
+									<!--  -->
+								Google Plus</a></li>
+								<li class="sticon facebook" id="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.aig.com/knowledge-and-insights/building-a-cyber-resilient-business%3Fcmpid%3DSMC%2duser%2dfacebook%2daig:us:knowledge-and-insights:building-a-cyber-resilient-business&t=7%20Steps%20to%20a%20Cyber-Resilient%20Business" title="Facebook" target="_blank" onclick="s.linkTrackVars='eVar27,events';
+									s.linkTrackEvents='event10';
+									s.eVar27='facebook';
+									s.events='event10';
+									s.tl(this,'e','facebook', null, cleanupAfter);">
+									<!-- onclick="socialAnalytics('facebook')"> -->
+									<!--  -->
+								Facebook</a></li>
+								<li class="sticon email" id="email"><a href="#" title="Email" data-toggle="modal" data-target=".bs-modal-lg" onclick="s.linkTrackVars='eVar27,events';
+									s.linkTrackEvents='event10';
+									s.eVar27='email';
+									s.events='event10';
+									s.tl(this,'e','email', null, cleanupAfter);">
+									<!-- onclick="socialAnalytics('email')"> -->
+									<!--  -->
+								Email</a></li>
+                </ul>
+                <!-- Modal popup for Email -->
+                    <div class="modal bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="socialLargeModalLabel" aria-hidden="true">
+                        <div class="modalbox">
+                            <div class="modal-dialog modal-lg" id="socialLargeModalLabel">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            <p class="emaillabel">Please Select Your E-Mail Provider</p>
+                                        <ul class="emailbox">
+                                                <li class="eboutlook">
+                                                    <a href="mailto:?body=https://www.aig.com/knowledge-and-insights/building-a-cyber-resilient-business%3Fcmpid%3DEMC%2duser%2doutlook%2daig:us:knowledge-and-insights:building-a-cyber-resilient-business%0D%0A%0D%0A&subject=7%20Steps%20to%20a%20Cyber-Resilient%20Business" title="Outlook" target="_blank">
+													Outlook</a>
+                                                </li>
+                                                <li class="ebgmail">
+                                                    <a href="https://mail.google.com/mail/u/0/?view=cm&to=&body=https://www.aig.com/knowledge-and-insights/building-a-cyber-resilient-business%3Fcmpid%3DEMC%2duser%2Dgmail%2daig:us:knowledge-and-insights:building-a-cyber-resilient-business%0D%0A%0D%0A&su=7%20Steps%20to%20a%20Cyber-Resilient%20Business" title="Gmail" target="_blank">
+													Gmail</a>
+                                                </li>
+                                                <li class="ebyahoo">
+                                                    <a href="http://compose.mail.yahoo.com/?body=https://www.aig.com/knowledge-and-insights/building-a-cyber-resilient-business%3Fcmpid%3DEMC%2duser%2demail%2daig:us:knowledge-and-insights:building-a-cyber-resilient-business%0D%0A%0D%0A&subject=7%20Steps%20to%20a%20Cyber-Resilient%20Business" title="Yahoo" target="_blank">
+													Yahoo</a>
+                                                </li>
+                                        </ul>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+		</div>
+</div>
+</div>
+            <!-- End Insert Social Content from DMP here-->
+            <!-- Start Article Body Parsys-->
+<div class="article-body ft-art-bodycopy">
+		<div class="columnctrl section">
+<div class="column-ctrl nocolor">
+  <div class="container">
+    <div class="row">
+				<div class="colu-two">
+						<div class="col-xs-12 col-sm-8 col-md-8 ">
+							<div class="parbase richtext section">
+<div class="richtxteditor">
+	<div class="rtepan">
+		<div class="richtext">
+       		<p>Cyber security is the most prominent risk facing company Boards of Directors and executives worldwide. We are inundated almost daily with accounts of major corporate data breaches and compromised networks. Recent high-profile attacks such as the targeting of point-of-sale terminals at Target, Home Depot, and Staples, server software at JP Morgan, and employee databases at Sony, demonstrate how vulnerable even the largest and most sophisticated companies can be. In this highly challenging environment, board members and executives are, not surprisingly, unsure of how best to protect themselves.</p>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+						</div>
+						<div class="col-sm-4 col-md-4 col-xs-12 panel-light-gray">
+							<div class="parbase richtext section">
+<div class="richtxteditor">
+	<div class="rtepan">
+		<div class="richtext">
+       		<h3>We thought you might be interested in learning more about:</h3>
+<p><a title="Cyber Insurance" href="http://www.aig.com/business/insurance/cyber-insurance" target="_blank"><i>Cyber Insurance</i></a></p>
+<p> </p>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+						</div>
+					<div class="clear"></div>
+				</div>
+	   </div>
+	</div>
+</div>
+</div>
+<div class="parbase richtext section">
+<div class="richtxteditor">
+	<div class="rtepan">
+		<div class="richtext">
+       		<h4>Proactive Prevention with a Focus on Cyber Resilience: A “How-To” Guide</h4>
+<p>The first and most important step is to take measures to prevent intrusions from occurring in the first place. Just as a proper diet, exercise, hand-washing, and regular flu shots are important to minimizing your odds of developing the flu, maintaining standard systems hygiene is critical to protecting your organization from being infiltrated by hackers. In fact, the Center for Internet Security claims that up to 80% of cyber attacks can be prevented by:</p>
+<ul>
+<li>Maintaining an inventory of authorized and unauthorized devices</li>
+<li>Maintaining an inventory of authorized and unauthorized software</li>
+<li>Developing and managing secure configurations for all devices</li>
+<li>Conducting continuous (automated) vulnerability assessment and remediation</li>
+<li>Actively managing and controlling the use of administrative privileges<sup>1</sup></li>
+</ul>
+<p>Unfortunately, blocking four out of five attacks still leaves open the possibility that a substantial number of attacks might succeed. And today, it’s more a matter of when rather than if you will, eventually, be attacked. What happens then?</p>
+<p>Even well prepared companies may not know immediately that they have been breached. But those that have prepared for such an event will be much better off than those that have not. Just as conducting fire drills can save lives in the event of a real fire, preparing for the aftermath of a cyber attack can make an enormous difference in how quickly your company gets back on its feet and how well officers and board members do in the limelight after a major breach becomes public.</p>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="image parbase section">	
+			<div class="aigimage">
+                                             <a title="steps-to-cyber-resilience-thmb" href="/content/dam/aig/america-canada/us/documents/insights/steps-to-cyber-resilience-final.pdf">
+											<img src="/content/dam/aig/america-canada/us/images/insights/1162r-cyber-resilience-infographic.jpg/jcr:content/renditions/default.jpg" alt="steps-to-cyber-resilience-thmb" class="aigimage-resp"/>
+										     </a>
+			</div>
+</div>
+<div class="parbase richtext section">
+<div class="richtxteditor">
+	<div class="rtepan">
+		<div class="richtext">
+       		<p>The good news is that building a cyber-resilience action plan is a step-by-step process that any company willing to commit the time and resources can accomplish. And, after ensuring you have good system hygiene, the next step is to put the right group together to work out the details. This working group should include a cross-functional collection of senior managers (Sales & Marketing, IT, Finance, Legal, Risk, HR, etc.) each of whom is willing to meet regularly to discuss cyber security, monitor evolving threats (as seen from his or her unique perspective in the company), and participate in modeling and analyzing hypothetical attacks.</p>
+<p>Once formed, the group can begin to map out the plan by, first, assessing the company’s cyber risk profile. A recent study from Verizon has concluded that 95% of all cyber attacks can be analyzed in terms of nine basic patterns.<sup>2</sup> A thorough study of the patterns, facilitated perhaps by the help of an external cyber security expert, can help the group determine the types of attacks their company is most vulnerable to; preventive measures can then be tailored to these patterns.</p>
+<p>To go deeper, the team should then develop hypothetical scenarios, based on the most relevant patterns identified above, to help identify in detail possible attack modes, targets, vulnerabilities and impacts. There is no need for, and it is in fact a detriment to require, great precision in this exercise. No one can know for certain, ahead of the event, how much damage a successful data breach will cause in terms of lost revenue, reputational harm, or stock price declines. All that is needed are rough estimates that give enough sense of scale and types of potential harm to enable the team to put together a risk mitigation strategy.</p>
+<p>Such a strategy will involve steps to mitigate the damage to the most relevant targets in an attack. For example, if a company determines that its greatest threat is malware installations in point-of-sale software systems, directed by domestic operatives, via vendor access rights, then it might consider investments in end-to-end encryption, Application White Listing (AWL), File Integrity Monitoring (FIM), system access software, vendor access controls and regular reviews of all vendor access logs.</p>
+<p>It is important to realize that cyber-attacks cannot be fully mitigated. In these instances, having the right cyber insurance coverage in place can make all the difference in how your company performs in the days, weeks and months following a successful attack. Cyber insurance can provide critical capital and expert assistance when a cyber-security event occurs.</p>
+<p>Companies may also want to acquire Directors and Officers (D&O) liability insurance to protect board members company officers against claims of negligence following a breach. In addition, they may want to review their property, casualty and business interruption coverage to ensure that sufficient protection exists in the event of a successful cyber-attack on the company’s infrastructure. Fortunately this type of attack has, to date, been rare. But such attacks are not unheard of, and the potential for them is growing more likely given current geopolitical instabilities, especially for multinationals with exposure in more sensitive countries around the globe.</p>
+<p>By taking the steps outlined above, a company can increase its cyber resiliency and be much better positioned to quickly recover from a successful cyber-attack.</p>
+<p>To learn more, download the original article via the PDF below.</p>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="columnctrl section">
+<div class="column-ctrl nocolor">
+  <div class="container">
+    <div class="row">
+			<div class="colu-one">
+				<div class="section documentdownloadcard">
+					<a class="document-download-card" href="/content/dam/aig/america-canada/us/documents/insights/1158y-achieving-cyber-resilience-brochure.pdf" name="&lid=document:achieving cyber resilience">
+						<div class="btn btn-info ft-docformat">
+							<span class="glyphicon glyphicon-arrow-down"></span> PDF
+						</div>
+						<div class="download-card-content">
+								<h3 class="ft-cardsubtitle">Brochure</h3>
+							<h4>Achieving Cyber Resilience</h4>
+						</div>
+					</a>
+</div>
+			</div>
+	   </div>
+	</div>
+</div>
+</div>
+<div class="parbase richtext section">
+<div class="richtxteditor">
+	<div class="rtepan">
+		<div class="richtext">
+       		<h3>Found this article interesting? Read more on this topic here.</h3>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="section relatedarticles">
+<div class="related-articles-section">
+	<div class="container">
+		<div class="row">
+       		<div class="col-xs-12">
+						<a></a>
+						<p></p>
+						<a></a>
+						<p></p>
+						<a></a>
+						<p></p>
+			</div>
+		</div>
+	</div>
+</div></div>
+<div class="section videocomponent">
+<div class="videopan" id="a-sA-yvideocomponent">
+	<div class="vbottomthumb">
+        <div class="vthumbnail">
+				<input type="hidden" class="frameurl" value="https://www.youtube.com/embed/9xFFQIZl2OU?rel=0&showinfo=0&wmode=transparent&enablejsapi=1"/>
+				<input type="hidden" class="captionurl"/>
+				<a class="videoimg youtubevideo" href="#" title="Cyber Series:Intro" data-toggle="modal" data-target=".bs-modal-a-sA-yvideocomponent">
+					<img src="/content/dam/aig/america-canada/us/images/thumbnails/cyber-series-intro-thumbnail.jpg" alt="Cyber Series:Intro">
+						<span class="overlayplay">Cyber Series:Intro</span>
+				</a>
+		</div>
+        <div class="vcontent">
+			<div class="videotitle">
+					<input type="hidden" class="frameurl" value="https://www.youtube.com/embed/9xFFQIZl2OU?rel=0&showinfo=0&wmode=transparent&enablejsapi=1"/>
+					<input type="hidden" class="captionurl"/>
+					<a class="modaltitle youtubevideo" href="#" data-toggle="modal" data-target=".bs-modal-a-sA-yvideocomponent">
+						Cyber Series: Introduction
+					</a>
+			</div>
+			<div class="videodescription"><p>Constantly monitoring the cyber landscape, we keep insureds at the
+  forefront of the industry as cyber risks continue to evolve. Our
+  preventative tools provide our clients with the knowledge, training,
+  security, and consultative solutions to help them stay ahead of the curve.</p>
+</div>
+		</div>
+	</div>
+	<div class="modal bs-modal-a-sA-yvideocomponent" tabindex="-1" role="dialog" aria-labelledby="myvideoModalLabel-a-sA-yvideocomponent" aria-hidden="true">
+		<div class="modal-dialog modal-lg" id="myvideoModalLabel-a-sA-yvideocomponent">
+			<div class="modal-content">
+					<div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+                        <input type="hidden" class="player-a-sA-yvideocomponent" value=""/>
+						<iframe class="videostream" width="800" height="450" src="//www.youtube.com/embed/aaa" id="player-a-sA-yvideocomponent" frameborder="0" allowfullscreen title="Cyber Series:Intro"> </iframe>
+				</div>
+				<div class="modal-footer">
+					<div class="modaltitle" id="ModalLabel">Cyber Series: Introduction</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="section videocomponent">
+<div class="videopan" id="a-sA-yvideocomponent_1654727940">
+	<div class="vbottomthumb">
+        <div class="vthumbnail">
+				<input type="hidden" class="frameurl" value="https://www.youtube.com/embed/_7Fj-uPfbe8?rel=0&showinfo=0&wmode=transparent&enablejsapi=1"/>
+				<input type="hidden" class="captionurl"/>
+				<a class="videoimg youtubevideo" href="#" title="Cyber Risk: The Board's Role" data-toggle="modal" data-target=".bs-modal-a-sA-yvideocomponent_1654727940">
+					<img src="/content/dam/aig/america-canada/us/images/thumbnails/cyber-insurance-cyberrisk-the-boards-role-thumbnail.png" alt="Cyber Risk: The Board's Role">
+						<span class="overlayplay">Cyber Risk: The Board's Role</span>
+				</a>
+		</div>
+        <div class="vcontent">
+			<div class="videotitle">
+					<input type="hidden" class="frameurl" value="https://www.youtube.com/embed/_7Fj-uPfbe8?rel=0&showinfo=0&wmode=transparent&enablejsapi=1"/>
+					<input type="hidden" class="captionurl"/>
+					<a class="modaltitle youtubevideo" href="#" data-toggle="modal" data-target=".bs-modal-a-sA-yvideocomponent_1654727940">
+						Cyber Risk: The Board's Role
+					</a>
+			</div>
+			<div class="videodescription"><p>On this edition of NACD BoardVision, Chris Clark, publisher of NACD's
+  Directorship Magazine and Lou Lucullo, Chief Underwriting Officer,
+  Financial Lines, Americas Region at AIG, discuss what directors can do
+  to mitigate cyber risks, and who are the most vulnerable targets.</p>
+</div>
+		</div>
+	</div>
+	<div class="modal bs-modal-a-sA-yvideocomponent_1654727940" tabindex="-1" role="dialog" aria-labelledby="myvideoModalLabel-a-sA-yvideocomponent_1654727940" aria-hidden="true">
+		<div class="modal-dialog modal-lg" id="myvideoModalLabel-a-sA-yvideocomponent_1654727940">
+			<div class="modal-content">
+					<div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+                        <input type="hidden" class="player-a-sA-yvideocomponent_1654727940" value=""/>
+						<iframe class="videostream" width="800" height="450" src="//www.youtube.com/embed/aaa" id="player-a-sA-yvideocomponent_1654727940" frameborder="0" allowfullscreen title="Cyber Risk: The Board's Role"> </iframe>
+				</div>
+				<div class="modal-footer">
+					<div class="modaltitle" id="ModalLabel">Cyber Risk: The Board's Role</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="section videocomponent">
+<div class="videopan" id="a-sA-yvideocomponent_294788884">
+	<div class="vbottomthumb">
+        <div class="vthumbnail">
+				<input type="hidden" class="frameurl" value="https://www.youtube.com/embed/-4fh8l--DpQ" frameborder=?wmode=transparent&enablejsapi=1"/>
+				<input type="hidden" class="captionurl"/>
+				<a class="videoimg youtubevideo" href="#" title="5 Reasons Why CyberEdge is Critical for Your Business" data-toggle="modal" data-target=".bs-modal-a-sA-yvideocomponent_294788884">
+					<img src="/content/dam/aig/america-canada/us/images/others/5330t2_5reasons_why_cyberedge_is_critical_for_your_business.png" alt="5 Reasons Why CyberEdge is Critical for Your Business">
+						<span class="overlayplay">5 Reasons Why CyberEdge is Critical for Your Business</span>
+				</a>
+		</div>
+        <div class="vcontent">
+			<div class="videotitle">
+					<input type="hidden" class="frameurl" value="https://www.youtube.com/embed/-4fh8l--DpQ" frameborder=?wmode=transparent&enablejsapi=1"/>
+					<input type="hidden" class="captionurl"/>
+					<a class="modaltitle youtubevideo" href="#" data-toggle="modal" data-target=".bs-modal-a-sA-yvideocomponent_294788884">
+						5 Reasons Why CyberEdge is Critical for Your Business
+					</a>
+			</div>
+			<div class="videodescription"><p>Our world continues to become more digitized and inter-connected each
+  and every day. With this, cyber risk has transformed from a network
+  securityrisk to a peril. AIG helps protect organizations with
+  CyberEdge, our end-to-end risk management solution to help clients
+  stay ahead of the curve of cyber risk. It offers the unique coverage,
+  tools, and services to safeguard against data breaches, computer
+  hacking, property damage, and much more. Here are some reasons why
+  CyberEdge is critical for your business against the threat of cyber risk.</p>
+</div>
+		</div>
+	</div>
+	<div class="modal bs-modal-a-sA-yvideocomponent_294788884" tabindex="-1" role="dialog" aria-labelledby="myvideoModalLabel-a-sA-yvideocomponent_294788884" aria-hidden="true">
+		<div class="modal-dialog modal-lg" id="myvideoModalLabel-a-sA-yvideocomponent_294788884">
+			<div class="modal-content">
+					<div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+                        <input type="hidden" class="player-a-sA-yvideocomponent_294788884" value=""/>
+						<iframe class="videostream" width="800" height="450" src="//www.youtube.com/embed/aaa" id="player-a-sA-yvideocomponent_294788884" frameborder="0" allowfullscreen title="5 Reasons Why CyberEdge is Critical for Your Business"> </iframe>
+				</div>
+				<div class="modal-footer">
+					<div class="modaltitle" id="ModalLabel">5 Reasons Why CyberEdge is Critical for Your Business</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+            <!-- End Article Body Parsys-->
+            <!-- Start Parsys-->
+             <div class="section articlereference">
+<div class="article-references">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="ft-artref">
+					<ol>
+                            <p><sup>1 </sup><a href="http://www.nationaldefensemagazine.org/articles/2014/5/1/2014may-new-cyber-hygiene-campaign-seeks-to-curtail-attacks">http://www.nationaldefensemagazine.org/articles/2014/5/1/2014may-new-cyber-hygiene-campaign-seeks-to-curtail-attacks</a><sup></sup></p>
+<p> </p>
+<p><sup>2</sup> Introduction to Incident Classification Patterns”, 2017 Data Breach Investigations Report 10th Edition, <a href="http://www.verizonenterprise.com/resources/reports/rp_DBIR_2017_Report_en_xg.pdf">http://www.verizonenterprise.com/resources/reports/rp_DBIR_2017_Report_en_xg.pdf</a><a href="http://www.infrastructurereportcard.org/a/#p/grade-sheet/gpa"><br>
+ <br>
+ </a></p>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div>
+<div class="generalformpicker section">
+<script type="text/javascript">
+$(document).ready(function() {
+	if (CQ_Analytics.Sitecatalyst) {
+		featuredContentFormAnalytics();
+	}
+});
+</script>
+  <div style="display:inline;" class="cq-dd-paragraph"><div class="generalformconfig"><div>
+<script type="text/javascript" src="/etc/clientlibs/aig/abacusclean.min.js"></script>
+<script type="text/javascript">
+  function cq5forms_preCheck_defaultForm(submitid) {
+    var dMsgs = "Please fill out the required field.";
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"])) {cq5forms_showMsg('dmp-forms-insights','FirstName','Please enter first name');validinput=false;}
+if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"])){
+if (document.forms["dmp-forms-insights"].elements["FirstName"][0] !== undefined){var i=0;while (i<document.forms["dmp-forms-insights"].elements["FirstName"].length){if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"][i])){var obj=document.forms["dmp-forms-insights"].elements["FirstName"][i];if(!cq5forms_regcheck(obj.value,/^[^0-9!@#$%&*]{1,}/)){validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter valid first name';}}i++;}var i=0;while (i<document.forms["dmp-forms-insights"].elements["FirstName"].length){if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"][i])){var obj=document.forms["dmp-forms-insights"].elements["FirstName"][i];validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter first name';}i++;}}else{if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"])) {cq5forms_showMsg('dmp-forms-insights','FirstName','Please enter first name');validinput=false;}
+else{var obj=document.forms["dmp-forms-insights"].elements["FirstName"];if(!cq5forms_regcheck(obj.value,/^[^0-9!@#$%&*]{1,}/)){cq5forms_showMsg('dmp-forms-insights','FirstName','Please enter valid first name');validinput=false;}}}
+}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"])) {cq5forms_showMsg('dmp-forms-insights','LastName','Please enter last name');validinput=false;}
+if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"])){
+if (document.forms["dmp-forms-insights"].elements["LastName"][0] !== undefined){var i=0;while (i<document.forms["dmp-forms-insights"].elements["LastName"].length){if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"][i])){var obj=document.forms["dmp-forms-insights"].elements["LastName"][i];if(!cq5forms_regcheck(obj.value,/^[^0-9!@#$%&*]{1,}/)){validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter valid last name';}}i++;}var i=0;while (i<document.forms["dmp-forms-insights"].elements["LastName"].length){if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"][i])){var obj=document.forms["dmp-forms-insights"].elements["LastName"][i];validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter last name';}i++;}}else{if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"])) {cq5forms_showMsg('dmp-forms-insights','LastName','Please enter last name');validinput=false;}
+else{var obj=document.forms["dmp-forms-insights"].elements["LastName"];if(!cq5forms_regcheck(obj.value,/^[^0-9!@#$%&*]{1,}/)){cq5forms_showMsg('dmp-forms-insights','LastName','Please enter valid last name');validinput=false;}}}
+}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"])) {cq5forms_showMsg('dmp-forms-insights','EmailAddress','Please enter email address');validinput=false;}
+if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"])){
+if (document.forms["dmp-forms-insights"].elements["EmailAddress"][0] !== undefined){var i=0;while (i<document.forms["dmp-forms-insights"].elements["EmailAddress"].length){if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"][i])){var obj=document.forms["dmp-forms-insights"].elements["EmailAddress"][i];if(!cq5forms_regcheck(obj.value,/^[^@]+([@]{1})[0-9a-zA-Z\._-]+([\.]{1})[0-9a-zA-Z\._-]+$/)){validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter valid email address';}}i++;}var i=0;while (i<document.forms["dmp-forms-insights"].elements["EmailAddress"].length){if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"][i])){var obj=document.forms["dmp-forms-insights"].elements["EmailAddress"][i];validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter email address';}i++;}}else{if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"])) {cq5forms_showMsg('dmp-forms-insights','EmailAddress','Please enter email address');validinput=false;}
+else{var obj=document.forms["dmp-forms-insights"].elements["EmailAddress"];if(!cq5forms_regcheck(obj.value,/^[^@]+([@]{1})[0-9a-zA-Z\._-]+([\.]{1})[0-9a-zA-Z\._-]+$/)){cq5forms_showMsg('dmp-forms-insights','EmailAddress','Please enter valid email address');validinput=false;}}}
+}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["country"])) {cq5forms_showMsg('dmp-forms-insights','country','Please select the country');validinput=false;}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["checkconfirm"])) {cq5forms_showMsg('dmp-forms-insights','checkconfirm','Please confirm you have read and consent to the Privacy Policy.');validinput=false;}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["captcha"])) {cq5forms_showMsg('dmp-forms-insights','captcha','Please type in the security code');validinput=false;}
+else{var servletURL = '/bin/services/validatecaptcha';var captchaId = document.getElementById('cq_captchakey');var userEnteredCaptcha = document.getElementById('captcha');$.ajax({url: servletURL,dataType: 'json',type: 'POST',async: false,data: {'CAPTCHA_ID' : captchaId.value,'USER_ENTERED_CAPTCHA': userEnteredCaptcha.value},success: function(data){if(data.Valid == 'false'){cq5forms_showMsg('dmp-forms-insights','captcha','Invalid Security Code');validinput=false;}}});}
+    return true;
+  }
+</script>
+<form method="POST" action="/knowledge-and-insights/building-a-cyber-resilient-business" id="dmp-forms-insights" name="dmp-forms-insights" enctype="multipart/form-data"><input type="hidden" name=":formid" value="dmp-forms-insights"/><input type="hidden" name=":formstart" value="/content/aig/america-canada/us/en/subscription-form-on-knowledge-insights-pages/jcr:content/par/generalformconfig/gcfpar/start"/><input type="hidden" name="_charset_" value="UTF-8"/><input type="hidden" name=":redirect" value="/confirmation/confirmation-page-knowledge-and-insights-center"/><div class="form">
+      <input type='hidden' class='toDate' id='dmp-forms-insights' value='10'>
+  <input type='hidden' class='fromDate' id='dmp-forms-insights' value='10'>
+<input type='hidden' class='selectedDateFormat' id='dmp-forms-insights' value='mm/dd/yy'>
+<link rel="stylesheet" href="/etc/clientlibs/aig/aigcalendar.min.css" type="text/css">
+<script type="text/javascript" src="/etc/clientlibs/aig/aigcalendar.min.js"></script>
+	<script type="text/javascript">
+function cq5forms_preCheck_dmp_forms_insights(submitid) {
+$('.form_error').remove();
+var dMsgs = " Please fill out the required field.";
+var validinput = true;
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"])) {cq5forms_showMsg('dmp-forms-insights','FirstName','Please enter first name');validinput=false;}
+if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"])){
+if (document.forms["dmp-forms-insights"].elements["FirstName"][0] !== undefined){var i=0;while (i<document.forms["dmp-forms-insights"].elements["FirstName"].length){if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"][i])){var obj=document.forms["dmp-forms-insights"].elements["FirstName"][i];if(!cq5forms_regcheck(obj.value,/^[^0-9!@#$%&*]{1,}/)){validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter valid first name';}}i++;}var i=0;while (i<document.forms["dmp-forms-insights"].elements["FirstName"].length){if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"][i])){var obj=document.forms["dmp-forms-insights"].elements["FirstName"][i];validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter first name';}i++;}}else{if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["FirstName"])) {cq5forms_showMsg('dmp-forms-insights','FirstName','Please enter first name');validinput=false;}
+else{var obj=document.forms["dmp-forms-insights"].elements["FirstName"];if(!cq5forms_regcheck(obj.value,/^[^0-9!@#$%&*]{1,}/)){cq5forms_showMsg('dmp-forms-insights','FirstName','Please enter valid first name');validinput=false;}}}
+}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"])) {cq5forms_showMsg('dmp-forms-insights','LastName','Please enter last name');validinput=false;}
+if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"])){
+if (document.forms["dmp-forms-insights"].elements["LastName"][0] !== undefined){var i=0;while (i<document.forms["dmp-forms-insights"].elements["LastName"].length){if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"][i])){var obj=document.forms["dmp-forms-insights"].elements["LastName"][i];if(!cq5forms_regcheck(obj.value,/^[^0-9!@#$%&*]{1,}/)){validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter valid last name';}}i++;}var i=0;while (i<document.forms["dmp-forms-insights"].elements["LastName"].length){if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"][i])){var obj=document.forms["dmp-forms-insights"].elements["LastName"][i];validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter last name';}i++;}}else{if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["LastName"])) {cq5forms_showMsg('dmp-forms-insights','LastName','Please enter last name');validinput=false;}
+else{var obj=document.forms["dmp-forms-insights"].elements["LastName"];if(!cq5forms_regcheck(obj.value,/^[^0-9!@#$%&*]{1,}/)){cq5forms_showMsg('dmp-forms-insights','LastName','Please enter valid last name');validinput=false;}}}
+}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"])) {cq5forms_showMsg('dmp-forms-insights','EmailAddress','Please enter email address');validinput=false;}
+if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"])){
+if (document.forms["dmp-forms-insights"].elements["EmailAddress"][0] !== undefined){var i=0;while (i<document.forms["dmp-forms-insights"].elements["EmailAddress"].length){if (!cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"][i])){var obj=document.forms["dmp-forms-insights"].elements["EmailAddress"][i];if(!cq5forms_regcheck(obj.value,/^[^@]+([@]{1})[0-9a-zA-Z\._-]+([\.]{1})[0-9a-zA-Z\._-]+$/)){validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter valid email address';}}i++;}var i=0;while (i<document.forms["dmp-forms-insights"].elements["EmailAddress"].length){if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"][i])){var obj=document.forms["dmp-forms-insights"].elements["EmailAddress"][i];validinput=false; var fieldConstraint =obj.parentElement.appendChild(document.createElement('div')); fieldConstraint.className = 'form_error'; fieldConstraint.innerHTML ='Please enter email address';}i++;}}else{if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["EmailAddress"])) {cq5forms_showMsg('dmp-forms-insights','EmailAddress','Please enter email address');validinput=false;}
+else{var obj=document.forms["dmp-forms-insights"].elements["EmailAddress"];if(!cq5forms_regcheck(obj.value,/^[^@]+([@]{1})[0-9a-zA-Z\._-]+([\.]{1})[0-9a-zA-Z\._-]+$/)){cq5forms_showMsg('dmp-forms-insights','EmailAddress','Please enter valid email address');validinput=false;}}}
+}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["country"])) {cq5forms_showMsg('dmp-forms-insights','country','Please select the country');validinput=false;}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["checkconfirm"])) {cq5forms_showMsg('dmp-forms-insights','checkconfirm','Please confirm you have read and consent to the Privacy Policy.');validinput=false;}
+if (cq5forms_isEmpty(document.forms["dmp-forms-insights"].elements["captcha"])) {cq5forms_showMsg('dmp-forms-insights','captcha','Please type in the security code');validinput=false;}
+else{var servletURL = '/bin/services/validatecaptcha';var captchaId = document.getElementById('cq_captchakey');var userEnteredCaptcha = document.getElementById('captcha');$.ajax({url: servletURL,dataType: 'json',type: 'POST',async: false,data: {'CAPTCHA_ID' : captchaId.value,'USER_ENTERED_CAPTCHA': userEnteredCaptcha.value},success: function(data){if(data.Valid == 'false'){cq5forms_showMsg('dmp-forms-insights','captcha','Invalid Security Code');validinput=false;}}});}
+return validinput;
+}
+</script>
+		<input type="hidden" id="formType" name="formType" value=" lead"/>
+</div>
+<div class="openhtml section">
+<script src="https://www.linkedin.com/autofill/js/autofill.js" async></script>
+<script type="IN/Form2" data-formid="dmp-forms-insights" data-field-firstname="dmp-forms-insights_FirstName" data-field-lastname="dmp-forms-insights_LastName" data-field-email="dmp-forms-insights_EmailAddress" data-field-country="dmp-forms-insights_country"></script>
+<div class="clear"></div>
+</div>
+<div class="inpagetitle section">
+		<h2 class="in-page-title ft-artprodtitle"><p>Sign Up For Latest Updates<br /> </p>
+</h2>
+</div>
+<div class="parbase richtext section">
+<div class="richtxteditor">
+	<div class="rtepan">
+		<div class="richtext">
+       		<p>Stay up to date with updates on latest information and trends in coverage, emerging risks, life insurance and innovation.</p>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="parbase richtext section">
+<div class="richtxteditor">
+	<div class="rtepan">
+		<div class="richtext">
+       		<h3>Your Information:</h3>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="generalformconfig section"><div>
+</div></div>
+<div class="columnctrl section">
+<div class="column-ctrl nocolor">
+  <div class="container">
+    <div class="row">
+				<div class="colu-two">
+						<div class="col-sm-6 col-xs-12">
+							<div class="section text"><div class="form_row">
+        <div class="form_leftcol"><div class="form_leftcollabel"><label for="dmp-forms-insights_FirstName">First Name</label></div><div class="form_leftcolmark"> *</div></div>
+        <div class="form_rightcol" id="FirstName_rightcol"><div id="FirstName_0_wrapper" class="form_rightcol_wrapper"><input class="form_field form_field_text" id="dmp-forms-insights_FirstName" type="text" name="FirstName" value="" size="35" onkeydown=""></div></div></div><div class="form_row_description"></div>
+</div>
+<div class="section text"><div class="form_row">
+        <div class="form_leftcol"><div class="form_leftcollabel"><label for="dmp-forms-insights_LastName">Last Name</label></div><div class="form_leftcolmark"> *</div></div>
+        <div class="form_rightcol" id="LastName_rightcol"><div id="LastName_0_wrapper" class="form_rightcol_wrapper"><input class="form_field form_field_text" id="dmp-forms-insights_LastName" type="text" name="LastName" value="" size="35" onkeydown=""></div></div></div><div class="form_row_description"></div>
+</div>
+<div class="section text"><div class="form_row">
+        <div class="form_leftcol"><div class="form_leftcollabel"><label for="dmp-forms-insights_EmailAddress">Email Address</label></div><div class="form_leftcolmark"> *</div></div>
+        <div class="form_rightcol" id="EmailAddress_rightcol"><div id="EmailAddress_0_wrapper" class="form_rightcol_wrapper"><input class="form_field form_field_text" id="dmp-forms-insights_EmailAddress" type="email" name="EmailAddress" value="" size="35" onkeydown=""></div></div></div><div class="form_row_description"></div>
+</div>
+<div class="AIGDropDown section">
+    <div class="form_row">
+       <div class="form_leftcol"><div class="form_leftcollabel"><label for="dmp-forms-insights_country">Country</label></div><div class="form_leftcolmark"> *</div></div>
+       <div class="form_rightcol">
+        <select class="form_field form_field_select" id="dmp-forms-insights_country" name="country" ><option value="">- Please Select a Country -</option><option value="Admiralty Islands">Admiralty Islands</option><option value="Afghanistan">Afghanistan</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Aruba">Aruba</option><option value="Ascot">Ascot</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Brazil">Brazil</option><option value="British Virgin Islands">British Virgin Islands</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Congo, Republic of the">Congo, Republic of the</option><option value="Cook Islands">Cook Islands</option><option value="Costa Rica">Costa Rica</option><option value="Croatia">Croatia</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Congo, Democratic Republic of the">Congo, Democratic Republic of the</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Ethiopia">Ethiopia</option><option value="Falkland Islands">Falkland Islands</option><option value="Faroe Islands">Faroe Islands</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="French Guiana">French Guiana</option><option value="French Polynesia">French Polynesia</option><option value="Fujairah">Fujairah</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option><option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Honduras">Honduras</option><option value="Hong Kong">Hong Kong</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Ivory Coast">Ivory Coast</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxemburg">Luxemburg</option><option value="Macau">Macau</option><option value="Macedonia">Macedonia</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="Netherlands Antilles">Netherlands Antilles</option><option value="New Caledonia">New Caledonia</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="Norfolk Island">Norfolk Island</option><option value="Northern Mariana Islands">Northern Mariana Islands</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Puerto Rico">Puerto Rico</option><option value="Qatar">Qatar</option><option value="Ras Al Khaimah">Ras Al Khaimah</option><option value="Reunion Island">Reunion Island</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Helena">Saint Helena</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Vincent">Saint Vincent</option><option value="Saipan">Saipan</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="Sao Tome and Principe">Sao Tome and Principe</option><option value="Sarjah">Sarjah</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Georgia">South Georgia</option><option value="South Korea">South Korea</option><option value="South Sandwich Islands">South Sandwich Islands</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Swaziland">Swaziland</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="Umm al-Quwain">Umm al-Quwain</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Uruguay">Uruguay</option><option value="US Virgin Islands">US Virgin Islands</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Vatican City">Vatican City</option><option value="Venezuela">Venezuela</option><option value="Vietnam">Vietnam</option><option value="Wake Island">Wake Island</option><option value="Windward Islandsa">Windward Islandsa</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option><option value="Other">Other</option></select>
+          </div>
+        </div>
+    <div class="form_row_description"></div>
+</div>
+						</div>
+						<div class="col-sm-6 col-xs-12">
+							<div class="checkbox section">
+<div class="form_row"><div class="form_leftcol"><div class="form_leftcollabel"><label for="dmp-forms-insights_kICInnovation1">Select Topics</label></div><div class="form_leftcolmark"> </div></div>
+<div class="form_rightcol" style="display: none;"> </div>
+    </div><div class="form_row"><div class="form_rightcol"><label for="dmp-forms-insights_kICInnovation1-0"> Innovation</label>
+                    <input class="form_field form_field_checkbox" type="checkbox" id="dmp-forms-insights_kICInnovation1-0" name="kICInnovation1" value="on"/>
+        </div>
+    </div><div class="form_row_description"></div>
+</div>
+<div class="checkbox section">
+<div class="form_row"><div class="form_leftcol" style="display: none;"><div class="form_leftcollabel"><label for="dmp-forms-insights_kICMultinational1">Topic2</label></div><div class="form_leftcolmark"></div></div>
+<div class="form_rightcol" style="display: none;"> </div>
+    </div><div class="form_row"><div class="form_rightcol"><label for="dmp-forms-insights_kICMultinational1-0"> Multinational</label>
+                    <input class="form_field form_field_checkbox" type="checkbox" id="dmp-forms-insights_kICMultinational1-0" name="kICMultinational1" value="on"/>
+        </div>
+    </div><div class="form_row_description"></div>
+</div>
+<div class="checkbox section">
+<div class="form_row"><div class="form_leftcol" style="display: none;"><div class="form_leftcollabel"><label for="dmp-forms-insights_kICRiskManagement1">Topic3</label></div><div class="form_leftcolmark"></div></div>
+<div class="form_rightcol" style="display: none;"> </div>
+    </div><div class="form_row"><div class="form_rightcol"><label for="dmp-forms-insights_kICRiskManagement1-0"> Risk Management</label>
+                    <input class="form_field form_field_checkbox" type="checkbox" id="dmp-forms-insights_kICRiskManagement1-0" name="kICRiskManagement1" value="on"/>
+        </div>
+    </div><div class="form_row_description"></div>
+</div>
+<div class="checkbox section">
+<div class="form_row"><div class="form_leftcol" style="display: none;"><div class="form_leftcollabel"><label for="dmp-forms-insights_kICRetirementPlanning1">Topic4</label></div><div class="form_leftcolmark"></div></div>
+<div class="form_rightcol" style="display: none;"> </div>
+    </div><div class="form_row"><div class="form_rightcol"><label for="dmp-forms-insights_kICRetirementPlanning1-0"> Life Insurance and Retirement Planning</label>
+                    <input class="form_field form_field_checkbox" type="checkbox" id="dmp-forms-insights_kICRetirementPlanning1-0" name="kICRetirementPlanning1" value="on"/>
+        </div>
+    </div><div class="form_row_description"></div>
+</div>
+<div class="checkbox section">
+<div class="form_row"><div class="form_leftcol" style="display: none;"><div class="form_leftcollabel"><label for="dmp-forms-insights_kICSafety1">Topic5</label></div><div class="form_leftcolmark"></div></div>
+<div class="form_rightcol" style="display: none;"> </div>
+    </div><div class="form_row"><div class="form_rightcol"><label for="dmp-forms-insights_kICSafety1-0"> Safety & Recovery</label>
+                    <input class="form_field form_field_checkbox" type="checkbox" id="dmp-forms-insights_kICSafety1-0" name="kICSafety1" value="on"/>
+        </div>
+    </div><div class="form_row_description"></div>
+</div>
+<div class="checkbox section">
+<div class="form_row"><div class="form_leftcol" style="display: none;"><div class="form_leftcollabel"><label for="dmp-forms-insights_kICEmergingRisks1">Topic6</label></div><div class="form_leftcolmark"></div></div>
+<div class="form_rightcol" style="display: none;"> </div>
+    </div><div class="form_row"><div class="form_rightcol"><label for="dmp-forms-insights_kICEmergingRisks1-0"> Emerging Risks</label>
+                    <input class="form_field form_field_checkbox" type="checkbox" id="dmp-forms-insights_kICEmergingRisks1-0" name="kICEmergingRisks1" value="on"/>
+        </div>
+    </div><div class="form_row_description"></div>
+</div>
+						</div>
+					<div class="clear"></div>
+				</div>
+	   </div>
+	</div>
+</div>
+</div>
+<div class="columnctrl section">
+<div class="column-ctrl nocolor">
+  <div class="container">
+    <div class="row">
+			<div class="colu-one">
+				<div class="checkbox section">
+<div class="form_row"><div class="form_leftcol" style="display: none;"><div class="form_leftcollabel"><label for="dmp-forms-insights_checkconfirm">Selection</label></div><div class="form_leftcolmark"></div></div>
+<div class="form_rightcol" style="display: none;"> </div>
+    </div><div class="form_row"><div class="form_rightcol"><label for="dmp-forms-insights_checkconfirm-0"> </label>
+                    <input class="form_field form_field_checkbox" type="checkbox" id="dmp-forms-insights_checkconfirm-0" name="checkconfirm" value="1"/>
+        </div>
+    </div><div class="form_row_description"></div>
+</div>
+<div class="parbase richtext section">
+<div class="richtxteditor">
+	<div class="rtepan">
+		<div class="richtext">
+       		<p>By checking this box, you confirm you have read and consent to the <a href="/global-privacy-policy">Privacy Notice</a>.</p>
+		</div>
+    </div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="captcha section">
+<script type="text/javascript">
+    var captchaStartTime = 0;
+    function captchaRefresh() {
+        var captchakey = ("" + Math.random()).substring(3, 8);
+        var captchaimg = document.getElementById("cq_captchaimg");
+        var captchakeyelem = document.getElementById("cq_captchakey");
+        captchaimg.src = CQ.shared.HTTP.getXhrHookedURL(CQ.shared.HTTP.externalize("/content/aig/america-canada/us/en/subscription-form-on-knowledge-insights-pages/_jcr_content/par/generalformconfig/gcfpar/columnctrl_776941471/par1/captcha.captcha.png?id=" + captchakey));
+        captchakeyelem.value = captchakey;
+        captchaStartTime = new Date().getTime();
+    }
+    function captchaTimer() {
+        var now = new Date().getTime();
+        if ((now - captchaStartTime) > 60000) {
+            captchaRefresh();
+        }
+        var captchatimer = document.getElementById("cq_captchatimer");
+        if (!captchatimer) {
+            // captcha has been removed
+            return;
+        }
+        var width = Math.floor((60000 - (now - captchaStartTime)) / 60000 * 64);
+        captchatimer.innerHTML = "<div class=\"form_captchatimer_bar\" style=\"width:" + width + "px;\"></div>";
+        window.setTimeout(captchaTimer, 500);
+    }
+</script>
+<input type="hidden" name=":cq:captchakey" id="cq_captchakey" value=""/>
+<div class="form_row">
+    <div class="form_leftcol"><div class="form_leftcollabel"><label for="captcha">For verification, enter the text as shown</label></div><div class="form_leftcolmark"> *</div></div>
+    <div class="form_rightcol">
+        <div class="form_captcha_input"><input type="text" id="captcha" name="captcha" class="form_field form_field_text" size="6"/></div>
+        <div class="form_captcha_img"><img id="cq_captchaimg" src="/content/aig/america-canada/us/en/subscription-form-on-knowledge-insights-pages/_jcr_content/par/generalformconfig/gcfpar/columnctrl_776941471/par1/captcha.captcha.png?id=123" alt=""></div>
+        <div class="form_captcha_refresh"><input type="button" onclick="captchaRefresh()" title="Reset Security Code" value="refresh" class="form_button"></div>
+    </div>
+</div>
+<div class="form_row">
+    <div class="form_leftcol"><div class="form_leftcollabel"><span> </span></div><div class="form_leftcolmark"> </div></div>
+    <div class="form_rightcol"><div id="cq_captchatimer" class="form_captchatimer" style="width: 63px;"></div></div>
+</div>
+<script type="text/javascript">
+        captchaTimer();
+</script><div class="form_row_description"></div>
+</div>
+<div class="submit section">
+    <div class="form_row">
+      <div class="form_leftcol"><div class="form_leftcollabel"><span> </span></div><div class="form_leftcolmark"> </div></div>
+      <div class="form_rightcol">
+        <input type="submit" class="form_button_submit" name="Submit" value="Keep me informed" onclick=" if (cq5forms_preCheck_dmp_forms_insights('Submit')) { if($('#dmp-forms-insights .aiginputtext.section input').length){ if($('#dmp-forms-insights .aiginputtext.section input').val().length > 0) { return false; } } document.forms['dmp-forms-insights'].submit();} else{ if($('#dmp-forms-insights .aiginputtext.section input').length) { if($('#dmp-forms-insights .form_error').length || ($('#dmp-forms-insights .aiginputtext.section input').val().length > 0)){ return false; } } else { if($('#dmp-forms-insights .form_error').length) { $('#dmp-forms-insights .form_error').parent().find('.form_field').focus(); } featuredContentFormAnalytics();return false;} }">
+      </div>
+    </div>
+    <div class="form_row_description"></div>
+</div>
+			</div>
+	   </div>
+	</div>
+</div>
+</div>
+<div class="aighiddenfield section"><input id="dmp-forms-insights_elqFormName" name="elqFormName" value="ourinsights" type="hidden">
+</div>
+<div class="aighiddenfield section"><input id="dmp-forms-insights_elqSiteID" name="elqSiteID" value="1109" type="hidden">
+</div>
+<div class="aighiddenfield section"><input id="dmp-forms-insights_elqCustomerGUID" name="elqCustomerGUID" value="" type="hidden">
+</div>
+<div class="end section">
+<div class="form_row">
+   <div class="form_leftcol"></div>
+   <div class="form_rightcol">
+</div>
+  </div><div class="form_row_description"></div>
+</div></form>
+</div></div>
+</div>
+<div class="clear"></div></div>
+            <!-- End Parsys-->
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- End: Two Column Template Ends here -->
+ <footer class="row">
+	<div class="footerpan">
+		<div class="col-sm-12 col-xs-12">
+			<div class="footer-action-links row hidden-xs">
+				<ul class="navigationColumn col-sm-3  col-xs-12">
+									<li><a href="/individual">Individuals</a></li>
+									<li><a href="/business">Business</a></li>
+									<li><a href="/careers">Careers</a></li>
+									<li><a href="/knowledge-and-insights">Knowledge & Insights</a></li>
+									<li><a href="/sitemap">Site Map</a></li>
+				</ul>
+				<ul class="navigationColumn col-sm-3 col-xs-12">
+									<li><a href="/about-our-ads">About Our Ads</a></li>
+									<li><a href="/terms-of-use">Terms of Use</a></li>
+									<li><a href="/privacy-policy">Privacy</a></li>
+									<li><a href="/legal-notice">Legal Notice</a></li>
+				</ul>
+				<ul class="navigationColumn col-sm-2 col-xs-12">
+									<li><a href="/producer-notification">Producer Notifications</a></li>
+									<li><a href="/fraud-warning">Fraud Warning</a></li>
+									<li><a href="https://www.aigcorporate.com/_20_306214.html" target="_blank">Employee Login</a></li>
+				</ul>
+				<ul class="navigationColumn col-sm-4 col-xs-12 social">
+								   <li class="fbook">				
+										<a href="https://www.facebook.com/AIGInsurance" target="_blank">							Facebook
+										</a>							  
+								   </li>
+								   <li class="linkedin">				
+										<a href="https://www.linkedin.com/company/1760?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_1760%2Cidx%3A0" target="_blank">							LinkedIn
+										</a>							  
+								   </li>
+								   <li class="twitter">				
+										<a href="https://twitter.com/AIGinsurance" target="_blank">							Twitter
+										</a>							  
+								   </li>
+								   <li class="youtube">				
+										<a href="https://www.youtube.com/user/AIG" target="_blank">							YouTube
+										</a>							  
+								   </li>
+								   <li class="gplus">				
+										<a href="https://plus.google.com/+AIGInsurance/posts" target="_blank">							Google +
+										</a>							  
+								   </li>
+				</ul>
+			</div>
+			<div class="footer-mobile visible-xs">
+				<ul class="social">
+								   <li class="fbook">									  
+									   <a href="https://www.facebook.com/AIGInsurance" target="_blank">
+											Facebook
+										</a>
+								   </li>
+								   <li class="linkedin">									  
+									   <a href="https://www.linkedin.com/company/1760?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_1760%2Cidx%3A0" target="_blank">
+											LinkedIn
+										</a>
+								   </li>
+								   <li class="twitter">									  
+									   <a href="https://twitter.com/AIGinsurance" target="_blank">
+                                           Twitter
+                                       </a>
+								   </li>
+								   <li class="youtube">
+									   <a href="https://www.youtube.com/user/AIG" target="_blank">
+											YouTube
+										</a>
+								   </li>
+								   <li class="gplus">									  
+									   <a href="https://plus.google.com/+AIGInsurance/posts" target="_blank">
+											Google +
+										</a>
+								   </li>
+				</ul>
+                <ul class="navigationColumn3 col-xs-12">
+									<li><a href="/producer-notification">Producer Notifications</a></li>
+									<li><a href="/fraud-warning">Fraud Warning</a></li>
+									<li><a href="https://www.aigcorporate.com/_20_306214.html" target="_blank">Employee Login</a></li>
+               </ul>
+			</div>
+			<div class="footer-action-links-middle row">
+				<ul class="navigationColumn col-sm-4  col-xs-12">
+												<li><span class="active">United States</span>
+													|
+									<a href="http://aig.com/worldwide" target="_blank">Worldwide ></a>
+									</li>
+				</ul>
+				<ul class="navigationColumn col-sm-4 col-xs-12">
+			</ul>
+			<ul class="navigationColumn col-sm-4 col-xs-12 footer-images">
+     		</ul>
+		</div>
+			<div class="footer-general-links row">
+				<ul class="col-sm-7 col-xs-12">
+						 <li><div id="teconsent" style="display:none" class="nosubfooterlinks"></div></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row copyright-text">
+			Copyright © 2017 American International Group, Inc. All rights reserved.
+		</div>
+		<div class="row disclaimer-text">
+		</div>
+	</div>
+</footer>
+<script type="text/javascript" src="/etc/clientlibs/aigus/js/aigUsaFooterConfigJs.min.js"></script>
+        <script>  
+        CQ_Analytics.PageDataMgr.addInitProperty( 'sc_site_name',"aig us");
+        </script>
+        <script>  
+        CQ_Analytics.PageDataMgr.addInitProperty( 'sc_channel',"knowledge-and-insights");
+        </script> 
+        <script>  
+        CQ_Analytics.PageDataMgr.addInitProperty( 'sc_pageName',"aig us:knowledge-and-insights:article:7 steps to a cyber-resilient business");
+        </script>  
+        <script>  
+        CQ_Analytics.PageDataMgr.addInitProperty( 'sc_business_unit',"property-and-casualty");
+        </script> 
+        <script>  
+        CQ_Analytics.PageDataMgr.addInitProperty( 'sc_site_country',"us");
+        </script>  
+        <script> 
+        CQ_Analytics.PageDataMgr.addInitProperty( 'sc_site_language',"en");
+        </script>  
+        <script>  
+        CQ_Analytics.PageDataMgr.addInitProperty( 'sc_article_title',"7 steps to a cyber-resilient business");
+        </script>
+    <div class="cloudservice sitecatalyst"><script type="text/javascript" src="/etc/clientlibs/foundation/sitecatalyst/sitecatalyst.min.js"></script>
+<script type="text/javascript" src="/etc/clientlibs/foundation/sitecatalyst/util.min.js"></script>
+<script type="text/javascript" src="/content/aig/america-canada/us/_jcr_content/analytics.sitecatalyst.js"></script>
+<script type="text/javascript" src="/etc/clientlibs/foundation/sitecatalyst/plugins.min.js"></script>
+<script type="text/javascript" src="/content/aig/america-canada/us/_jcr_content/analytics.config.js"></script><span data-tracking="{event:'pageView', values:{}, componentPath:'foundation/components/page'}"></span><script type="text/javascript">
+CQ_Analytics.Sitecatalyst.frameworkComponents = ['global/components/general/social','global/components/pages/errorpage404','global/components/pages/productdetail','global/components/general/searchresults','global/components/general/videocomponent','global/components/pages/base/basePage','global/components/general/carousel','global/components/general/formcompletetracking'];
+/**
+ * Sets SiteCatalyst variables accordingly to mapped components. If <code>options</code>
+ * object is provided only variables matching the options.componentPath are set.
+ *
+ * @param {Object} options Parameter object from CQ_Analytics.record() call. Optional.
+ */
+CQ_Analytics.Sitecatalyst.updateEvars = function(options) {
+    this.frameworkMappings = [];
+                this.frameworkMappings.push({scVar:"eVar27",cqVar:"eventdata.sc_shareType",resourceType:"global/components/general/social"});
+                this.frameworkMappings.push({scVar:"event10",cqVar:"eventdata.events.sc_shareEvent",resourceType:"global/components/general/social"});
+                this.frameworkMappings.push({scVar:"list1",cqVar:"eventdata.sc_error_list",resourceType:"global/components/pages/errorpage404"});
+                this.frameworkMappings.push({scVar:"pageType",cqVar:"eventdata.sc_page_type",resourceType:"global/components/pages/errorpage404"});
+                this.frameworkMappings.push({scVar:"event17",cqVar:"eventdata.events.sc_error_event",resourceType:"global/components/pages/errorpage404"});
+                this.frameworkMappings.push({scVar:"prodView",cqVar:"eventdata.events.sc_prod_view",resourceType:"global/components/pages/productdetail"});
+                this.frameworkMappings.push({scVar:"event1",cqVar:"eventdata.events.sc_searchResultPageLoad",resourceType:"global/components/general/searchresults"});
+                this.frameworkMappings.push({scVar:"eVar16",cqVar:"eventdata.sc_internalSearchTerm",resourceType:"global/components/general/searchresults"});
+                this.frameworkMappings.push({scVar:"eVar34",cqVar:"eventdata.sc_searchFilter",resourceType:"global/components/general/searchresults"});
+                this.frameworkMappings.push({scVar:"eVar18",cqVar:"eventdata.sc_numberOfSearchResults",resourceType:"global/components/general/searchresults"});
+                this.frameworkMappings.push({scVar:"eVar26",cqVar:"eventdata.a.media.name",resourceType:"global/components/general/videocomponent"});
+                this.frameworkMappings.push({scVar:"prop1",cqVar:"eventdata.a.video.pageurl",resourceType:"global/components/general/videocomponent"});
+                this.frameworkMappings.push({scVar:"event13",cqVar:"eventdata.events.milestone25",resourceType:"global/components/general/videocomponent"});
+                this.frameworkMappings.push({scVar:"event14",cqVar:"eventdata.events.milestone50",resourceType:"global/components/general/videocomponent"});
+                this.frameworkMappings.push({scVar:"event15",cqVar:"eventdata.events.milestone75",resourceType:"global/components/general/videocomponent"});
+                this.frameworkMappings.push({scVar:"event16",cqVar:"eventdata.events.a.media.complete",resourceType:"global/components/general/videocomponent"});
+                this.frameworkMappings.push({scVar:"prop4",cqVar:"eventdata.a.video.pagename",resourceType:"global/components/general/videocomponent"});
+                this.frameworkMappings.push({scVar:"event12",cqVar:"eventdata.events.a.media.view",resourceType:"global/components/general/videocomponent"});
+                this.frameworkMappings.push({scVar:"eVar38",cqVar:"pagedata.sc_user_experience_type",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"eVar33",cqVar:"pagedata.sc_site_language",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"eVar31",cqVar:"pagedata.sc_site_country",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"channel",cqVar:"pagedata.sc_channel",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"pageName",cqVar:"pagedata.sc_pageName",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"eVar28",cqVar:"pagedata.sc_site_name",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"eVar39",cqVar:"pagedata.sc_page_orientation",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"products",cqVar:"pagedata.sc_products",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"prop3",cqVar:"pagedata.sc_category2",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"prop2",cqVar:"pagedata.sc_category1",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"prop29",cqVar:"pagedata.sc_business_unit",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"eVar40",cqVar:"pagedata.sc_article_title",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"prop34",cqVar:"pagedata.sc_line_of_business",resourceType:"global/components/pages/base/basePage"});
+                this.frameworkMappings.push({scVar:"eVar14",cqVar:"eventdata.sc_form_type",resourceType:"global/components/general/formcompletetracking"});
+                this.frameworkMappings.push({scVar:"event7",cqVar:"eventdata.events.sc_form_complete_event",resourceType:"global/components/general/formcompletetracking"});
+                this.frameworkMappings.push({scVar:"event6",cqVar:"eventdata.events.sc_form_start_event",resourceType:"global/components/general/formcompletetracking"});
+    for (var i=0; i<this.frameworkMappings.length; i++){
+        var m = this.frameworkMappings[i];
+        if (!options || options.compatibility || (options.componentPath == m.resourceType)) {
+            CQ_Analytics.Sitecatalyst.setEvar(m);
+        }
+    }
+}
+CQ_Analytics.Sitecatalyst.doPageTrack = function() {
+    var collect = true;
+    var lte = s.linkTrackEvents;
+    s.pageName="content:aig:america-canada:us:en:knowledge-and-insights:building-a-cyber-resilient-business";
+    s.contextData['AEM.pagename'] = s.pageName;
+    s.contextData['AEM.site'] = "content:aig";
+    CQ_Analytics.Sitecatalyst.collect(collect);
+    if (collect) {
+        CQ_Analytics.Sitecatalyst.updateEvars();
+        /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+        var s_code=s.t();if(s_code)document.write(s_code);
+        s.linkTrackEvents = lte;
+        if(s.linkTrackVars.indexOf('events')==-1){delete s.events};
+        $CQ(document).trigger("sitecatalystAfterCollect");
+    }
+};
+<!-- Below (document).ready added to verify the page name issues - when the page loads first time, few variable, pageName tracking incorrect -->
+$(document).ready(function() { 
+	checkFlag();
+	function checkFlag() {
+		if(typeof analytics_ready != 'undefined' && analytics_ready == false)
+			window.setTimeout(checkFlag, 10);
+		else
+			if (CQ_Analytics.CCM.areStoresInitialized)
+				CQ_Analytics.Sitecatalyst.doPageTrack();
+		else
+			CQ_Analytics.CCM.addListener("storesinitialize", function(e) {CQ_Analytics.Sitecatalyst.doPageTrack();});
+	}
+});
+</script>
+<!-- Below no script tag commented after taking update code from AEM6.1 as well. Do not un comment -->
+<!-- noscript><img src="https://www-172.aig.com/b/ss/aig.us,aig.global/1/H.26.2--NS/1506743980509?cdp=2&gn=content%3Aaig%3Aamerica-canada%3Aus%3Aen%3Aknowledge-and-insights%3Abuilding-a-cyber-resilient-business" height="1" width="1" border="0" alt="" /></noscript -->
+<span data-tracking="{event:'pageView', values:{}, componentPath:'foundation/components/page'}"></span>
+</div>
+<script type="text/javascript">_satellite.pageBottom();</script>
+</body>
+        </html>

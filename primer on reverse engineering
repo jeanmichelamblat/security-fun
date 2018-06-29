@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<!--[if lte IE 9]><html class="no-js IE9 IE" lang="en-US"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en-US"><!--<![endif]-->
+	<head>
+				<meta charset="UTF-8" />
+	<title>A Primer Guide to Reverse Engineering &#8211; Purism</title>
+			<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+			<script type="text/javascript">
+			/* <![CDATA[ */
+			document.documentElement.className = document.documentElement.className.replace(new RegExp('(^|\\s)no-js(\\s|$)'), '$1js$2');
+			/* ]]> */
+		</script>
+	<link rel='dns-prefetch' href='//code.jquery.com' />
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Purism &raquo; Feed" href="https://puri.sm/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Purism &raquo; Comments Feed" href="https://puri.sm/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/puri.sm\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.4"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='inline-footnotes-css'  href='https://puri.sm/wp-content/plugins/inline-footnotes/public/css/inline-footnotes-public.compressed.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_team_b-font-awesome-front-css'  href='https://puri.sm/wp-content/plugins/team-builder/assets/css/font-awesome/css/font-awesome.min.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_team_b_bootstrap-front-css'  href='https://puri.sm/wp-content/plugins/team-builder/assets/css/bootstrap-front.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_team_b_team1-css'  href='https://puri.sm/wp-content/plugins/team-builder/assets/css/team1.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_team_b_team2-css'  href='https://puri.sm/wp-content/plugins/team-builder/assets/css/team2.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-simple-product-badge-style-css'  href='https://puri.sm/wp-content/plugins/wc-simple-product-badge/css/style.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='woocommerce-layout-css'  href='https://puri.sm/wp-content/plugins/woocommerce/assets/css/woocommerce-layout.css?ver=3.2.6' type='text/css' media='all' />
+<link rel='stylesheet' id='woocommerce-smallscreen-css'  href='https://puri.sm/wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen.css?ver=3.2.6' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='woocommerce-general-css'  href='https://puri.sm/wp-content/plugins/woocommerce/assets/css/woocommerce.css?ver=3.2.6' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-ui-css'  href='//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css?ver=1.11.4' type='text/css' media='all' />
+<link rel='stylesheet' id='neo-crowdfunding-css-front-css'  href='https://puri.sm/wp-content/plugins/wp-crowdfunding/assets/css/crowdfunding-front.css?ver=10.13' type='text/css' media='all' />
+<link rel='stylesheet' id='buttons-css'  href='https://puri.sm/wp-includes/css/buttons.min.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='https://puri.sm/wp-includes/css/dashicons.min.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='mediaelement-css'  href='https://puri.sm/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.6-78496d1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css'  href='https://puri.sm/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='media-views-css'  href='https://puri.sm/wp-includes/css/media-views.min.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='imgareaselect-css'  href='https://puri.sm/wp-includes/js/imgareaselect/imgareaselect.css?ver=0.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='wpneo_crowdfunding_style-css'  href='https://puri.sm/wp-content/plugins/wp-crowdfunding//wpneotemplate/woocommerce/basic/style.css?ver=10.13' type='text/css' media='all' />
+<link rel='stylesheet' id='chosen-css'  href='https://puri.sm/wp-content/themes/make/css/libs/chosen/chosen.min.css?ver=1.5.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-job-manager-frontend-css'  href='https://puri.sm/wp-content/plugins/wp-job-manager/assets/css/frontend.css?ver=1.31.0' type='text/css' media='all' />
+<link rel='stylesheet' id='testimonial-rotator-style-css'  href='https://puri.sm/wp-content/plugins/testimonial-rotator/testimonial-rotator-style.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='https://puri.sm/wp-content/themes/make/css/libs/font-awesome/css/font-awesome.min.css?ver=4.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='parent-style-css'  href='https://puri.sm/wp-content/themes/make/style.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='make-google-font-css'  href='//fonts.googleapis.com/css?family=Open+Sans%3Aregular%2Citalic%2C700%2C700italic&#038;ver=1.9.8#038;subset=latin' type='text/css' media='all' />
+<link rel='stylesheet' id='make-main-css'  href='https://puri.sm/wp-content/themes/make-purism/style.css?ver=1.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='make-print-css'  href='https://puri.sm/wp-content/themes/make/css/print.css?ver=1.9.8' type='text/css' media='print' />
+<link rel='stylesheet' id='tablepress-default-css'  href='https://puri.sm/wp-content/tablepress-combined.min.css?ver=23' type='text/css' media='all' />
+<link rel='stylesheet' id='qcf_style-css'  href='https://puri.sm/wp-content/plugins/quick-contact-form/styles.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='qcf_custom_style-css'  href='https://puri.sm/wp-content/plugins/quick-contact-form/quick-contact-form-custom.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-style-css'  href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css?ver=4.9.4' type='text/css' media='all' />
+<link rel='stylesheet' id='sccss_style-css'  href='https://puri.sm/?sccss=1&#038;ver=4.9.4' type='text/css' media='all' />
+<!--[if !IE]><!-->
+<link rel='stylesheet' id='tablepress-responsive-css'  href='https://puri.sm/wp-content/plugins/tablepress-responsive-tables/tablepress-responsive.min.css?ver=1.2' type='text/css' media='all' />
+<!--<![endif]-->
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var inlineFootNotesVars = {"hover":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/inline-footnotes/public/js/inline-footnotes-public.compressed.js?ver=1.0.0'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var userSettings = {"url":"\/","uid":"0","time":"1525717955","secure":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/utils.min.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/plupload/moxie.min.js?ver=1.3.5'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/plupload/plupload.min.js?ver=2.1.9'></script>
+<!--[if lt IE 8]>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/json2.min.js?ver=2015-05-03'></script>
+<![endif]-->
+<script type='text/javascript'>
+var mejsL10n = {"language":"en","strings":{"mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen-off":"Turn off Fullscreen","mejs.fullscreen-on":"Go Fullscreen","mejs.download-video":"Download Video","mejs.fullscreen":"Fullscreen","mejs.time-jump-forward":["Jump forward 1 second","Jump forward %1 seconds"],"mejs.loop":"Toggle Loop","mejs.play":"Play","mejs.pause":"Pause","mejs.close":"Close","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.time-skip-back":["Skip back 1 second","Skip back %1 seconds"],"mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.mute-toggle":"Mute Toggle","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.ad-skip":"Skip ad","mejs.ad-skip-info":["Skip in 1 second","Skip in %1 seconds"],"mejs.source-chooser":"Source Chooser","mejs.stop":"Stop","mejs.speed-rate":"Speed Rate","mejs.live-broadcast":"Live Broadcast","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/mediaelement/mediaelement-and-player.min.js?ver=4.2.6-78496d1'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/mediaelement/mediaelement-migrate.min.js?ver=4.9.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ajaxurl = "https:\/\/puri.sm\/wp-admin\/admin-ajax.php";
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/wp-post-email-notification/js/bundle/frontend-widget.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/testimonial-rotator/js/jquery.cycletwo.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/testimonial-rotator/js/jquery.cycletwo.addons.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/wp-charts/js/Chart.min.js?ver=4.9.4'></script>
+<link rel='https://api.w.org/' href='https://puri.sm/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://puri.sm/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://puri.sm/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Trusted Platform Module now available as an add-on for Librem laptops' href='https://puri.sm/posts/tpm-addon-for-librem-laptops/' />
+<link rel='next' title='Le Capitole du Libre 2017' href='https://puri.sm/posts/le-capitole-du-libre-2017/' />
+<meta name="generator" content="WordPress 4.9.4" />
+<meta name="generator" content="WooCommerce 3.2.6" />
+<link rel="canonical" href="https://puri.sm/posts/primer-to-reverse-engineering/" />
+<link rel='shortlink' href='https://puri.sm/?p=43843' />
+<link rel="alternate" type="application/json+oembed" href="https://puri.sm/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpuri.sm%2Fposts%2Fprimer-to-reverse-engineering%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://puri.sm/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpuri.sm%2Fposts%2Fprimer-to-reverse-engineering%2F&#038;format=xml" />
+
+<style>
+	.inline-footnote,
+	.inline-footnote:hover,
+	.inline-footnote:active,
+	.inline-footnote:visited {
+		background-color: #e8f5ff;
+		color: #1e73be !important;
+	}
+	.inline-footnote span.footnoteContent {
+		background-color: #f4f4f4;
+		color: #020202 !important;
+	}
+</style>
+<script>
+jQuery(document).ready(function() {
+  // If both M.2 SSD and 2.5" SSD options are set to none,
+  // disable the Add to Cart button.
+
+  var storageM2Box = jQuery('.storage-m2-selectbox');
+  var storageSataBox = jQuery('.storage-sata-selectbox');
+  var addToCartButton = jQuery('.single_add_to_cart_button');
+
+  function toggleSubmitButton() {
+    if ((storageM2Box.find(':selected').text().indexOf('None') > -1) &&
+        (storageSataBox.find(':selected').text().indexOf('None') > -1)) {
+      addToCartButton.prop('disabled', true);
+    } else {
+      addToCartButton.prop('disabled', false);
+    }
+  }
+
+  storageM2Box.change(toggleSubmitButton);
+  storageSataBox.change(toggleSubmitButton);
+
+});
+</script>
+<!-- StarBox - the Author Box for Humans 3.0.6, visit: http://wordpress.org/plugins/starbox/ -->
+<!-- /StarBox - the Author Box for Humans -->
+
+<link rel='stylesheet' id='frontend.css-css'  href='https://puri.sm/wp-content/plugins/starbox//themes/business/css/frontend.css?ver=3.0.6' type='text/css' media='all' />
+<!--[if !IE]><!-->
+<!--<![endif]-->
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/starbox//themes/business/js/frontend.js?ver=3.0.6'></script>
+<link rel='stylesheet' id='hidedefault.css-css'  href='https://puri.sm/wp-content/plugins/starbox//themes/admin/css/hidedefault.css?ver=3.0.6' type='text/css' media='all' />
+<script type="text/javascript">
+(function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//puri.sm/?wordfence_lh=1&hid=59D745D0E40981C0E6A91A4C9C6A7A21');
+</script><style type="text/css"> .wpneo_donate_button, 
+                        #wpneo-tab-reviews .submit,
+                        .wpneo-edit-btn,
+                        .wpneo-image-upload.float-right,
+                        .wpneo-image-upload-btn,
+                        .wpneo-save-btn,
+                        #wpneo_active_edit_form,
+                        .removeCampaignRewards,
+                        #addreward,
+                        .removecampaignupdate,
+                        .btn-style1,
+                        #addcampaignupdate,
+                        .removecampaignupdate,
+                        .wpneo-profile-button,
+                        .dashboard-btn-link,
+                        .wpneo_login_form_div #wp-submit,
+                        .wpneo-submit-campaign,
+                        .wpneo_donate_button{ background-color:#89a5bf !important; color:#fff !important; }.wpneo_donate_button:hover, 
+                        #wpneo-tab-reviews .submit:hover,
+                        .wpneo-edit-btn:hover,
+                        .wpneo-image-upload.float-right:hover,
+                        .wpneo-image-upload-btn:hover,
+                        .wpneo-save-btn:hover,
+                        .removeCampaignRewards:hover,
+                        #addreward:hover,
+                        .removecampaignupdate:hover,
+                        .btn-style1:hover,
+                        #addcampaignupdate:hover,
+                        #wpneo_active_edit_form:hover,
+                        .removecampaignupdate:hover,
+                        .wpneo-profile-button:hover,
+                        .dashboard-btn-link:hover,
+                        .wpneo_login_form_div #wp-submit:hover,
+                        .wpneo-submit-campaign:hover,
+                        .wpneo_donate_button:hover{ background-color:#6193bf !important; color:#fff !important; }#neo-progressbar > div,
+                        ul.wpneo-crowdfunding-update li:hover span.round-circle,
+                        .wpneo-links li a:hover, .wpneo-links li.active a{
+                            background-color: #89a5bf  !important;
+                        }
+                        .wpneo-tabs-menu li.wpneo-current {
+                            border-bottom: 3px solid #89a5bf  !important;
+                        }
+                        .wpneo-link-style1,
+                        ul.wpneo-crowdfunding-update li .wpneo-crowdfunding-update-title {
+                            color: #89a5bf !important;
+                        }.tab-rewards-wrapper .overlay {
+                            background: rgba(137,165,191,.9) !important;
+                        }.wpneo-author-info, 
+.wpneo-campaign-creator-info-wrapper,
+ .wpneo-single-sidebar,
+ .wpneo-location-wrapper,
+ #campaign_loved_html {
+display:none;
+}
+.single-product .woocommerce-Price-amount {
+    display: block;
+}
+.available {
+width:100%;
+height:100%;
+text-align: center;
+/*background-color: #E6F3E6;*/
+}
+.available span {
+color: #6db7a5;
+font-weight: bold;
+}
+.not-available {
+width:100%;
+height:100%; 
+/*background-color: #F4E6E6;*/
+text-align: center
+}
+.not-available span {
+color: darkred; 
+font-weight: bold;
+}
+.tablepress td, .tablepress th {
+padding: 8px 2px 8px 2px;
+}
+thead th {
+background-color: #FFFFFF;
+}
+.table-title {
+text-align:center;
+padding: 0px 0px 4px 0px;
+background-color: #333;
+color: #fff;
+font-weight: normal;
+}
+.table-title.highlighted {
+background-color: #89a5bf;
+color: #fff;
+font-weight: bold;
+margin: 0px 4px 0px 0px;
+}
+hr {
+color: #cccccc;
+}
+h1 {
+font-size: 3.5rem;
+}
+
+h1 img {
+    width: 50px;
+    float: left;
+    margin: -8px 0px 0px 0px;
+}
+h1 {
+    display: inline-block;
+    width:100%;
+    margin-bottom: 20px;
+}
+h1 span {
+    background-color: #fff;
+    margin: -20px 0px 0px -30px;
+    padding: 0px 2px 0px 2px;
+    display: inline-block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 34px;
+    height: 35px;
+}
+h5 {
+    margin: 40px 0px 0px 0px;
+}
+hr {
+    margin: 20px 0px 20px 0px;
+}
+blockquote p{
+    background: none;
+    color: #999;
+    font-size: 24px; 
+    font-weight: bold;
+}
+
+blockquote p span.author {
+    color: #6193bf;
+    font-style: normal;
+    text-decoration: none;
+    margin-left: 100px; 
+    font-size: 14px
+}
+p {
+    color: #555;
+}
+a {
+    color: #89a5bf;
+}
+ul.bullets {
+    color: #555;
+    padding: 0px;
+    margin: 0px 0px 20px 40px;
+    list-style: disc;
+}
+.bullets li {
+    margin: 5px 0px 5px 0px;
+}
+li .bullets {
+    list-style-type:circle;
+}
+ol.bullets {
+    color:#555;
+}
+
+.heading {
+    font-size: 24px; 
+    font-weight: normal;
+    margin: 10px 0px 10px 0px;
+}
+
+@media screen and (max-width: 699px) {
+    .tab-description-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .tab-description {
+        width: 90%;
+        order: 2;
+    }
+
+    .tab-rewards {
+        width: 90%;
+        order: 1;
+    }
+}
+.wpneo-campaign-summary .woocommerce {
+    background-image: url("https://videos.puri.sm/librem_phone/l5-funded-text.png");
+    margin: 10px 0 20px 0;
+    background-repeat: no-repeat;
+} </style>		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<!--[if lte IE 8]><script src="https://puri.sm/wp-content/plugins/wp-charts/js/excanvas.compiled.js"></script><![endif]-->	<style>
+    			/*wp_charts_js responsive canvas CSS override*/
+    			.wp_charts_canvas {
+    				width:100%!important;
+    				max-width:100%;
+    			}
+
+    			@media screen and (max-width:480px) {
+    				div.wp-chart-wrap {
+    					width:100%!important;
+    					float: none!important;
+						margin-left: auto!important;
+						margin-right: auto!important;
+						text-align: center;
+    				}
+    			}
+    		</style><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style>
+<!-- Begin Make Inline CSS -->
+<style type="text/css">
+h1:not(.site-title),h1:not(.site-title) a,.font-header,.entry-title{font-size:32px;font-size:3.2rem;}h2,h2 a{font-size:30px;font-size:3rem;font-weight:normal;}h3,h3 a,.builder-text-content .widget-title{font-weight:normal;}h4,h4 a{font-size:20px;font-size:2rem;}.footer-social-links{font-size:40px;font-size:4rem;}div.custom-logo{background-image:url("https://puri.sm/wp-content/uploads/2016/11/purism-logo-with-text-5470x1120px-transparent-gradient.png");width:960px;}div.custom-logo a{padding-bottom:21.4%;}.builder-text-content .widget-title{font-size:20px;font-size:2rem;}
+@media screen and (min-width: 800px){.has-left-sidebar.has-right-sidebar .entry-title{font-size:22px;font-size:2.2rem;}}
+@media screen and (min-width: 1100px){.footer-social-links{font-size:34px;font-size:3.4rem;}}
+</style>
+<!-- End Make Inline CSS -->
+<link rel="icon" href="https://puri.sm/wp-content/uploads/2015/04/purism-logo-87x56px.png" sizes="32x32" />
+<link rel="icon" href="https://puri.sm/wp-content/uploads/2015/04/purism-logo-87x56px.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://puri.sm/wp-content/uploads/2015/04/purism-logo-87x56px.png" />
+<meta name="msapplication-TileImage" content="https://puri.sm/wp-content/uploads/2015/04/purism-logo-87x56px.png" />
+	</head>
+
+	<body class="post-template-default single single-post postid-43843 single-format-standard wp-custom-logo view-post full-width no-sidebar make-purism">
+		<div id="site-wrapper" class="site-wrapper">
+			<a class="skip-link screen-reader-text" href="#site-content">Skip to content</a>
+
+			
+<header id="site-header" class="site-header header-layout-3 no-site-title no-site-tagline" role="banner">
+		<div class="site-header-main">
+		<div class="container">
+			<div class="site-branding">
+									<a href="https://puri.sm/" class="custom-logo-link" rel="home" itemprop="url"><img width="1000" height="214" src="https://puri.sm/wp-content/uploads/2016/11/purism-logo-with-text-5470x1120px-transparent-gradient.png" class="custom-logo" alt="Purism" itemprop="logo" srcset="https://puri.sm/wp-content/uploads/2016/11/purism-logo-with-text-5470x1120px-transparent-gradient.png 1000w, https://puri.sm/wp-content/uploads/2016/11/purism-logo-with-text-5470x1120px-transparent-gradient-300x64.png 300w, https://puri.sm/wp-content/uploads/2016/11/purism-logo-with-text-5470x1120px-transparent-gradient-768x164.png 768w" sizes="(max-width: 1000px) 100vw, 1000px" /></a>												<h1 class="site-title screen-reader-text">
+					<a href="https://puri.sm/" rel="home">Purism</a>
+				</h1>
+												<span class="site-description screen-reader-text">
+					High-quality laptops that protect your freedom and privacy				</span>
+							</div>
+
+			
+<form role="search" method="get" class="search-form" action="https://puri.sm/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search&hellip;" title="Press Enter to submit your search" value="" name="s">
+	</label>
+	<input type="submit" class="search-submit" value="Search">
+</form>
+
+			
+<nav id="site-navigation" class="site-navigation" role="navigation">
+			<span class="menu-toggle">Menu</span>
+		<div class=" mobile-menu"><ul id="menu-primary-menu" class="menu"><li id="menu-item-8703" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8703"><a href="https://puri.sm/why-purism/">Why Purism?</a></li>
+<li id="menu-item-64" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-64"><a href="https://puri.sm/products/">Products</a></li>
+<li id="menu-item-14226" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14226"><a href="https://pureos.net">PureOS</a></li>
+<li id="menu-item-9338" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9338"><a href="https://puri.sm/news/">News &#038; Events</a></li>
+<li id="menu-item-8884" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-8884"><a>Support</a>
+<ul class="sub-menu">
+	<li id="menu-item-5440" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5440"><a href="https://puri.sm/my-account/">My Account</a></li>
+	<li id="menu-item-19156" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19156"><a href="https://forums.puri.sm">Forums</a></li>
+	<li id="menu-item-160" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160"><a title="Frequently Asked Questions" href="https://puri.sm/faq/">FAQ</a></li>
+	<li id="menu-item-8885" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8885"><a href="https://puri.sm/contact/">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-13213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13213"><a href="https://puri.sm/about/">About</a></li>
+</ul></div></nav>		</div>
+	</div>
+</header>
+			<div id="site-content" class="site-content">
+				<div class="container">
+
+<main id="site-main" class="site-main" role="main">
+
+			
+<article id="post-43843" class="post-43843 post type-post status-publish format-standard has-post-thumbnail hentry category-firmware tag-advanced-readers tag-laptops tag-newsletter-and-status-updates tag-reverse-engineering tag-software-freedom">
+		<header class="entry-header">
+		<div class="entry-meta">
+
+<time class="entry-date published" datetime="2017-11-17T20:00:15+00:00">November 17, 2017</time>
+</div>
+
+<figure class="entry-thumbnail post-header">
+			<img width="960" height="471" src="https://puri.sm/wp-content/uploads/2017/11/reverse-engineering-hacker-by-TheDigitalArtist-CC0-crop-1024x502.jpg" class="attachment-large size-large wp-post-image" alt="" srcset="https://puri.sm/wp-content/uploads/2017/11/reverse-engineering-hacker-by-TheDigitalArtist-CC0-crop-1024x502.jpg 1024w, https://puri.sm/wp-content/uploads/2017/11/reverse-engineering-hacker-by-TheDigitalArtist-CC0-crop-300x147.jpg 300w, https://puri.sm/wp-content/uploads/2017/11/reverse-engineering-hacker-by-TheDigitalArtist-CC0-crop-768x377.jpg 768w, https://puri.sm/wp-content/uploads/2017/11/reverse-engineering-hacker-by-TheDigitalArtist-CC0-crop.jpg 1500w" sizes="(max-width: 960px) 100vw, 960px" />		</figure>
+
+<h1 class="entry-title">
+			A Primer Guide to Reverse Engineering	</h1>
+<div class="entry-meta">
+</div>	</header>
+	
+	<div class="entry-content">
+				
+                         <div class="abh_box abh_box_up abh_box_business"><ul class="abh_tabs"> <li class="abh_about abh_active"><a href="#abh_about">About</a></li> <li class="abh_posts"><a href="#abh_posts">Latest Posts</a></li></ul><div class="abh_tab_content"><section class="vcard abh_about_tab abh_tab" style="display:block"><div class="abh_image"><a href="https://puri.sm/posts/author/_kakaroto/" class="url" title="Youness Alaoui"><img src="https://puri.sm/wp-content/uploads/gravatar/kakaroto.jpg" class="photo" width="80" alt="Youness Alaoui" /></a></div><div class="abh_social"> </div><div class="abh_text"><h3 class="fn name" ><a href="https://puri.sm/posts/author/_kakaroto/" class="url">Youness Alaoui</a></h3><div class="abh_job" ></div><div class="description note abh_description" >Hardware enablement developer</div></div> </section><section class="abh_posts_tab abh_tab" ><div class="abh_image"><a href="https://puri.sm/posts/author/_kakaroto/" class="url" title="Youness Alaoui"><img src="https://puri.sm/wp-content/uploads/gravatar/kakaroto.jpg" class="photo" width="80" alt="Youness Alaoui" /></a></div><div class="abh_social"> </div><div class="abh_text"><h4 >Latest posts by Youness Alaoui <span class="abh_allposts">(<a href="https://puri.sm/posts/author/_kakaroto/">see all</a>)</span></h4><div class="abh_description note" ><ul>				<li>					<a href="https://puri.sm/posts/intel-fsp-reverse-engineering-finding-the-real-entry-point/">Intel FSP reverse engineering: finding the real entry point!</a><span> - April 2, 2018</span>				</li>				<li>					<a href="https://puri.sm/posts/february-2018-coreboot-update/">February 2018 coreboot update now available</a><span> - February 22, 2018</span>				</li>				<li>					<a href="https://puri.sm/posts/primer-to-reverse-engineering/">A Primer Guide to Reverse Engineering</a><span> - November 17, 2017</span>				</li></ul></div></div> </section></div> </div><p><!--Recently, I've finished <strong>reverse engineering the Intel FSP-S "entry" code,</strong> that is from the entry point (FspSiliconInit) all the way to the end of the function and all the subfunctions that it calls. This is only some initial foray into reverse engineering the FSP as a whole, but reverse engineering is something that takes a lot of time and effort. Today's blog post is here to illustrate that, and to lay the foundations for understanding what I've done with the FSP code (in a future blog post).
+
+-->Over the years, many people asked me to teach them what I do, or to explain to them how to reverse engineer assembly code in general. Sometimes I hear the infamous &#8220;How hard can it be?&#8221; catchphrase. Last week someone I was discussing with thought that the assembly language is just like a regular programming language, but in binary form—it&#8217;s easy to make that mistake if you&#8217;ve never seen what assembly is or looks like. Historically, I&#8217;ve always said that reverse engineering and ASM is &#8220;too complicated to explain&#8221; or that &#8220;If you need help to get started, then you won&#8217;t be able to finish it on your own&#8221; and various other vague responses—I often wanted to explain to others why I said things like that but I never found a way to do it. You see, when something is complex, it&#8217;s easy to say that it&#8217;s complex, but it&#8217;s much harder to explain to people <em>why</em> it&#8217;s complex.</p>
+<p>I was lucky to recently stumble onto a little function while reverse engineering<!-- the Intel FSP,--> a function that was both simple and complex, where figuring out what it does was an interesting challenge that I can easily walk you through. This function wasn&#8217;t a difficult thing to understand, and by far, it&#8217;s not one of the hard or complex things to reverse engineer, but this one is &#8220;small and complex enough&#8221; that it&#8217;s a perfect example to explain, without writing an entire book or getting into the more complex aspects of reverse engineering. So <strong>today&#8217;s post serves as a &#8220;primer&#8221; guide to reverse engineering</strong> for all of those interested in the subject. <strong>It is a required read in order to understand the next blog posts I would be writing about reverse engineering.</strong> </p>
+<p><strong>Note:</strong> some function and component names in this blog post have been scrambled, with names such as &#8220;BOB&#8221;, &#8220;ALICE&#8221; and &#8220;QUEEN&#8221;.</p>
+<p>Ready? Strap on your geek helmet and let&#8217;s get started!</p>
+<hr class="ttfmake-hr" style="border-style: dashed; border-top-width: 2px;" />
+<p><strong>DISCLAIMER</strong>: I might make false statements in the blog post below, some by mistake, some intentionally for the purpose of vulgarizing the explanations. For example, when I say below that there are 9 registers in X86, I know there are more (SSE, FPU, or even just the DS or EFLAGS registers, or purposefully not mentioning EAX instead of RAX, etc.), but I just don&#8217;t want to complicate matters by going too wide in my explanations.</p>
+<hr class="ttfmake-hr" style="border-style: dashed; border-top-width: 2px;" />
+<h1>A prelude</h1>
+<p>First things first, you need to understand some basic concepts, such as &#8220;what is ASM exactly&#8221;. I will explain some basic concepts but not <em>all</em> the basic concepts you might need. I will assume that you know at least what a programming language is and know how to write a simple &#8220;hello world&#8221; in at least one language, otherwise you&#8217;ll be completely lost.</p>
+<p>So, ASM is the Assembly language, but it&#8217;s not the actual binary code that executes on the machine. It is however, very similar to it. To be more exact, the assembly language is a textual representation of the binary instructions given to the microprocessor. You see, when you compile your regular C program into an executable, the compiler will transform all your code into some very, very, very basic instructions. Those instructions are what the CPU will understand and execute. By combining a lot of small, simple and specific instructions, you can do more complex things. That&#8217;s the basis of any programming language, of course, but with assembly, the building blocks that you get are very limited. Before I&#8217;ll talk about instructions, I want to explain two concepts first which you&#8217;ll need to follow the rest of the story.</p>
+<h2>The stack</h2>
+<p>First I&#8217;ll explain what &#8220;the stack&#8221; is.  You may have heard of it before, or maybe you didn&#8217;t, but the important thing to know is that when you write code, you have two types of memory:</p>
+<ul>
+<li>The first one is your &#8220;dynamic memory&#8221;, that&#8217;s when you call &#8216;malloc&#8217; or &#8216;new&#8217; to allocate new memory, this goes from your RAM upward (or left-to-right), in the sense that if you allocate 10 bytes, you&#8217;ll first get address 0x1000 for example, then when you allocate another 30 bytes, you&#8217;ll get address 0x100A, then if you allocate another 16 bytes, you&#8217;ll get 0x1028, etc.</li>
+<li>The second type of memory that you have access to is the <em>stack,</em> which is different, instead it grows downward (or right-to-left), and it&#8217;s used to store local variables in a function. So if you start with the stack at address 0x8000, then when you enter a function with 16 bytes worth of local variables, your stack now points to address 0x7FF0, then you enter another function with 64 bytes worth of local variables, and your stack now points to address 0x7FB0, etc. The way the stack works is by &#8220;stacking&#8221; data into it, you &#8220;push&#8221; data in the stack, which puts the variable/data into the stack and moves the stack pointer down, you can&#8217;t remove an item from anywhere in the stack, you can always only remove (pop) the last item you added (pushed). A stack is actually an abstract type of data, like a list, an array, a dictionary, etc. You can read more about what a stack is on <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">wikipedia</a> and it shows you how you can add and remove items on a stack with this image:</li>
+</ul>
+<p><img class="alignnone size-medium" src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png" width="773" height="540" /></p>
+<p>The image shows you what we call a LIFO (Last-In-First-Out) and that&#8217;s what a stack is. In the case of the computer&#8217;s stack, it grows downward in the RAM (as opposed to upward in the above image) and is used to store local variables as well as the return address for your function (the instruction that comes after the call to your function in the parent function). So when you look at a stack, you will see multiple &#8220;frames&#8221;, you&#8217;ll see your current function&#8217;s stack with all its variables, then the return address of the function that called it, and above it, you&#8217;ll see the previous function&#8217;s frame with its own variables and the address of the function that called it, and above, etc. all the way to the main function which resides at the top of the stack.</p>
+<p>Here is another image that exemplifies this:</p>
+<p><img class="alignnone size-medium" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/ProgramCallStack2_en.png/350px-ProgramCallStack2_en.png" width="350" height="416" /></p>
+<h2>The registers</h2>
+<p>The second thing I want you to understand is that the processor has multiple &#8220;registers&#8221;. You can think of a register as a variable, but there are only 9 total registers on x86, with only 7 of them usable. So, on the x86 processor, the various registers are: EAX, EBX, ECX, EDX, EDI, ESI, EBP, ESP, EIP.</p>
+<p>There are two registers in there that are special:</p>
+<ul>
+<li>The EIP (Instruction Pointer) contains the address of the current instruction being executed.</li>
+<li>The ESP (Stack Pointer) contains the address of the stack.</li>
+</ul>
+<p>Access to the registers is extremely fast when compared to accessing the data in the RAM (the stack also resides on the RAM, but towards the end of it) and most operations (instructions) have to happen on registers. You&#8217;ll understand more when you read below about instructions, but basically, you can&#8217;t use an instruction to say &#8220;add value A to value B and store it into address C&#8221;, you&#8217;d need to say &#8220;move value A into register EAX, then move value B into register EBX, then add register EAX to register EBX and store the result in register ECX, then store the value of register ECX into the address C&#8221;.</p>
+<h2>The instructions</h2>
+<p>Let&#8217;s go back to explaining instructions now. As I explained before, the instructions are the basic building blocks of the programs, and they are very simple, they take the form of:</p>
+<pre>INS OP1, OP2, OP3</pre>
+<p>Where &#8220;INS&#8221; is the instruction&#8221;, and OP1, OP2, OP3 is what we call the &#8220;operand&#8221;, most instructions will only take 2 operands, some will take no operands, some will take one operand and others will take 3 operands. The operands are usually registers. Sometimes, the operand can be an actual value (what we call an &#8220;immediate value&#8221;) like &#8220;1&#8221;, &#8220;2&#8221; or &#8220;3&#8221;, etc. and sometimes, the operand is a relative position from a register, like for example &#8220;[%eax + 4]&#8221; meaning the address pointed to by the %eax register + 4 bytes. We&#8217;ll see more of that shortly. For now, let&#8217;s give you the list of the most common and used instructions:</p>
+<ul>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_176.html">MOV</a>&#8220;: move data from one operand into another</li>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_5.html">ADD</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_308.html">SUB</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_210.html">MUL</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_72.html">DIV</a>&#8220;: Add, Substract, Multiply, Divide one operand with another and store the result in a register</li>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_12.html">AND</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_219.html">OR</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_330.html">XOR</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_218.html">NOT</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_216.html">NEG</a>&#8220;: Perform logical and/or/xor/not/negate operations on the operand</li>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_285.html">SHL</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_285.html">SHR</a>&#8220;: Shift Left/Shift Right the bits in the operand</li>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_35.html">CMP</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_315.html">TEST</a>&#8220;: Compare one register with an operand</li>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_147.html">JMP</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_146.html">JZ</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_146.html">JNZ</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_146.html">JB</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_146.html">JS</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_146.html">etc</a>.&#8221;: Jump to another instruction (Jump unconditionally, Jump if Zero, Jump if Not Zero, Jump if Below, Jump if Sign, etc.)</li>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_269.html">PUSH</a>/<a href="https://x86.puri.sm/html/file_module_x86_id_248.html">POP</a>&#8220;: Push an operand into the stack, or pop a value from the stack into a register</li>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_26.html">CALL</a>&#8220;: Call a function. This is the equivalent of doing a &#8220;PUSH %EIP+4&#8221; + &#8220;JMP&#8221;. I&#8217;ll get into calling conventions later..</li>
+<li>&#8220;<a href="https://x86.puri.sm/html/file_module_x86_id_280.html">RET</a>&#8220;: Return from a function. This is the equivalent of doing a &#8220;POP %EIP&#8221;</li>
+</ul>
+<p>That&#8217;s about it, that&#8217;s what most programs are doing. Of course, there&#8217;s a lot more instructions, you can see a full list <a href="https://x86.puri.sm/">here</a>, but you&#8217;ll see that most of the other instructions are very obscure or very specific or variations on the above instructions, so really, this represents most of the instructions you&#8217;ll ever encounter.</p>
+<p>I want to explain one thing before we go further down: there is an additional register I didn&#8217;t mention before called the <a href="https://en.wikipedia.org/wiki/FLAGS_register">FLAGS register</a>, which is basically just a status register that contains &#8220;flags&#8221; that indicate when some arithmetic condition happened on the last arithmetic operation. For example, if you add 1 to 0xFFFFFFFF, it will give you &#8216;0&#8217; but the &#8220;<a href="https://en.wikipedia.org/wiki/Overflow_flag">Overflow flag</a>&#8221; will be set in the FLAGS register. If you substract 5 from 0, it will give you 0xFFFFFFFB and the &#8220;<a href="https://en.wikipedia.org/wiki/Sign_flag">Sign flag</a>&#8221; will be set because the result is negative, and if you substract 3 from 3, the result will be zero and the &#8220;<a href="https://en.wikipedia.org/wiki/Zero_flag">Zero flag</a>&#8221; will be set.</p>
+<p>I&#8217;ve shown you the &#8220;CMP&#8221; instruction which is used to compare a register with an operand, but you might be wondering, &#8220;What does it mean exactly to &#8216;compare&#8217;?&#8221; Well, it&#8217;s simple, the CMP instruction is the same thing as the SUB instruction, in that, it substracts one operand from another, but the difference is that it doesn&#8217;t store the result anywhere. However, it does get your flags updated in the FLAGS register. For example, if I wanted to compare %EAX register with the value &#8216;2&#8217;, and %EAX contains the value 3, this is what&#8217;s going to happen: you will substract 2 from the value, the result will be 1, but you don&#8217;t care about that, what you care about is that the ZF (Zero flag) is not set, and the SF (Sign flag is not set), which means that %eax and &#8216;2&#8217; are not equal (otherwise, ZF would be set), and that the value in %eax is superior to 2 (because SF is not set), so you know that &#8220;%eax &gt; 2&#8221; and that&#8217;s what the CMP does.</p>
+<p>The TEST instruction is very similar but it does a logical AND on the two operands for testing, so it&#8217;s used for comparing logical values instead of arithmetic values (&#8220;TEST %eax, 1&#8221; can be used to check if %eax contains an odd or even number for example).</p>
+<p>This is useful because the next bunch of instructions I explained in the list above is conditional Jump instructions, like &#8220;JZ&#8221; (jump if zero) or &#8220;JB&#8221; (jump if below), or &#8220;JS&#8221; (jump if sign), etc. This is what is used to implement &#8220;if, for, while, switch/case, etc.&#8221; it&#8217;s as simple as doing a &#8220;CMP&#8221; followed by a &#8220;JZ&#8221; or &#8220;JNZ&#8221; or &#8220;JB&#8221;, &#8220;JA&#8221;, &#8220;JS&#8221;, etc.</p>
+<p>And if you&#8217;re wondering what&#8217;s the difference between a &#8220;Jump if below&#8221; and &#8220;Jump if sign&#8221; and &#8220;Jump if lower&#8221;, since they all mean that the comparison gave a negative result, right? Well, the &#8220;jump if below&#8221; is used for unsigned integers, while &#8220;jump if lower&#8221; is used for signed integers, while &#8220;jump if sign&#8221; can be misleading. An unsigned 3 &#8211; 4 would give us a very high positive result&#8230;  something like that, in practice, JB checks the <a href="https://en.wikipedia.org/wiki/Carry_flag">Carry Flag</a>, while JS checks the <a href="https://en.wikipedia.org/wiki/Sign_flag">Sign Flag</a> and JL checks if the Sign Flag is equal to the <a href="https://en.wikipedia.org/wiki/Overflow_flag">Overflow flag</a>. See the <a href="https://x86.puri.sm/html/file_module_x86_id_146.html">Conditional Jump</a> page for more details.</p>
+<h2>A practical example</h2>
+<p>Here&#8217;s a very small and simple practical example, if you have a simple C program like this:</p>
+<pre>int main() {
+   return add_a_and_b(2, 3);
+}
+
+int add_a_and_b(int a, int b) {
+   return a + b;
+}</pre>
+<p>It would compile into something like this:</p>
+<pre>_main:
+   push   3                ; Push the second argument '3' into the stack
+   push   2                ; Push the first argument '2' into the stack
+   call   _add_a_and_b     ; Call the _add_a_and_b function. This will put the address of the next
+                           ; instruction (add) into the stack, then it will jump into the _add_a_and_b
+                           ; function by putting the address of the first instruction in the _add_a_and_b
+                           ; label (push %ebx) into the EIP register
+   add    %esp, 8          ; Add 8 to the esp, which effectively pops out the two values we just pushed into it
+   ret                     ; Return to the parent function.... 
+
+_add_a_and_b:
+   push   %ebx             ; We're going to modify %ebx, so we need to push it to the stack
+                           ; so we can restore its value when we're done
+   mov    %eax, [%esp+8]   ; Move the first argument (8 bytes above the stack pointer) into EAX
+   mov    %ebx, [%esp+12]  ; Move the second argument (12 bytes above the stack pointer) into EBX
+   add    %eax, %ebx       ; Add EAX and EBX and store the result into EAX
+   pop    %ebx             ; Pop EBX to restore its previous value
+   ret                     ; Return back into the main. This will pop the value on the stack (which was
+                           ; the address of the next instruction in the main function that was pushed into
+                           ; the stack when the 'call' instruction was executed) into the EIP register</pre>
+<p>Yep, something as simple as that, can be quite complicated in assembly. Well, it&#8217;s not really that complicated actually, but a couple of things can be confusing.</p>
+<p>You have only 7 usable registers, and one stack. Every function gets its arguments passed through the stack, and can return its return value through the %eax register. If every function modified every register, then your code will break, so every function has to ensure that the other registers are unmodified when it returns (other than %eax). You pass the arguments on the stack and your return value through %eax, so what should you do if need to use a register in your function? Easy: you keep a copy on the stack of any registers you&#8217;re going to modify so you can restore them at the end of your function. In the _<em>add_a_and_b </em>function, I did that for the %ebx register as you can see. For more complex function, it can get a lot more complicated than that, but let&#8217;s not get into that for now (for the curious: compilers will create what we call a &#8220;prologue&#8221; and an &#8220;epilogue&#8221; in each function. In the prologue, you store the registers you&#8217;re going to modify, set up the %ebp (base pointer) register to point to the base of the stack when your function was entered, which allows you to access things without keeping track of the pushes/pops you do throughout the function, then in the epilogue, you pop the registers back, restore %esp to the value that was saved in %ebp, before you return).</p>
+<p>The second thing you might be wondering about is with these lines:</p>
+<pre>mov %eax, [%esp+8]
+mov %ebx, [%esp+12]</pre>
+<p>And to explain it, I will simply show you this drawing of the stack&#8217;s contents when we call those two instructions above:</p>
+<p><img class="alignnone size-medium wp-image-43904" src="https://puri.sm/wp-content/uploads/2017/11/stack-300x259.png" alt="" width="300" height="259" srcset="https://puri.sm/wp-content/uploads/2017/11/stack-300x259.png 300w, https://puri.sm/wp-content/uploads/2017/11/stack-768x664.png 768w, https://puri.sm/wp-content/uploads/2017/11/stack.png 898w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>For the purposes of this exercise, we&#8217;re going to assume that the _main function is located in memory at the address 0xFFFF0000, and that each instructoin is 4 bytes long (the size of each instruction can vary depending on the instruction and on its operands). So you can see, we first pushed 3 into the stack, %esp was lowered, then we pushed 2 into the stack, %esp was lowered, then we did a &#8216;call _add_a_and_b&#8217;, which stored the address of the next instruction (4 instructions into the main, so &#8216;_main+16&#8217;) into the stack and esp was lowered, then we pushed %ebx, which I assumed here contained a value of 0, and the %esp was lowered again. If we now wanted to access the first argument to the function (2), we need to access %esp+8, which will let us skip the saved %ebx and the &#8216;Return address&#8217; that are in the stack (since we&#8217;re working with 32 bits, each value is 4 bytes). And in order to access the second argument (3), we need to access %esp+12.</p>
+<h2>Binary or assembly?</h2>
+<p>One question that may (or may not) be popping into your mind now is &#8220;wait, isn&#8217;t this supposed to be the &#8216;computer language&#8217;, so why isn&#8217;t this binary?&#8221; Well, it is&#8230; in a way. As I explained earlier, &#8220;the assembly language is a textual representation of the binary instructions given to the microprocessor&#8221;, what it means is that those instructions are given to the processor as is, there is no transformation of the instructions or operands or anything like that. However, the instructions are given to the microprocessor in binary form, and the text you see above is just the textual representation of it.. kind of like how &#8220;68 65 6c 6c 6f&#8221; is the hexadecimal representation of the ASCII text &#8220;hello&#8221;. What this means is that each instruction in assembly language, which we call a &#8216;mnemonic&#8217; represents a binary instruction, which we call an &#8216;opcode&#8217;, and you can see the opcodes and mnemonics in the <a href="https://x86.puri.sm/">list</a> of x86 instructions I gave you above. Let&#8217;s take the <a href="https://x86.puri.sm/html/file_module_x86_id_26.html">CALL</a> instruction for example. The opcode/mnemonic list is shown as:</p>
+<table class="box">
+<tbody>
+<tr>
+<th>Opcode</th>
+<th>Mnemonic</th>
+<th>Description</th>
+</tr>
+<tr>
+<td class="grid"><code>E8 cw</code></td>
+<td class="grid"><code>CALL rel16</code></td>
+<td class="grid">Call near, relative, displacement relative to next instruction</td>
+</tr>
+<tr>
+<td class="grid"><code>E8 cd</code></td>
+<td class="grid"><code>CALL rel32</code></td>
+<td class="grid">Call near, relative, displacement relative to next instruction</td>
+</tr>
+<tr>
+<td class="grid"><code>FF /2</code></td>
+<td class="grid"><code>CALL r/m16</code></td>
+<td class="grid">Call near, absolute indirect, address given in r/m16</td>
+</tr>
+<tr>
+<td class="grid"><code>FF /2</code></td>
+<td class="grid"><code>CALL r/m32</code></td>
+<td class="grid">Call near, absolute indirect, address given in r/m32</td>
+</tr>
+<tr>
+<td class="grid"><code>9A cd</code></td>
+<td class="grid"><code>CALL ptr16:16</code></td>
+<td class="grid">Call far, absolute, address given in operand</td>
+</tr>
+<tr>
+<td class="grid"><code>9A cp</code></td>
+<td class="grid"><code>CALL ptr16:32</code></td>
+<td class="grid">Call far, absolute, address given in operand</td>
+</tr>
+<tr>
+<td class="grid"><code>FF /3</code></td>
+<td class="grid"><code>CALL m16:16</code></td>
+<td class="grid">Call far, absolute indirect, address given in m16:16</td>
+</tr>
+<tr>
+<td class="grid"><code>FF /3</code></td>
+<td class="grid"><code>CALL m16:32</code></td>
+<td class="grid">Call far, absolute indirect, address given in m16:32</td>
+</tr>
+</tbody>
+</table>
+<p>This means that this same &#8220;CALL&#8221; mnemonic can have multiple addresses to call. Actually, there are four different possitiblities, each having a 16 bits and a 32 bits variant. The first possibility is to call a function with a relative displacement (Call the function 100 bytes below this current position), or an absolute address given in a register (Call the function whose address is stored in %eax) or an absolute address given as a pointer (Call the function at address 0xFFFF0100), or an absolute address given as an offset to a segment (I won&#8217;t explain segments now). In our example above, the &#8220;call _add_a_and_b&#8221; was probably stored as a call relative to the current position with 12 bytes below the current instruction (4 bytes per instruction, and we have the CALL, ADD, RET instructions to skip). This means that the instruction in the binary file was encoded as &#8220;E8 00 00 00 0C&#8221; (The E8 opcode to mean a &#8220;CALL near, relative&#8221;, and the &#8220;00 00 00 0C&#8221; to mean 12 bytes relative to the current instruction). Now, the most observant of you have probably noticed that this CALL instruction takes 5 bytes total, not 4, but as I said above, we will assume it&#8217;s 4 bytes per instruction just for the sake of keeping things simple, but yes, the CALL (in this case) is 5 bytes, and other instructions will sometimes have more or less bytes as well.</p>
+<p>I chose the CALL function above for example, because I think it&#8217;s the least complicated to explain.. other instructions have even more complicated opcodes and operands (See the <a href="https://x86.puri.sm/html/file_module_x86_id_5.html">ADD</a> and <a href="https://x86.puri.sm/html/file_module_x86_id_4.html">ADC</a> (Add with Cary) instructions for example, you&#8217;ll notice the same opcodes shared between them even, so they are the same instruction, but it&#8217;s easy to give them separate mnemonics to differentiate their behaviors).</p>
+<p>Here&#8217;s a screenshot showing a side by side view of the Assembly of a function with the hexadecimal view of the binary:</p>
+<p><img class="alignnone size-large wp-image-44228" src="https://puri.sm/wp-content/uploads/2017/11/ida_hex-1024x475.png" alt="" width="960" height="445" srcset="https://puri.sm/wp-content/uploads/2017/11/ida_hex-1024x475.png 1024w, https://puri.sm/wp-content/uploads/2017/11/ida_hex-300x139.png 300w, https://puri.sm/wp-content/uploads/2017/11/ida_hex-768x357.png 768w, https://puri.sm/wp-content/uploads/2017/11/ida_hex.png 1385w" sizes="(max-width: 960px) 100vw, 960px" /></p>
+<p>As you can see, I have my cursor on address 0xFFF6E1D6 on the assembly view on the left, which is also highlighted on the hex view on the right. That address is a CALL instruction, and you can see the equivalent hex of &#8220;E8 B4 00 00 00&#8221;, which means it&#8217;s a CALL near, relative (E8 being the opcode for it) and the function is 0xB4 (180) bytes below our current position of 0xFFF6E1D6.</p>
+<p>If you open the file with a hexadecimal editor, you&#8217;ll only see the hex view on the right, but you need to put the file into a Disassembler (such as the IDA disassembler which I&#8217;m using here, but there are cheaper alternatives as well, <a href="https://en.wikibooks.org/wiki/X86_Disassembly/Disassemblers_and_Decompilers">the list</a> can be long), and the disassembler will interpret those binary opcodes to show you the textual assembly representation which is much much easier to read.</p>
+<h1>Some actual reverse engineering</h1>
+<p>Now that you have the basics, let&#8217;s do a quick reverse engineering exercise&#8230; This is a very simple function that I&#8217;ve reversed recently, it comes from the SiliconInit<!-- part of the FSP-->, and it&#8217;s used to validate the UPD configuration structure (used to tell it what to do).</p>
+<p>Here is the Assembly code for that function:</p>
+<p><img class="alignnone size-full wp-image-43908" src="https://puri.sm/wp-content/uploads/2017/11/validate_upd_config.png" alt="" width="854" height="660" srcset="https://puri.sm/wp-content/uploads/2017/11/validate_upd_config.png 854w, https://puri.sm/wp-content/uploads/2017/11/validate_upd_config-300x232.png 300w, https://puri.sm/wp-content/uploads/2017/11/validate_upd_config-768x594.png 768w" sizes="(max-width: 854px) 100vw, 854px" /></p>
+<p>This was disassembled using <a href="https://www.hex-rays.com/products/ida/">IDA</a> 7.0 (The Interactive DisAssembler) which is an incredible (but expensive) piece of software. There are other disassemblers which can do similar jobs, but I prefer IDA personally. Let&#8217;s first explain what you see on the screen.</p>
+<p>On the left side, you see &#8220;seg000:FFF40xxx&#8221; this means that we are in the segment &#8220;seg000&#8221; at the address 0xFFF40xxx. I won&#8217;t explain what a segment is, because you don&#8217;t need to know it. The <em>validate_upd_config</em> function starts at address 0xFFF40311 in the RAM, and there&#8217;s not much else to understand. You can see how the address increases from one instruction to the next, it can help you calculate the size in bytes that each instruction takes in RAM for example, if you&#8217;re curious of course&#8230; (the XOR is 2 bytes, the CMP is 2 bytes, etc.).</p>
+<p>As you&#8217;ve seen in my previous example, anything after a semicolon (&#8220;;&#8221;) is considered a comment and can be ignored. The &#8220;CODE XREF&#8221; comments are added by IDA to tell us that this code has a cross-references (is being called by) some other code. So when you see &#8220;CODE XREF: validate_upd_config+9&#8221; (at 0xFF40363, the RETN instruction), it means this instruction is being called (referenced by) from the function validate_upd_config and the &#8220;+9&#8221; means 9 bytes into the function (so since the function starts at 0xFFF40311, it means it&#8217;s being called from the instruction at offset 0xFFF4031A. The little &#8220;up&#8221; arrow next to it means that it comes from above the current position in the code, and if you follow the grey lines on the left side of the screen, you can follow that call up to the address 0xFFF4031A which contains the instruction &#8220;jnz short locret_FFF40363&#8221;. I assume the &#8220;j&#8221; letter right after the up arrow is to tell us that the reference comes from a &#8220;jump&#8221; instruction.</p>
+<p>As you can see in the left side of the screen, there are a lot of arrows, that means that there&#8217;s a lot of jumping around in the code, even though it&#8217;s not immediatly obvious. The awesome IDA software has a &#8220;layout view&#8221; which gives us a much nicer view of the code, and it looks like this:</p>
+<p><img class="alignnone size-full wp-image-43911" src="https://puri.sm/wp-content/uploads/2017/11/validate_upd_config_graph.png" alt="" width="867" height="778" srcset="https://puri.sm/wp-content/uploads/2017/11/validate_upd_config_graph.png 867w, https://puri.sm/wp-content/uploads/2017/11/validate_upd_config_graph-300x269.png 300w, https://puri.sm/wp-content/uploads/2017/11/validate_upd_config_graph-768x689.png 768w" sizes="(max-width: 867px) 100vw, 867px" /></p>
+<p>Now you can see each block of code separately in their own little boxes, with arrows linking all of the boxes together whenever a jump happens. The green arrows mean that it&#8217;s a conditional jump when the condition is successful, while the red arrows means the condition was not successful. This means that a &#8220;JZ&#8221; will show a green arrow towards the code it would jump to if the result is indeed zero, and a red arrow towards the block where the result is not zero. A blue arrow means that it&#8217;s an unconditional jump.</p>
+<p>I usually always do my reverse engineering using the layout view, I find it much easier to read/follow, but for the purpose of this exercise, I will use the regular linear view instead, so I think it will be easier for you to follow with that instead. The reason is mostly because the layout view doesn&#8217;t display the address of each instruction, and it&#8217;s easier to have you follow along if I can point out exactly which instruction I&#8217;m looking it by mentioning its address.</p>
+<p>Now that you know how to read the assembly code, you understand the various instructions, I feel you should be ready to reverse engineering this very simple assembly code (even though it might seem complex at first). I just need to give you the following hints first:</p>
+<ul>
+<li>Because I&#8217;ve already reversed engineering it, you get the beautiful name &#8220;validate_upd_config&#8221; for the function, but technically, it was simply called &#8220;sub_FFF40311&#8221;</li>
+<li>I had already reverse engineered the function that called it so I know that this function is receiving its arguments in an unusual way. The arguments aren&#8217;t pushed to the stack, instead, the first argument is stored in %ecx, and the second argument is stored in %edx</li>
+<li>The first argument (%ecx, remember?) is an enum to indicate what type of UPD structure to validate, let me help you out and say that type &#8216;3&#8217; is &#8220;ALICE&#8221; (The configuration structure for the QueenM<!--FSPM-->, the MemoryInit function), and that type &#8216;5&#8217; is &#8220;BOB&#8221; (The configuration structure for the QueenS<!--FSPS-->, the SiliconInit function).</li>
+<li>Reverse engineering is really about reading one line at a time, in a sequential manner, keep track of which blocks you reversed and be patient. You can&#8217;t look at it and expect to understand the function by viewing the big picture.</li>
+<li>It is very very useful in this case to have a dual monitor, so you can have one monitor for the assembly, and the other monitor for your C code editor. In my case, I actually recently bought an ultra-wide monitor and I split screen between my IDA window and my emacs window and it&#8217;s great. It&#8217;s hard otherwise to keep going back and forth between the assembly and the C code. That being said, I would suggest you do the same thing here and have a window on the side showing you the assembly image above (not the layout view) while you read the explanation on how to reverse engineer it below.</li>
+</ul>
+<p>Got it? All done? No? Stop sweating and hyperventilating&#8230; I&#8217;ll explain exactly how to reverse engineer this function in the next paragraph, and you will see how simple it turns out to be!</p>
+<h2>Let&#8217;s get started!</h2>
+<p>The first thing I do is write the function in C. Since I know the name and its arguments already, I&#8217;ll do that:</p>
+<pre>void validate_upd_config (uint8_t action, void *config) {
+}</pre>
+<p>Yeah, there&#8217;s not much to it yet, and I set it to return &#8220;void&#8221; because I don&#8217;t know if it returns anything else, and I gave the first argument &#8220;action&#8221; as a &#8220;uint8_t&#8221; because in the parent function it&#8217;s used a single byte register (I won&#8217;t explain for now how to differentiate 1-byte, 2-bytes, 4-bytes and 8-bytes registers). The second argument is a pointer, but I don&#8217;t know it&#8217;s a pointer to what kind of structure exactly, so I just set it as a <em>void *</em>.</p>
+<p>The first instruction is a &#8220;xor eax, eax&#8221;. What does this do? It XORs the eax register with the eax register and stores the result in the eax register itself, which is the same thing as &#8220;mov eax, 0&#8221;, because <em>1 XOR 1= 0</em> and <em>0 XOR 0 = 0</em>, so if every bit in the eax register is logically XORed with itself, it will give 0 for the result. If you&#8217;re asking yourself &#8220;Why did the compiler decide to do &#8216;xor eax, eax&#8217; instead of &#8216;mov eax, 0&#8217; ?&#8221; then the answer is simple: &#8220;Because it takes less CPU clock cycles to do a XOR, than to do a move&#8221;, which means it&#8217;s more optimized and it will run faster. Besides, the XOR takes 2 bytes as you can see above (the address of the instructions jumped from FFF40311 to FFF40313), while a &#8220;mov eax, 0&#8221; would have taken 5 bytes. So it also helps keep the code smaller.</p>
+<p>Alright, so now we know that eax is equal to 0, let&#8217;s keep that in mind and move along (I like to keep track of things like that as comments in my C code). Next instruction does a &#8220;cmp ecx, 3&#8221;, so it&#8217;s comparing ecx, which we already know is our first argument (uint8_t action), ok, it&#8217;s a comparison, not much to do here, again let&#8217;s keep that in mind and continue&#8230; the next instruction does a &#8220;jnz short loc_FFF40344&#8221;, which is more interesting, so if the previous comparison is NOT ZERO, then jump to the label loc_FFF40344 (for now ignore the &#8220;short&#8221;, it just helps us differentiate between the various mnemonics, and it means that the jump is a relative offset that fits in a &#8220;short word&#8221; which means 2 bytes, and you can confirm that the jnz instruction does indeed take only 2 bytes of code). Great, so there&#8217;s a jump if the result is NOT ZERO, which means that if the result is zero, the code will just continue, which means if the ecx register (action variable) is EQUAL (substraction is zero) to 3, the code will continue down to the next instruction instead of jumping&#8230; let&#8217;s do that, and in the meantime we&#8217;ll update our C code:</p>
+<pre>void validate_upd_config (uint8_t action, void *config) {
+   // eax = 0
+   if (action == 3) {
+      // 0xFFF40318 
+   } else {
+      // loc_FFF40344
+   }
+}</pre>
+<p>The next instruction is &#8220;test edx, edx&#8221;.  We know that the edx register is our second argument which is the pointer to the configuration structure. As I explained above, the &#8220;test&#8221; is just like a comparison, but it does an AND instead of a substraction, so basically, you AND edx with itself.. well, of course, that has no consequence, <em>1 AND 1 = 1</em>, and <em>0 AND 0 = 0</em>, so why is it useful to test a register against itself? Simply because the TEST will update our FLAGS register&#8230; so when the next instruction is &#8220;JZ&#8221; it basically means &#8220;Jump if the edx register was zero&#8221;&#8230; And yes, doing a &#8220;TEST edx, edx&#8221;  is more optimized than doing a &#8220;CMP edx, 0&#8221;, you&#8217;re starting to catch on, yeay!</p>
+<p>And indeed, the next instruction is &#8220;jz locret_FFF40363&#8221;, so if the edx register is ZERO, then jump to locret_FFF40363, and if we look at that locret_FFF40363, it&#8217;s a very simple &#8220;retn&#8221; instruction. So our code becomes:</p>
+<pre>void validate_upd_config (uint8_t action, void *config) {
+  // eax = 0
+  if (action == 3) {
+    if (config == NULL)
+       return; 
+  } else {
+    // loc_FFF40344
+  }
+}</pre>
+<p>Next! Now it gets slightly more complicated&#8230; the instruction is: &#8220;cmp dword ptr [edx], 554C424Bh&#8221;, which means we do a comparison of a dword (4 bytes), of the data pointed to by the pointer edx, with no offset (&#8220;[edx]&#8221; is the same as saying &#8220;edx[0]&#8221; if it was a C array for example), and we compare it to the value 554C424Bh&#8230; the &#8220;h&#8221; at the end means it&#8217;s a hexadecimal value, and with experience you can quickly notice that the hexadecimal value is all within the ASCII range, so using a Hex to ASCII converter, we realize that those 4 bytes represent the ASCII letters &#8220;KBLU&#8221; (which is why I manually added them as a comment to that instruction, so I won&#8217;t forget). So basically the instruction compares the first 4 bytes of the structure (the content pointed to by the edx pointer) to the string &#8220;KBLU&#8221;. The next instruction does a &#8220;jnz loc_FFF4035E&#8221; which means that if the comparison result is NOT ZERO (so, if they are not equal) we jump to loc_FFF4035E.</p>
+<p>Instead of continuing sequentially, I will see what that loc_FFF4035E contains (of course, I did the same thing in all the previous jumps, and had to decide if I wanted to continue reverse engineering the jump or the next instruction, in this case, it seems better for me to jump, you&#8217;ll see why soon). The loc_FFF4035E label contains the following instruction: &#8220;mov, eax, 80000002h&#8221;, which means it stores the value 0x80000002 into the eax register, and then it jumps to (not really, it just naturally flows to the next instruction which happens to be the label) locret_FFF40363, which is just a &#8220;retn&#8221;. This makes our code into this:</p>
+<pre>uint32_t validate_upd_config (uint8_t action, void *config) {
+  // eax = 0
+  if (action == 3) {
+    if (config == NULL)
+       return 0; 
+    if (((uint32_t *)config)[0] != 0x554C524B)
+       return 0x80000002;
+  } else {
+    // loc_FFF40344
+  }
+}</pre>
+<p>The observant here will notice that I&#8217;ve changed the function prototype to return a uint32_t instead of &#8220;void&#8221; and my previous &#8220;return&#8221; has become &#8220;return 0&#8221; and the new code has a &#8220;return 0x80000002&#8221;. That&#8217;s because I realized at this point that the &#8220;eax&#8221; register is used to return a uint32_t value. And since the first instruction was &#8220;xor eax, eax&#8221;, and we kept in the back of our mind that &#8220;eax is initialized to 0&#8221;, it means that the use case with the (config == NULL) will return 0. That&#8217;s why I made all these changes&#8230;</p>
+<p>Very well, let&#8217;s go back to where we were, since we&#8217;ve exhausted this jump, we&#8217;ll jump back in reverse to go back to the address FFF40322 and continue from there to the next instruction. It&#8217;s a &#8220;cmp dword ptr [edx+4], 4D5F4450h&#8221;, which compares the dword at edx+4 to 0x4D5F4450, which I know to be the ASCII for &#8220;PD_M&#8221;; this means that the last 3 instructions are used to compare the first 8 bytes of our pointer to &#8220;KBLUPD_M&#8221;&#8230; ohhh, light bulb above our heads, it&#8217;s comparing the pointer to the Signature of the ALICE structure (don&#8217;t forget, you weren&#8217;t supposed to know that the function is called validate_upd_config, or that the argument is a config pointer&#8230; just that it&#8217;s a pointer)! OK, now it makes sense, and while we&#8217;re at it—and since we are, of course, reading the QUEEN integration guide PDF, we then also realize what the 0x80000002 actually means. At this point, our code now becomes:</p>
+<pre>EFI_STATUS validate_upd_config (uint8_t action, void *config) {
+  if (action == 3) {
+    ALICE *upd = (ALICE *) config;
+    if (upd == NULL)
+       return EFI_SUCCESS; 
+    if (upd-&gt;QueenUpdHeader.Signature != 0x4D5F4450554C524B /* 'KBLUPD_M'*/)
+       return EFI_INVALID_PARAMETERS;
+  } else {
+    // loc_FFF40344
+  }
+}</pre>
+<p>Yay, this is starting to look like something&#8230; Now you probably got the hang of it, so let&#8217;s do things a little faster now.</p>
+<ul>
+<li>The next line &#8220;cmp [edx+28h], eax&#8221; compares edx+0x28 to eax. Thankfully, we know now that edx points to the ALICE structure, and we can calculate that at offset 0x28 inside that structure, it&#8217;s the field StackBase within the QueenmArchUpd field&#8230;</li>
+<li>and also, we still have in the back of our minds that &#8216;eax&#8217; is initialized to zero, so, we know that the next 2 instructions are just checking if upd-&gt;QueenmArchUpd.StackBase is == NULL.</li>
+<li>Then we compare the StackSize with 0x26000, but the comparison is using &#8220;jb&#8221; for the jump, which is &#8220;jump if below&#8221;, so it checks if StackSize &lt; 0x26000,</li>
+<li>finally it does a &#8220;test&#8221; with &#8220;edx+30h&#8221; (which is the BootloaderTolumSize field) and 0xFFF, then it does an unconditional jump to loc_FFF4035C, which itself does a &#8220;jz&#8221; to the return..</li>
+<li>which means if (BootloaderTolumSize  &amp; 0xFFF  == 0) it will return whatever EAX contained (which is zero),</li>
+<li>but if it doesn&#8217;t, then it will continue to the next instruction which is the &#8220;mov eax, 80000002h&#8221;.</li>
+</ul>
+<p>So, we end up with this code:</p>
+<pre>EFI_STATUS validate_upd_config (uint8_t action, void *config) {
+  // eax = 0
+  if (action == 3) {
+    ALICE *upd = (ALICE *) config;
+    if (upd == NULL)
+       return 0;
+    if (upd-&gt;QueenUpdHeader.Signature != 0x4D5F4450554C524B /* 'KBLUPD_M'*/)
+       return EFI_INVALID_PARAMETERS;
+    if (upd-&gt;QueenmArchUpd.StackBase == NULL)
+        return EFI_INVALID_PARAMETERS;
+    if (upd-&gt;QueenmArchUpd.StackSize &lt; 0x2600)
+        return EFI_INVALID_PARAMETERS;
+    if (upd-&gt;QueenmArchUpd.BootloaderTolumSize &amp; 0xFFF)
+        return EFI_INVALID_PARAMETERS;
+  } else {
+    // loc_FFF40344
+  }
+  return EFI_SUCCESS
+}</pre>
+<p>Great, we just solved half of our code! Don&#8217;t forget, we jumped one way instead of another at the start of the function, now we need to go back up and explore the second branch of the code (at offset 0xFFF40344). The code is very similar, but it checks for &#8220;KBLUPD_S&#8221; Signature, and nothing else. Now we can also remove any comment/notes we have (such as the note that eax is initialized to 0) and clean up, and simplify the code if there is a need.</p>
+<p>So our function ends up being (this is the final version of the function):</p>
+<pre>EFI_STATUS validate_upd_config (uint8_t action, void *config) {
+  if (action == 3) {
+    ALICE *upd = (ALICE *) config;
+    if (upd == NULL)
+       return EFI_SUCCESS;
+    if (upd-&gt;QueenUpdHeader.Signature != 0x4D5F4450554C524B /* 'KBLUPD_M'*/)
+       return EFI_INVALID_PARAMETERS;
+    if (upd-&gt;QueenmArchUpd.StackBase == NULL)
+        return EFI_INVALID_PARAMETERS;
+    if (upd-&gt;QueenmArchUpd.StackSize &lt; 0x2600)
+        return EFI_INVALID_PARAMETERS;
+    if (upd-&gt;QueenmArchUpd.BootloaderTolumSize &amp; 0xFFF)
+        return EFI_INVALID_PARAMETERS;
+  } else {
+    BOB *upd = (BOB *) config;
+    if (upd == NULL)
+        return EFI_SUCCESS;
+    if (upd-&gt;QueenUpdHeader.Signature != 0x535F4450554C524B /* 'KBLUPD_S'*/)
+        return EFI_INVALID_PARAMETERS;
+  }
+  return EFI_SUCCESS
+}</pre>
+<p>Now this wasn&#8217;t so bad, was it? I mean, it&#8217;s time consuming, sure, it can be a little disorienting if you&#8217;re not used to it, and you have to keep track of which branches (which blocks in the layout view) you&#8217;ve already gone through, etc. but the function turned out to be quite small and simple. After all, it was mostly only doing CMP/TEST and JZ/JNZ.</p>
+<p>That&#8217;s pretty much all I do when I do my reverse engineering, I go line by line, I understand what it does, I try to figure out how it fits into the bigger picture, I write equivalent C code to keep track of what I&#8217;m doing and to be able to understand what happens, so that I can later figure out what the function does exactly&#8230; Now try to imagine doing that for hundreds of functions, some of them that look like this (random function taken from the QueenM module):</p>
+<p><img class="alignnone size-full wp-image-44230" src="https://puri.sm/wp-content/uploads/2017/11/long_function.png" alt="" width="1147" height="770" srcset="https://puri.sm/wp-content/uploads/2017/11/long_function.png 1147w, https://puri.sm/wp-content/uploads/2017/11/long_function-300x201.png 300w, https://puri.sm/wp-content/uploads/2017/11/long_function-768x516.png 768w, https://puri.sm/wp-content/uploads/2017/11/long_function-1024x687.png 1024w" sizes="(max-width: 1147px) 100vw, 1147px" /></p>
+<p>You can see on the right, the graph overview which shows the entirety of the function layout diagram. The part on the left (the assembly) is represented by the dotted square on the graph overview (near the middle). You will notice some arrows that are thicker than the others, that&#8217;s used in IDA to represent loops. On the left side, you can notice one such thick green line coming from the bottom and the arrow pointing to a block inside our view. This means that there&#8217;s a jump condition below that can jump back to a block that is above the current block and this is basically how you do a for/while loop with assembly, it&#8217;s just a normal jump that points backwards instead of forwards.</p>
+<h1>Finally, the challenge!</h1>
+<p>At the beginning of this post, I mentioned a challenging function to reverse engineer. It&#8217;s not extremely challenging—it&#8217;s complex enough that you can understand the kind of things I have to deal with sometimes, but it&#8217;s simple enough that anyone who was able to follow up until now should be able to understand it (and maybe even be able to reverse engineer it on their own).</p>
+<p>So, without further ado, here&#8217;s this very simple function:</p>
+<p><img class="alignnone size-full wp-image-43921" src="https://puri.sm/wp-content/uploads/2017/11/sub_fff4023f.png" alt="" width="417" height="172" srcset="https://puri.sm/wp-content/uploads/2017/11/sub_fff4023f.png 417w, https://puri.sm/wp-content/uploads/2017/11/sub_fff4023f-300x124.png 300w" sizes="(max-width: 417px) 100vw, 417px" /></p>
+<p>Since I&#8217;m a very nice person, I renamed the function so you won&#8217;t know what it does, and I removed my comments so it&#8217;s as virgin as it was when I first saw it. Try to reverse engineer it. Take your time, I&#8217;ll wait:</p>
+<p><img class="alignnone size-full wp-image-44375" src="https://puri.sm/wp-content/uploads/2017/11/sloth.jpg" alt="" width="1000" height="750" srcset="https://puri.sm/wp-content/uploads/2017/11/sloth.jpg 1000w, https://puri.sm/wp-content/uploads/2017/11/sloth-300x225.jpg 300w, https://puri.sm/wp-content/uploads/2017/11/sloth-768x576.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" /></p>
+<p>Alright, so, the first instruction is a &#8220;call $+5&#8221;, what does that even mean?</p>
+<ol>
+<li>When I looked at the hex dump, the instruction was simply &#8220;E8 00 00 00 00&#8221; which according to our previous <a href="https://x86.puri.sm/html/file_module_x86_id_26.html">CALL opcode table</a> means &#8220;Call near, relative, displacement relative to next instruction&#8221;, so it wants to call the instruction 0 bytes from the next instruction. Since the call opcode itself is taking 5 bytes, that means it&#8217;s doing a call to its own function but skipping the call itself, so it&#8217;s basically jumping to the &#8220;pop eax&#8221;, right? Yes&#8230;  but it&#8217;s not actually jumping to it, it&#8217;s &#8220;calling it&#8221;, which means that it just pushed into the stack the return address of the function&#8230; which means that our stack contains the address 0xFFF40244 and our next instruction to be executed is the one at the address 0xFFF40244. That&#8217;s because, if you remember, when we do a &#8220;ret&#8221;, it will pop the return address from the stack into the EIP (instruction pointer) register, that&#8217;s how it knows where to go back when the function finishes.</li>
+<li>So, then the instruction does a &#8220;pop eax&#8221; which will pop that return address into EAX, thus removing it from the stack and making the call above into a regular jump (since there is no return address in the stack anymore).</li>
+<li>Then it does a &#8220;sub eax, 0FFF40244h&#8221;, which means it&#8217;s substracting 0xFFF40244 from eax (which should contain 0xFFF40244), so eax now contains the value &#8220;0&#8221;, right? You bet!</li>
+<li>Then it adds to eax, the value &#8220;0xFFF4023F&#8221;, which is the address of our function itself. So, eax now contains the value 0xFFF4023F.</li>
+<li>It will then substract from EAX, the value pointed to by [eax-15], which means the dword (4 bytes) value at the offset 0xFFF4023F &#8211; 0xF, so the value at 0xFFF40230, right&#8230; that value is 0x1AB (yep, I know, you didn&#8217;t have this information)&#8230; so, 0xFFF4023F &#8211; 0x1AB = 0xFFF40094!</li>
+<li>And then the function returns.. with the value 0xFFF40094 in EAX, so it returns 0xFFF40094, which happens to be the pointer to the QUEEN_INFO_HEADER structure in the binary.</li>
+</ol>
+<p>So, the function just returns 0xFFF40094, but why did it do it in such a convoluted way? The reason is simple: because the QUEEN-S code is technically meant to be loaded in RAM at the address 0xFFF40000, but it can actually reside anywhere in the RAM when it gets executed. Coreboot for example doesn&#8217;t load it in the right memory address when it executes it, so instead of returning the wrong address for the structure and crashing (remember, most of the jumps and calls use relative addresses, so the code should work regardless of where you put it in memory, but in this case returning the wrong address for a structure in memory wouldn&#8217;t work), the code tries to dynamically verify if it has been relocated and if it is, it will calculate how far away it is from where it&#8217;s supposed to be, and calculate where in memory the QUEEN_INFO_HEADER structure ended up being.</p>
+<p>Here&#8217;s the explanation why:</p>
+<ul>
+<li>If the Queen<!--FSP--> was loaded into a different memory address, then the &#8220;call $+5&#8221; would put the exact memory address of the next instruction into the stack, so when you pop it into eax then substract from it the expected address 0xFFF40244, this means that eax will contain the <strong>offset</strong> from where it was supposed to be.</li>
+<li>Above, we said eax would be equal to zero, yes, that&#8217;s true, but <em>only</em> in the usecase where the Queen<!--FSP--> is in the right memory address, as expected, otherwise, eax would simply contain the offset. Then you add to it 0xFFFF4023F which is the address of our function, and with the offset, that means eax now contains the exact memory address of the current function, wherever it was actually placed in RAM!</li>
+<li>Then when it grabs the value 0x1AB (because that value is stored in RAM 15 bytes before the start of the function, that will work just fine) and substracts it from our current position, it gives us the address in RAM of the QUEEN_INFO_HEADER (because the compiler knows that the structure is located exactly 0x1AB bytes before the current function). This just makes everything be relative.</li>
+</ul>
+<p>Isn&#8217;t that great!? 😉 It&#8217;s so simple, but it does require some thinking to figure out what it does and some thinking to understand why it does it that way&#8230; but then you end up with the problem of &#8220;How do I write this in C&#8221;? Honestly, I don&#8217;t know how, I just wrote this in my C file:</p>
+<pre>// Use Position-independent code to make this relocatable
+void *get_queen_info_header() {
+    return 0xFFF40094; 
+}</pre>
+<p>I think the compiler takes care of doing all that magic on its own when you use the -fPIC compiler option (for gcc), which means &#8220;Position-Independent Code&#8221;.</p>
+<h1>What this means for Purism</h1>
+<p>On my side, <strong>I&#8217;ve finished reverse engineering the <!--FSP-S -->entry code</strong>—from the entry point <!--(FspSiliconInit) -->all the way to the end of the function and all the subfunctions that it calls.</p>
+<p>This only represents 9 functions however, and about 115 lines of C code; I haven&#8217;t yet fully figured out where exactly it&#8217;s going in order to execute the rest of the code. What happens is that the last function it calls (it actually jumps into it) grabs a variable from some area in memory, and within that variable, it will copy a value into the ESP, thus replacing our stack pointer, and then it does a &#8220;RETN&#8221;&#8230; which means that it&#8217;s not actually returning to the function that called it (coreboot), it&#8217;s returning… &#8220;somewhere&#8221;, depending on what the new stack contains, but I don&#8217;t know where (or how) this new stack is created, so I need to track it down in order to find what the return address is, find where the &#8220;retn&#8221; is returning us into, so I can unlock plenty of new functions and continue reverse engineering this.</p>
+<p>I&#8217;ve already made some progress on that front (I know where the new stack tells us to return into) but you will have to wait until my next blog post before I can explain it all to you. It&#8217;s long and complicated enough that it needs its own post, and this one is long enough already.</p>
+<h1>Other stories from strange lands</h1>
+<p>You never really know what to expect when you start reverse engineering assembly. Here are some other stories from my past experiences.</p>
+<ul>
+<li>I once spent a few days reverse engineering a function until about 30% of it when I finally realized that the function was… the C++ &#8220;+ operator&#8221; of the std::string class (which by the way, with the use of C++ templates made it excruciatingly hard to understand)!</li>
+<li>I once had to reverse engineer over 5000 lines of assembly code that all resolved into&#8230; 7 lines of C code. The code was for creating a hash and it was doing a lot of manipulation on data with different values on every iteration. There was a LOT of xor, or, and, shifting left and right of data, etc., which took maybe a hundred or so lines of assembly and it was all inside a loop, which the compiler decided that—to optimize it—it would unravel the loop (this means that instead of doing a jmp, it will just copy-paste the same code again), so instead of having to reverse engineer the code once and then see that it&#8217;s a loop that runs 64 times, I had to reverse engineer the same code 64 times because it was basically getting copy-pasted by the compiler in a single block but the compiler was &#8220;nice&#8221; enough that it was using completely different registers for every repetition of the loop, and the data was getting shifted in a weird way and using different constants and different variables at every iteration, and—as if that wasn&#8217;t enough— every 1/4th of the loop, changing the algorithm and making it very difficult to predict the pattern, forcing me to completely reverse engineer the 5000+ assembly lines into C, then slowly refactor and optimize the C code until it became that loop with 7 lines of code inside it… If you&#8217;re curious you can see the code <a href="https://github.com/tomhennigan/amsn/blob/master/amsn/utils/webcamsn/src/kidhash.c#L39">here</a> at line 39, where there is some operation common to all iterations, then 4 different operations depending on which iteration we are doing, and the variables used for each operation changes after each iteration (P, PP, PPP and PPPP get swapped every time), and the constant values and the indices used are different for each iteration as well (see <a href="https://github.com/tomhennigan/amsn/blob/master/amsn/utils/webcamsn/src/constants.h">constants.h</a>). It was complicated and took a long while to reverse engineer.</li>
+<li>Below is the calling graph of the PS3 firmware I worked on some years ago. All of these functions have been entirely reverse engineered (each black rectangle is actually an entire function, and the arrows show which function calls which other function), and the result was the <a href="https://github.com/kakaroto/ps3xport">ps3xport</a> tool. As you can see, sometimes a function can be challenging to reverse, and sometimes a single function can call so many nested functions that it can get pretty complicated to keep track of what is doing what and how everything fits together. That function at the top of the graph was probably very simple, but it brought with it so much complexity because of a single &#8220;call&#8221;:<br />
+<a href="https://puri.sm/wp-content/uploads/2017/11/wingraph.png"><img class="alignnone wp-image-43928 size-large" src="https://puri.sm/wp-content/uploads/2017/11/wingraph-1024x382.png" alt="" width="960" height="358" srcset="https://puri.sm/wp-content/uploads/2017/11/wingraph-1024x382.png 1024w, https://puri.sm/wp-content/uploads/2017/11/wingraph-300x112.png 300w, https://puri.sm/wp-content/uploads/2017/11/wingraph-768x287.png 768w" sizes="(max-width: 960px) 100vw, 960px" /></a></li>
+</ul>
+<h1>Perseverance prevails</h1>
+<p>In conclusion:</p>
+<ul>
+<li>Reverse engineering isn&#8217;t just about learning a new language, it&#8217;s a very different experience from &#8220;learning Java/Python/Rust after you&#8217;ve mastered C&#8221;, because of the way it works; it can sometimes be very easy and boring, sometimes it will be very challenging for a very simple piece of code.</li>
+<li>It&#8217;s all about perseverance, being very careful (it&#8217;s easy to get lost or make a mistake, and very hard to track down and fix a mistake/typo if you make one), and being <em>very</em> patient. We&#8217;re talking days, weeks, <em>months.</em> That&#8217;s why reverse engineering is something that very few people do (compared to the number of people who do general software development). Remember also that our first example was 82 bytes of code, and the second one was only 19 bytes long, and most of the time, when you need to reverse engineer something, it&#8217;s many hundreds of KBs of code.</li>
+</ul>
+<p>All that being said, the satisfaction you get when you finish reverse engineering some piece of code, when you <em>finally</em> understand how it works and can reproduce its functionality with open source software of your own, cannot be described with words. The feeling of achievement that you get makes all the efforts worth it!</p>
+<p>I hope this write-up helps everyone get a fresh perspective on what it means to &#8220;reverse engineer the code&#8221;, why it takes so long, and why it&#8217;s rare to find someone with the skills, experience and patience to do this kind of stuff for months—as it can be frustrating, and we sometimes need to take a break from it and do something else in order to renew our brain cells.</p>
+		
+	</div>
+
+		<footer class="entry-footer">
+		<div class="entry-meta">
+
+</div>
+	<i class="fa fa-file"></i> <ul class="post-categories">
+	<li><a href="https://puri.sm/posts/category/firmware/" rel="category tag">Firmware and BIOS</a></li></ul><i class="fa fa-tag"></i> <ul class="post-tags"><li><a href="https://puri.sm/posts/tag/advanced-readers/" rel="tag">Advanced readers</a></li>
+<li><a href="https://puri.sm/posts/tag/laptops/" rel="tag">Laptops</a></li>
+<li><a href="https://puri.sm/posts/tag/newsletter-and-status-updates/" rel="tag">Newsletter and status updates</a></li>
+<li><a href="https://puri.sm/posts/tag/reverse-engineering/" rel="tag">Reverse engineering</a></li>
+<li><a href="https://puri.sm/posts/tag/software-freedom/" rel="tag">Software freedom</a></li></ul>	</footer>
+	</article>
+		<nav class="navigation post-navigation" role="navigation">
+	<span class="screen-reader-text">Post navigation</span>
+	<div class="nav-links">
+		<div class="nav-previous"><a href="https://puri.sm/posts/le-capitole-du-libre-2017/" rel="next">Le Capitole du Libre 2017</a></div><div class="nav-next"><a href="https://puri.sm/posts/tpm-addon-for-librem-laptops/" rel="prev">Trusted Platform Module now available as an add-on for Librem laptops</a></div>	</div>
+</nav>
+		
+	
+</main>
+
+
+
+				</div>
+			</div>
+
+			
+<footer id="site-footer" class="site-footer footer-layout-2" role="contentinfo">
+	<div class="container">
+				<div class="footer-widget-container columns-2">
+			<section id="footer-1" class="widget-area footer-1 active" role="complementary">
+	<aside id="nav_menu-2" class="widget widget_nav_menu"><h4 class="widget-title">About Purism</h4><div class="menu-footer-corporaty-menu-container"><ul id="menu-footer-corporaty-menu" class="menu"><li id="menu-item-9604" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9604"><a href="https://puri.sm/about/">Our story</a></li>
+<li id="menu-item-9618" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9618"><a href="https://puri.sm/faq/">Frequently asked questions</a></li>
+<li id="menu-item-9602" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9602"><a href="https://puri.sm/jobs/">Jobs</a></li>
+<li id="menu-item-9606" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9606"><a href="https://puri.sm/pr/">Press Room</a></li>
+<li id="menu-item-9607" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9607"><a href="https://puri.sm/warrant-canary/">Warrant Canary</a></li>
+<li id="menu-item-9601" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9601"><a href="https://puri.sm/contact/">Contact</a></li>
+</ul></div></aside></section><section id="footer-2" class="widget-area footer-2 active" role="complementary">
+			<aside id="recent-posts-3" class="widget widget_recent_entries">		<h4 class="widget-title">Recent Posts</h4>		<ul>
+											<li>
+					<a href="https://puri.sm/posts/may-2018-laptop-sale-begins/">Librem 15 sale? Librem 13 sale? Why not both?</a>
+									</li>
+											<li>
+					<a href="https://puri.sm/posts/ubports-ubuntu-touch-on-librem5-collaboration/">Purism and UBports officially collaborate to offer Ubuntu Touch on Librem 5</a>
+									</li>
+											<li>
+					<a href="https://puri.sm/posts/demonstrating-tamper-detection-with-heads/">Demonstrating Tamper Detection with Heads</a>
+									</li>
+											<li>
+					<a href="https://puri.sm/posts/librem5-progress-report-10/">Initial Developer Documentation for the Librem 5 Phone Platform</a>
+									</li>
+											<li>
+					<a href="https://puri.sm/posts/intel-fsp-reverse-engineering-finding-the-real-entry-point/">Intel FSP reverse engineering: finding the real entry point!</a>
+									</li>
+											<li>
+					<a href="https://puri.sm/posts/librem-laptop-orders-now-shipping-within-a-week/">Librem laptop orders now shipping within a week</a>
+									</li>
+					</ul>
+		</aside></section>		</div>
+		
+		
+<div class="site-info">
+		<div class="footer-text">
+		✉ Want to get announcements &amp; news digests once in a while?<br /> Simply send a blank mail to <a href="mailto:announce-join@announce.puri.sm">announce-join</a> to subscribe (and reply to the confirmation email that gets sent to you). You can unsubscribe at any time.<br /><br />Unless otherwise noted, contents created by the Purism team on this website are copyleft with a <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-by-SA 4.0 license</a>.	</div>
+	
+	</div>
+
+				<div class="footer-social-links">
+			<ul class="social-customizer social-links">
+				<li class="make-social-icon">
+					<a href="https://puri.sm/feed/" target="_blank">
+						<i class="fa fa-fw fa-rss" aria-hidden="true"></i>
+						<span class="screen-reader-text">RSS</span>
+					</a>
+				</li>
+							<li class="make-social-icon">
+					<a href="https://twitter.com/puri_sm" target="_blank">
+						<i class="fa fa-fw fa-twitter" aria-hidden="true"></i>
+						<span class="screen-reader-text">Twitter</span>
+					</a>
+				</li>
+							<li class="make-social-icon">
+					<a href="https://plus.google.com/111393989043350251300/posts" target="_blank">
+						<i class="fa fa-fw fa-google-plus" aria-hidden="true"></i>
+						<span class="screen-reader-text">Google Plus</span>
+					</a>
+				</li>
+							<li class="make-social-icon">
+					<a href="https://www.facebook.com/purismcomputer" target="_blank">
+						<i class="fa fa-fw fa-facebook-official" aria-hidden="true"></i>
+						<span class="screen-reader-text">Facebook</span>
+					</a>
+				</li>
+							<li class="make-social-icon">
+					<a href="https://www.reddit.com/r/Purism" target="_blank">
+						<i class="fa fa-fw fa-reddit" aria-hidden="true"></i>
+						<span class="screen-reader-text">Reddit</span>
+					</a>
+				</li>
+							<li class="make-social-icon">
+					<a href="https://www.pinterest.com/purismcomputer/" target="_blank">
+						<i class="fa fa-fw fa-pinterest" aria-hidden="true"></i>
+						<span class="screen-reader-text">Pinterest</span>
+					</a>
+				</li>
+			</ul>
+			</div>
+		</div>
+</footer>		</div>
+
+		<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.puri.sm/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+	<!--[if lte IE 8]>
+	<style>
+		.attachment:focus {
+			outline: #1e8cbe solid;
+		}
+		.selected.attachment {
+			outline: #1e8cbe solid;
+		}
+	</style>
+	<![endif]-->
+	<script type="text/html" id="tmpl-media-frame">
+		<div class="media-frame-menu"></div>
+		<div class="media-frame-title"></div>
+		<div class="media-frame-router"></div>
+		<div class="media-frame-content"></div>
+		<div class="media-frame-toolbar"></div>
+		<div class="media-frame-uploader"></div>
+	</script>
+
+	<script type="text/html" id="tmpl-media-modal">
+		<div tabindex="0" class="media-modal wp-core-ui">
+			<button type="button" class="media-modal-close"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></button>
+			<div class="media-modal-content"></div>
+		</div>
+		<div class="media-modal-backdrop"></div>
+	</script>
+
+	<script type="text/html" id="tmpl-uploader-window">
+		<div class="uploader-window-content">
+			<h1>Drop files to upload</h1>
+		</div>
+	</script>
+
+	<script type="text/html" id="tmpl-uploader-editor">
+		<div class="uploader-editor-content">
+			<div class="uploader-editor-title">Drop files to upload</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="tmpl-uploader-inline">
+		<# var messageClass = data.message ? 'has-upload-message' : 'no-upload-message'; #>
+		<# if ( data.canClose ) { #>
+		<button class="close dashicons dashicons-no"><span class="screen-reader-text">Close uploader</span></button>
+		<# } #>
+		<div class="uploader-inline-content {{ messageClass }}">
+		<# if ( data.message ) { #>
+			<h2 class="upload-message">{{ data.message }}</h2>
+		<# } #>
+					<div class="upload-ui">
+				<h2 class="upload-instructions drop-instructions">Drop files anywhere to upload</h2>
+				<p class="upload-instructions drop-instructions">or</p>
+				<button type="button" class="browser button button-hero">Select Files</button>
+			</div>
+
+			<div class="upload-inline-status"></div>
+
+			<div class="post-upload-ui">
+				
+				<p class="max-upload-size">Maximum upload file size: 512 MB.</p>
+
+				<# if ( data.suggestedWidth && data.suggestedHeight ) { #>
+					<p class="suggested-dimensions">
+						Suggested image dimensions: {{data.suggestedWidth}} by {{data.suggestedHeight}} pixels.					</p>
+				<# } #>
+
+							</div>
+				</div>
+	</script>
+
+	<script type="text/html" id="tmpl-media-library-view-switcher">
+		<a href="/posts/primer-to-reverse-engineering/?mode=list" class="view-list">
+			<span class="screen-reader-text">List View</span>
+		</a>
+		<a href="/posts/primer-to-reverse-engineering/?mode=grid" class="view-grid current">
+			<span class="screen-reader-text">Grid View</span>
+		</a>
+	</script>
+
+	<script type="text/html" id="tmpl-uploader-status">
+		<h2>Uploading</h2>
+		<button type="button" class="button-link upload-dismiss-errors"><span class="screen-reader-text">Dismiss Errors</span></button>
+
+		<div class="media-progress-bar"><div></div></div>
+		<div class="upload-details">
+			<span class="upload-count">
+				<span class="upload-index"></span> / <span class="upload-total"></span>
+			</span>
+			<span class="upload-detail-separator">&ndash;</span>
+			<span class="upload-filename"></span>
+		</div>
+		<div class="upload-errors"></div>
+	</script>
+
+	<script type="text/html" id="tmpl-uploader-status-error">
+		<span class="upload-error-filename">{{{ data.filename }}}</span>
+		<span class="upload-error-message">{{ data.message }}</span>
+	</script>
+
+	<script type="text/html" id="tmpl-edit-attachment-frame">
+		<div class="edit-media-header">
+			<button class="left dashicons <# if ( ! data.hasPrevious ) { #> disabled <# } #>"><span class="screen-reader-text">Edit previous media item</span></button>
+			<button class="right dashicons <# if ( ! data.hasNext ) { #> disabled <# } #>"><span class="screen-reader-text">Edit next media item</span></button>
+		</div>
+		<div class="media-frame-title"></div>
+		<div class="media-frame-content"></div>
+	</script>
+
+	<script type="text/html" id="tmpl-attachment-details-two-column">
+		<div class="attachment-media-view {{ data.orientation }}">
+			<div class="thumbnail thumbnail-{{ data.type }}">
+				<# if ( data.uploading ) { #>
+					<div class="media-progress-bar"><div></div></div>
+				<# } else if ( data.sizes && data.sizes.large ) { #>
+					<img class="details-image" src="{{ data.sizes.large.url }}" draggable="false" alt="" />
+				<# } else if ( data.sizes && data.sizes.full ) { #>
+					<img class="details-image" src="{{ data.sizes.full.url }}" draggable="false" alt="" />
+				<# } else if ( -1 === jQuery.inArray( data.type, [ 'audio', 'video' ] ) ) { #>
+					<img class="details-image icon" src="{{ data.icon }}" draggable="false" alt="" />
+				<# } #>
+
+				<# if ( 'audio' === data.type ) { #>
+				<div class="wp-media-wrapper">
+					<audio style="visibility: hidden" controls class="wp-audio-shortcode" width="100%" preload="none">
+						<source type="{{ data.mime }}" src="{{ data.url }}"/>
+					</audio>
+				</div>
+				<# } else if ( 'video' === data.type ) {
+					var w_rule = '';
+					if ( data.width ) {
+						w_rule = 'width: ' + data.width + 'px;';
+					} else if ( wp.media.view.settings.contentWidth ) {
+						w_rule = 'width: ' + wp.media.view.settings.contentWidth + 'px;';
+					}
+				#>
+				<div style="{{ w_rule }}" class="wp-media-wrapper wp-video">
+					<video controls="controls" class="wp-video-shortcode" preload="metadata"
+						<# if ( data.width ) { #>width="{{ data.width }}"<# } #>
+						<# if ( data.height ) { #>height="{{ data.height }}"<# } #>
+						<# if ( data.image && data.image.src !== data.icon ) { #>poster="{{ data.image.src }}"<# } #>>
+						<source type="{{ data.mime }}" src="{{ data.url }}"/>
+					</video>
+				</div>
+				<# } #>
+
+				<div class="attachment-actions">
+					<# if ( 'image' === data.type && ! data.uploading && data.sizes && data.can.save ) { #>
+					<button type="button" class="button edit-attachment">Edit Image</button>
+					<# } else if ( 'pdf' === data.subtype && data.sizes ) { #>
+					Document Preview					<# } #>
+				</div>
+			</div>
+		</div>
+		<div class="attachment-info">
+			<span class="settings-save-status">
+				<span class="spinner"></span>
+				<span class="saved">Saved.</span>
+			</span>
+			<div class="details">
+				<div class="filename"><strong>File name:</strong> {{ data.filename }}</div>
+				<div class="filename"><strong>File type:</strong> {{ data.mime }}</div>
+				<div class="uploaded"><strong>Uploaded on:</strong> {{ data.dateFormatted }}</div>
+
+				<div class="file-size"><strong>File size:</strong> {{ data.filesizeHumanReadable }}</div>
+				<# if ( 'image' === data.type && ! data.uploading ) { #>
+					<# if ( data.width && data.height ) { #>
+						<div class="dimensions"><strong>Dimensions:</strong> {{ data.width }} &times; {{ data.height }}</div>
+					<# } #>
+				<# } #>
+
+				<# if ( data.fileLength ) { #>
+					<div class="file-length"><strong>Length:</strong> {{ data.fileLength }}</div>
+				<# } #>
+
+				<# if ( 'audio' === data.type && data.meta.bitrate ) { #>
+					<div class="bitrate">
+						<strong>Bitrate:</strong> {{ Math.round( data.meta.bitrate / 1000 ) }}kb/s
+						<# if ( data.meta.bitrate_mode ) { #>
+						{{ ' ' + data.meta.bitrate_mode.toUpperCase() }}
+						<# } #>
+					</div>
+				<# } #>
+
+				<div class="compat-meta">
+					<# if ( data.compat && data.compat.meta ) { #>
+						{{{ data.compat.meta }}}
+					<# } #>
+				</div>
+			</div>
+
+			<div class="settings">
+				<label class="setting" data-setting="url">
+					<span class="name">URL</span>
+					<input type="text" value="{{ data.url }}" readonly />
+				</label>
+				<# var maybeReadOnly = data.can.save || data.allowLocalEdits ? '' : 'readonly'; #>
+								<label class="setting" data-setting="title">
+					<span class="name">Title</span>
+					<input type="text" value="{{ data.title }}" {{ maybeReadOnly }} />
+				</label>
+								<# if ( 'audio' === data.type ) { #>
+								<label class="setting" data-setting="artist">
+					<span class="name">Artist</span>
+					<input type="text" value="{{ data.artist || data.meta.artist || '' }}" />
+				</label>
+								<label class="setting" data-setting="album">
+					<span class="name">Album</span>
+					<input type="text" value="{{ data.album || data.meta.album || '' }}" />
+				</label>
+								<# } #>
+				<label class="setting" data-setting="caption">
+					<span class="name">Caption</span>
+					<textarea {{ maybeReadOnly }}>{{ data.caption }}</textarea>
+				</label>
+				<# if ( 'image' === data.type ) { #>
+					<label class="setting" data-setting="alt">
+						<span class="name">Alt Text</span>
+						<input type="text" value="{{ data.alt }}" {{ maybeReadOnly }} />
+					</label>
+				<# } #>
+				<label class="setting" data-setting="description">
+					<span class="name">Description</span>
+					<textarea {{ maybeReadOnly }}>{{ data.description }}</textarea>
+				</label>
+				<label class="setting">
+					<span class="name">Uploaded By</span>
+					<span class="value">{{ data.authorName }}</span>
+				</label>
+				<# if ( data.uploadedToTitle ) { #>
+					<label class="setting">
+						<span class="name">Uploaded To</span>
+						<# if ( data.uploadedToLink ) { #>
+							<span class="value"><a href="{{ data.uploadedToLink }}">{{ data.uploadedToTitle }}</a></span>
+						<# } else { #>
+							<span class="value">{{ data.uploadedToTitle }}</span>
+						<# } #>
+					</label>
+				<# } #>
+				<div class="attachment-compat"></div>
+			</div>
+
+			<div class="actions">
+				<a class="view-attachment" href="{{ data.link }}">View attachment page</a>
+				<# if ( data.can.save ) { #> |
+					<a href="post.php?post={{ data.id }}&action=edit">Edit more details</a>
+				<# } #>
+				<# if ( ! data.uploading && data.can.remove ) { #> |
+											<button type="button" class="button-link delete-attachment">Delete Permanently</button>
+									<# } #>
+			</div>
+
+		</div>
+	</script>
+
+	<script type="text/html" id="tmpl-attachment">
+		<div class="attachment-preview js--select-attachment type-{{ data.type }} subtype-{{ data.subtype }} {{ data.orientation }}">
+			<div class="thumbnail">
+				<# if ( data.uploading ) { #>
+					<div class="media-progress-bar"><div style="width: {{ data.percent }}%"></div></div>
+				<# } else if ( 'image' === data.type && data.sizes ) { #>
+					<div class="centered">
+						<img src="{{ data.size.url }}" draggable="false" alt="" />
+					</div>
+				<# } else { #>
+					<div class="centered">
+						<# if ( data.image && data.image.src && data.image.src !== data.icon ) { #>
+							<img src="{{ data.image.src }}" class="thumbnail" draggable="false" alt="" />
+						<# } else if ( data.sizes && data.sizes.medium ) { #>
+							<img src="{{ data.sizes.medium.url }}" class="thumbnail" draggable="false" alt="" />
+						<# } else { #>
+							<img src="{{ data.icon }}" class="icon" draggable="false" alt="" />
+						<# } #>
+					</div>
+					<div class="filename">
+						<div>{{ data.filename }}</div>
+					</div>
+				<# } #>
+			</div>
+			<# if ( data.buttons.close ) { #>
+				<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>
+			<# } #>
+		</div>
+		<# if ( data.buttons.check ) { #>
+			<button type="button" class="check" tabindex="-1"><span class="media-modal-icon"></span><span class="screen-reader-text">Deselect</span></button>
+		<# } #>
+		<#
+		var maybeReadOnly = data.can.save || data.allowLocalEdits ? '' : 'readonly';
+		if ( data.describe ) {
+			if ( 'image' === data.type ) { #>
+				<input type="text" value="{{ data.caption }}" class="describe" data-setting="caption"
+					placeholder="Caption this image&hellip;" {{ maybeReadOnly }} />
+			<# } else { #>
+				<input type="text" value="{{ data.title }}" class="describe" data-setting="title"
+					<# if ( 'video' === data.type ) { #>
+						placeholder="Describe this video&hellip;"
+					<# } else if ( 'audio' === data.type ) { #>
+						placeholder="Describe this audio file&hellip;"
+					<# } else { #>
+						placeholder="Describe this media file&hellip;"
+					<# } #> {{ maybeReadOnly }} />
+			<# }
+		} #>
+	</script>
+
+	<script type="text/html" id="tmpl-attachment-details">
+		<h2>
+			Attachment Details			<span class="settings-save-status">
+				<span class="spinner"></span>
+				<span class="saved">Saved.</span>
+			</span>
+		</h2>
+		<div class="attachment-info">
+			<div class="thumbnail thumbnail-{{ data.type }}">
+				<# if ( data.uploading ) { #>
+					<div class="media-progress-bar"><div></div></div>
+				<# } else if ( 'image' === data.type && data.sizes ) { #>
+					<img src="{{ data.size.url }}" draggable="false" alt="" />
+				<# } else { #>
+					<img src="{{ data.icon }}" class="icon" draggable="false" alt="" />
+				<# } #>
+			</div>
+			<div class="details">
+				<div class="filename">{{ data.filename }}</div>
+				<div class="uploaded">{{ data.dateFormatted }}</div>
+
+				<div class="file-size">{{ data.filesizeHumanReadable }}</div>
+				<# if ( 'image' === data.type && ! data.uploading ) { #>
+					<# if ( data.width && data.height ) { #>
+						<div class="dimensions">{{ data.width }} &times; {{ data.height }}</div>
+					<# } #>
+
+					<# if ( data.can.save && data.sizes ) { #>
+						<a class="edit-attachment" href="{{ data.editLink }}&amp;image-editor" target="_blank">Edit Image</a>
+					<# } #>
+				<# } #>
+
+				<# if ( data.fileLength ) { #>
+					<div class="file-length">Length: {{ data.fileLength }}</div>
+				<# } #>
+
+				<# if ( ! data.uploading && data.can.remove ) { #>
+											<button type="button" class="button-link delete-attachment">Delete Permanently</button>
+									<# } #>
+
+				<div class="compat-meta">
+					<# if ( data.compat && data.compat.meta ) { #>
+						{{{ data.compat.meta }}}
+					<# } #>
+				</div>
+			</div>
+		</div>
+
+		<label class="setting" data-setting="url">
+			<span class="name">URL</span>
+			<input type="text" value="{{ data.url }}" readonly />
+		</label>
+		<# var maybeReadOnly = data.can.save || data.allowLocalEdits ? '' : 'readonly'; #>
+				<label class="setting" data-setting="title">
+			<span class="name">Title</span>
+			<input type="text" value="{{ data.title }}" {{ maybeReadOnly }} />
+		</label>
+				<# if ( 'audio' === data.type ) { #>
+				<label class="setting" data-setting="artist">
+			<span class="name">Artist</span>
+			<input type="text" value="{{ data.artist || data.meta.artist || '' }}" />
+		</label>
+				<label class="setting" data-setting="album">
+			<span class="name">Album</span>
+			<input type="text" value="{{ data.album || data.meta.album || '' }}" />
+		</label>
+				<# } #>
+		<label class="setting" data-setting="caption">
+			<span class="name">Caption</span>
+			<textarea {{ maybeReadOnly }}>{{ data.caption }}</textarea>
+		</label>
+		<# if ( 'image' === data.type ) { #>
+			<label class="setting" data-setting="alt">
+				<span class="name">Alt Text</span>
+				<input type="text" value="{{ data.alt }}" {{ maybeReadOnly }} />
+			</label>
+		<# } #>
+		<label class="setting" data-setting="description">
+			<span class="name">Description</span>
+			<textarea {{ maybeReadOnly }}>{{ data.description }}</textarea>
+		</label>
+	</script>
+
+	<script type="text/html" id="tmpl-media-selection">
+		<div class="selection-info">
+			<span class="count"></span>
+			<# if ( data.editable ) { #>
+				<button type="button" class="button-link edit-selection">Edit Selection</button>
+			<# } #>
+			<# if ( data.clearable ) { #>
+				<button type="button" class="button-link clear-selection">Clear</button>
+			<# } #>
+		</div>
+		<div class="selection-view"></div>
+	</script>
+
+	<script type="text/html" id="tmpl-attachment-display-settings">
+		<h2>Attachment Display Settings</h2>
+
+		<# if ( 'image' === data.type ) { #>
+			<label class="setting align">
+				<span>Alignment</span>
+				<select class="alignment"
+					data-setting="align"
+					<# if ( data.userSettings ) { #>
+						data-user-setting="align"
+					<# } #>>
+
+					<option value="left">
+						Left					</option>
+					<option value="center">
+						Center					</option>
+					<option value="right">
+						Right					</option>
+					<option value="none" selected>
+						None					</option>
+				</select>
+			</label>
+		<# } #>
+
+		<div class="setting">
+			<label>
+				<# if ( data.model.canEmbed ) { #>
+					<span>Embed or Link</span>
+				<# } else { #>
+					<span>Link To</span>
+				<# } #>
+
+				<select class="link-to"
+					data-setting="link"
+					<# if ( data.userSettings && ! data.model.canEmbed ) { #>
+						data-user-setting="urlbutton"
+					<# } #>>
+
+				<# if ( data.model.canEmbed ) { #>
+					<option value="embed" selected>
+						Embed Media Player					</option>
+					<option value="file">
+				<# } else { #>
+					<option value="none" selected>
+						None					</option>
+					<option value="file">
+				<# } #>
+					<# if ( data.model.canEmbed ) { #>
+						Link to Media File					<# } else { #>
+						Media File					<# } #>
+					</option>
+					<option value="post">
+					<# if ( data.model.canEmbed ) { #>
+						Link to Attachment Page					<# } else { #>
+						Attachment Page					<# } #>
+					</option>
+				<# if ( 'image' === data.type ) { #>
+					<option value="custom">
+						Custom URL					</option>
+				<# } #>
+				</select>
+			</label>
+			<input type="text" class="link-to-custom" data-setting="linkUrl" />
+		</div>
+
+		<# if ( 'undefined' !== typeof data.sizes ) { #>
+			<label class="setting">
+				<span>Size</span>
+				<select class="size" name="size"
+					data-setting="size"
+					<# if ( data.userSettings ) { #>
+						data-user-setting="imgsize"
+					<# } #>>
+											<#
+						var size = data.sizes['thumbnail'];
+						if ( size ) { #>
+							<option value="thumbnail" >
+								Thumbnail &ndash; {{ size.width }} &times; {{ size.height }}
+							</option>
+						<# } #>
+											<#
+						var size = data.sizes['medium'];
+						if ( size ) { #>
+							<option value="medium" >
+								Medium &ndash; {{ size.width }} &times; {{ size.height }}
+							</option>
+						<# } #>
+											<#
+						var size = data.sizes['large'];
+						if ( size ) { #>
+							<option value="large" >
+								Large &ndash; {{ size.width }} &times; {{ size.height }}
+							</option>
+						<# } #>
+											<#
+						var size = data.sizes['full'];
+						if ( size ) { #>
+							<option value="full"  selected='selected'>
+								Full Size &ndash; {{ size.width }} &times; {{ size.height }}
+							</option>
+						<# } #>
+									</select>
+			</label>
+		<# } #>
+	</script>
+
+	<script type="text/html" id="tmpl-gallery-settings">
+		<h2>Gallery Settings</h2>
+
+		<label class="setting">
+			<span>Link To</span>
+			<select class="link-to"
+				data-setting="link"
+				<# if ( data.userSettings ) { #>
+					data-user-setting="urlbutton"
+				<# } #>>
+
+				<option value="post" <# if ( ! wp.media.galleryDefaults.link || 'post' == wp.media.galleryDefaults.link ) {
+					#>selected="selected"<# }
+				#>>
+					Attachment Page				</option>
+				<option value="file" <# if ( 'file' == wp.media.galleryDefaults.link ) { #>selected="selected"<# } #>>
+					Media File				</option>
+				<option value="none" <# if ( 'none' == wp.media.galleryDefaults.link ) { #>selected="selected"<# } #>>
+					None				</option>
+			</select>
+		</label>
+
+		<label class="setting">
+			<span>Columns</span>
+			<select class="columns" name="columns"
+				data-setting="columns">
+									<option value="1" <#
+						if ( 1 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						1					</option>
+									<option value="2" <#
+						if ( 2 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						2					</option>
+									<option value="3" <#
+						if ( 3 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						3					</option>
+									<option value="4" <#
+						if ( 4 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						4					</option>
+									<option value="5" <#
+						if ( 5 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						5					</option>
+									<option value="6" <#
+						if ( 6 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						6					</option>
+									<option value="7" <#
+						if ( 7 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						7					</option>
+									<option value="8" <#
+						if ( 8 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						8					</option>
+									<option value="9" <#
+						if ( 9 == wp.media.galleryDefaults.columns ) { #>selected="selected"<# }
+					#>>
+						9					</option>
+							</select>
+		</label>
+
+		<label class="setting">
+			<span>Random Order</span>
+			<input type="checkbox" data-setting="_orderbyRandom" />
+		</label>
+
+		<label class="setting size">
+			<span>Size</span>
+			<select class="size" name="size"
+				data-setting="size"
+				<# if ( data.userSettings ) { #>
+					data-user-setting="imgsize"
+				<# } #>
+				>
+									<option value="thumbnail">
+						Thumbnail					</option>
+									<option value="medium">
+						Medium					</option>
+									<option value="large">
+						Large					</option>
+									<option value="full">
+						Full Size					</option>
+							</select>
+		</label>
+	</script>
+
+	<script type="text/html" id="tmpl-playlist-settings">
+		<h2>Playlist Settings</h2>
+
+		<# var emptyModel = _.isEmpty( data.model ),
+			isVideo = 'video' === data.controller.get('library').props.get('type'); #>
+
+		<label class="setting">
+			<input type="checkbox" data-setting="tracklist" <# if ( emptyModel ) { #>
+				checked="checked"
+			<# } #> />
+			<# if ( isVideo ) { #>
+			<span>Show Video List</span>
+			<# } else { #>
+			<span>Show Tracklist</span>
+			<# } #>
+		</label>
+
+		<# if ( ! isVideo ) { #>
+		<label class="setting">
+			<input type="checkbox" data-setting="artists" <# if ( emptyModel ) { #>
+				checked="checked"
+			<# } #> />
+			<span>Show Artist Name in Tracklist</span>
+		</label>
+		<# } #>
+
+		<label class="setting">
+			<input type="checkbox" data-setting="images" <# if ( emptyModel ) { #>
+				checked="checked"
+			<# } #> />
+			<span>Show Images</span>
+		</label>
+	</script>
+
+	<script type="text/html" id="tmpl-embed-link-settings">
+		<label class="setting link-text">
+			<span>Link Text</span>
+			<input type="text" class="alignment" data-setting="linkText" />
+		</label>
+		<div class="embed-container" style="display: none;">
+			<div class="embed-preview"></div>
+		</div>
+	</script>
+
+	<script type="text/html" id="tmpl-embed-image-settings">
+		<div class="thumbnail">
+			<img src="{{ data.model.url }}" draggable="false" alt="" />
+		</div>
+
+					<label class="setting caption">
+				<span>Caption</span>
+				<textarea data-setting="caption" />
+			</label>
+		
+		<label class="setting alt-text">
+			<span>Alt Text</span>
+			<input type="text" data-setting="alt" />
+		</label>
+
+		<div class="setting align">
+			<span>Align</span>
+			<div class="button-group button-large" data-setting="align">
+				<button class="button" value="left">
+					Left				</button>
+				<button class="button" value="center">
+					Center				</button>
+				<button class="button" value="right">
+					Right				</button>
+				<button class="button active" value="none">
+					None				</button>
+			</div>
+		</div>
+
+		<div class="setting link-to">
+			<span>Link To</span>
+			<div class="button-group button-large" data-setting="link">
+				<button class="button" value="file">
+					Image URL				</button>
+				<button class="button" value="custom">
+					Custom URL				</button>
+				<button class="button active" value="none">
+					None				</button>
+			</div>
+			<input type="text" class="link-to-custom" data-setting="linkUrl" />
+		</div>
+	</script>
+
+	<script type="text/html" id="tmpl-image-details">
+		<div class="media-embed">
+			<div class="embed-media-settings">
+				<div class="column-image">
+					<div class="image">
+						<img src="{{ data.model.url }}" draggable="false" alt="" />
+
+						<# if ( data.attachment && window.imageEdit ) { #>
+							<div class="actions">
+								<input type="button" class="edit-attachment button" value="Edit Original" />
+								<input type="button" class="replace-attachment button" value="Replace" />
+							</div>
+						<# } #>
+					</div>
+				</div>
+				<div class="column-settings">
+											<label class="setting caption">
+							<span>Caption</span>
+							<textarea data-setting="caption">{{ data.model.caption }}</textarea>
+						</label>
+					
+					<label class="setting alt-text">
+						<span>Alternative Text</span>
+						<input type="text" data-setting="alt" value="{{ data.model.alt }}" />
+					</label>
+
+					<h2>Display Settings</h2>
+					<div class="setting align">
+						<span>Align</span>
+						<div class="button-group button-large" data-setting="align">
+							<button class="button" value="left">
+								Left							</button>
+							<button class="button" value="center">
+								Center							</button>
+							<button class="button" value="right">
+								Right							</button>
+							<button class="button active" value="none">
+								None							</button>
+						</div>
+					</div>
+
+					<# if ( data.attachment ) { #>
+						<# if ( 'undefined' !== typeof data.attachment.sizes ) { #>
+							<label class="setting size">
+								<span>Size</span>
+								<select class="size" name="size"
+									data-setting="size"
+									<# if ( data.userSettings ) { #>
+										data-user-setting="imgsize"
+									<# } #>>
+																			<#
+										var size = data.sizes['thumbnail'];
+										if ( size ) { #>
+											<option value="thumbnail">
+												Thumbnail &ndash; {{ size.width }} &times; {{ size.height }}
+											</option>
+										<# } #>
+																			<#
+										var size = data.sizes['medium'];
+										if ( size ) { #>
+											<option value="medium">
+												Medium &ndash; {{ size.width }} &times; {{ size.height }}
+											</option>
+										<# } #>
+																			<#
+										var size = data.sizes['large'];
+										if ( size ) { #>
+											<option value="large">
+												Large &ndash; {{ size.width }} &times; {{ size.height }}
+											</option>
+										<# } #>
+																			<#
+										var size = data.sizes['full'];
+										if ( size ) { #>
+											<option value="full">
+												Full Size &ndash; {{ size.width }} &times; {{ size.height }}
+											</option>
+										<# } #>
+																		<option value="custom">
+										Custom Size									</option>
+								</select>
+							</label>
+						<# } #>
+							<div class="custom-size<# if ( data.model.size !== 'custom' ) { #> hidden<# } #>">
+								<label><span>Width <small>(px)</small></span> <input data-setting="customWidth" type="number" step="1" value="{{ data.model.customWidth }}" /></label><span class="sep">&times;</span><label><span>Height <small>(px)</small></span><input data-setting="customHeight" type="number" step="1" value="{{ data.model.customHeight }}" /></label>
+							</div>
+					<# } #>
+
+					<div class="setting link-to">
+						<span>Link To</span>
+						<select data-setting="link">
+						<# if ( data.attachment ) { #>
+							<option value="file">
+								Media File							</option>
+							<option value="post">
+								Attachment Page							</option>
+						<# } else { #>
+							<option value="file">
+								Image URL							</option>
+						<# } #>
+							<option value="custom">
+								Custom URL							</option>
+							<option value="none">
+								None							</option>
+						</select>
+						<input type="text" class="link-to-custom" data-setting="linkUrl" />
+					</div>
+					<div class="advanced-section">
+						<h2><button type="button" class="button-link advanced-toggle">Advanced Options</button></h2>
+						<div class="advanced-settings hidden">
+							<div class="advanced-image">
+								<label class="setting title-text">
+									<span>Image Title Attribute</span>
+									<input type="text" data-setting="title" value="{{ data.model.title }}" />
+								</label>
+								<label class="setting extra-classes">
+									<span>Image CSS Class</span>
+									<input type="text" data-setting="extraClasses" value="{{ data.model.extraClasses }}" />
+								</label>
+							</div>
+							<div class="advanced-link">
+								<div class="setting link-target">
+									<label><input type="checkbox" data-setting="linkTargetBlank" value="_blank" <# if ( data.model.linkTargetBlank ) { #>checked="checked"<# } #>>Open link in a new tab</label>
+								</div>
+								<label class="setting link-rel">
+									<span>Link Rel</span>
+									<input type="text" data-setting="linkRel" value="{{ data.model.linkRel }}" />
+								</label>
+								<label class="setting link-class-name">
+									<span>Link CSS Class</span>
+									<input type="text" data-setting="linkClassName" value="{{ data.model.linkClassName }}" />
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="tmpl-image-editor">
+		<div id="media-head-{{ data.id }}"></div>
+		<div id="image-editor-{{ data.id }}"></div>
+	</script>
+
+	<script type="text/html" id="tmpl-audio-details">
+		<# var ext, html5types = {
+			mp3: wp.media.view.settings.embedMimes.mp3,
+			ogg: wp.media.view.settings.embedMimes.ogg
+		}; #>
+
+				<div class="media-embed media-embed-details">
+			<div class="embed-media-settings embed-audio-settings">
+				<audio style="visibility: hidden"
+	controls
+	class="wp-audio-shortcode"
+	width="{{ _.isUndefined( data.model.width ) ? 400 : data.model.width }}"
+	preload="{{ _.isUndefined( data.model.preload ) ? 'none' : data.model.preload }}"
+	<#
+	if ( ! _.isUndefined( data.model.autoplay ) && data.model.autoplay ) {
+		#> autoplay<#
+	}
+	if ( ! _.isUndefined( data.model.loop ) && data.model.loop ) {
+		#> loop<#
+	}
+	#>
+>
+	<# if ( ! _.isEmpty( data.model.src ) ) { #>
+	<source src="{{ data.model.src }}" type="{{ wp.media.view.settings.embedMimes[ data.model.src.split('.').pop() ] }}" />
+	<# } #>
+
+	<# if ( ! _.isEmpty( data.model.mp3 ) ) { #>
+	<source src="{{ data.model.mp3 }}" type="{{ wp.media.view.settings.embedMimes[ 'mp3' ] }}" />
+	<# } #>
+	<# if ( ! _.isEmpty( data.model.ogg ) ) { #>
+	<source src="{{ data.model.ogg }}" type="{{ wp.media.view.settings.embedMimes[ 'ogg' ] }}" />
+	<# } #>
+	<# if ( ! _.isEmpty( data.model.flac ) ) { #>
+	<source src="{{ data.model.flac }}" type="{{ wp.media.view.settings.embedMimes[ 'flac' ] }}" />
+	<# } #>
+	<# if ( ! _.isEmpty( data.model.m4a ) ) { #>
+	<source src="{{ data.model.m4a }}" type="{{ wp.media.view.settings.embedMimes[ 'm4a' ] }}" />
+	<# } #>
+	<# if ( ! _.isEmpty( data.model.wav ) ) { #>
+	<source src="{{ data.model.wav }}" type="{{ wp.media.view.settings.embedMimes[ 'wav' ] }}" />
+	<# } #>
+	</audio>
+
+				<# if ( ! _.isEmpty( data.model.src ) ) {
+					ext = data.model.src.split('.').pop();
+					if ( html5types[ ext ] ) {
+						delete html5types[ ext ];
+					}
+				#>
+				<label class="setting">
+					<span>SRC</span>
+					<input type="text" disabled="disabled" data-setting="src" value="{{ data.model.src }}" />
+					<button type="button" class="button-link remove-setting">Remove audio source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.mp3 ) ) {
+					if ( ! _.isUndefined( html5types.mp3 ) ) {
+						delete html5types.mp3;
+					}
+				#>
+				<label class="setting">
+					<span>MP3</span>
+					<input type="text" disabled="disabled" data-setting="mp3" value="{{ data.model.mp3 }}" />
+					<button type="button" class="button-link remove-setting">Remove audio source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.ogg ) ) {
+					if ( ! _.isUndefined( html5types.ogg ) ) {
+						delete html5types.ogg;
+					}
+				#>
+				<label class="setting">
+					<span>OGG</span>
+					<input type="text" disabled="disabled" data-setting="ogg" value="{{ data.model.ogg }}" />
+					<button type="button" class="button-link remove-setting">Remove audio source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.flac ) ) {
+					if ( ! _.isUndefined( html5types.flac ) ) {
+						delete html5types.flac;
+					}
+				#>
+				<label class="setting">
+					<span>FLAC</span>
+					<input type="text" disabled="disabled" data-setting="flac" value="{{ data.model.flac }}" />
+					<button type="button" class="button-link remove-setting">Remove audio source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.m4a ) ) {
+					if ( ! _.isUndefined( html5types.m4a ) ) {
+						delete html5types.m4a;
+					}
+				#>
+				<label class="setting">
+					<span>M4A</span>
+					<input type="text" disabled="disabled" data-setting="m4a" value="{{ data.model.m4a }}" />
+					<button type="button" class="button-link remove-setting">Remove audio source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.wav ) ) {
+					if ( ! _.isUndefined( html5types.wav ) ) {
+						delete html5types.wav;
+					}
+				#>
+				<label class="setting">
+					<span>WAV</span>
+					<input type="text" disabled="disabled" data-setting="wav" value="{{ data.model.wav }}" />
+					<button type="button" class="button-link remove-setting">Remove audio source</button>
+				</label>
+				<# } #>
+				
+				<# if ( ! _.isEmpty( html5types ) ) { #>
+				<div class="setting">
+					<span>Add alternate sources for maximum HTML5 playback:</span>
+					<div class="button-large">
+					<# _.each( html5types, function (mime, type) { #>
+					<button class="button add-media-source" data-mime="{{ mime }}">{{ type }}</button>
+					<# } ) #>
+					</div>
+				</div>
+				<# } #>
+
+				<div class="setting preload">
+					<span>Preload</span>
+					<div class="button-group button-large" data-setting="preload">
+						<button class="button" value="auto">Auto</button>
+						<button class="button" value="metadata">Metadata</button>
+						<button class="button active" value="none">None</button>
+					</div>
+				</div>
+
+				<label class="setting checkbox-setting autoplay">
+					<input type="checkbox" data-setting="autoplay" />
+					<span>Autoplay</span>
+				</label>
+
+				<label class="setting checkbox-setting">
+					<input type="checkbox" data-setting="loop" />
+					<span>Loop</span>
+				</label>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="tmpl-video-details">
+		<# var ext, html5types = {
+			mp4: wp.media.view.settings.embedMimes.mp4,
+			ogv: wp.media.view.settings.embedMimes.ogv,
+			webm: wp.media.view.settings.embedMimes.webm
+		}; #>
+
+				<div class="media-embed media-embed-details">
+			<div class="embed-media-settings embed-video-settings">
+				<div class="wp-video-holder">
+				<#
+				var w = ! data.model.width || data.model.width > 640 ? 640 : data.model.width,
+					h = ! data.model.height ? 360 : data.model.height;
+
+				if ( data.model.width && w !== data.model.width ) {
+					h = Math.ceil( ( h * w ) / data.model.width );
+				}
+				#>
+
+				<#  var w_rule = '', classes = [],
+		w, h, settings = wp.media.view.settings,
+		isYouTube = isVimeo = false;
+
+	if ( ! _.isEmpty( data.model.src ) ) {
+		isYouTube = data.model.src.match(/youtube|youtu\.be/);
+		isVimeo = -1 !== data.model.src.indexOf('vimeo');
+	}
+
+	if ( settings.contentWidth && data.model.width >= settings.contentWidth ) {
+		w = settings.contentWidth;
+	} else {
+		w = data.model.width;
+	}
+
+	if ( w !== data.model.width ) {
+		h = Math.ceil( ( data.model.height * w ) / data.model.width );
+	} else {
+		h = data.model.height;
+ 	}
+
+	if ( w ) {
+		w_rule = 'width: ' + w + 'px; ';
+	}
+
+	if ( isYouTube ) {
+		classes.push( 'youtube-video' );
+	}
+
+	if ( isVimeo ) {
+		classes.push( 'vimeo-video' );
+	}
+
+#>
+<div style="{{ w_rule }}" class="wp-video">
+<video controls
+	class="wp-video-shortcode {{ classes.join( ' ' ) }}"
+	<# if ( w ) { #>width="{{ w }}"<# } #>
+	<# if ( h ) { #>height="{{ h }}"<# } #>
+	<#
+		if ( ! _.isUndefined( data.model.poster ) && data.model.poster ) {
+			#> poster="{{ data.model.poster }}"<#
+		} #>
+		preload="{{ _.isUndefined( data.model.preload ) ? 'metadata' : data.model.preload }}"<#
+	 if ( ! _.isUndefined( data.model.autoplay ) && data.model.autoplay ) {
+		#> autoplay<#
+	}
+	 if ( ! _.isUndefined( data.model.loop ) && data.model.loop ) {
+		#> loop<#
+	}
+	#>
+>
+	<# if ( ! _.isEmpty( data.model.src ) ) {
+		if ( isYouTube ) { #>
+		<source src="{{ data.model.src }}" type="video/youtube" />
+		<# } else if ( isVimeo ) { #>
+		<source src="{{ data.model.src }}" type="video/vimeo" />
+		<# } else { #>
+		<source src="{{ data.model.src }}" type="{{ settings.embedMimes[ data.model.src.split('.').pop() ] }}" />
+		<# }
+	} #>
+
+	<# if ( data.model.mp4 ) { #>
+	<source src="{{ data.model.mp4 }}" type="{{ settings.embedMimes[ 'mp4' ] }}" />
+	<# } #>
+	<# if ( data.model.m4v ) { #>
+	<source src="{{ data.model.m4v }}" type="{{ settings.embedMimes[ 'm4v' ] }}" />
+	<# } #>
+	<# if ( data.model.webm ) { #>
+	<source src="{{ data.model.webm }}" type="{{ settings.embedMimes[ 'webm' ] }}" />
+	<# } #>
+	<# if ( data.model.ogv ) { #>
+	<source src="{{ data.model.ogv }}" type="{{ settings.embedMimes[ 'ogv' ] }}" />
+	<# } #>
+	<# if ( data.model.flv ) { #>
+	<source src="{{ data.model.flv }}" type="{{ settings.embedMimes[ 'flv' ] }}" />
+	<# } #>
+		{{{ data.model.content }}}
+</video>
+</div>
+
+				<# if ( ! _.isEmpty( data.model.src ) ) {
+					ext = data.model.src.split('.').pop();
+					if ( html5types[ ext ] ) {
+						delete html5types[ ext ];
+					}
+				#>
+				<label class="setting">
+					<span>SRC</span>
+					<input type="text" disabled="disabled" data-setting="src" value="{{ data.model.src }}" />
+					<button type="button" class="button-link remove-setting">Remove video source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.mp4 ) ) {
+					if ( ! _.isUndefined( html5types.mp4 ) ) {
+						delete html5types.mp4;
+					}
+				#>
+				<label class="setting">
+					<span>MP4</span>
+					<input type="text" disabled="disabled" data-setting="mp4" value="{{ data.model.mp4 }}" />
+					<button type="button" class="button-link remove-setting">Remove video source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.m4v ) ) {
+					if ( ! _.isUndefined( html5types.m4v ) ) {
+						delete html5types.m4v;
+					}
+				#>
+				<label class="setting">
+					<span>M4V</span>
+					<input type="text" disabled="disabled" data-setting="m4v" value="{{ data.model.m4v }}" />
+					<button type="button" class="button-link remove-setting">Remove video source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.webm ) ) {
+					if ( ! _.isUndefined( html5types.webm ) ) {
+						delete html5types.webm;
+					}
+				#>
+				<label class="setting">
+					<span>WEBM</span>
+					<input type="text" disabled="disabled" data-setting="webm" value="{{ data.model.webm }}" />
+					<button type="button" class="button-link remove-setting">Remove video source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.ogv ) ) {
+					if ( ! _.isUndefined( html5types.ogv ) ) {
+						delete html5types.ogv;
+					}
+				#>
+				<label class="setting">
+					<span>OGV</span>
+					<input type="text" disabled="disabled" data-setting="ogv" value="{{ data.model.ogv }}" />
+					<button type="button" class="button-link remove-setting">Remove video source</button>
+				</label>
+				<# } #>
+				<# if ( ! _.isEmpty( data.model.flv ) ) {
+					if ( ! _.isUndefined( html5types.flv ) ) {
+						delete html5types.flv;
+					}
+				#>
+				<label class="setting">
+					<span>FLV</span>
+					<input type="text" disabled="disabled" data-setting="flv" value="{{ data.model.flv }}" />
+					<button type="button" class="button-link remove-setting">Remove video source</button>
+				</label>
+				<# } #>
+								</div>
+
+				<# if ( ! _.isEmpty( html5types ) ) { #>
+				<div class="setting">
+					<span>Add alternate sources for maximum HTML5 playback:</span>
+					<div class="button-large">
+					<# _.each( html5types, function (mime, type) { #>
+					<button class="button add-media-source" data-mime="{{ mime }}">{{ type }}</button>
+					<# } ) #>
+					</div>
+				</div>
+				<# } #>
+
+				<# if ( ! _.isEmpty( data.model.poster ) ) { #>
+				<label class="setting">
+					<span>Poster Image</span>
+					<input type="text" disabled="disabled" data-setting="poster" value="{{ data.model.poster }}" />
+					<button type="button" class="button-link remove-setting">Remove poster image</button>
+				</label>
+				<# } #>
+				<div class="setting preload">
+					<span>Preload</span>
+					<div class="button-group button-large" data-setting="preload">
+						<button class="button" value="auto">Auto</button>
+						<button class="button" value="metadata">Metadata</button>
+						<button class="button active" value="none">None</button>
+					</div>
+				</div>
+
+				<label class="setting checkbox-setting autoplay">
+					<input type="checkbox" data-setting="autoplay" />
+					<span>Autoplay</span>
+				</label>
+
+				<label class="setting checkbox-setting">
+					<input type="checkbox" data-setting="loop" />
+					<span>Loop</span>
+				</label>
+
+				<label class="setting" data-setting="content">
+					<span>Tracks (subtitles, captions, descriptions, chapters, or metadata)</span>
+					<#
+					var content = '';
+					if ( ! _.isEmpty( data.model.content ) ) {
+						var tracks = jQuery( data.model.content ).filter( 'track' );
+						_.each( tracks.toArray(), function (track) {
+							content += track.outerHTML; #>
+						<p>
+							<input class="content-track" type="text" value="{{ track.outerHTML }}" />
+							<button type="button" class="button-link remove-setting remove-track">Remove video track</button>
+						</p>
+						<# } ); #>
+					<# } else { #>
+					<em>There are no associated subtitles.</em>
+					<# } #>
+					<textarea class="hidden content-setting">{{ content }}</textarea>
+				</label>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/html" id="tmpl-editor-gallery">
+		<# if ( data.attachments.length ) { #>
+			<div class="gallery gallery-columns-{{ data.columns }}">
+				<# _.each( data.attachments, function( attachment, index ) { #>
+					<dl class="gallery-item">
+						<dt class="gallery-icon">
+							<# if ( attachment.thumbnail ) { #>
+								<img src="{{ attachment.thumbnail.url }}" width="{{ attachment.thumbnail.width }}" height="{{ attachment.thumbnail.height }}" alt="" />
+							<# } else { #>
+								<img src="{{ attachment.url }}" alt="" />
+							<# } #>
+						</dt>
+						<# if ( attachment.caption ) { #>
+							<dd class="wp-caption-text gallery-caption">
+								{{{ data.verifyHTML( attachment.caption ) }}}
+							</dd>
+						<# } #>
+					</dl>
+					<# if ( index % data.columns === data.columns - 1 ) { #>
+						<br style="clear: both;">
+					<# } #>
+				<# } ); #>
+			</div>
+		<# } else { #>
+			<div class="wpview-error">
+				<div class="dashicons dashicons-format-gallery"></div><p>No items found.</p>
+			</div>
+		<# } #>
+	</script>
+
+	<script type="text/html" id="tmpl-crop-content">
+		<img class="crop-image" src="{{ data.url }}" alt="Image crop area preview. Requires mouse interaction.">
+		<div class="upload-errors"></div>
+	</script>
+
+	<script type="text/html" id="tmpl-site-icon-preview">
+		<h2>Preview</h2>
+		<strong aria-hidden="true">As a browser icon</strong>
+		<div class="favicon-preview">
+			<img src="https://puri.sm/wp-admin/images/browser.png" class="browser-preview" width="182" height="" alt="" />
+
+			<div class="favicon">
+				<img id="preview-favicon" src="{{ data.url }}" alt="Preview as a browser icon"/>
+			</div>
+			<span class="browser-title" aria-hidden="true">Purism</span>
+		</div>
+
+		<strong aria-hidden="true">As an app icon</strong>
+		<div class="app-icon-preview">
+			<img id="preview-app-icon" src="{{ data.url }}" alt="Preview as an app icon"/>
+		</div>
+	</script>
+
+	<script type='text/javascript'>
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"https:\/\/puri.sm\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https:\/\/puri.sm\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=3.2.6'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"https:\/\/puri.sm\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=3.2.6'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"https:\/\/puri.sm\/?wc-ajax=%%endpoint%%","fragment_name":"wc_fragments_4f8a2d8a685d75d1cf5696c56fe99d0f"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.2.6'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/jquery/ui/datepicker.min.js?ver=1.11.4'></script>
+<script type='text/javascript'>
+jQuery(document).ready(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"Close","currentText":"Today","monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Previous","dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"dateFormat":"MM d, yy","firstDay":1,"isRTL":false});});
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpcf_ajax_object = {"ajax_url":"https:\/\/puri.sm\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/wp-crowdfunding/assets/js/crowdfunding-front.js?ver=10.13'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/underscore.min.js?ver=1.8.3'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/shortcode.min.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/backbone.min.js?ver=1.2.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/wp-util.min.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/wp-backbone.min.js?ver=4.9.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpMediaModelsL10n = {"settings":{"ajaxurl":"\/wp-admin\/admin-ajax.php","post":{"id":0}}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/media-models.min.js?ver=4.9.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var pluploadL10n = {"queue_limit_exceeded":"You have attempted to queue too many files.","file_exceeds_size_limit":"%s exceeds the maximum upload size for this site.","zero_byte_file":"This file is empty. Please try another.","invalid_filetype":"Sorry, this file type is not permitted for security reasons.","not_an_image":"This file is not an image. Please try another.","image_memory_exceeded":"Memory exceeded. Please try another smaller file.","image_dimensions_exceeded":"This is larger than the maximum size. Please try another.","default_error":"An error occurred in the upload. Please try again later.","missing_upload_url":"There was a configuration error. Please contact the server administrator.","upload_limit_exceeded":"You may only upload 1 file.","http_error":"HTTP error.","upload_failed":"Upload failed.","big_upload_failed":"Please try uploading this file with the %1$sbrowser uploader%2$s.","big_upload_queued":"%s exceeds the maximum upload size for the multi-file uploader when used in your browser.","io_error":"IO error.","security_error":"Security error.","file_cancelled":"File canceled.","upload_stopped":"Upload stopped.","dismiss":"Dismiss","crunching":"Crunching\u2026","deleted":"moved to the trash.","error_uploading":"\u201c%s\u201d has failed to upload."};
+var _wpPluploadSettings = {"defaults":{"file_data_name":"async-upload","url":"\/wp-admin\/async-upload.php","filters":{"max_file_size":"536870912b","mime_types":[{"extensions":"jpg,jpeg,jpe,gif,png,bmp,tiff,tif,ico,asf,asx,wmv,wmx,wm,avi,divx,flv,mov,qt,mpeg,mpg,mpe,mp4,m4v,ogv,webm,mkv,3gp,3gpp,3g2,3gp2,txt,asc,c,cc,h,srt,csv,tsv,ics,rtx,css,vtt,dfxp,mp3,m4a,m4b,ra,ram,wav,ogg,oga,flac,mid,midi,wma,wax,mka,rtf,pdf,class,tar,zip,gz,gzip,rar,7z,psd,xcf,doc,pot,pps,ppt,wri,xla,xls,xlt,xlw,mdb,mpp,docx,docm,dotx,dotm,xlsx,xlsm,xlsb,xltx,xltm,xlam,pptx,pptm,ppsx,ppsm,potx,potm,ppam,sldx,sldm,onetoc,onetoc2,onetmp,onepkg,oxps,xps,odt,odp,ods,odg,odc,odb,odf,wp,wpd,key,numbers,pages"}]},"multipart_params":{"action":"upload-attachment","_wpnonce":"9774a7cd09"}},"browser":{"mobile":false,"supported":true},"limitExceeded":false};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/plupload/wp-plupload.min.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/jquery/ui/mouse.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/jquery/ui/sortable.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/mediaelement/wp-mediaelement.min.js?ver=4.9.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpApiSettings = {"root":"https:\/\/puri.sm\/wp-json\/","nonce":"78245beae2","versionString":"wp\/v2\/"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/api-request.min.js?ver=4.9.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpMediaViewsL10n = {"url":"URL","addMedia":"Add Media","search":"Search","select":"Select","cancel":"Cancel","update":"Update","replace":"Replace","remove":"Remove","back":"Back","selected":"%d selected","dragInfo":"Drag and drop to reorder media files.","uploadFilesTitle":"Upload Files","uploadImagesTitle":"Upload Images","mediaLibraryTitle":"Media Library","insertMediaTitle":"Add Media","createNewGallery":"Create a new gallery","createNewPlaylist":"Create a new playlist","createNewVideoPlaylist":"Create a new video playlist","returnToLibrary":"\u2190 Return to library","allMediaItems":"All media items","allDates":"All dates","noItemsFound":"No items found.","insertIntoPost":"Insert into post","unattached":"Unattached","trash":"Trash","uploadedToThisPost":"Uploaded to this post","warnDelete":"You are about to permanently delete this item from your site.\nThis action cannot be undone.\n 'Cancel' to stop, 'OK' to delete.","warnBulkDelete":"You are about to permanently delete these items from your site.\nThis action cannot be undone.\n 'Cancel' to stop, 'OK' to delete.","warnBulkTrash":"You are about to trash these items.\n  'Cancel' to stop, 'OK' to delete.","bulkSelect":"Bulk Select","cancelSelection":"Cancel Selection","trashSelected":"Trash Selected","untrashSelected":"Untrash Selected","deleteSelected":"Delete Selected","deletePermanently":"Delete Permanently","apply":"Apply","filterByDate":"Filter by date","filterByType":"Filter by type","searchMediaLabel":"Search Media","searchMediaPlaceholder":"Search media items...","noMedia":"No media files found.","attachmentDetails":"Attachment Details","insertFromUrlTitle":"Insert from URL","setFeaturedImageTitle":"Featured Image","setFeaturedImage":"Set featured image","createGalleryTitle":"Create Gallery","editGalleryTitle":"Edit Gallery","cancelGalleryTitle":"\u2190 Cancel Gallery","insertGallery":"Insert gallery","updateGallery":"Update gallery","addToGallery":"Add to gallery","addToGalleryTitle":"Add to Gallery","reverseOrder":"Reverse order","imageDetailsTitle":"Image Details","imageReplaceTitle":"Replace Image","imageDetailsCancel":"Cancel Edit","editImage":"Edit Image","chooseImage":"Choose Image","selectAndCrop":"Select and Crop","skipCropping":"Skip Cropping","cropImage":"Crop Image","cropYourImage":"Crop your image","cropping":"Cropping\u2026","suggestedDimensions":"Suggested image dimensions: %1$s by %2$s pixels.","cropError":"There has been an error cropping your image.","audioDetailsTitle":"Audio Details","audioReplaceTitle":"Replace Audio","audioAddSourceTitle":"Add Audio Source","audioDetailsCancel":"Cancel Edit","videoDetailsTitle":"Video Details","videoReplaceTitle":"Replace Video","videoAddSourceTitle":"Add Video Source","videoDetailsCancel":"Cancel Edit","videoSelectPosterImageTitle":"Select Poster Image","videoAddTrackTitle":"Add Subtitles","playlistDragInfo":"Drag and drop to reorder tracks.","createPlaylistTitle":"Create Audio Playlist","editPlaylistTitle":"Edit Audio Playlist","cancelPlaylistTitle":"\u2190 Cancel Audio Playlist","insertPlaylist":"Insert audio playlist","updatePlaylist":"Update audio playlist","addToPlaylist":"Add to audio playlist","addToPlaylistTitle":"Add to Audio Playlist","videoPlaylistDragInfo":"Drag and drop to reorder videos.","createVideoPlaylistTitle":"Create Video Playlist","editVideoPlaylistTitle":"Edit Video Playlist","cancelVideoPlaylistTitle":"\u2190 Cancel Video Playlist","insertVideoPlaylist":"Insert video playlist","updateVideoPlaylist":"Update video playlist","addToVideoPlaylist":"Add to video playlist","addToVideoPlaylistTitle":"Add to Video Playlist","settings":{"tabs":[],"tabUrl":"https:\/\/puri.sm\/wp-admin\/media-upload.php?chromeless=1","mimeTypes":{"image":"Images","audio":"Audio","video":"Video"},"captions":true,"nonce":{"sendToEditor":"ed7ecc296e"},"post":{"id":0},"defaultProps":{"link":"","align":"","size":""},"attachmentCounts":{"audio":1,"video":1},"oEmbedProxyUrl":"https:\/\/puri.sm\/wp-json\/oembed\/1.0\/proxy","embedExts":["mp3","ogg","flac","m4a","wav","mp4","m4v","webm","ogv","flv"],"embedMimes":{"mp3":"audio\/mpeg","ogg":"audio\/ogg","flac":"audio\/flac","m4a":"audio\/mpeg","wav":"audio\/wav","mp4":"video\/mp4","m4v":"video\/mp4","webm":"video\/webm","ogv":"video\/ogg","flv":"video\/x-flv"},"contentWidth":960,"months":[{"year":"2018","month":"5","text":"May 2018"},{"year":"2018","month":"4","text":"April 2018"},{"year":"2018","month":"3","text":"March 2018"},{"year":"2018","month":"2","text":"February 2018"},{"year":"2018","month":"1","text":"January 2018"},{"year":"2017","month":"12","text":"December 2017"},{"year":"2017","month":"11","text":"November 2017"},{"year":"2017","month":"10","text":"October 2017"},{"year":"2017","month":"9","text":"September 2017"},{"year":"2017","month":"8","text":"August 2017"},{"year":"2017","month":"7","text":"July 2017"},{"year":"2017","month":"6","text":"June 2017"},{"year":"2017","month":"5","text":"May 2017"},{"year":"2017","month":"4","text":"April 2017"},{"year":"2017","month":"3","text":"March 2017"},{"year":"2017","month":"2","text":"February 2017"},{"year":"2017","month":"1","text":"January 2017"},{"year":"2016","month":"12","text":"December 2016"},{"year":"2016","month":"11","text":"November 2016"},{"year":"2016","month":"10","text":"October 2016"},{"year":"2016","month":"9","text":"September 2016"},{"year":"2016","month":"8","text":"August 2016"},{"year":"2016","month":"7","text":"July 2016"},{"year":"2016","month":"6","text":"June 2016"},{"year":"2016","month":"5","text":"May 2016"},{"year":"2016","month":"2","text":"February 2016"},{"year":"2016","month":"1","text":"January 2016"},{"year":"2015","month":"12","text":"December 2015"},{"year":"2015","month":"10","text":"October 2015"},{"year":"2015","month":"9","text":"September 2015"},{"year":"2015","month":"8","text":"August 2015"},{"year":"2015","month":"7","text":"July 2015"},{"year":"2015","month":"6","text":"June 2015"},{"year":"2015","month":"5","text":"May 2015"},{"year":"2015","month":"4","text":"April 2015"},{"year":"2015","month":"2","text":"February 2015"},{"year":"2015","month":"1","text":"January 2015"},{"year":"2014","month":"11","text":"November 2014"},{"year":"2014","month":"8","text":"August 2014"},{"year":"2014","month":"7","text":"July 2014"},{"year":"2014","month":"5","text":"May 2014"}],"mediaTrash":0}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/media-views.min.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/media-editor.min.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/media-audiovideo.min.js?ver=4.9.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var MakeFrontEnd = {"fitvids":{"selectors":""}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://puri.sm/wp-content/themes/make/js/frontend.js?ver=1.9.8'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/themes/make/js/formatting/dynamic-stylesheet/dynamic-stylesheet.js?ver=1.9.8'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/wp-charts//js/functions.js?ver=4.9.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/jquery/ui/effect.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/quick-contact-form/scripts.js'></script>
+<script type='text/javascript' src='https://puri.sm/wp-content/plugins/quick-contact-form/slider.js'></script>
+<script type='text/javascript' src='https://puri.sm/wp-includes/js/wp-embed.min.js?ver=4.9.4'></script>
+
+	</body>
+</html>
+<!-- Dynamic page generated in 0.935 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2018-05-07 18:32:36 -->
+
+<!-- Compression = gzip -->

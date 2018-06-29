@@ -1,0 +1,465 @@
+<!doctype html><html amp lang=en><head><meta charset=utf-8><meta content=noindex name=robots><meta content=width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no name=viewport><meta content=article property=og:type><meta content="mimikatz: Golden Ticket + DCSync" property=og:title><meta content=https://blog.didierstevens.com/2016/08/12/mimikatz-golden-ticket-dcsync/ property=og:url><meta content="This blog post aims to provide a bit more information about what Benjamin Delpy wrote in this tweet: For this demo I run mimikatz as a least privilege, local user on a Windows workstation that is a…" property=og:description><meta content="Didier Stevens" property=og:site_name><meta content=https://didierstevens.files.wordpress.com/2016/08/20160805-091005.png property=og:image><meta content=692 property=og:image:width><meta content=873 property=og:image:height><meta content=en_US property=og:locale><meta content=@wordpressdotcom name=twitter:site><meta content="mimikatz: Golden Ticket + DCSync" name=twitter:text:title><meta content=https://didierstevens.files.wordpress.com/2016/08/20160805-092138.png?w=240 name=twitter:image><meta content=summary name=twitter:card><link as=script href=https://cdn.ampproject.org/rtv/011507083985898/v0.js rel=preload><script async src=https://cdn.ampproject.org/rtv/011507083985898/v0.js></script><link href=/i/s/blog.didierstevens.com/favicon.ico rel=icon><link href=https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic rel=stylesheet><link href="https://fonts.gstatic.com" rel="dns-prefetch preconnect" crossorigin><style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 584px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url('https://s2-wp-com.cdn.ampproject.org/i/s/s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png') no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+			</style><title>mimikatz: Golden Ticket + DCSync – Didier Stevens</title><link href=https://blog.didierstevens.com/2016/08/12/mimikatz-golden-ticket-dcsync/ rel=canonical><style amp-boilerplate>body{visibility:hidden;-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{visibility:visible;-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript><link href=https://didierstevens-files-wordpress-com.cdn.ampproject.org rel="dns-prefetch preconnect"><link href=https://s2-wp-com.cdn.ampproject.org rel="dns-prefetch preconnect"><link href=https://secure-gravatar-com.cdn.ampproject.org rel="dns-prefetch preconnect"></head><body class>
+
+<header class=amp-wp-header id=#top>
+	<div>
+		<a href=https://blog.didierstevens.com/ target=_top>
+						Didier Stevens		</a>
+	</div>
+</header>
+
+<article class=amp-wp-article>
+
+	<header class=amp-wp-article-header>
+		<h1 class=amp-wp-title>mimikatz: Golden Ticket + DCSync</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img height=24 layout=fixed src=https://secure-gravatar-com.cdn.ampproject.org/i/s/secure.gravatar.com/avatar/b7ca17d338918a19d656f79b0b16057f?s=24&amp;d=mm srcset="https://secure-gravatar-com.cdn.ampproject.org/ii/w39/s/secure.gravatar.com/avatar/b7ca17d338918a19d656f79b0b16057f?s=24&amp;d=mm 39w, https://secure-gravatar-com.cdn.ampproject.org/ii/w56/s/secure.gravatar.com/avatar/b7ca17d338918a19d656f79b0b16057f?s=24&amp;d=mm 56w, https://secure-gravatar-com.cdn.ampproject.org/ii/w82/s/secure.gravatar.com/avatar/b7ca17d338918a19d656f79b0b16057f?s=24&amp;d=mm 82w" width=24></amp-img>
+				<span class="amp-wp-author author vcard">Didier Stevens</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime=2016-08-12T08:04:23+00:00>
+		1 year ago	</time>
+</div>
+	</header>
+
+	
+	<div class=amp-wp-article-content>
+		<p>This blog post aims to provide a bit more information about what <a href=https://twitter.com/gentilkiwi target=_top>Benjamin Delpy</a> wrote in <a href=https://twitter.com/gentilkiwi/status/759472953520160768 target=_top>this tweet</a>:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-092138.png target=_top><amp-img alt=20160805-092138 class="alignnone size-full wp-image-4808 amp-wp-enforced-sizes" height=347 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-092138.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-092138.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-092138.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-092138.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-092138.png?w=768 768w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-092138.png 925w" width=584></amp-img></a></p>
+<p>For this demo I run <a href=http://blog.gentilkiwi.com/mimikatz target=_top>mimikatz</a> as a least privilege, local user on a Windows workstation that is a member of my demo domain. The first step is to generate and use a golden ticket to obtain domain admin rights. The second step is to use dcsync to retrieve hashes from the domain controller.</p>
+<p>As a freshly logged-on local user, I have no tickets:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-090019.png target=_top><amp-img alt=20160805-090019 class="alignnone size-full wp-image-4809 amp-wp-enforced-sizes" height=301 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090019.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090019.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090019.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090019.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090019.png 692w" width=584></amp-img></a></p>
+<p>Then I create a golden ticket for the domain admin:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-090730.png target=_top><amp-img alt=20160805-090730 class="alignnone size-full wp-image-4810 amp-wp-enforced-sizes" height=301 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090730.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090730.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090730.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090730.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090730.png 692w" width=584></amp-img></a></p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-090713.png target=_top><amp-img alt=20160805-090713 class="alignnone size-full wp-image-4811 amp-wp-enforced-sizes" height=301 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090713.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090713.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090713.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090713.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090713.png 692w" width=584></amp-img></a></p>
+<p>And I use it:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-090827.png target=_top><amp-img alt=20160805-090827 class="alignnone size-full wp-image-4812 amp-wp-enforced-sizes" height=301 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090827.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090827.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090827.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090827.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090827.png 692w" width=584></amp-img></a></p>
+<p>Now my least privilege, local user is impersonating the domain administrator:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-090904.png target=_top><amp-img alt=20160805-090904 class="alignnone size-full wp-image-4813 amp-wp-enforced-sizes" height=301 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090904.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090904.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090904.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090904.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090904.png 692w" width=584></amp-img></a></p>
+<p>Then I retrieve the hashes for user user01 from the domain control via the DRSR protocol:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-091005.png target=_top><amp-img alt=20160805-091005 class="alignnone size-full wp-image-4814 amp-wp-enforced-sizes" height=737 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-091005.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-091005.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-091005.png?w=76 76w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-091005.png?w=238 238w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-091005.png 692w" width=584></amp-img></a></p>
+<p>Compare the LM and NTLM hashes with the hashes in <a href=https://blog.didierstevens.com/2016/07/13/practice-ntds-dit-file-part-2-extracting-hashes/ target=_top>this blogpost</a>: they are the same.</p>
+<p>All the arguments (krbtgt, domain, domain admin username, domain SID) needed for the kerberos::golden command can be <a href=https://blog.didierstevens.com/2016/07/13/practice-ntds-dit-file-part-2-extracting-hashes/ target=_top>extracted from the ntds.dit</a> file we obtained. More info on alternative methods to obtain the arguments can be found <a href=http://rycon.hu/papers/goldenticket.html target=_top>here</a>.</p>
+<p><a href=https://twitter.com/gentilkiwi target=_top>@gentilkiwi</a> told me that the domain admin username and RID can also be faked, as long that it is part of the domain admins group. It will work for about 20 minutes without checks.</p>
+<p>If we don’t have the necessary rights (for example domain admin) to query a DC with DRSR, we get an error 5 (access denied):</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-090342.png target=_top><amp-img alt=20160805-090342 class="alignnone size-full wp-image-4816 amp-wp-enforced-sizes" height=301 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090342.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090342.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090342.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090342.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-090342.png 692w" width=584></amp-img></a></p>
+<p>You also get this error when the krbtgt NTLM hash has changed. Command ptt will seem to succeed however:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-121604.png target=_top><amp-img alt=20160805-121604 class="alignnone size-full wp-image-4823 amp-wp-enforced-sizes" height=301 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-121604.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-121604.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-121604.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-121604.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-121604.png 692w" width=584></amp-img></a></p>
+<p>Remember that unless the password for user <a href=http://blogs.microsoft.com/microsoftsecure/2015/02/11/krbtgt-account-password-reset-scripts-now-available-for-customers/ target=_top>krbtgt is changed</a> (which is not a standard practice), the krbtgt NTLM hash never changes. So even very old copies of ntds.dit can be used to recover hashes as described in this method.</p>
+<p>The ticket is stored on file using asn1:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-100151.png target=_top><amp-img alt=20160805-100151 class="alignnone size-full wp-image-4819 amp-wp-enforced-sizes" height=441 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-100151.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-100151.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-100151.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-100151.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-100151.png?w=768 768w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-100151.png 815w" width=584></amp-img></a></p>
+<p>Benjamin has a YARA rule (mimikatz_kirbi_ticket) to detect such tickets:</p>
+<p><a href=https://didierstevens.files.wordpress.com/2016/08/20160805-101142.png target=_top><amp-img alt=20160805-101142 class="alignnone size-full wp-image-4820 amp-wp-enforced-sizes" height=220 sizes="(min-width: 584px) 584px, 100vw" src=https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-101142.png?w=584 srcset="https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-101142.png?w=584 584w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-101142.png?w=128 128w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-101142.png?w=300 300w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-101142.png?w=768 768w, https://didierstevens-files-wordpress-com.cdn.ampproject.org/i/s/didierstevens.files.wordpress.com/2016/08/20160805-101142.png 777w" width=584></amp-img></a></p>
+<p>Unfortunately, the mimikatz I use (version 2.1) <a href=https://twitter.com/gentilkiwi/status/761307312996884480 target=_top>uses another asn1 encoder</a> and the rule no longer works.</p>
+<p>Until Benjamin makes a more generic rule, you can use this updated rule:</p>
+<pre class="brush: plain; title: ; notranslate" title>&#13;
+rule mimikatz_kirbi_ticket&#13;
+{&#13;
+	meta:&#13;
+		description		= &quot;KiRBi ticket for mimikatz&quot;&#13;
+		author			= &quot;Benjamin DELPY (gentilkiwi); Didier Stevens&quot;&#13;
+&#13;
+	strings:&#13;
+		$asn1			= { 76 82 ?? ?? 30 82 ?? ?? a0 03 02 01 05 a1 03 02 01 16 }&#13;
+		$asn1_84		= { 76 84 ?? ?? ?? ?? 30 84 ?? ?? ?? ?? a0 84 00 00 00 03 02 01 05 a1 84 00 00 00 03 02 01 16 }&#13;
+&#13;
+	condition:&#13;
+		$asn1 at 0 or $asn1_84 at 0&#13;
+}&#13;
+</pre>
+<p>This ticket file is created on disk because I use kerberos::golden’s option /ticket:, but if I use option /ptt, the ticket is immediately passed, and not written to disk.</p>
+<p><a href=https://twitter.com/gentilkiwi target=_top>@gentilkiwi</a> also told me that if you impersonate a domain controller account for kerberos::dcsync, then no events are logged.</p>
+	</div>
+
+	<footer class=amp-wp-article-footer>
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href=https://blog.didierstevens.com/category/encryption/ rel="category tag" target=_top>Encryption</a>	</div>
+
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href=https://blog.didierstevens.com/2016/08/12/mimikatz-golden-ticket-dcsync/#comments target=_top>
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class=amp-wp-footer>
+	<div>
+		<h2>Didier Stevens</h2>
+		<p>
+			<a href=https://wordpress.com/?ref=footer_blog target=_top>Blog at WordPress.com.</a>
+		</p>
+		<a class=back-to-top href=#top>Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src=https://pixel.wp.com/b.gif?rand=RANDOM&amp;host=blog.didierstevens.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=264765&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=4805&amp;subd=didierstevens></amp-pixel>
+	<amp-pixel src=https://pixel.wp.com/b.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE40eW5QN0p8M2Y%2FRE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGNrd29%2BSmw0TDhnZmRTK0hlRi9QSGh6bi9GXVhBJWIlZlR5U1JMLU8%2FMkNtblkvY1d1TmEtNmtucXhocHJ5b3NMNyYsVkgvdGVGYVJYMXlLNFZ4XSxWeHFVLDkzdl85UHZrRkQ2fkdlX3VVZCxXUWpvSi1IZG4teUtJXyxbc3FJRk1qVnV0dCV6dktYM0RHcit6fmc3Vm43a2IuSl1UTUVZcXFubi91Y2lrNiswZkRZTEptRlNuLy15K1lTRGNlMjkzcC9sfi5mK1MydTFs></amp-pixel>
+	
+
+
+</body></html>

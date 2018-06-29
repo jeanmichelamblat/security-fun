@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en" class="js" xmlns:og="http://opengraphprotocol.org/schema/">
+<!--<![endif]-->
+<head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8"/>
+    <title>How to Hide DDE Based Attacks in MS Word &#171; Null Byte :: WonderHowTo</title>
+            <link rel="preload" href="https://ads.servebom.com/tmnhead.js" as="script"/>
+    <link rel="preload" href="https://img.wonderhowto.com/images/logos/wonderhowto.logo.shadow.png" as="image" />
+    <link rel="preload" href="https://img.wonderhowto.com/images/logos/wonderhowto.mark.png" as="image" />
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Slabo+27px" as="style"/>
+    <link rel="preload" href="https://img.wonderhowto.com/css/fonts-and-styles.bundle.min.css?v=1103201700" as="style"/>
+    <link rel="preload" href="https://img.wonderhowto.com/js/ready.min.js?v=1103201700" as="script"/>
+    <link rel="preload" href="https://img.wonderhowto.com/img/71/16/63644697957716/0/hide-dde-based-attacks-ms-word.1280x600.jpg" as="image"/>
+        <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" as="script" />
+        <link rel="preload" href="https://img.wonderhowto.com/js/set.min.js?v=1103201700" as="script" />
+        <link rel="preload" href="https://img.wonderhowto.com/js/go.min.js?v=1103201700" as="script" />
+
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=no,viewport-fit=cover"/>
+    <meta property="fb:app_id" content="133643190002681"/>
+    <meta property="og:site_name" content="WonderHowTo"/>
+    <meta content="How to Hide DDE Based Attacks in MS Word" property="og:title" />
+<meta content="https://null-byte.wonderhowto.com/how-to/hide-dde-based-attacks-ms-word-0180784/" property="og:url" />
+<meta content="In our previous article, we learned how to take advantage of a feature, Dynamic Data Exchange (DDE), to run malicious code when a MS Word document is opened. The biggest challenge of this attack is that it requires getting the user to agree to a pop-up prompt. Fortunately, since I posted that article, many new obfuscation techniques have been discovered to make this easier. Today we explore and combine some of them to make the ultimate hidden DDE attack. If you haven&#39;t already read the last article, we explored how to abuse Windows DDE. In simple terms, DDE both executes an application and" property="og:description" />
+<meta content="article" property="og:type" />
+<meta content="https://www.facebook.com/WonderHowTo" property="article:publisher" />
+<meta content="https://img.wonderhowto.com/img/71/16/63644697957716/0/hide-dde-based-attacks-ms-word.1280x600.jpg" property="og:image" />
+<meta content="In our previous article, we learned how to take advantage of a feature, Dynamic Data Exchange (DDE), to run malicious code when a MS Word document is opened. The biggest challenge of this attack is that it requires getting the user to agree to a pop-up prompt. Fortunately, since I posted that article, many new obfuscation techniques have been discovered to make this easier. Today we explore and combine some of them to make the ultimate hidden DDE attack. If you haven&#39;t already read the last article, we explored how to abuse Windows DDE. In simple terms, DDE both executes an application and" name="description" />
+<meta content="summary_large_image" name="twitter:card" />
+<meta content="https://img.wonderhowto.com/img/71/16/63644697957716/0/hide-dde-based-attacks-ms-word.1280x600.jpg" name="twitter:image:src" />
+<meta content="@WonderHowTo" name="twitter:site" />
+<meta content="How to Hide DDE Based Attacks in MS Word" name="twitter:title" />
+<meta content="In our previous article, we learned how to take advantage of a feature, Dynamic Data Exchange (DDE), to run malicious code when a MS Word document is opened. The biggest challenge of this attack is..." name="twitter:description" />
+<meta content="@NullByteWht" name="twitter:creator" />
+<meta content="null-byte.WonderHowTo.com" name="twitter:domain" />
+<link href="https://null-byte.wonderhowto.com/how-to/hide-dde-based-attacks-ms-word-0180784/" rel="canonical" />
+
+    <link rel="alternate" type="application/rss+xml" href="https://null-byte.wonderhowto.com/rss.xml" title="Null Byte RSS Feed"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="https://img.wonderhowto.com/images/favicons/wonderhowto/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://img.wonderhowto.com/images/favicons/wonderhowto/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="https://img.wonderhowto.com/images/favicons/wonderhowto/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://img.wonderhowto.com/images/favicons/wonderhowto/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://img.wonderhowto.com/images/favicons/wonderhowto/manifest.json">
+    <link rel="mask-icon" href="https://img.wonderhowto.com/images/favicons/wonderhowto/safari-pinned-tab.svg" color="#7abd13">
+    <meta name="apple-mobile-web-app-title" content="WonderHowTo">
+    <meta name="application-name" content="WonderHowTo">
+    <meta name="msapplication-TileColor" content="#7abd13">
+    <meta name="msapplication-TileImage" content="https://img.wonderhowto.com/images/favicons/wonderhowto/mstile-144x144.png">
+    <meta name="theme-color" content="#7abd13">
+    <script type="text/javascript">
+        //<![CDATA[
+        window._sf_startpt = (new Date()).getTime();
+        var tmntag = tmntag || {}; tmntag.cmd = tmntag.cmd || [];
+        
+        (function (a) { _q = function () { return a; }; $ = function (f) { typeof f === "function" && a.push(arguments); return $; }; jQuery = $.ready = $; }([]));
+        (function () {
+            // callback format: callback(oElement, sSrc, bSuccess, bFromCache){}
+            window.preloadImage = function (element, src, callback, skipCacheCheck) {
+                var c = callback;
+                if (skipCacheCheck !== true) { var t = document.createElement('img'); t.src = src; if (t.complete || t.width + t.height > 0) { t = null; if (callback) callback(element, src, true, true); return; } t = null; }
+                var i = new Image();
+                i.onload = function () { i.onload = i.onerror = i.onabort = null; if (callback) callback(element, i.src, true, false); i = null; };
+                i.onerror = i.onabort = function () { i = i.onload = i.onerror = i.onabort = null; if (callback) callback(element, src, false, false); i = null; };
+                i.src = src;
+            };
+        })();
+
+        
+            (function (WHT) { WHT.___pOpts = { type: 'article', pageSize: 2, kw: ["null-byte","Null Byte","wonderhowto.com","WonderHowTo","ID0180784","howto","hide","dde","based","attacks","ms","word"], enableCloning: true, cloneOneAtATime: true, maxClone: 10, iForceRefreshIfUnfilledAfterSeconds: 15, iMinAgeForBlankVisiblePlacementRefresh: 6, speedyRefresh: false }; })(window.WHT = window.WHT || {});
+                
+                    (function() { 
+                        try { if (window.document.location.hash === '#loadtest') { return; } } catch (e) { }
+                        var tmnhead = document.createElement('script'); tmnhead.async = true; tmnhead.type = 'text/javascript'; tmnhead.src = 'https://ads.servebom.com/tmnhead.js';
+                        var node = document.getElementsByTagName('script')[0]; node.parentNode.insertBefore(tmnhead, node);
+                    })();
+                
+        document.documentElement.className = '';
+        //]]>
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://img.wonderhowto.com/css/fonts-and-styles.bundle.min.css?v=1103201700" type="text/css" />
+
+</head>
+<body class="theme-wh oversized-header isworld is-world world-name-null-byte subworld controller-article action-index isnotuser hascalltoaction" vocab="http://schema.org/">
+    <header>
+        <div id="header-offset" class="clearfix"><div></div></div>
+        <div id="top-header" class="page-header header-height full-page-width">
+                <img id="header-bg-image" class="header-bg full-page-width immediate" src="https://img.wonderhowto.com/img/71/16/63644697957716/0/hide-dde-based-attacks-ms-word.1280x600.jpg" width="128" height="60" />
+            
+                <div id="header-overlay" class="header-overlay">
+                    <strong class="big-site-logo">
+                    <a class="big-logo" href="https://www.wonderhowto.com/">
+                        <span>WonderHowTo</span>
+                        <img class="immediate" src="https://img.wonderhowto.com/images/logos/wonderhowto.logo.shadow.png" width="309" height="125" />
+                    </a>
+                    </strong>
+
+<strong class="header-tagline sub-site-title">                        <a class="active-world-name" href="https://null-byte.wonderhowto.com/" title="The aspiring white-hat hacker/security awareness playground">
+                            Null Byte
+                        </a>
+</strong>                </div>
+        </div>
+        <div class="init">
+            <!-- Preload header image -->
+            
+            <script type="text/javascript">
+                //<![CDATA[
+                (function (d) {
+                    window.rxMatchDomain = /^http(s)?\:\/\/([a-z0-9-]+)\.((wonderhowto|gadgethacks|invisiverse|foodhacksdaily)\.com|reality\.news|driverless\.id)/i;
+                    var sDN = function (u, s, rx) { rx = rxMatchDomain.exec(u); window['_WHT_' + s + 'sdn'] = rx == null ? '' : rx[1]; window['_WHT_' + s + 'tdn'] = rx == null ? '' : rx[2]; }, bDidJump = false,
+                        sbbg = 'https://img.wonderhowto.com/img/69/07/63620327870894/0/null-byte.b300x140.jpg',
+                        sfbg = 'https://img.wonderhowto.com/img/69/07/63620327870894/0/null-byte.1280x600.jpg';
+                    sDN(document.location, 'c'); sDN(document.referrer, 'r');
+                    window._RefInSite = (_WHT_ctdn === _WHT_rtdn && _WHT_csdn === _WHT_rsdn);
+                    window._RefInNetwork = (_WHT_rtdn !== '');
+                    
+                })(document.getElementById('header-bg-image'));
+                //]]>
+            </script>
+        </div>
+        <div id="top-nav" class="full-page-width immediate">
+            <div style="height:0;">
+                <div class="nav-menu-block">
+                    <div class="shade immediate"></div>
+                    <div class="root-sites"><div>
+	<a href="https://www.wonderhowto.com/" class="wonderhowto_com theme-wh">WonderHowTo</a>
+	<a href="https://www.gadgethacks.com/" class="gadgethacks_com theme-gh">Gadget Hacks</a>
+	<a href="https://next.reality.news/" class="reality_news theme-nr">Next Reality</a>
+	<a href="https://null-byte.wonderhowto.com/" class="sub-null-byte active theme-wh">Null Byte</a>
+</div></div>
+                    <div class="small-logo-mark">
+                        <a class="logo-mark" href="https://www.wonderhowto.com/">
+                            <img class="immediate" src="https://img.wonderhowto.com/images/logos/wonderhowto.mark.png" width="60" height="60" />
+                        </a>
+                    </div>
+                    <div class="top-nav-links navlinks">
+                        <div class="social-cta">
+                            <button type="button" class="fa fa-facebook-square" data-action="follow-facebook"></button>
+                            <button type="button" class="fa fa-twitter-square" data-action="follow-twitter"></button>
+                            <button type="button" class="fa fa-youtube-square" data-action="follow-youtube"></button>
+                            <button type="button" class="fa fa-pinterest-square" data-action="follow-pinterest"></button>
+                        </div>
+                        
+
+        <a href="https://null-byte.wonderhowto.com/forum">Forum</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/metasploit-basics/">Metasploit Basics</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/facebook-hacks/">Facebook Hacks</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/password-cracking/">Password Cracking</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/wi-fi-hacking/">Wi-Fi Hacking</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/linux-basics/">Linux Basics</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/mr-robot-hacks/">Mr. Robot Hacks</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/hack-like-a-pro/">Hack Like a Pro</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/forensics/">Forensics</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/recon/">Recon</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/social-engineering/">Social Engineering</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/networking-basics/">Networking Basics</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/evading-av-software/">Antivirus Evasion</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/spy-tactics/">Spy Tactics</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/mitm/">MitM</a>
+        <a href="https://null-byte.wonderhowto.com/how-to/advice-from-a-hacker/">Advice from a Hacker</a>
+
+                        
+                        
+                    </div>
+                    <div class="menu-buttons">
+                        <button type="button" class="nav-button nav-menu-toggle fa fa-bars">
+                        </button>
+                        <button type="button" class="nav-button nav-search-toggle fa fa-search"></button>
+                    </div>
+                    <form action="https://null-byte.wonderhowto.com/search/" method="GET" class="search-form">
+                        <input type="search" id="searchbox" placeholder="Search" class="search-box" name="searchText" value="">
+                        <button type="submit" class="search-submit"></button>
+                    </form>
+                </div>
+                <div class="center-frame">
+                    <div id="locked-toolbar" class="locked-toolbar-block"></div>
+                </div>
+            </div>
+        </div>
+        <div class="top-nav-init">
+            <script type="text/javascript">
+                (function(){
+                    window.waitForFont = function (fCallback, fontClass, oCallBackScope) {
+                        window.waitForFont.fonts = window.waitForFont.fonts || {};
+                        if (window.waitForFont.fonts[fontClass || 'default']) { if (oCallBackScope) fCallback.apply(oCallBackScope, []); else fCallback(); return; }
+                        var fc = document.createElement('span'), w, to = null,retries=0;
+                        fc.className = 'font-load-check' + (fontClass?' '+fontClass:'');
+                        document.body.appendChild(fc);w = fc.offsetWidth;fc.className += ' check';
+                        var fCheck = function () {
+                            if (to != null) clearTimeout(to); to = null;
+                            if (++retries > 3000) return;
+                            if (fc && fc.offsetWidth != w) { window.waitForFont.fonts[fontClass || 'default'] = true; fc.parentNode.removeChild(fc); fc = null; if(oCallBackScope) fCallback.apply(oCallBackScope,[]); else fCallback(); return; }
+                            to = setTimeout(fCheck, 10);
+                        };
+                        fCheck();
+                    };
+                })();
+                //(function(e,s,a,m,t,T,p) {
+                //    var e = document.getElementById('asw'), s = 42;
+                //    if (e == null) return; a = e.getElementsByTagName('a'); if (a.length == 0) return; a = a[0]; m = s;
+                //    a.style.visibility = 'hidden';
+                //    a.style.fontSize = String(s) + 'px';
+                //    window._fixSWN = function () {
+                //        if (document.getElementById('top-nav').className.indexOf('small-logo') > -1) { a.style.visibility = ''; return; }
+                //        a.style.visibility = ''; t = String(a.innerText); T = '', p = t.indexOf(' ') > -1;
+                //        if (t.length > 18) a.style.letterSpacing = 0;
+                //        if (t.length < 10 || !p) {
+                //            for (var x = 0; x < t.length; x++) T += t.charAt(x) + ((t.charAt(x) == ' ') ? '&nbsp; &nbsp; ' : ' ');
+                //            a.style.wordSpacing = '-0.3em';
+                //            a.style.letterSpacing = 0;
+                //            if (p) { e.style.width = '230px'; e.style.paddingRight = '30px'; }
+                //            a.innerHTML = T.substring(0, T.length - 1);
+                //        }
+                //        while (a.scrollHeight > ((m + 2) * 2) && s > 8) a.style.fontSize = String(--s) + 'px';
+                //    };waitForFont(window._fixSWN);
+                //})();
+            </script>
+        </div>
+    </header>
+
+    <section class="page-wrapper">
+        <div id="main-wrapper" class="clearfix">
+            
+                <div id="ad-top-lock" class="full-page-width">
+                    <div class="center-frame centered clearfix">
+                        <div class="ad-top-container whtaph" data-unit-type="topwide"></div>
+                    </div>
+                </div>
+            <div id="content" class="center-frame">
+                
+
+
+
+<div id="content-container" class="reversed">
+    
+    <div class="right-col outer-article-wrapper">
+        
+
+<div class="article-wrapper at-10 article-id-180784" data-article-id="180784">
+
+    <div class="article-root" itemscope itemtype="http://schema.org/Article">
+
+
+
+        
+<header class="article-headline ">
+    <h1 itemprop="name headline">
+        <a itemprop="url mainEntityOfPage" href="https://null-byte.wonderhowto.com/how-to/hide-dde-based-attacks-ms-word-0180784/">
+                <span class="series-tab"><span class="series">How To</span></span><span class="hide">:</span>
+            Hide DDE Based Attacks in MS Word
+        </a>
+    </h1>
+        <figure class="hide" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+            <img src="https://img.wonderhowto.com/img/71/16/63644697957716/0/hide-dde-based-attacks-ms-word.1280x600.jpg" width="1280" height="600" alt="Hide DDE Based Attacks in MS Word" class="article-cover-image hide" itemprop="url contentUrl" />
+            <meta itemprop="width" content="1280"/>
+            <meta itemprop="height" content="600"/>
+        </figure>
+</header>
+
+        <aside class="meta-stats">
+            <ul>
+                <li class="stat stat-author" itemprop="author" itemscope itemtype="https://schema.org/Person">By <a rel="author" itemprop="url" href="https://creator.wonderhowto.com/hoid/"><strong itemprop="name"><!-- Author Start -->Hoid<!-- Author End --></strong></a></li>
+                <li class="stat stat-timestamp"><i class="fa fa-clock-o"></i>         <time datetime="2017-11-02T12:21:13" pubdate="pubdate" class="localtimestamp" data-published="2017-11-02T12:21:13" data-revised="2017-11-02T12:21:12" data-featured="2017-11-02T12:21:13" title="">Thu 5:21 AM</time>
+    <meta itemprop="dateCreated" content="2017-10-27T17:49:09" />
+    <meta itemprop="datePublished" content="2017-11-02T12:21:13" />
+    <meta itemprop="dateModified" content="2017-11-02T12:21:12" />
+</li>
+                
+                <li class="stat stat-site" style="display:none;" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+
+                    <a href="https://www.wonderhowto.com/" itemprop="url"><strong itemprop="name">WonderHowTo</strong></a>
+                    <meta itemprop="logo" />
+                    <figure class="hide" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                        <img src="https://img.wonderhowto.com/images/logos/wonderhowto.feed.logo.gif" width="144" height="144" alt="WonderHowTo" class="hide" itemprop="url contentUrl" />
+                        <meta itemprop="width" content="144" />
+                        <meta itemprop="height" content="144" />
+                    </figure>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="article-box">
+            <!-- Article Start -->
+            <article class="article-container clearfix centered-article-content" itemprop="articleBody">
+                <section>
+                    
+                    <p>In our <a href="https://null-byte.wonderhowto.com/how-to/execute-code-microsoft-word-document-without-security-warnings-0180495/">previous article</a>, we learned how to take advantage of a feature, Dynamic Data Exchange (DDE), to run malicious code when a MS Word document is opened. The biggest challenge of this attack is that it requires getting the user to agree to a pop-up prompt. Fortunately, since I posted that article, many new obfuscation techniques have been discovered to make this easier. Today we explore and combine some of them to make the ultimate hidden DDE attack.</p><p>If you haven't already read the last article, we explored how to abuse Windows DDE. In simple terms, DDE both executes an application and sends it data. We can use it to open any application, including command prompt, and send it data, or in our case, code to execute. When the user opens our Word document, the code runs on after the user accepts two separate pop-up notifications. This article will explore how to make that process easier by hiding the pop-up windows and disguising the content.</p><aside><blockquote class="center"><p><strong>Don't Miss: <a href="https://null-byte.wonderhowto.com/how-to/use-pupy-linux-remote-access-tool-0180320/">How To Use Pupy, A Linux Remote Access Tool</a></strong></p></blockquote></aside><p>If you haven't read <a href="https://null-byte.wonderhowto.com/how-to/execute-code-microsoft-word-document-without-security-warnings-0180495/">my last article on DDE</a>, I advise you do so before proceeding with this one. Let's dive right in.</p></section>
+<section>
+<h2 class="step"><a id="jump-step1" class="anchor"></a>Step 1: Make the Field Invisible</h2><p>The first and easiest way to obfuscate the DDE field is to turn it invisible. Thanks to <a href="https://twitter.com/WhiskeyS373N" rel="nofollow" target="_blank" >WhiskeyS373N</a> for the idea!</p> <figure><figure class="whtGallery pad-2" id="50170338docPartGal880007" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/51/06/63644703444049/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure><figcaption><em>Image via <a href="https://twitter.com/WhiskeyS373N/status/921457552977784834" rel="nofollow">WhiskeyS373N</a></em></figcaption></figure> <p>With your payload open in Word, find in the top left and click "Insert" then find "Footer" on the right side of the bar, and left click it. Left click "Blank" and you should be taken to a new footer at the bottom of the page.</p> <figure><figure class="whtGallery pad-2" id="30167898docPartGal880009" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/90/93/63644703599045/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> <p>You could now add a field the same way as in the first article, but there's a much easier way. Pressing <em>Ctrl</em> + <em>F9</em> will open a blank field. Then, you simply add your code. Here, I'll be using the standard calc.exe.</p><blockquote class="blockquote"><p>{DDEAUTO c:\\windows\\system32\\cmd.exe "/k calc.exe" }</p></blockquote><p>Once you have your code in place, highlight it and the right click on it. In the middle bottom of the pop-up window, left click on the arrow beside "A" and then left click on the white block, the top leftmost one.</p> <figure><figure class="whtGallery pad-2" id="12890867docPartGal880013" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/94/76/63644703678473/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> <p>The text should now be white and hidden from sight. As you can see below, it's quite invisible to the human eye.</p> <figure><figure class="whtGallery pad-2" id="745760docPartGal880015" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/59/62/63644703921150/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> <p>However, this does not mean it is invisible to the computer, it will still execute when Word is opened. If you don't believe me, try it for yourself. Save the document and reopen it, it will work just the same as if it were in the body of the text.</p><aside><blockquote class="center"><p><strong>Check Out: <a href="https://null-byte.wonderhowto.com/how-to/use-powershell-empire-getting-started-with-post-exploitation-windows-hosts-0178664/">Getting Started with Post-Exploitation of Windows Hosts</a></strong></p></blockquote></aside><p>If you still need to work on the field, then either keep it highlighted to see it or turn it back to black. Just don't forget to set it back to white before sending it to a target.</p> <figure><figure class="whtGallery pad-2" id="26111149docPartGal880019" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/09/51/63644703826065/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> </section>
+<section>
+<h2 class="step"><a id="jump-step2" class="anchor"></a>Step 2: Modify the User Warning</h2><p>As we have discussed before, one of the great things about the DDE based attack is the user never gets an explicit security warning. Unfortunately, they do still get two pop-ups that we need them to say yes to, and there's nothing we can do to change that. Fortunately, since they aren't security warnings, they have less strict policies about changing them, which allows us to modify the second one.</p><p>There's nothing we can do about the first one, but it's already pretty mundane, asking the user to update the document. As we discussed in our first article, the best way to tackle this problem is with social engineering.</p> <figure><figure class="whtGallery pad-2" id="42668238docPartGal880023" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/67/27/63644709052188/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> <p>The second one can cause us some trouble and definitely can draw attention from more security-minded users. It asks them about starting an application, which can tip off the target that something fishy is happening. Interestingly, the text of the pop-up prompt actually incorporates portions of the DDEAUTO command. Specifically, it gets the bit in parentheses just after remote data and at the end where it lists the application.</p> <figure><figure class="whtGallery pad-2" id="31929613docPartGal880025" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/76/98/63644709711091/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> <p>The original SensePost blog suggests that this can be modified.</p><blockquote cite="https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/" class="blockquote has-citation"><p>The second prompt asks the user whether or not they want to execute the specified application, now this can be considered as a security warning since it asks the user to execute "cmd.exe", <strong>however with proper syntax modification it can be hidden.</strong></p>
+ <footer>— <a  href="https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/" rel="nofollow" target="_blank" >Etienne Stalmans, Saif El-Sherei</a></footer></blockquote><p>This naturally peaked the interest of two researchers that came up with two slightly different methods to achieve the same effect. Because the second prompt is reading directly from the DDE command field, we can manipulate it to change the message.</p><aside><blockquote class="center"><p><strong>Check Out: <a href="https://null-byte.wonderhowto.com/how-to/hack-like-pro-windows-cmd-remote-commands-for-aspiring-hacker-part-1-0165538/Windows">CMD Remote Commands for the Aspiring Hacker, Part 1</a></strong></p></blockquote></aside><p>The major difference from the standard method is the directory manipulation and message verbiage added to the second parameter of the DDE command. Ryan Hanson was one of the first to post on Twitter how to do it.</p> <figure><figure class="whtGallery pad-2" id="31778668docPartGal880031" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/01/75/63644706685812/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure><figcaption><em>Image via <a href="https://twitter.com/ryHanson/status/918571894827245568" rel="nofollow">Ryan Hanson</a></em></figcaption></figure> <blockquote class="blockquote"><p>{ DDEAUTO "Microsoft Word" "Document \\..\\..\\..\\..\\Windows\\File.docx\\..\\System32\\cmd.exe" "" }</p></blockquote><p>However, when I attempted to copy and paste it, the code worked, but didn't look quite the same.</p> <figure><figure class="whtGallery pad-2" id="12910592docPartGal880035" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/88/45/63644705961299/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> <p>Mike Czumak had a slightly a different method of solving this problem.</p> <figure><figure class="whtGallery pad-2" id="3211310docPartGal880037" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/18/62/63644706812209/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure><figcaption><em>Image via <a href="https://twitter.com/SecuritySift/status/918563308541829120" rel="nofollow">Mike Czumak‏</a></em></figcaption></figure> <p>I had better luck with getting his example working. I used the following without payload for testing.</p><blockquote class="blockquote"><p>{DDEAUTO "C:\\Programs\\Microsoft\\Office\\MSWord.exe\\..\\..\\..\\..\\windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe $e # " "for security reasons"}</p></blockquote><p>Of the two, this one is more likely to make sense to the average end user and thus fool them. You could also try "Due to Security Settings" instead of "for security reasons" or some other variation. Below, you can see my much less suspicious result.</p> <figure><figure class="whtGallery pad-2" id="65869541docPartGal880041" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/44/19/63644706182801/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> </section>
+<section>
+<h2 class="step"><a id="jump-step3" class="anchor"></a>Step 3: Obfuscate the Payload</h2><p>Etienne Stalmans, one of the two authors of the SensePost blog that started all the DDE rage, discovered a way to actually <a href="http://staaldraad.github.io/2017/10/23/msword-field-codes/" rel="nofollow" target="_blank" >obfuscate the payload</a> itself. The method relies on the clever use of the <a  href="https://support.office.com/en-us/article/Field-codes-Quote-field-26f0d723-07a8-4076-9097-a71459f3d44c?ui=en-US&amp;rs=en-US&amp;ad=US" rel="nofollow" target="_blank" >quote field</a> and the fact that these field codes can be nested.</p><p>You can feed the quote field characters in <a  href="http://www.asciitable.com/" rel="nofollow" target="_blank" >ASCII</a>, and the field it is in will read that given ASCII character. For example, {QUOTE 65 66 67} would return ABC. This allows us to represent our payload as integers, and have word convert it to a string before executing our DDE field. There are many <a  href="http://onlinecalculators.brainmeasures.com/Conversions/StringtoAsciiCalculator.aspx" rel="nofollow" target="_blank" >tools to convert strings to ASCII</a>.</p><p>Another tool we can use is the "set" and "ref" functions, which set a variable and then reference it. For example, if we had this in the field:</p><blockquote class="blockquote"><p>{SET c "{QUOTE 65 65 65 65}"}<br />{SET d "{QUOTE 71 71 71 71}"}<br />{DDE {REF c} {REF d}}</p></blockquote><p>This is what the computer would see before executing the DDE field:</p><blockquote class="blockquote"><p>{DDE "AAAA" "GGGG"}</p></blockquote><p>In this way, we can obfuscate the entire payload, as it will appear as nothing more than a string of numbers to any virus scanning software, until the user says yes to the second prompt. Opening PowerShell would appear like below.</p> <figure><figure class="whtGallery pad-2" id="46411259docPartGal880049" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/90/72/63644718776200/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> <blockquote class="blockquote"><p>{SET C "{QUOTE 67 58 92 92 80 114 111 103 114 97 109 115 92 92 77 105 99 114 111 115 111 102 116 92 92 79 102 102 105 99 101 92 92 77 83 87 111 114 100 46 101 120 101 92 92 46 46 92 92 46 46 92 92 46 46 92 92 46 46 92 92 119 105 110 100 111 119 115 92 92 115 121 115 116 101 109 51 50 92 92 119 105 110 100 111 119 115 112 111 119 101 114 115 104 101 108 108 92 92 118 49 46 48 92 92 112 111 119 101 114 115 104 101 108 108 46 101 120 101} "}</p><p>{DDE {REF C} "a"}</p></blockquote><p>However, Microsoft doesn't update every field when it's opened, and this will not work if the quote does not execute. Luckily, there's something we can do to make sure it updates, by marking it "dirty" in the XML file.</p><p>To do this, save the word document and the find it in your documents. Rename it from a .docx to a .zip then open the zip file. Within the zip file should be the "Word" folder, open it. Now, copy "document.xml" by dragging it to the desktop, and open it for editing.</p><aside><blockquote class="center"><p><strong>Don't Miss: <a href="https://null-byte.wonderhowto.com/how-to/create-obfuscate-virus-inside-microsoft-word-document-0167780/">Create &amp; Obfuscate a Virus Inside of a Microsoft Word Document</a></strong></p></blockquote></aside><p>Now we need to make our links "dirty" by adding the <strong>w:dirty="true"</strong> to each <strong>begin &lt;w:fldChar&gt;</strong>.<br />The easy way to find these is <em>Ctrl</em> + <em>F</em> and search for fldChar. It should look like this when you are done.</p> <figure><figure class="whtGallery pad-2" id="30045194docPartGal880055" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/02/67/63644717981356/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> <blockquote class="blockquote"><p>&lt;w:fldChar w:fldCharType="begin" w:dirty="true"/&gt;</p></blockquote><p>Once that is done, save your edits, and place this file back where you found it. Then you can change the file extension back from .zip to .docx.</p><p>Now, in addition to our obfuscated payload, we also get a much cleaner looking first prompt.</p> <figure><figure class="whtGallery pad-2" id="64661737docPartGal880059" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/75/88/63644718405358/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure></figure> </section>
+<section>
+<h2 class="step"><a id="jump-step4" class="anchor"></a>Step 4: Publisher</h2><p>Now for the coup de grâce when sending a DDE attack document. One of the troubles when sending a Word document over the internet is that it will normally be opened in <a href="https://support.office.com/en-us/article/What-is-Protected-View-d6f09ac7-e6b9-4495-8e43-2bbcdbcb6653" rel="nofollow" target="_blank" >Protected View</a> by default. This just puts another layer of pop-ups between the target and code execution.</p><p>Thanks to research done by Matt Nelson, we can circumvent Protected View and make it that much easier for the target to mess up.</p> <figure><figure class="whtGallery pad-2" id="29653548docPartGal880063" role="group"><div class="gallery-layout"><div class="gallery-layout-container"><figure class="gal-mgb" data-index="0"><img src="https://img.wonderhowto.com/img/92/34/63644715930779/0/hide-dde-based-attacks-ms-word.w1456.jpg" alt="How to Hide DDE Based Attacks in MS Word" width="532" height="532" style="max-width:532px;height:auto;"/></figure></div></div></figure><figcaption><em>Image via <a href="https://twitter.com/enigma0x3/status/921417811037229056" rel="nofollow">Matt Nelson</a></em></figcaption></figure> <p>This is as simple as opening Publisher, and going to File, then import Word Document. Once you have it saved as a .pub file, you can send it to the target and it should work just like a normal Word doc, but without triggering Protected View.</p></section>
+<section>
+<h2 class="step"><a id="jump-step5" class="anchor"></a>Step 5: Putting It All Together &amp; Defending</h2><p>Now, we can combine all of these obfuscation methods to make make the ultimate super sneaky DDE attack. By turning our payload into ASCII, we avoid most anti-virus tools. We then trick the user by editing the prompts they get, and even turn the DDE field inviable so they can't easily find it by inspecting the document. Lastly, we take away their last saving grace, Protected View, by using Publisher to slip past.</p><aside><blockquote class="center"><p><strong>Check Out: <a href="https://null-byte.wonderhowto.com/how-to/exploit-dde-microsoft-office-defend-against-dde-based-attacks-0180706/">Exploit DDE in Microsoft Office &amp; Defend Against DDE Based Attacks</a></strong></p></blockquote></aside><p>Combining these methods have made this exploit significantly more dangerous and much more likely to trick the average user. The flexibility of this attack, combined with the modular payload and steep consequences for a user clicking "OK" on the wrong prompt make this a potent tool for delivering malware.</p><p>So how can you defend against this sort of attack? The key lies in your observation. When opening files, look for any unusual behaviors and be wary of giving permissions to processes you don't understand or aren't familiar. There's not really much you can do other than being paranoid whenever you open a document from an untrusted source. Just remember the golden rule: always say NO to unexpected pop-us and prompts.</p><p>Thanks for reading! If you have any questions, you can ask here or <a href="https://twitter.com/The_Hoid" rel="nofollow" target="_blank" >on Twitter</a>.</p><ul><li>Follow Null Byte on <a  href="https://twitter.com/nullbytewht" rel="nofollow" target="_blank" >Twitter</a> and <a  href="https://plus.google.com/106653382407425784977" rel="nofollow" target="_blank" >Google+</a></li> <li>Follow WonderHowTo on <a  href="https://facebook.com/wonderhowto/" rel="nofollow" target="_blank" >Facebook</a>, <a  href="http://twitter.com/wonderhowto/" rel="nofollow" target="_blank" >Twitter</a>, <a  href="http://pinterest.com/wonderhowto/" rel="nofollow" target="_blank" >Pinterest</a>, and <a  href="https://plus.google.com/+wonderhowto" rel="nofollow" target="_blank" >Google+</a></li> </ul><p>Screenshots &amp; Cover Photo by Hoid/Null Byte</p> 
+                </section>
+                <footer class="clearfix mgb"></footer>
+            </article>
+            <!-- Article End -->
+
+                <aside class="related-scroller">
+                    <h2 class="subsections-heading text-only"><span class="centered-article-content">Related</span></h2>
+                    
+    <div class="article-list article-list-mode1 hscrollable"  data-margin-between-items="0" data-filter-sort="0" data-display-mode="1" data-prevpagekey="" data-activepagekey="QXJ0aWNsZUxpc3RLZXl8MHwxMzB8MHwxMTI0fHwxfDE4MDc4NHwwfDB8MXwwfA==" data-nextpagekey="" data-prevpagepath="" data-activepagepath="" data-nextpagepath="" data-title-base="Related" data-page-number="1">
+                <ul>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="167780">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/create-obfuscate-virus-inside-microsoft-word-document-0167780/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/76/96/63588548256054/0/create-obfuscate-virus-inside-microsoft-word-document.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Create &amp; Obfuscate a Virus Inside of a Microsoft Word Document
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180706">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/exploit-dde-microsoft-office-defend-against-dde-based-attacks-0180706/" class="has-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/60/81/63645227118790/0/exploit-dde-microsoft-office-defend-against-dde-based-attacks.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Exploit DDE in Microsoft Office &amp; Defend Against DDE-Based Attacks
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="154998">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/disable-remove-recent-document-list-ms-word-excel-0154998/" class="has-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/96/13/63535878980694/0/disable-remove-recent-document-list-ms-word-excel.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Disable or Remove Recent Document List in MS Word or Excel
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="155146">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/make-digital-signature-ms-word-0155146/" class="has-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/74/77/63536668001655/0/make-digital-signature-ms-word.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Make Digital Signature in MS Word
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="155709">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/create-3d-effect-object-ms-word-0155709/" class="has-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/56/92/63538819952223/0/create-3d-effect-object-ms-word.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Create 3D Effect Object in MS Word
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="155016">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/create-watermark-ms-word-document-0155016/" class="has-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/59/48/63536049214132/0/create-watermark-ms-word-document.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Create a Watermark MS Word Document
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="154999">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/customize-quick-access-toolbar-and-delete-mini-toolbar-ms-word-2007-0154999/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/88/88/63535882377616/0/customize-quick-access-toolbar-and-delete-mini-toolbar-ms-word-2007.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Customize Quick Access Toolbar and Delete Mini Toolbar in MS Word 2007
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="154629">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/protect-ms-word-document-with-password-0154629/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/74/34/63534246702408/0/protect-ms-word-document-with-password.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Protect MS Word Document with Password
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="141820">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/add-calculating-expression-ms-word-2007-0141820/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/33/09/63495609647734/0/add-calculating-expression-ms-word-2007.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Add Calculating Expression in MS Word 2007
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180495">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/execute-code-microsoft-word-document-without-security-warnings-0180495/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/45/38/63643381837059/0/execute-code-microsoft-word-document-without-security-warnings.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Execute Code in a Microsoft Word Document Without Security Warnings
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="168801">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/advanced-system-attacks-total-guide-0168801/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/70/24/63591461630876/0/advanced-system-attacks-total-guide.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Advanced System Attacks - Total Guide
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="147790">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/customize-quick-access-toolbar-ms-word-0147790/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/02/73/63508609294031/0/customize-quick-access-toolbar-ms-word.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Customize Quick Access Toolbar in MS Word
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="115617">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/news/ultimate-scrabble-word-list-resource-0115617/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/00/63/63410929812613/0/ultimate-scrabble-word-list-resource.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    The Ultimate SCRABBLE Word List Resource
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="132542">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-wpa-wifi-passwords-by-cracking-wps-pin-0132542/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/79/18/63461292854393/0/hack-wpa-wifi-passwords-by-cracking-wps-pin.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Hack WPA WiFi Passwords by Cracking the WPS PIN
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="138218">
+        <h3 class="article-headline">
+            <a href="https://politicsdissected.wonderhowto.com/news/fox-news-latest-attack-obama-0138218/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/12/06/63478412546816/0/fox-news-latest-attack-obama.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Fox News Latest Attack on Obama
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="-314513">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/use-spellcheck-thesaurus-autocorrect-ms-word-2007-314513/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/00/49/63402092553681/0/use-spellcheck-thesaurus-autocorrect-ms-word-2007.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Use Spellcheck/Thesaurus/AutoCorrect in MS Word 2007
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="148571">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-like-pro-spear-phish-with-social-engineering-toolkit-set-backtrack-0148571/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/46/85/63515017516029/0/hack-like-pro-spear-phish-with-social-engineering-toolkit-set-backtrack.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Hack Like a Pro</span><span class="hide">:</span>
+                    How to Spear Phish with the Social Engineering Toolkit (SET) in BackTrack
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="167591">
+        <h3 class="article-headline">
+            <a href="https://math.wonderhowto.com/how-to/solve-word-problems-involving-volume-pyramid-0167591/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/72/08/63587666195939/0/solve-word-problems-involving-volume-pyramid.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Solve Word Problems Involving Volume of a Pyramid
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="-178603">
+        <h3 class="article-headline">
+            <a href="https://makeup.wonderhowto.com/how-to/label-your-eyeshadow-palette-with-ms-word-178603/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/22/21/63475376083627/0/label-your-eyeshadow-palette-with-ms-word.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Label your eyeshadow palette with MS Word
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="-361463">
+        <h3 class="article-headline">
+            <a href="https://ms-office.wonderhowto.com/how-to/use-templates-ms-word-361463/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/29/83/63475363532666/0/use-templates-ms-word.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Use templates in MS Word
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="135356">
+        <h3 class="article-headline">
+            <a href="https://politicsdissected.wonderhowto.com/news/revealed-hundreds-words-avoid-using-online-0135356/" class="no-video no-image">
+
+
+                <span class="text ">
+                        <span class="series">Revealed</span><span class="hide">:</span>
+                    Hundreds of words to avoid using online
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="132761">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/generate-word-lists-with-python-for-dictionary-attacks-0132761/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/50/37/63462150158678/0/generate-word-lists-with-python-for-dictionary-attacks.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Generate Word-Lists with Python for Dictionary Attacks
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="131664">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/how-to/scrabble-challenge-18-can-you-win-scrabble-rack-attack-0131664/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/09/41/63458426368145/0/scrabble-challenge-18-can-you-win-scrabble-rack-attack.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Scrabble Challenge #18</span><span class="hide">:</span>
+                    Can You Win at Scrabble Rack Attack?
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="128039">
+        <h3 class="article-headline">
+            <a href="https://indie-games-ichiban.wonderhowto.com/news/friday-indie-game-review-roundup-turn-based-strategy-steam-0128039/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/64/70/63443320141498/0/friday-indie-game-review-roundup-turn-based-strategy-steam.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Friday Indie Game Review Roundup: Turn-Based Strategy on Steam
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="130606">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/cross-site-scripting-xss-attacks-sneak-into-unprotected-websites-plus-block-them-0130606/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/56/06/63454195473568/0/cross-site-scripting-xss-attacks-sneak-into-unprotected-websites-plus-block-them.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    How Cross-Site Scripting (XSS) Attacks Sneak into Unprotected Websites (Plus: How to Block Them)
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="129821">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/how-to/scrabble-challenge-7-can-you-solve-bingo-parallel-play-for-150-points-0129821/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/04/04/63451688753390/0/scrabble-challenge-7-can-you-solve-bingo-parallel-play-for-150-points.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Scrabble Challenge #7</span><span class="hide">:</span>
+                    Can You Solve This Bingo Parallel Play for 150+ Points?
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="114463">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/news/scrabble-hits-casinos-0114463/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/07/13/63405120235843/0/scrabble-hits-casinos.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    SCRABBLE Hits Casinos
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="133962">
+        <h3 class="article-headline">
+            <a href="https://politicsdissected.wonderhowto.com/news/afghan-shooting-raises-questions-about-us-course-country-0133962/" class="no-video no-image">
+
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Afghan shooting raises questions about US course in country
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="131980">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/how-to/scrabble-challenge-19-would-you-rather-play-phoney-phoney-looking-word-0131980/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/69/52/63459030192888/0/scrabble-challenge-19-would-you-rather-play-phoney-phoney-looking-word.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Scrabble Challenge #19</span><span class="hide">:</span>
+                    Would You Rather Play a Phoney or a Phoney-Looking Word?
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="126425">
+        <h3 class="article-headline">
+            <a href="https://know-your-body.wonderhowto.com/news/brief-summary-heart-attack-0126425/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/81/51/63437152624943/0/brief-summary-heart-attack.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    A Brief Summary on heart attack
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="116930">
+        <h3 class="article-headline">
+            <a href="https://culvercitykarate.wonderhowto.com/news/kizeme-0116930/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/61/61/63411863474645/0/kizeme.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Kizeme
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="115329">
+        <h3 class="article-headline">
+            <a href="https://movieposters.wonderhowto.com/news/attack-50-foot-woman-1958-0115329/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/87/96/63407377461524/0/attack-50-foot-woman-1958.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Attack of the 50 Foot Woman 1958
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="131259">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/news/goodnight-byte-coding-web-based-password-cracker-python-0131259/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/99/58/63456094953483/0/goodnight-byte-coding-web-based-password-cracker-python.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Goodnight Byte</span><span class="hide">:</span>
+                    Coding a Web-Based Password Cracker in Python
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="133573">
+        <h3 class="article-headline">
+            <a href="https://politicsdissected.wonderhowto.com/news/obama-supports-drone-attacks-0133573/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/54/77/63465721642704/0/obama-supports-drone-attacks.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Obama supports drone attacks
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="117226">
+        <h3 class="article-headline">
+            <a href="https://microsoft-office.wonderhowto.com/news/ms-office-2011-for-mac-beta-preview-0117226/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/42/92/63412474971743/0/ms-office-2011-for-mac-beta-preview.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    MS Office 2011 for Mac Beta Preview
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="130005">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/news/scrabble-bingo-day-feazing-0130005/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/93/55/63452719747370/0/scrabble-bingo-day-feazing.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Scrabble Bingo of the Day</span><span class="hide">:</span>
+                    FEAZING
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="129553">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/news/news-alert-scrabble-makes-you-smarter-0129553/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/90/79/63449947684523/0/news-alert-scrabble-makes-you-smarter.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News Alert</span><span class="hide">:</span>
+                    Scrabble Makes You Smarter
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="130891">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/how-to/scrabble-challenge-14-which-variant-word-wins-game-and-which-doesnt-0130891/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/49/62/63456005160483/0/scrabble-challenge-14-which-variant-word-wins-game-and-which-doesnt.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Scrabble Challenge #14</span><span class="hide">:</span>
+                    Which Variant Word Wins the Game (And Which Doesn&#39;t)?
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="130995">
+        <h3 class="article-headline">
+            <a href="https://scrabble.wonderhowto.com/news/scrabble-beats-words-with-friends-nook-color-0130995/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/84/85/63455157914135/0/scrabble-beats-words-with-friends-nook-color.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Scrabble Beats Words with Friends to NOOK Color
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="116766">
+        <h3 class="article-headline">
+            <a href="https://microsoft-office.wonderhowto.com/news/easily-access-ms-tutorials-microsofts-desktop-player-0116766/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/09/52/63411619904206/0/easily-access-ms-tutorials-microsofts-desktop-player.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Easily Access MS Tutorials</span><span class="hide">:</span>
+                    Microsoft&#39;s Desktop Player
+                </span>
+            </a>
+        </h3>
+    </li>
+                                    </ul>
+    </div>
+
+
+
+
+    
+
+    
+
+
+    
+
+
+
+                </aside>
+        </div>
+    </div>
+
+        <div class="comments-box article-id-180784" data-article-id="180784">
+            <div class="responses-wrapper clearfix">
+
+                    <div class="centered-article-content">
+                        
+                        
+                    </div>
+
+                <h2 class="subsections-heading response-count" data-response-count="0">
+                    <span class="centered-article-content">
+                        Be the First to Comment
+                    </span>
+                </h2>
+
+                <div class="responses" >
+                </div>
+
+            </div>
+
+            
+                <div class="user-comment-editor">
+                    <h2 class="subsections-heading hide comment-editor-header">
+                        <span class="centered-article-content">Share Your Thoughts</span>
+                    </h2>
+
+                    
+                    
+
+
+    <div class="share-widget clearfix notOnInit" data-world-topic-id="0">
+        <div class="share-widget-input clearfix">
+            <div class="article-box">
+
+                    <aside class="author-hero">
+                        <div class="centered-article-content clearfix">
+                                <span rel="nofollow" class="image"><img src="https://img.wonderhowto.com/img/00/00/00/0/user-default.135x180.jpg" width="23" height="30" /></span>
+                                <span class="text">
+                                    <a href="javascript://" rel="nofollow" class="name">You</a>
+                                    <small>Login to Comment</small>
+                                </span>
+                        </div>
+                    </aside>
+
+                <div class="centered-article-content clearfix">
+                    <div class="share-pre-init clearfix">
+                            <div class="wteParagraph textholder pos-rel">
+                                <span class="txt-clr-lighter">
+                                    Click to share your thoughts
+                                </span>
+                            </div>
+                            <textarea placeholder="Click to leave a response" class="comment-input hide"></textarea>
+                    </div>
+                    <div class="sharePrompt">
+                        <form class="share-form">
+                            <div class="editorBlocks"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons clearfix centered-article-content"></div>
+        </div>
+
+        <div class="share-widget-tips" style="display: none;">
+
+        </div>
+    </div>
+
+                </div>
+        </div>
+</div>
+
+
+
+
+    </div>
+
+        <div class="left-col">
+            
+<aside class="top-ad-anchor whtaph" data-unit-type="bigbox">
+    
+</aside>
+
+<div class="content-nav">
+    
+
+    
+
+    <div class="lockable-anchor">
+        <div class="lockable-region" data-lockable-top-offset="0" data-lock-edge="bottom">
+            
+
+            <div class="list-toggler subtabs">
+                <ul>
+                    <li><span class="right" data-filter-sort="12"><i class="fa fa-certificate"></i> Hot</span></li>
+                    <li><span class="left active" data-filter-sort="15"><i class="fa fa-clock-o"></i> Latest</span></li>
+                    
+                </ul>
+            </div>
+
+            <div class="lockable-fill-vertical-no"><div>
+                
+
+
+
+                
+
+                
+    <div class="article-list article-list-mode1"  data-filter-sort="15" data-display-mode="1" data-prevpagekey="" data-activepagekey="QXJ0aWNsZUxpc3RLZXl8MTV8MTMwfDB8MTEyNHx8MXwxODA3ODR8MHwxfDF8MHw=" data-nextpagekey="QXJ0aWNsZUxpc3RLZXl8MTV8MTMwfDB8MTEyNHx8MnwxODA3ODR8MHwxfDF8MHw=" data-prevpagepath="" data-activepagepath="https://null-byte.wonderhowto.com/" data-nextpagepath="https://null-byte.wonderhowto.com/" data-title-base="Null Byte Features" data-page-number="1">
+                <ul>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180076">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/select-field-tested-kali-linux-compatible-wireless-adapter-0180076/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/23/55/63644603954279/0/select-field-tested-kali-linux-compatible-wireless-adapter.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Select a Field-Tested Kali Linux Compatible Wireless Adapter
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="176182">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/set-up-headless-raspberry-pi-hacking-platform-running-kali-linux-0176182/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/48/84/63624571565453/0/set-up-headless-raspberry-pi-hacking-platform-running-kali-linux.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Set Up a Headless Raspberry Pi Hacking Platform Running Kali Linux
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="176134">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-wi-fi-capturing-wpa-passwords-by-targeting-users-with-fluxion-attack-0176134/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/71/59/63622852293595/0/hack-wi-fi-capturing-wpa-passwords-by-targeting-users-with-fluxion-attack.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How to Hack Wi-Fi</span><span class="hide">:</span>
+                    Capturing WPA Passwords by Targeting Users with a Fluxion Attack
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="139532">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/4-ways-crack-facebook-password-protect-yourself-from-them-0139532/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/74/07/63491554359510/0/4-ways-crack-facebook-password-protect-yourself-from-them.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    4 Ways to Crack a Facebook Password &amp; How to Protect Yourself from Them
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="173829">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/mac-for-hackers-get-your-mac-ready-for-hacking-0173829/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/52/85/63609624997540/0/mac-for-hackers-get-your-mac-ready-for-hacking.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">Mac for Hackers</span><span class="hide">:</span>
+                    How to Get Your Mac Ready for Hacking
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="174674">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/intro-vim-unix-text-editor-every-hacker-should-be-familiar-with-0174674/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/68/85/63613872671921/0/intro-vim-unix-text-editor-every-hacker-should-be-familiar-with.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    An Intro to Vim, the Unix Text Editor Every Hacker Should Be Familiar With
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180240">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/simplify-payload-creation-with-msfpc-0180240/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/57/84/63642202853600/0/simplify-payload-creation-with-msfpc.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Simplify Payload Creation with MSFPC
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180816">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/take-control-mouse-and-keyboard-python-0180816/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/26/20/63644985745138/0/take-control-mouse-and-keyboard-python.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Take Control of the Mouse and Keyboard in Python
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="165154">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-wi-fi-get-anyones-wi-fi-password-without-cracking-using-wifiphisher-0165154/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/45/49/63580412049218/0/hack-wi-fi-get-anyones-wi-fi-password-without-cracking-using-wifiphisher.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How to Hack Wi-Fi</span><span class="hide">:</span>
+                    Get Anyone&#39;s Wi-Fi Password Without Cracking Using Wifiphisher
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180706">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/exploit-dde-microsoft-office-defend-against-dde-based-attacks-0180706/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/60/81/63645227118790/0/exploit-dde-microsoft-office-defend-against-dde-based-attacks.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Exploit DDE in Microsoft Office &amp; Defend Against DDE-Based Attacks
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="142514">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-like-pro-secretly-hack-into-switch-on-watch-anyones-webcam-remotely-0142514/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/76/71/63497044701306/0/hack-like-pro-secretly-hack-into-switch-watch-anyones-webcam-remotely.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Hack Like a Pro</span><span class="hide">:</span>
+                    How to Secretly Hack Into, Switch On, &amp; Watch Anyone&#39;s Webcam Remotely
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="179607">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/turn-any-phone-into-hacking-super-weapon-with-sonic-0179607/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/20/66/63640351641472/0/turn-any-phone-into-hacking-super-weapon-with-sonic.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Turn Any Phone into a Hacking Super Weapon with the Sonic
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180671">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/news/hak5-just-released-packet-squirrel-0180671/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/48/91/63644976870685/0/hak5-just-released-packet-squirrel.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Hak5 Just Released the Packet Squirrel
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180418">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/use-usb-rubber-ducky-disable-antivirus-software-install-ransomware-0180418/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/48/08/63643609934753/0/use-usb-rubber-ducky-disable-antivirus-software-install-ransomware.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Use the USB Rubber Ducky to Disable Antivirus Software &amp; Install Ransomware
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="160161">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-android-using-kali-remotely-0160161/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/28/55/63559120258311/0/hack-android-using-kali-remotely.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Hack Android Using Kali (Remotely)
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="149638">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/get-unlimited-free-trials-using-real-fake-credit-card-number-0149638/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/96/76/63521171811895/0/get-unlimited-free-trials-using-real-fake-credit-card-number.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Get Unlimited Free Trials Using a &quot;Real&quot; Fake Credit Card Number
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="160151">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-windows-7-become-admin-0160151/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/91/69/63559050599992/0/hack-windows-7-become-admin.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Hack Windows 7 (Become Admin)
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="148366">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-wi-fi-cracking-wpa2-psk-passwords-using-aircrack-ng-0148366/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/36/65/63513198971448/0/hack-wi-fi-cracking-wpa2-psk-passwords-using-aircrack-ng.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How to Hack Wi-Fi</span><span class="hide">:</span>
+                    Cracking WPA2-PSK Passwords Using Aircrack-Ng
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="162253">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/install-kali-live-usb-drive-with-persistence-optional-0162253/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/52/49/63568761325555/0/install-kali-live-usb-drive-with-persistence-optional.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Install Kali Live on a USB Drive (With Persistence, Optional)
+                </span>
+            </a>
+        </h3>
+    </li>
+                                            <li class="pad-small"><div class="paging next-only"> <a class="align-right raised-btn" href="https://null-byte.wonderhowto.com/">All Features <span class="fa fa-chevron-right"></span></a> </div></li>
+                </ul>
+    </div>
+
+
+
+
+    
+
+    
+
+
+    
+
+
+
+                
+    <div class="article-list article-list-mode1"  data-filter-sort="12" data-display-mode="1" data-prevpagekey="" data-activepagekey="QXJ0aWNsZUxpc3RLZXl8MTJ8MTMwfDB8MTEyNHx8MXwxODA3ODR8MHwxfDF8MHw=" data-nextpagekey="QXJ0aWNsZUxpc3RLZXl8MTJ8MTMwfDB8MTEyNHx8MnwxODA3ODR8MHwxfDF8MHw=" data-prevpagepath="" data-activepagepath="https://null-byte.wonderhowto.com/hot/" data-nextpagepath="https://null-byte.wonderhowto.com/hot/2/" data-title-base="Hot Null Byte Posts" data-page-number="1">
+                <ul>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180240">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/simplify-payload-creation-with-msfpc-0180240/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/57/84/63642202853600/0/simplify-payload-creation-with-msfpc.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Simplify Payload Creation with MSFPC
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180816">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/take-control-mouse-and-keyboard-python-0180816/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/26/20/63644985745138/0/take-control-mouse-and-keyboard-python.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Take Control of the Mouse and Keyboard in Python
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="139532">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/4-ways-crack-facebook-password-protect-yourself-from-them-0139532/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/74/07/63491554359510/0/4-ways-crack-facebook-password-protect-yourself-from-them.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    4 Ways to Crack a Facebook Password &amp; How to Protect Yourself from Them
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180076">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/select-field-tested-kali-linux-compatible-wireless-adapter-0180076/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/23/55/63644603954279/0/select-field-tested-kali-linux-compatible-wireless-adapter.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Select a Field-Tested Kali Linux Compatible Wireless Adapter
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="165154">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-wi-fi-get-anyones-wi-fi-password-without-cracking-using-wifiphisher-0165154/" class="no-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/45/49/63580412049218/0/hack-wi-fi-get-anyones-wi-fi-password-without-cracking-using-wifiphisher.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How to Hack Wi-Fi</span><span class="hide">:</span>
+                    Get Anyone&#39;s Wi-Fi Password Without Cracking Using Wifiphisher
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180706">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/exploit-dde-microsoft-office-defend-against-dde-based-attacks-0180706/" class="has-video ">
+
+                    <span class="img-crop">
+                        <img src="https://img.wonderhowto.com/img/60/81/63645227118790/0/exploit-dde-microsoft-office-defend-against-dde-based-attacks.300x140.jpg" alt="" width="300" height="140" />                    </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Exploit DDE in Microsoft Office &amp; Defend Against DDE-Based Attacks
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="142514">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-like-pro-secretly-hack-into-switch-on-watch-anyones-webcam-remotely-0142514/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/76/71/63497044701306/0/hack-like-pro-secretly-hack-into-switch-watch-anyones-webcam-remotely.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">Hack Like a Pro</span><span class="hide">:</span>
+                    How to Secretly Hack Into, Switch On, &amp; Watch Anyone&#39;s Webcam Remotely
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="179607">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/turn-any-phone-into-hacking-super-weapon-with-sonic-0179607/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/20/66/63640351641472/0/turn-any-phone-into-hacking-super-weapon-with-sonic.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Turn Any Phone into a Hacking Super Weapon with the Sonic
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180671">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/news/hak5-just-released-packet-squirrel-0180671/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/48/91/63644976870685/0/hak5-just-released-packet-squirrel.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">News</span><span class="hide">:</span>
+                    Hak5 Just Released the Packet Squirrel
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="180418">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/use-usb-rubber-ducky-disable-antivirus-software-install-ransomware-0180418/" class="has-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/48/08/63643609934753/0/use-usb-rubber-ducky-disable-antivirus-software-install-ransomware.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Use the USB Rubber Ducky to Disable Antivirus Software &amp; Install Ransomware
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="160161">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-android-using-kali-remotely-0160161/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/28/55/63559120258311/0/hack-android-using-kali-remotely.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Hack Android Using Kali (Remotely)
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="149638">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/get-unlimited-free-trials-using-real-fake-credit-card-number-0149638/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/96/76/63521171811895/0/get-unlimited-free-trials-using-real-fake-credit-card-number.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Get Unlimited Free Trials Using a &quot;Real&quot; Fake Credit Card Number
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="160151">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-windows-7-become-admin-0160151/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/91/69/63559050599992/0/hack-windows-7-become-admin.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Hack Windows 7 (Become Admin)
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="148366">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-wi-fi-cracking-wpa2-psk-passwords-using-aircrack-ng-0148366/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/36/65/63513198971448/0/hack-wi-fi-cracking-wpa2-psk-passwords-using-aircrack-ng.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How to Hack Wi-Fi</span><span class="hide">:</span>
+                    Cracking WPA2-PSK Passwords Using Aircrack-Ng
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="176134">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/hack-wi-fi-capturing-wpa-passwords-by-targeting-users-with-fluxion-attack-0176134/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/71/59/63622852293595/0/hack-wi-fi-capturing-wpa-passwords-by-targeting-users-with-fluxion-attack.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How to Hack Wi-Fi</span><span class="hide">:</span>
+                    Capturing WPA Passwords by Targeting Users with a Fluxion Attack
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="162253">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/install-kali-live-usb-drive-with-persistence-optional-0162253/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/52/49/63568761325555/0/install-kali-live-usb-drive-with-persistence-optional.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Install Kali Live on a USB Drive (With Persistence, Optional)
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="167535">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/successfully-hack-website-2016-0167535/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/10/98/63587456159510/0/successfully-hack-website-2016.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Successfully Hack a Website in 2016!
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="139261">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/crack-wi-fi-passwords-with-your-android-phone-and-get-free-internet-0139261/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/35/11/63483669455533/0/crack-wi-fi-passwords-with-your-android-phone-and-get-free-internet.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Crack Wi-Fi Passwords with Your Android Phone and Get Free Internet!
+                </span>
+            </a>
+        </h3>
+    </li>
+    <li class="article-item item snappable img-crop-zoom-rotate " data-article-id="176182">
+        <h3 class="article-headline">
+            <a href="https://null-byte.wonderhowto.com/how-to/set-up-headless-raspberry-pi-hacking-platform-running-kali-linux-0176182/" class="no-video ">
+
+                    <span class="img-crop">
+<img class="lazy-img" src="https://img.wonderhowto.com/images/trans.gif" data-src="https://img.wonderhowto.com/img/48/84/63624571565453/0/set-up-headless-raspberry-pi-hacking-platform-running-kali-linux.300x140.jpg" alt="" width="300" height="140" />                                            </span>
+
+                <span class="text ">
+                        <span class="series">How To</span><span class="hide">:</span>
+                    Set Up a Headless Raspberry Pi Hacking Platform Running Kali Linux
+                </span>
+            </a>
+        </h3>
+    </li>
+                                            <li class="pad-small"><div class="paging next-only"> <a class="align-right raised-btn" href="https://null-byte.wonderhowto.com/hot/">All Hot  Posts <span class="fa fa-chevron-right"></span></a> </div></li>
+                </ul>
+    </div>
+
+
+
+
+    
+
+    
+
+
+    
+
+
+            </div></div>
+
+            <div class="footer">
+                © 2017 WonderHowTo, Inc
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+</div>
+
+
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div id="sidebars">
+            
+            
+
+<div class="sidebar sidebar-nav-menu">
+    <div class="center-frame">
+        <div class="menu">
+            <div class="sidebar-pad">
+                <ul>
+                    
+    <li class="active-world-menu">
+        
+
+        <ul class="active-world-sections">
+                <li><span class="menu-section-heading">Collections</span></li>
+                    <li><a href="https://null-byte.wonderhowto.com/collection/hack-like-a-pro/">Hack Like a Pro</a></li>
+                    <li><a href="https://null-byte.wonderhowto.com/collection/mac-for-hackers/">Mac for Hackers</a></li>
+                    <li><a href="https://null-byte.wonderhowto.com/collection/rogue-devices/">Rogue Devices</a></li>
+                    <li><a href="https://null-byte.wonderhowto.com/collection/usb-rubber-ducky/">USB Rubber Ducky</a></li>
+            <li>
+                <span class="menu-section-heading">Sections</span>
+                <ul class="sub-menu">
+                    <li><a href="https://null-byte.wonderhowto.com/how-to/"><strong>Null Byte How-Tos</strong></a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/tor/">Tor</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/wi-fi-hacking/">Wi-Fi Hacking</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/recon/">Recon</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/raspberry-pi/">Raspberry Pi</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/python-training/">Python Training</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/facebook-hacks/">Facebook Hacks</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/security-oriented-c/">Security-Oriented C</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/snort/">Snort</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/forensics/">Forensics</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/hack-like-a-pro/">Hack Like a Pro</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/metasploit-basics/">Metasploit Basics</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/windows-7-hacking/">Windows 7 Hacking</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/dionaea/">Dionaea</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/electricity-basics/">Electricity Basics</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/linux-basics/">Linux Basics</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/hacking-web-apps/">Hacking Web Apps</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/evading-av-software/">Evading AV Software</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/networking-basics/">Networking Basics</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/android/">Android</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/advice-from-a-hacker/">Advice from a Hacker</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/mr-robot-hacks/">Mr. Robot Hacks</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/db-hacking/">DB Hacking</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/bluetooth-hacking/">Bluetooth Hacking</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/c-c-for-hackers/">C/C++ for Hackers</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/exploit-building/">Exploit Building</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/mitm/">MitM</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/password-cracking/">Password Cracking</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/spy-tactics/">Spy Tactics</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/attack-on-stack/">Attack on Stack</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/scripting/">Scripting</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/kali-forensics/">Kali Forensics</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/shodan/">Shodan</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/social-engineering/">Social Engineering</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/listeners/">Listeners</a></li>
+                            <li><a href="https://null-byte.wonderhowto.com/how-to/uncategorized/">Everything Else</a></li>
+                </ul>
+            </li>
+            <li>
+                <span class="menu-section-heading">News</span>
+                <ul class="sub-menu">
+                    <li><a href="https://null-byte.wonderhowto.com/news/"><strong>Null Byte News</strong></a></li>
+                            <li class="menu-category"><a href="https://null-byte.wonderhowto.com/news/anonymity-darknets/">Anonymity &amp; Darknets</a></li>
+                            <li class="menu-category"><a href="https://null-byte.wonderhowto.com/news/uncategorized/">Everything Else</a></li>
+                </ul>
+            </li>
+            <li>
+                <span class="menu-section-heading">Forum</span>
+                <ul class="sub-menu">
+                    <li><a href="https://null-byte.wonderhowto.com/forum/"><strong>Null Byte Forum</strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+                        <li>
+        <span class="menu-section-heading">Featured Sites</span>
+        <ul>
+            <li><a href="https://www.wonderhowto.com/"><strong>WonderHowTo Home</strong></a></li>
+                                <li>
+                        <a href="https://www.gadgethacks.com/">Gadget Hacks</a>
+                    </li>
+                    <li>
+                        <a href="https://food-hacks.wonderhowto.com/">Food Hacks Daily</a>
+                    </li>
+                    <li>
+                        <a href="https://next.reality.news/">Next Reality</a>
+                    </li>
+                    <li>
+                        <a href="https://null-byte.wonderhowto.com/">Null Byte</a>
+                    </li>
+                    <li>
+                        <a href="https://invisiverse.wonderhowto.com/">Invisiverse</a>
+                    </li>
+                    <li>
+                        <a href="https://thesecretyumiverse.wonderhowto.com/">The Secret Yumiverse</a>
+                    </li>
+                    <li>
+                        <a href="https://driverless.wonderhowto.com/">Driverless</a>
+                    </li>
+                    <li>
+                        <a href="https://macgyverisms.wonderhowto.com/">MacGyverisms</a>
+                    </li>
+                    <li>
+                        <a href="https://lock-picking.wonderhowto.com/">Lock Picking</a>
+                    </li>
+                    <li>
+                        <a href="https://mad-science.wonderhowto.com/">Mad Science </a>
+                    </li>
+                    <li>
+                        <a href="https://mind-hacks.wonderhowto.com/">Mind Hacks</a>
+                    </li>
+        </ul>
+    </li>
+                        <li>
+        <span class="menu-section-heading">Categories</span>
+        <ul>
+
+                <li><a href="https://alcohol.wonderhowto.com/">Alcohol</a></li>
+                <li><a href="https://arts-crafts.wonderhowto.com/">Arts &amp; Crafts</a></li>
+                <li><a href="https://cars-bikes-planes.wonderhowto.com/">Autos, Motorcycles &amp; Planes</a></li>
+                <li><a href="https://beauty-style.wonderhowto.com/">Beauty &amp; Style</a></li>
+                <li><a href="https://business-money.wonderhowto.com/">Business &amp; Money</a></li>
+                <li><a href="https://computer-programming.wonderhowto.com/">Computers &amp; Programming</a></li>
+                <li><a href="https://dance.wonderhowto.com/">Dance</a></li>
+                <li><a href="https://dating-relationships.wonderhowto.com/">Dating &amp; Relationships</a></li>
+                <li><a href="https://diet-health.wonderhowto.com/">Diet &amp; Health</a></li>
+                <li><a href="https://disaster-preparation.wonderhowto.com/">Disaster Preparation</a></li>
+                <li><a href="https://education.wonderhowto.com/">Education</a></li>
+                <li><a href="https://electronics.wonderhowto.com/">Electronics</a></li>
+                <li><a href="https://family.wonderhowto.com/">Family</a></li>
+                <li><a href="https://movies-film-theater.wonderhowto.com/">Film &amp; Theater</a></li>
+                <li><a href="https://fine-art.wonderhowto.com/">Fine Art</a></li>
+                <li><a href="https://fitness.wonderhowto.com/">Fitness</a></li>
+                <li><a href="https://food.wonderhowto.com/">Food</a></li>
+                <li><a href="https://gambling.wonderhowto.com/">Gambling</a></li>
+                <li><a href="https://games.wonderhowto.com/">Games</a></li>
+                <li><a href="https://hobbies-toys.wonderhowto.com/">Hobbies &amp; Toys</a></li>
+                <li><a href="https://home-garden.wonderhowto.com/">Home &amp; Garden</a></li>
+                <li><a href="https://hosting-entertaining.wonderhowto.com/">Hosting &amp; Entertaining</a></li>
+                <li><a href="https://language-lessons.wonderhowto.com/">Language</a></li>
+                <li><a href="https://magic-parlor-tricks.wonderhowto.com/">Magic &amp; Parlor Tricks</a></li>
+                <li><a href="https://motivation-self-help.wonderhowto.com/">Motivation &amp; Self Help</a></li>
+                <li><a href="https://music-instruments.wonderhowto.com/">Music &amp; Instruments</a></li>
+                <li><a href="https://outdoor-recreation.wonderhowto.com/">Outdoor Recreation</a></li>
+                <li><a href="https://pets-animals.wonderhowto.com/">Pets &amp; Animals</a></li>
+                <li><a href="https://prank-con.wonderhowto.com/">Pranks &amp; Cons</a></li>
+                <li><a href="https://software.wonderhowto.com/">Software</a></li>
+                <li><a href="https://spirituality.wonderhowto.com/">Spirituality</a></li>
+                <li><a href="https://sports.wonderhowto.com/">Sports</a></li>
+                <li><a href="https://travel.wonderhowto.com/">Travel</a></li>
+                <li><a href="https://video-games.wonderhowto.com/">Video Games</a></li>
+        </ul>
+    </li>
+                        <li>
+        <span class="menu-section-heading">Gadget Hacks Sites</span>
+        <ul>
+            <li><a href="https://www.gadgethacks.com/"><strong>Gadget Hacks Home</strong></a></li>
+                                <li>
+                        <a href="https://ios.gadgethacks.com/">iOS &amp; iPhone</a>
+                    </li>
+                    <li>
+                        <a href="https://android.gadgethacks.com/">Android</a>
+                            <ul class="sub-menu">
+                                    <li><a href="https://gs5.gadgethacks.com/">Samsung Galaxy S5</a></li>
+                                    <li><a href="https://htc-one.gadgethacks.com/">HTC One</a></li>
+                                    <li><a href="https://gs4.gadgethacks.com/">Samsung GS4</a></li>
+                                    <li><a href="https://gs3.gadgethacks.com/">Samsung Galaxy S3</a></li>
+                                    <li><a href="https://nexus5.gadgethacks.com/">Nexus</a></li>
+                                    <li><a href="https://gs6.gadgethacks.com/">Samsung Galaxy S6</a></li>
+                                    <li><a href="https://galaxy-note2.gadgethacks.com/">Samsung Galaxy Note 2</a></li>
+                                    <li><a href="https://nexus7.gadgethacks.com/">Nexus 7</a></li>
+                                    <li><a href="https://galaxy-note-3.gadgethacks.com/">Samsung Galaxy Note 3</a></li>
+                                    <li><a href="https://oneplus.gadgethacks.com/">OnePlus</a></li>
+                                    <li><a href="https://fire.gadgethacks.com/">Amazon Fire</a></li>
+                                    <li><a href="https://lg-g3.gadgethacks.com/">LG G3</a></li>
+                                    <li><a href="https://gs7.gadgethacks.com/">Samsung Galaxy S7</a></li>
+                                    <li><a href="https://galaxy-note-4.gadgethacks.com/">Galaxy Note 4</a></li>
+                            </ul>
+                    </li>
+                    <li>
+                        <a href="https://smartphones.gadgethacks.com/">Smartphones</a>
+                    </li>
+                    <li>
+                        <a href="https://digiwonk.gadgethacks.com/">Digiwonk</a>
+                    </li>
+                    <li>
+                        <a href="https://mods-n-hacks.gadgethacks.com/">Hacks, Mods &amp; Circuitry</a>
+                    </li>
+                    <li>
+                        <a href="https://internet.gadgethacks.com/">Internet</a>
+                    </li>
+                    <li>
+                        <a href="https://windows.gadgethacks.com/">Windows Tips</a>
+                    </li>
+                    <li>
+                        <a href="https://mac-how-to.gadgethacks.com/">Mac Tips</a>
+                    </li>
+                    <li>
+                        <a href="https://cord-cutters.gadgethacks.com/">Cord Cutters</a>
+                    </li>
+                    <li>
+                        <a href="https://tech-pr0n.gadgethacks.com/">Tech Pr0n</a>
+                    </li>
+                    <li>
+                        <a href="https://tablets.gadgethacks.com/">Tablets</a>
+                    </li>
+        </ul>
+    </li>
+    <li>
+        <span class="menu-section-heading">Next Reality Sites</span>
+        <ul>
+            <li><a href="https://next.reality.news/"><strong>Next Reality Home</strong></a></li>
+                                <li>
+                        <a href="https://augmented.reality.news/">Augmented Reality News</a>
+                            <ul class="sub-menu">
+                                    <li><a href="https://mobile-ar.reality.news/">Mobile AR News</a></li>
+                                    <li><a href="https://mixed.reality.news/">Mixed Reality News</a></li>
+                                            <li><a href="https://hololens.reality.news/">HoloLens</a></li>
+                                            <li><a href="https://magic-leap.reality.news/">Magic Leap</a></li>
+                                            <li><a href="https://meta.reality.news/">Meta 2</a></li>
+                                    <li><a href="https://glass.reality.news/">Google Glass</a></li>
+                            </ul>
+                    </li>
+                    <li>
+                        <a href="https://virtual.reality.news/">Virtual Reality News</a>
+                            <ul class="sub-menu">
+                                    <li><a href="https://mobile-vr.reality.news/">Mobile VR News</a></li>
+                                    <li><a href="https://vive.reality.news/">HTC Vive</a></li>
+                                    <li><a href="https://oculus.reality.news/">Oculus Rift</a></li>
+                            </ul>
+                    </li>
+        </ul>
+    </li>
+                    <li>
+                        <span class="menu-section-heading">About</span>
+                        <ul>
+                            <li><a href="/about/"><strong>About Us</strong></a></li>
+                            <li><a href="/terms/"><strong>Terms</strong></a></li>
+                            <li><a href="/privacy/"><strong>Privacy</strong></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+            
+                <div class="sidebar sidebar-user-menu">
+                    <div class="center-frame">
+                        <div class="menu">
+                            <div class="sidebar-pad">
+                                <div class="my-profile clearfix">
+                                    <button type="button" class="raised-btn align-center-full user-menu-loginsignup"><i class="fa fa-user"></i> Login or signup</button>
+                                </div>
+
+                                <div class="icon-menu-tabs clearfix">
+                                    <button type="button" class="user-menu-settings active fa fa-gears"><span>Settings</span></button>
+                                    <button type="button" class="user-menu-drafts active fa fa-pencil-square-o"><span>My Writing</span></button>
+                                    <button type="button" class="user-menu-inbox active fa fa-envelope-o"><span>Messages</span></button>
+                                    <button type="button" class="user-menu-notifications active fa fa-bell-o"><span>Notifications</span></button>
+                                    <button type="button" class="user-menu-nav active fa fa-bars"><span>Navigation</span></button>
+                                </div>
+
+                                <div class="sidebar-tab-contents">
+                                    <div class="actiongroup"><ul><li class="centered-divide"><i class="loading-spinner"></i><div class="padtop-small">Loading...</div></li></ul></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            <aside class="whtaph whtaph-skin" data-unit-type="skin"></aside>
+                <div id="foot-init" class="clearfix">
+                <script type="text/javascript" src="https://img.wonderhowto.com/js/ready.min.js?v=1103201700"></script>
+    <!--[if lt IE 7 ]><link rel="stylesheet" href="https://img.wonderhowto.com/css/jquery.jgrowl.ie6.css?v=1103201700" type="text/css"/><![endif]-->
+    <!--[if lt IE 9 ]><link rel="stylesheet" href="https://img.wonderhowto.com/css/ie.css?v=1103201700" type="text/css"/><![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">if(!window.jQuery) document.write('<'+'scr'+'ipt type="text/javascr'+'ipt" src="https://img.wonderhowto.com/js/libs/jquery-1.7.min.js?v=1103201700"><'+'/scri'+'pt>');</script>
+        <script src="https://img.wonderhowto.com/js/set.min.js?v=1103201700" type="text/javascript"></script>
+        <script src="https://img.wonderhowto.com/js/go.min.js?v=1103201700" type="text/javascript"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        WHT.init({
+            loggedInUser:{"UserID":0,"UserName":"not_logged_in","DisplayName":"not_logged_in","UserBio":"","IsAdmin":false,"IsStaff":false,"IsUser":false,"IsCurator":false,"CanEdit":false,"cd":0,"UserCommentScore":0,"KudosCount":0,"KudosPower":0,"JudgementPower":0,"ReputationCount":0,"ResponseCount":0,"ImageID":"user_default_large.jpg"},currentWorld:{"IsCategoryOrSubCategoryWorld":false,"WorldID":1124,"WorldName":"Null Byte","Description":"Null Byte is a white hat hacker world for anyone interested in hacking, science, networking, social engineering, security, pen-testing, getting root, zero days, etc.","Slogan":"The aspiring white-hat hacker/security awareness playground","UrlName":"null-byte","CreatedByUserID":32,"CreatedByUserName":"bryan","CreatedByUserDisplayName":"Bryan Crow","CreatedByUserImage":"636283108466577741","CreatedByUserGender":1,"CreatedByUserImagePath":"/userimages/636283108466577741","CreatedByUserProfilePath":"https://wwwwonderhowto.com/community/member/bryan/","CreatedDate":"\/Date(1316496204577)\/","LastUpdated":"\/Date(1509820834620)\/","HeaderGraphic":"636203278708946907","HasCustomHeaderGraphic":true,"HeaderGraphicMatchesOriginal":false,"HeaderHeight":38,"HeaderColor":"081e05","ShowHeaderText":false,"LargeImage":"636446039542792355","Image":"636446039542792355","TwitterUrl":"http://twitter.com/NullByteWht","FacebookUrl":"","GooglePlusUrl":"","HowToSubCategoryMode":0,"InspirationSubCategoryMode":0,"RootDomainName":"wonderhowto.com","FullDomainName":"null-byte.wonderhowto.com","FullWWWDomainName":"null-byte.wonderhowto.com","HasChildWorlds":false,"HasOwnDomain":false,"AllowUserPosts":true,"ChannelID":2,"CategoryID":6,"MemberCount":13898,"ContributorCount":2397,"PostCount":5725,"ChildLevel":1,"ImageID":"636203278708946907","CoverImage":"636446039542792355"},alerts:[],ajaxControllerURL:'/ajax/',urlBase:'https://null-byte.wonderhowto.com',imgUrlBase:'https://img.wonderhowto.com',imgFormats:["1014x174","w974","974x232","1920x1080","3840x1800","3200x1500","2560x1200","1920x900","1280x600","1280x220","1200x1200","960x540","664x250","654x306","600x600","w532","w302","w240","w654","w728","w1456","300x380","300x300","300x200","300x140","250x188","236x160","225x113","200x150","200x113","191x89","190x88","186x86","w160","150x190","150x70","146x68","135x180","100x100","100x47","88x68","w88","65x30","64x50","62x83","62x29","51x68","48x64","42x56","32x43","18x24","16x16","b300x169","b300x140","b654x306","b300x52","b100x100","original"],activeBrowseBase:'',hero:{id:180076,title:"How to Select a Field-Tested Kali Linux Compatible Wireless Adapter",img:"https://img.wonderhowto.com/img/69/07/63620327870894/0/null-byte.1280x600.jpg"},rootHero:{id:180878,title:"How to Force Switch to T-Mobile or Sprint on Project Fi",img:"https://img.wonderhowto.com/img/73/93/63620373033679/0/wonderhowto.1280x600.jpg"},rootDomains:["wonderhowto.com","gadgethacks.com","reality.news"],wmTest:'(wonderhowto|gadgethacks|nextreality|invisiverse|driverless|wonderhowto)',hpUpdateID:0,socialLinks: {facebook: '',twitter: 'http://twitter.com/NullByteWht',youtube: '',pinterest: ''}
+        });
+
+        // Second part of jquery loading
+        (function (i, s, q, l) { for (q = window._q(), l = q.length; i < l;) { $.apply(this, s.call(q[i++])); } window._q = undefined; }(0, Array.prototype.slice));
+
+        //]]>
+    </script>
+        <script src="https://img.wonderhowto.com/js/done.min.js?v=1103201700" type="text/javascript"></script>
+
+    
+    <script type="text/javascript">
+        //<![CDATA[
+        //initialize article galleries:
+        WHT.activeArticle = new WHT.ManagedArticle({
+            articleID: 180784,
+            authorUserName: "hoid",
+            connectionType: 0,
+            rootElement: $('.article-wrapper.article-id-180784'),
+            fnInit: (function(){setTimeout(function(){$('#50170338docPartGal880007').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447034440495106.jpg",largeSource:"636447034440495106.jpg",thumbSource:"636447034440495106.jpg",standardWidth:637,standardHeight:496,largeWidth:637,largeHeight:496,creditURL:"https://twitter.com/WhiskeyS373N/status/921457552977784834",creditText:"WhiskeyS373N",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#30167898docPartGal880009').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447035990459093.jpg",largeSource:"636447035990459093.jpg",thumbSource:"636447035990459093.jpg",standardWidth:1500,standardHeight:353,largeWidth:1500,largeHeight:353,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#12890867docPartGal880013').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447036784739476.jpg",largeSource:"636447036784739476.jpg",thumbSource:"636447036784739476.jpg",standardWidth:842,standardHeight:291,largeWidth:842,largeHeight:291,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#745760docPartGal880015').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447039211505962.jpg",largeSource:"636447039211505962.jpg",thumbSource:"636447039211505962.jpg",standardWidth:839,standardHeight:146,largeWidth:839,largeHeight:146,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#26111149docPartGal880019').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447038260650951.jpg",largeSource:"636447038260650951.jpg",thumbSource:"636447038260650951.jpg",standardWidth:671,standardHeight:115,largeWidth:671,largeHeight:115,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#42668238docPartGal880023').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447090521886727.jpg",largeSource:"636447090521886727.jpg",thumbSource:"636447090521886727.jpg",standardWidth:758,standardHeight:151,largeWidth:758,largeHeight:151,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#31929613docPartGal880025').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447097110917698.jpg",largeSource:"636447097110917698.jpg",thumbSource:"636447097110917698.jpg",standardWidth:680,standardHeight:113,largeWidth:680,largeHeight:113,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#31778668docPartGal880031').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447066858120175.jpg",largeSource:"636447066858120175.jpg",thumbSource:"636447066858120175.jpg",standardWidth:638,standardHeight:458,largeWidth:638,largeHeight:458,creditURL:"https://twitter.com/ryHanson/status/918571894827245568",creditText:"Ryan%20Hanson",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#12910592docPartGal880035').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447059612998845.jpg",largeSource:"636447059612998845.jpg",thumbSource:"636447059612998845.jpg",standardWidth:742,standardHeight:118,largeWidth:742,largeHeight:118,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#3211310docPartGal880037').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447068122091862.jpg",largeSource:"636447068122091862.jpg",thumbSource:"636447068122091862.jpg",standardWidth:638,standardHeight:447,largeWidth:638,largeHeight:447,creditURL:"https://twitter.com/SecuritySift/status/918563308541829120",creditText:"Mike%20Czumak%E2%80%8F",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#65869541docPartGal880041').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447061828014419.jpg",largeSource:"636447061828014419.jpg",thumbSource:"636447061828014419.jpg",standardWidth:781,standardHeight:116,largeWidth:781,largeHeight:116,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#46411259docPartGal880049').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447187762009072.jpg",largeSource:"636447187762009072.jpg",thumbSource:"636447187762009072.jpg",standardWidth:697,standardHeight:184,largeWidth:697,largeHeight:184,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#30045194docPartGal880055').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447179813560267.jpg",largeSource:"636447179813560267.jpg",thumbSource:"636447179813560267.jpg",standardWidth:948,standardHeight:173,largeWidth:948,largeHeight:173,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#64661737docPartGal880059').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447184053587588.jpg",largeSource:"636447184053587588.jpg",thumbSource:"636447184053587588.jpg",standardWidth:643,standardHeight:111,largeWidth:643,largeHeight:111,creditURL:"",creditText:"",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+setTimeout(function(){$('#29653548docPartGal880063').whtGallery({initFromGalleryItemsObjects:[{type:"galleryImage",caption:"",standardSource:"636447159307799234.jpg",largeSource:"636447159307799234.jpg",thumbSource:"636447159307799234.jpg",standardWidth:637,standardHeight:546,largeWidth:637,largeHeight:546,creditURL:"https://twitter.com/enigma0x3/status/921417811037229056",creditText:"Matt%20Nelson",originalURL:"",shadow:false,upScale:false,scale:0}],initWithLayoutIndex:0,imageTitleUrlBase:'hide-dde-based-attacks-ms-word'});},1);
+}),
+            url: "https://null-byte.wonderhowto.com/how-to/hide-dde-based-attacks-ms-word-0180784/",
+            editUrl: "https://null-byte.wonderhowto.com/how-to/hide-dde-based-attacks-ms-word-0180784/edit/",
+            noCache: false,
+            dnra: false,
+            pageTitle: "How to Hide DDE Based Attacks in MS Word &#171; Null Byte",
+            fnInitComments: (function(){WHT.Comments.init({id: 180784, urlVote: "https://null-byte.wonderhowto.com/ajax/updatecommentscore/", urlSubmit: "https://null-byte.wonderhowto.com/ajax/submitcomment/", urlDelete: "https://null-byte.wonderhowto.com/ajax/deletecomment/", docX: []});})
+        });
+        //]]>
+    </script>
+
+    <script type="text/javascript">
+        //Prevent double posting by accident
+        var currentlyVoting = false;
+
+        // see if there any comments to init:
+        if (typeof initQueue !== 'undefined' && initQueue) {
+            for(var i = 0; i < initQueue.length; i++) {
+                initQueue[i].apply();
+            }
+        }
+
+        // Follow Button:
+        var buttons = $(".article-author");
+        buttons.on("hover", ".btn", WHT.World.WorldButtonHoverHandler);
+        $(".article-author").on("hover",".follow-button",WHT.User.OnFollowButonHover);
+        $(".article-author").on("click",".follow-button",WHT.User.OnFollowUserClick);
+
+    </script>
+    <!--[if lt IE 7 ]><script type="text/javascript" src="https://img.wonderhowto.com/js/libs/dd_belatedpng.js?v=1103201700"></script><script type="text/javascript">DD_belatedPNG.fix('img, .png_bg');</script><![endif]-->
+    <script type="text/javascript">
+        //<![CDATA[
+        // Manually trigger jQuery ready to speed up page init:
+        setTimeout(function () { $.ready(); }, 0);
+        //]]>
+    </script>
+
+                        <!-- Analytics -->
+            <script type="text/javascript">
+                //<![CDATA[
+
+                // GA:
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-2361644-1', { 'cookieDomain': 'wonderhowto.com', 'legacyCookieDomain': '.wonderhowto.com' });
+                    
+                        ga('send', 'pageview');
+
+                        // Chartbeat:
+                        var _sf_async_config = { uid: 3214, domain: "wonderhowto.com", sections: "All Posts,How-Tos,No Video,null-byte" , authors: "hoid" };
+                        _cbq = window._cbq = (window._cbq || []);
+                        _cbq.push(['_acct', 'anon']);
+                        (function () {
+                        function loadChartbeat() {
+                            window._sf_endpt = (new Date()).getTime();
+                            var e = document.createElement('script');
+                            e.async = true;
+                            e.setAttribute('language', 'javascript');
+                            e.setAttribute('type', 'text/javascript');
+                            e.setAttribute('src',
+                            (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") +
+                            "static.chartbeat.com/js/chartbeat.js");
+                            document.body.appendChild(e);
+                        }
+                        var oldonload = window.onload;
+                        window.onload = (typeof window.onload != 'function') ? loadChartbeat : function () { oldonload(); loadChartbeat(); };
+                        })();
+                    
+
+                // comScore:
+                var _comscore = _comscore || [];
+                _comscore.push({ c1: "2", c2: "6035753" });
+                (function() {
+                    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+                    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+                    el.parentNode.insertBefore(s, el);
+                })();
+                //]]>
+            </script>
+            <noscript><img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=6035753&amp;cv=2.0&amp;cj=1" style="display:none" width="0" height="0" alt="" /></noscript>
+            <!-- End Analytics -->
+
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+

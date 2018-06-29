@@ -1,0 +1,1186 @@
+<!doctype html><!-- start coded_template: id:5467046831 path:generated_layouts/5467046824.html --><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en" > <![endif]--><!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en" >        <![endif]--><!--[if IE 8]>    <html class="no-js lt-ie9" lang="en" >               <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="Philip Tsukerman">
+    <meta name="description" content="Cybereason researchers discovered new lateral movement techniques discovered that abuse WMI (Windows Management Infrastructure) and provide a tool that’s a proof of concept for the techniques, showing what an attacker could potentially do with them.">
+    <meta name="generator" content="HubSpot">
+    <title>No Win32_Process Needed – Expanding the WMI Lateral Movement Arsenal</title>
+    <link rel="shortcut icon" href="https://www.cybereason.com/hubfs/favicon-1.ico?t=1529607952943">
+    
+
+    <link rel="stylesheet" href="/hs-fs/css/3354902/hub_generated/template_assets/1529609329816/combined-css-6f28a39b51dd97e3e461eda7ca03ea2b.css"><script src="/hs/hsstatic/jquery-libs/static-1.4/jquery/jquery-1.11.2.js"></script>
+<script>hsjQuery = window['jQuery'];</script>
+    
+    <meta property="og:description" content="Cybereason researchers discovered new lateral movement techniques discovered that abuse WMI (Windows Management Infrastructure) and provide a tool that’s a proof of concept for the techniques, showing what an attacker could potentially do with them.">
+    <meta property="og:title" content="No Win32_Process Needed – Expanding the WMI Lateral Movement Arsenal">
+    <meta name="twitter:description" content="Cybereason researchers discovered new lateral movement techniques discovered that abuse WMI (Windows Management Infrastructure) and provide a tool that’s a proof of concept for the techniques, showing what an attacker could potentially do with them.">
+    <meta name="twitter:title" content="No Win32_Process Needed – Expanding the WMI Lateral Movement Arsenal">
+
+
+    
+    
+
+    
+<!--  Added by GoogleAnalytics integration -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56367941-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- /Added by GoogleAnalytics integration -->
+
+    
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://use.typekit.net/vyv2ljd.js"></script>
+<script>try{Typekit.load({ async: false });}catch(e){}</script>
+
+<!-- Outbrain Pixel Code -->
+<script data-obct type="text/javascript">
+  /** DO NOT MODIFY THIS CODE**/
+  !function(_window, _document) {
+    var OB_ADV_ID='0027b8e5e3241bf8cc1be75fc37da5a0b4';
+    if (_window.obApi) {var toArray = function(object) {return Object.prototype.toString.call(object) === '[object Array]' ? object : [object];};_window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(toArray(OB_ADV_ID));return;}
+    var api = _window.obApi = function() {api.dispatch ? api.dispatch.apply(api, arguments) : api.queue.push(arguments);};api.version = '1.1';api.loaded = true;api.marketerId = OB_ADV_ID;api.queue = [];var tag = _document.createElement('script');tag.async = true;tag.src = '//amplify.outbrain.com/cp/obtp.js';tag.type = 'text/javascript';var script = _document.getElementsByTagName('script')[0];script.parentNode.insertBefore(tag, script);}(window, document);
+obApi('track', 'PAGE_VIEW');
+</script>
+
+<!-- Perfect Audience Pixel Code -->
+<script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/58e26bc626b13471520000d9.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+</script>
+
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '116645602292181');
+  fbq('track', 'PageView');
+</script>
+<noscript>&lt;img  height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=116645602292181&amp;amp;ev=PageView&amp;amp;noscript=1"&gt;</noscript>
+<!-- End Facebook Pixel Code -->
+<!-- head test -->
+
+<!-- lead lander  -->
+<script type="text/javascript" language="javascript">
+ var sf14gv = 27717;
+ (function() {
+   var sf14g = document.createElement('script'); sf14g.type = 'text/javascript'; sf14g.async = true;
+   sf14g.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 't.sf14g.com/sf14g.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sf14g, s);
+ })(); 
+</script>
+<!-- Hotjar Tracking Code for www.cybereason.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:704918,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+<!-- Google Code for Remarketing Tag -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 934771702;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+
+<link rel="amphtml" href="https://www.cybereason.com/blog/wmi-lateral-movement-win32?hs_amp=true">
+
+<meta property="og:image" content="https://www.cybereason.com/hubfs/chris-davis-9963%20%282%29-1.jpg?t=1529607952943#keepProtocol">
+<meta property="og:image:width" content="4608">
+<meta property="og:image:height" content="3072">
+<meta name="twitter:image" content="https://www.cybereason.com/hubfs/chris-davis-9963%20%282%29-1.jpg?t=1529607952943#keepProtocol">
+
+<meta property="og:url" content="https://www.cybereason.com/blog/wmi-lateral-movement-win32">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://www.cybereason.com/blog/wmi-lateral-movement-win32">
+
+<meta property="og:type" content="article">
+<link rel="alternate" type="application/rss+xml" href="https://www.cybereason.com/blog/rss.xml">
+<meta name="twitter:domain" content="www.cybereason.com">
+<script src="//platform.linkedin.com/in.js" type="text/javascript">
+    lang: en_US
+</script>
+
+<meta http-equiv="content-language" content="en">
+
+
+
+
+
+
+
+    
+
+
+<script src="https://www.cybereason.com/hs-fs/hub/3354902/hub_generated/template_assets/1524508126879/Custom/page/web_page_basic/cybereason-custom.min.js"></script>
+<script src="//cdn.rawgit.com/michael-lynch/reading-time/4255f585/src/readingTime.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+
+<script>
+$(document).ready(function() {
+
+	$('article').readingTime({
+	    readingTimeTarget: '.post-meta .eta',
+	    success: function() {
+			console.log('Read time success');
+		},
+		error: function() {
+			console.log('Read time failure');
+		}
+	});
+	
+});
+</script>
+    
+
+</head>
+<body class="   hs-content-id-5764480077 hs-blog-post hs-blog-id-5272851739" style="">
+    <div class="header-container-wrapper">
+    <div class="header-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-global_group " style="" data-widget-type="global_group" data-x="0" data-w="12">
+<!-- start coded_template: id:5356782332 path:generated_global_groups/5356782331.html -->
+<div class="" data-global-widget-path="generated_global_groups/5356782331.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_jinja " style="" data-widget-type="raw_jinja" data-x="0" data-w="12">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Font - DIN 2014 -->
+<script src="https://use.typekit.net/vyv2ljd.js"></script>
+<script>try{Typekit.load({ async: false });}catch(e){}</script>
+
+<script>
+    function viewport() {
+        var e = window, a = 'inner';
+        if (!('innerWidth' in window )) {
+            a = 'client';
+            e = document.documentElement || document.body;
+        }
+        return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
+    }
+    
+    $(document).ready(function(){
+        if(viewport().width <= 1024){
+            // expand menu items that have children on click
+            $('.main-menu li.hs-item-has-children').after().click(function(e){
+                $(this).find('> .hs-menu-children-wrapper').slideToggle();
+    
+                if ( $(this).hasClass('opened') ){ $(this).removeClass('opened'); }
+                else{ $(this).addClass('opened'); }
+    
+    			e.stopPropagation();
+            }); 
+        }
+        
+    });
+</script></div><!--end widget-span -->
+
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="header-main-wrapper blackMenu">
+<div class="span12 widget-span widget-type-cell page-center" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span2 widget-span widget-type-linked_image main-logo" style="" data-widget-type="linked_image" data-x="0" data-w="2">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_150596530751383" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="linked_image"><a href="https://www.cybereason.com/" id="hs-link-module_150596530751383" style="border-width:0px;border:0px;"><img src="https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/main-logo-black.png?t=1529607952943&amp;width=221&amp;name=main-logo-black.png" class="hs-image-widget " style="width:221px;border-width:0px;border:0px;" width="221" alt="Cybereason" title="Cybereason" srcset="https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/main-logo-black.png?t=1529607952943&amp;width=111&amp;name=main-logo-black.png 111w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/main-logo-black.png?t=1529607952943&amp;width=221&amp;name=main-logo-black.png 221w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/main-logo-black.png?t=1529607952943&amp;width=332&amp;name=main-logo-black.png 332w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/main-logo-black.png?t=1529607952943&amp;width=442&amp;name=main-logo-black.png 442w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/main-logo-black.png?t=1529607952943&amp;width=553&amp;name=main-logo-black.png 553w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/main-logo-black.png?t=1529607952943&amp;width=663&amp;name=main-logo-black.png 663w" sizes="(max-width: 221px) 100vw, 221px"></a></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span2 widget-span widget-type-linked_image mobile-logo" style="" data-widget-type="linked_image" data-x="2" data-w="2">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_150700220737896" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="linked_image"><a href="https://www.cybereason.com/" id="hs-link-module_150700220737896" style="border-width:0px;border:0px;"><img src="https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/logo-mobile.png?t=1529607952943&amp;width=74&amp;name=logo-mobile.png" class="hs-image-widget " style="width:74px;border-width:0px;border:0px;" width="74" alt="Cybereason" title="Cybereason" srcset="https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/logo-mobile.png?t=1529607952943&amp;width=37&amp;name=logo-mobile.png 37w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/logo-mobile.png?t=1529607952943&amp;width=74&amp;name=logo-mobile.png 74w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/logo-mobile.png?t=1529607952943&amp;width=111&amp;name=logo-mobile.png 111w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/logo-mobile.png?t=1529607952943&amp;width=148&amp;name=logo-mobile.png 148w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/logo-mobile.png?t=1529607952943&amp;width=185&amp;name=logo-mobile.png 185w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/logo-mobile.png?t=1529607952943&amp;width=222&amp;name=logo-mobile.png 222w" sizes="(max-width: 74px) 100vw, 74px"></a></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span8 widget-span widget-type-menu main-menu custom-menu-primary" style="" data-widget-type="menu" data-x="4" data-w="8">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_150596531515285" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_150596531515285" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="Cybereason_July2017-Sitemap1" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="menu"><a href="https://www.cybereason.com/hunting-platform" aria-haspopup="true" aria-expanded="false" role="menuitem">Products &amp; Services</a>
+   <ul class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children" role="menuitem"><a href="/hunting-platform" role="menuitem">Products</a>
+     <ul class="hs-menu-children-wrapper">
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/deep-detect-and-respond" role="menuitem">Deep Detect &amp; Respond (EDR)</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/deep-prevent" role="menuitem">Deep Prevent (NGAV)</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/deep-investigate" role="menuitem">Deep Investigate</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/deep-respond" role="menuitem">Deep Respond</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://ransomfree.cybereason.com" role="menuitem">RansomFree</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/resources-demos" role="menuitem">Demos</a></li>
+     </ul></li>
+    <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children" role="menuitem"><a href="/services-main" role="menuitem">Services</a>
+     <ul class="hs-menu-children-wrapper">
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.cybereason.com/active-monitoring" role="menuitem">Active Monitoring</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.cybereason.com/adversary-hunting" role="menuitem">Adversary Hunting</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.cybereason.com/advanced-analysis" role="menuitem">Advanced Analysis</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.cybereason.com/deployment-and-training" role="menuitem">Deployment and Training</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.cybereason.com/technical-account-management" role="menuitem">Technical Account Management</a></li>
+     </ul></li>
+    <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children" role="menuitem"><a href="/how-it-works" role="menuitem">Platform</a>
+     <ul class="hs-menu-children-wrapper">
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/how-it-works" role="menuitem">How It Works</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/deep-behavioral-intelligence-engine" role="menuitem">Deep Behavioral Intelligence Engine</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.cybereason.com/ai-hunting" role="menuitem">AI Hunting</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/deep-sensor-architecture" role="menuitem">Deep Sensor Architecture</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/complete-security-visibility" role="menuitem">Complete Security Visibility</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/full-theater-view" role="menuitem">Full Theater View</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="/cybereason-security-practices" role="menuitem">Compliance and Certification</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.cybereason.com/technology-partners" role="menuitem">Technology Partners</a></li>
+     </ul></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="menu"><a href="https://www.cybereason.com/our-company" aria-haspopup="true" aria-expanded="false" role="menuitem">Company</a>
+   <ul class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/our-company" role="menuitem">Who We Are</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/mission" role="menuitem">Our MIssion</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/careers" role="menuitem">Careers</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/management" role="menuitem">Management</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/newsroom" role="menuitem">Newsroom</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/newsroom#awards" role="menuitem">Awards</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/contact-us" role="menuitem">Contact Us</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="menu"><a href="/insights" aria-haspopup="true" aria-expanded="false" role="menuitem">Insights</a>
+   <ul class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/insights/tag/case-study" role="menuitem">Case Studies</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/insights/tag/webinars" role="menuitem">Webinars</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/insights/tag/white-papers" role="menuitem">White Papers</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/insights/tag/research" role="menuitem">Research</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="menu"><a href="/partnerships" aria-haspopup="true" aria-expanded="false" role="menuitem">Partners</a>
+   <ul class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="menuitem"><a href="/partnerships" role="menuitem" target="_blank">Become a Partner</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/blog" role="menuitem">Blog</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/request-a-demo" role="menuitem">Get a Demo</a></li>
+ </ul>
+</div></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html hamburger-wrapper" style="" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_150700218484593" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><button class="hamburger hamburger--spin" type="button">
+<span class="hamburger-box">
+<span class="hamburger-inner"></span>
+</span>
+</button>
+<style>
+.banner-header-wrapper::after {
+background-image: linear-gradient(0deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.50) 100%);
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 250px;
+content: "";
+display: block;
+}
+.hs-content-id-5356794848 .banner-header-wrapper::after { display: none; }
+</style></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+  </div>
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div><!-- end coded_template: id:5356782332 path:generated_global_groups/5356782331.html -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end header -->
+</div><!--end header wrapper -->
+
+<div class="body-container-wrapper">
+    <div class="body-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell banner-header-wrapper blog-post" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell page-center" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_jinja " style="" data-widget-type="raw_jinja" data-x="0" data-w="12">
+<style>
+    
+        .banner-header-wrapper{
+            background: linear-gradient( rgba(255, 255, 255, .6) 0%, rgba(0,0,0,0) 50%), url('https://www.cybereason.com/hubfs/chris-davis-9963%20%282%29-1.jpg?t=1529607952943') no-repeat center center / cover;
+        }
+    
+</style>
+
+<div class="content-wrapper">
+    <h1>No Win32_Process Needed – Expanding the WMI Lateral Movement Arsenal</h1>
+    <div class="post-meta">
+        <div class="read-meta">
+            <div class="post-date">May 9, 2018</div>
+            <div class="read-time"><span class="eta"></span>utes to read</div>
+        </div>
+        <div class="author-meta">
+            
+                <div class="author-photo" style="background:url(https://www.cybereason.com/hubfs/phil.jpg?t=1529607952943) center center no-repeat; background-size:cover;"></div>
+            
+            <div class="author-info">
+                <div class="c-white" style="padding-top: 10px;">Written by:</div>
+                
+                <div class="author-name c-white">Philip Tsukerman</div>
+                <div class="author-bio">Philip Tsukerman is a researcher Cybereason Innovation Labs.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!--end widget-span -->
+
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="">
+<div class="span12 widget-span widget-type-cell page-center" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-5 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-6 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-blog_content " style="" data-widget-type="blog_content" data-x="0" data-w="12">
+
+
+
+
+<div class="blog-post-wrap">
+    <div class="blog-post-wrapper cell-wrapper">
+        <div class="row-fluid">
+            <div class="span10 post-container">
+                <article class="post-body">
+                    
+                    
+                    <span id="hs_cos_wrapper_post_body" class="hs_cos_wrapper hs_cos_wrapper_meta_field hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="meta_field" data-hs-cos-type="rich_text"><p><span style="font-weight: 400;">Lateral movement is a critical phase in any attack targeting more than a single computer in a network. Lateral movement usually abuses existing mechanisms that allow remote code execution, assuming the attacker has the right credentials. While these mechanisms are usually used for legitimate reasons, many environments may monitor them for illegitimate use. Executing code remotely using a vector seldom used in a specific environment (such as using the PSExec tool in a network where remote service creation is a very rare occasion) may be detected as an anomaly and flagged as malicious. </span></p>
+<!--more-->
+<p><span style="font-weight: 400;">A more sophisticated attacker would prefer to use remote execution techniques more likely to get masked by a constant stream of similar-looking, yet benign behaviors or techniques that abuse an execution channel that’s less likely to be monitored by defenders. For this reason, expanding the set of available lateral movement techniques allows attackers to shape the way they appear to defenders and evade detection.</span></p>
+<p><span style="font-weight: 400;">In this blog we’ll look at </span><a href="https://conference.hitb.org/hitbsecconf2018ams/materials/D2T1%20-%20Philip%20Tsukerman%20-%20Expanding%20Your%20WMI%20Lateral%20Movement%20Arsenal.pdf" rel=" noopener" target="_blank"><span style="font-weight: 400;">new lateral movement techniques</span></a><span style="font-weight: 400;"> discovered by Cybereason that abuse&nbsp;WMI (Windows Management Infrastructure). We’ll also look at one that’s already been publicly disclosed and elaborate on it. Since these techniques are relatively unknown, many security tools can’t flag them. However, Cybereason built a tool that’s</span><span style="font-weight: 400;"> a proof of concept for the techniques, showing what an attacker could potentially do with them. The PowerShell script can be found </span><a href="https://github.com/Cybereason/Invoke-WMILM" rel=" noopener" target="_blank"><span style="font-weight: 400;">here</span></a><span style="font-weight: 400;">.</span></p>
+<p><span style="font-weight: 400;">To learn more about legitimate features that are being abused to carry out lateral movement, check out </span><a href="/blog/dcom-lateral-movement-techniques" rel=" noopener" target="_blank"><span style="font-weight: 400;">this blog</span></a><span style="font-weight: 400;"> that talks about how attackers are using Distributed Component Object Model (DCOM).</span></p>
+<h2>A brief background on WMI</h2>
+<p><span style="font-weight: 400;">WMI is the implementation of the WBEM and CIM standards on the Windows OS, and allows users, administrators and developers (as well as attackers) to enumerate, manipulate and interact with various managed components in the OS. In practice, WMI provides an abstracted, unified object-oriented model, which contains classes representing many discrete elements of a machine, without needing to directly interact (and study the documentation of) many unrelated APIs.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/philipwin.png?t=1529607952943&amp;width=368&amp;height=430&amp;name=philipwin.png" alt="WMI contains classes representing elements such as the system registry, processes, threads and hardware components." width="368" height="430" style="width: 368px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/philipwin.png?t=1529607952943&amp;width=184&amp;height=215&amp;name=philipwin.png 184w, https://www.cybereason.com/hs-fs/hubfs/philipwin.png?t=1529607952943&amp;width=368&amp;height=430&amp;name=philipwin.png 368w, https://www.cybereason.com/hs-fs/hubfs/philipwin.png?t=1529607952943&amp;width=552&amp;height=645&amp;name=philipwin.png 552w, https://www.cybereason.com/hs-fs/hubfs/philipwin.png?t=1529607952943&amp;width=736&amp;height=860&amp;name=philipwin.png 736w, https://www.cybereason.com/hs-fs/hubfs/philipwin.png?t=1529607952943&amp;width=920&amp;height=1075&amp;name=philipwin.png 920w, https://www.cybereason.com/hs-fs/hubfs/philipwin.png?t=1529607952943&amp;width=1104&amp;height=1290&amp;name=philipwin.png 1104w" sizes="(max-width: 368px) 100vw, 368px"><br></span></p>
+<p><em><span style="font-weight: 400;">WMI contains classes representing elements such as the system registry, processes, threads and hardware components.</span></em></p>
+<p><span style="font-weight: 400;">You can enumerate the instances of components represented by a class by issuing WMI queries, which are written in WQL, an SQL like language, or through abstractions such as the PowerShell CIM/WMI cmdlets. It is also possible to invoke methods on classes and instances, and thus to manipulate the underlying managed components using the WMI interface.</span></p>
+<p><span style="font-weight: 400;">An important feature of WMI is the ability to interact with the WMI model of a remote machine, using either the DCOM or the WinRM protocol. This allows attackers to remotely manipulate WMI classes on a remote machine without needing to run any arbitrary code on it beforehand.</span></p>
+<h2>The Main Components of WMI</h2>
+<p><span style="font-weight: 400;">WMI consists of three major components:</span></p>
+<ul>
+<li><span style="font-weight: 400;">The WMI service (winmgmt) acts as a mediator between clients and the WMI model itself, and is responsible for handling all requests (method calls, queries, etc.) coming from client processes. While it cannot process most of these requests by itself, it is able to forward them to other components, and forward their responses back to the client.</span></li>
+<li><span style="font-weight: 400;">WMI providers are where the actual code implementing classes, instances and methods is implemented. Providers are mostly implemented as in-process COM objects.</span></li>
+<li><span style="font-weight: 400;">The WMI Repository is the central storage area for the model, containing things like class definitions and instances of objects which require persistence (as opposed to instances that are dynamically generated by providers.</span></li>
+</ul>
+<p><span style="font-weight: 400;">To put this in the context of the classic WMI lateral movement technique – when a client (either local or remote) tries to invoke the “Create” method of the “Win32_Process”&nbsp;<span>–</span> a request for this action is sent to the WMI service, which then consults the repository to determine that the responsible provider is called CIMWin32. The WMI service then forwards the request to the provider, which creates a new process and returns the Win32_Process instance representing the process to the service, which sends it back to the client. Check out </span><a href="https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/wp-windows-management-instrumentation.pdf" rel=" noopener" target="_blank"><span style="font-weight: 400;">this paper</span></a><span style="font-weight: 400;"> for more information on WMI in a security and forensic context.</span></p>
+<p><span style="font-weight: 400;">This method of lateral movement is pretty well known and many products are starting to detect it. Since this technique is known, attackers will innovate and look to WMI for additional lateral movement techniques.</span></p>
+<h2>Alternative Methods of WMI Lateral Movement</h2>
+<h3>Class Derivation</h3>
+<p><span style="font-weight: 400;">While not strictly a </span><a href="https://www.secureworks.com/blog/wmi-persistence" rel=" noopener" target="_blank"><span style="font-weight: 400;">new lateral movement method</span></a><span style="font-weight: 400;">, this </span><a href="https://twitter.com/mattifestation/status/907702749193633792" rel=" noopener" target="_blank"><span style="font-weight: 400;">evasion technique</span></a><span style="font-weight: 400;"> removes the need for an attacker to interact with the often monitored Win32_Process::Create method directly. An attacker may (remotely) create a class that inherits from known-problematic classes such as Win32_Process, and call methods (or create instances) of the new class, without directly calling the suspicious one, like so:</span></p>
+<ul>
+<li><span style="font-weight: 400;">Create a subclass of Win32_Process, Win32_NotEvilAtAll, which can be done remotely via WMI</span></li>
+<li><span style="font-weight: 400;">The new class inherits all the methods of the parent</span></li>
+<li><span style="font-weight: 400;">Call the “Create” method of the newly defined class</span></li>
+</ul>
+<br>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/excerptfrom.png?t=1529607952943&amp;width=805&amp;height=167&amp;name=excerptfrom.png" alt="Excerpt from the Invoke-WmiLm script released with this article. " width="805" height="167" style="width: 805px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/excerptfrom.png?t=1529607952943&amp;width=403&amp;height=84&amp;name=excerptfrom.png 403w, https://www.cybereason.com/hs-fs/hubfs/excerptfrom.png?t=1529607952943&amp;width=805&amp;height=167&amp;name=excerptfrom.png 805w, https://www.cybereason.com/hs-fs/hubfs/excerptfrom.png?t=1529607952943&amp;width=1208&amp;height=251&amp;name=excerptfrom.png 1208w, https://www.cybereason.com/hs-fs/hubfs/excerptfrom.png?t=1529607952943&amp;width=1610&amp;height=334&amp;name=excerptfrom.png 1610w, https://www.cybereason.com/hs-fs/hubfs/excerptfrom.png?t=1529607952943&amp;width=2013&amp;height=418&amp;name=excerptfrom.png 2013w, https://www.cybereason.com/hs-fs/hubfs/excerptfrom.png?t=1529607952943&amp;width=2415&amp;height=501&amp;name=excerptfrom.png 2415w" sizes="(max-width: 805px) 100vw, 805px"></span></p>
+<p><em><span style="font-weight: 400;">Excerpt from the Invoke-WmiLm script released with this article. We create a new subclass of Win32_Process on the remote machine using the "Derive" and the "Put" methods, and call the Create method of the newly defined class.</span></em></p>
+<p><span style="font-weight: 400;">At first glance, looking at the events of the WMI-Activity ETW provider, it looks like we have evaded the direct use of Win32_Process:</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/notevil.png?t=1529607952943&amp;width=821&amp;height=106&amp;name=notevil.png" alt="notevil" width="821" height="106" style="width: 821px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/notevil.png?t=1529607952943&amp;width=411&amp;height=53&amp;name=notevil.png 411w, https://www.cybereason.com/hs-fs/hubfs/notevil.png?t=1529607952943&amp;width=821&amp;height=106&amp;name=notevil.png 821w, https://www.cybereason.com/hs-fs/hubfs/notevil.png?t=1529607952943&amp;width=1232&amp;height=159&amp;name=notevil.png 1232w, https://www.cybereason.com/hs-fs/hubfs/notevil.png?t=1529607952943&amp;width=1642&amp;height=212&amp;name=notevil.png 1642w, https://www.cybereason.com/hs-fs/hubfs/notevil.png?t=1529607952943&amp;width=2053&amp;height=265&amp;name=notevil.png 2053w, https://www.cybereason.com/hs-fs/hubfs/notevil.png?t=1529607952943&amp;width=2463&amp;height=318&amp;name=notevil.png 2463w" sizes="(max-width: 821px) 100vw, 821px"><br></span></p>
+<p><span style="font-weight: 400;">Indeed, all instances of event 11, which shows requests made to the WMI service, shows no trace of the WIn32_Process class, which is very promising, but a closer looks shows our evasion is not perfect:</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/notevil2.png?t=1529607952943&amp;width=884&amp;height=81&amp;name=notevil2.png" alt="notevil2" width="884" height="81" style="width: 884px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/notevil2.png?t=1529607952943&amp;width=442&amp;height=41&amp;name=notevil2.png 442w, https://www.cybereason.com/hs-fs/hubfs/notevil2.png?t=1529607952943&amp;width=884&amp;height=81&amp;name=notevil2.png 884w, https://www.cybereason.com/hs-fs/hubfs/notevil2.png?t=1529607952943&amp;width=1326&amp;height=122&amp;name=notevil2.png 1326w, https://www.cybereason.com/hs-fs/hubfs/notevil2.png?t=1529607952943&amp;width=1768&amp;height=162&amp;name=notevil2.png 1768w, https://www.cybereason.com/hs-fs/hubfs/notevil2.png?t=1529607952943&amp;width=2210&amp;height=203&amp;name=notevil2.png 2210w, https://www.cybereason.com/hs-fs/hubfs/notevil2.png?t=1529607952943&amp;width=2652&amp;height=243&amp;name=notevil2.png 2652w" sizes="(max-width: 884px) 100vw, 884px"><br></span></p>
+<p><span style="font-weight: 400;">So why does this still show "Win32_Process::Create"?</span></p>
+<p><span style="font-weight: 400;">While we have created a new class with the same "Create" method, we have not actually introduced any new code to the target machine. This means the method is executed in the context of the same provider. Event 12 of the WMI-Activity provider shows the communication between the WMI service and WMI providers, and shows the method execution request after the service has inferred which provider actually implements the requested method.</span></p>
+<p><span style="font-weight: 400;">A different approach to detection is WMI introspection. WMI provides a comprehensive eventing system, and exposes some extremely useful events to monitor itself. One such event describes all WMI method invocations on the machine.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/wmi.png?t=1529607952943&amp;width=775&amp;height=424&amp;name=wmi.png" alt="wmi" width="775" height="424" style="width: 775px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/wmi.png?t=1529607952943&amp;width=388&amp;height=212&amp;name=wmi.png 388w, https://www.cybereason.com/hs-fs/hubfs/wmi.png?t=1529607952943&amp;width=775&amp;height=424&amp;name=wmi.png 775w, https://www.cybereason.com/hs-fs/hubfs/wmi.png?t=1529607952943&amp;width=1163&amp;height=636&amp;name=wmi.png 1163w, https://www.cybereason.com/hs-fs/hubfs/wmi.png?t=1529607952943&amp;width=1550&amp;height=848&amp;name=wmi.png 1550w, https://www.cybereason.com/hs-fs/hubfs/wmi.png?t=1529607952943&amp;width=1938&amp;height=1060&amp;name=wmi.png 1938w, https://www.cybereason.com/hs-fs/hubfs/wmi.png?t=1529607952943&amp;width=2325&amp;height=1272&amp;name=wmi.png 2325w" sizes="(max-width: 775px) 100vw, 775px"></span></p>
+<p><span style="font-weight: 400;">As can be seen in the above screenshot, the MSFT_WmiProvider_ExecMethodAsyncEvent_Pre describes not the method requested by the client, but again the actual method implemented by the provider, not being affected by the evasion technique.</span></p>
+<p><span style="font-weight: 400;">While this technique seems not to work as well as one might hoped for obfuscating WMI method invocation, it works much better when applied to WMI "attacks" that do not need to use a method, such as <a href="https://attack.mitre.org/wiki/Technique/T1084" rel=" noopener" target="_blank">event subscription</a>, as the name of the derived class, and not the original, will show up in all events.</span></p>
+<p><span style="font-weight: 400;">Another, less successful attempt to abuse the WMI class hierarchy for evasion we have attempted is "<a href="https://msdn.microsoft.com/en-us/library/aa391436(v=vs.85).aspx" rel=" noopener" target="_blank">Class Cloning</a>". This method takes a target class, and defines a new one, sharing all members and hierarchy with the target. Supposedly, this is more evasive, as our new class is not a subclass of the target, but it seems that the WMI service is unable to locate the implementation of methods defined in the cloned class, rendering them broken.</span></p>
+<h2>WMI-ifying Classic Techniques</h2>
+<p><span style="font-weight: 400;">Sticking an additional acronym on a technique doesn't do much by itself, but performing common lateral movement tasks (such as replacing PSEXEC) using WMI changes the attackers behavior enough to evade network monitoring solutions. Below are a few examples of such technique modifications:</span></p>
+<h2>Service Creation</h2>
+<p><span style="font-weight: 400;">Remote service creation (often done with the PSEXEC tool, or a pass-the-hash enabled implementation), is possibly the most common method of lateral movement in Windows environments, and can be reimplemented using WMI.</span></p>
+<p><span style="font-weight: 400;">The "Win32_Service" class represents a single service on a machine, and exposes pretty much all of the functionality of the Windows service manager (or the sc.exe tool).</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hubfs/imagephilipblog.webp?t=1529607952943" alt="imagephilipblog" width="762" height="274" style="width: 762px; display: block; margin: 0px auto;"></span></p>
+<p><span style="font-weight: 400;">A quick look at the methods of Win32_Service shows the class is able to easily manipulate services on the target machine. This is enough to implement the create-start-stop-delete chain often used by attackers moving laterally using services.</span></p>
+<p><span style="font-weight: 400;">Win32_Service is not the only WMI class capable of these operations, and the following classes may be used interchangeably:</span></p>
+<ul>
+<li><span style="font-weight: 400;">WIn32_Service</span></li>
+<li><span style="font-weight: 400;">Win32_BaseService</span></li>
+<li><span style="font-weight: 400;">Win32_TerminalService</span></li>
+<li><span style="font-weight: 400;">Win32_SystemDriver</span></li>
+</ul>
+<p><span style="font-weight: 400;">When done using PSEXEC, sc.exe, or any other common implementation of remote service management tools, communication will be done via the <a href="https://msdn.microsoft.com/en-us/library/cc245832.aspx" rel=" noopener" target="_blank">MS-SCMR</a> protocol over <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa374172(v=vs.85).aspx" rel=" noopener" target="_blank">DCERPC</a>. Even when this protocol is using the maximum possible level of encryption, one may still easily determine which types of actions (service creation, service start etc.) are performed using network traffic monitoring.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/wiresharkcapture.png?t=1529607952943&amp;width=756&amp;height=232&amp;name=wiresharkcapture.png" alt="wiresharkcapture" width="756" height="232" style="width: 756px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/wiresharkcapture.png?t=1529607952943&amp;width=378&amp;height=116&amp;name=wiresharkcapture.png 378w, https://www.cybereason.com/hs-fs/hubfs/wiresharkcapture.png?t=1529607952943&amp;width=756&amp;height=232&amp;name=wiresharkcapture.png 756w, https://www.cybereason.com/hs-fs/hubfs/wiresharkcapture.png?t=1529607952943&amp;width=1134&amp;height=348&amp;name=wiresharkcapture.png 1134w, https://www.cybereason.com/hs-fs/hubfs/wiresharkcapture.png?t=1529607952943&amp;width=1512&amp;height=464&amp;name=wiresharkcapture.png 1512w, https://www.cybereason.com/hs-fs/hubfs/wiresharkcapture.png?t=1529607952943&amp;width=1890&amp;height=580&amp;name=wiresharkcapture.png 1890w, https://www.cybereason.com/hs-fs/hubfs/wiresharkcapture.png?t=1529607952943&amp;width=2268&amp;height=696&amp;name=wiresharkcapture.png 2268w" sizes="(max-width: 756px) 100vw, 756px"></span></p>
+<p><em><span style="font-weight: 400;">A wireshark capture of remote service creation using sc.exe</span></em></p>
+<p><span style="font-weight: 400;">On the other hand, the same action using WMI looks completely different on the wire:</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/different%20WMI.png?t=1529607952943&amp;width=772&amp;height=324&amp;name=different%20WMI.png" alt="different WMI" width="772" height="324" style="width: 772px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/different%20WMI.png?t=1529607952943&amp;width=386&amp;height=162&amp;name=different%20WMI.png 386w, https://www.cybereason.com/hs-fs/hubfs/different%20WMI.png?t=1529607952943&amp;width=772&amp;height=324&amp;name=different%20WMI.png 772w, https://www.cybereason.com/hs-fs/hubfs/different%20WMI.png?t=1529607952943&amp;width=1158&amp;height=486&amp;name=different%20WMI.png 1158w, https://www.cybereason.com/hs-fs/hubfs/different%20WMI.png?t=1529607952943&amp;width=1544&amp;height=648&amp;name=different%20WMI.png 1544w, https://www.cybereason.com/hs-fs/hubfs/different%20WMI.png?t=1529607952943&amp;width=1930&amp;height=810&amp;name=different%20WMI.png 1930w, https://www.cybereason.com/hs-fs/hubfs/different%20WMI.png?t=1529607952943&amp;width=2316&amp;height=972&amp;name=different%20WMI.png 2316w" sizes="(max-width: 772px) 100vw, 772px"></span></p>
+<p><span style="font-weight: 400;">Though still based on DCERPC, all WMI DCOM method calls are done through a single interface, and when coupled with "packet privacy" level encryption, network monitoring solutions would only be able to know that some WMI method was called. When performed via the WINRM protocol,WMI traffic looks looks like HTTP, and is again completely different than when done via the SVCCTL interface. This means WMI-ified techniques effectively evade any network traffic signatures made to detect the lateral movement methods they are based upon.</span></p>
+<h2>Old-Style Scheduled Task Creation</h2>
+<p><span style="font-weight: 400;">WMI also provides a way to interact with the old (at.exe) Windows task scheduling mechanism. This is done via the WIn32_ScheduledJob class.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hubfs/OLDSCHOLL%20TASK%20CREATION.webp?t=1529607952943" alt="OLDSCHOLL TASK CREATION" width="808" height="187" style="width: 808px; display: block; margin: 0px auto;"></span></p>
+<p><span style="font-weight: 400;">This class allows for the creation, deletion, and enumeration (through the enumeration of class instances, and not using a dedicated method) of scheduled jobs. Like the at.exe utility itself, the functionality of this class is deprecated in Windows 8 and up. The inability to force the execution of a task may be easily overcome (just like with the classic technique) by simply scheduling a task to run a few seconds after it is registered.</span></p>
+<h2>New-Style Scheduled Task Creation</h2>
+<p><span style="font-weight: 400;">Another mechanism often used for lateral movement, which may be accessed using WMI is the new Windows task scheduler, often interacted with using the schtasks.exe utility. Scheduled tasks created this way are represented by the PS_ScheduledTask and related classes under the ScheduledTaskProv provider.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hubfs/NEW%20SCHOLL%20TASK%20CREATION.webp?t=1529607952943" alt="NEW SCHOLL TASK CREATION" width="732" height="360" style="width: 732px; display: block; margin: 0px auto;"></span></p>
+<p><span style="font-weight: 400;">The PS_ScheduledTask class exposes methods allowing a client to create, delete, and run arbitrary scheduled tasks with custom actions. In fact, The <a href="https://docs.microsoft.com/en-us/powershell/module/scheduledtasks/?view=win10-ps" rel=" noopener" target="_blank">scheduled task cmdlets</a> available on Windows 8 and up, use these WMI classes behind the scenes, which means attackers abusing these commands might have been unknowingly (or maybe knowingly) evading various IDS detections. It should be noted that while the new task scheduler is available on Windows 7 and up, the ScheduledTaskProv provider is only available for Win8+ machines.</span></p>
+<h2>Abusing The Windows Installer</h2>
+<p><span style="font-weight: 400;">The Windows Installer provider exposes a class called Win32_Product, which represents applications installed by the Windows Installer (msiexec). This class can allow an attacker to run a malicious msi package on a target machine.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hubfs/WIN32PRODUCT.webp?t=1529607952943" alt="WIN32PRODUCT" width="780" height="195" style="width: 780px; display: block; margin: 0px auto;"></span></p>
+<p><span style="font-weight: 400;">The "Install" method (and probably the "Admin" and "Upgrade" methods too) of Win32_Product allows the installation of an msi package from a path or a URL. Such packages containing malicious payloads can be crafted by Metasploit:</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/INSTALL%20MSI%20PACKAGE.png?t=1529607952943&amp;width=789&amp;height=222&amp;name=INSTALL%20MSI%20PACKAGE.png" alt="INSTALL MSI PACKAGE" width="789" height="222" style="width: 789px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/INSTALL%20MSI%20PACKAGE.png?t=1529607952943&amp;width=395&amp;height=111&amp;name=INSTALL%20MSI%20PACKAGE.png 395w, https://www.cybereason.com/hs-fs/hubfs/INSTALL%20MSI%20PACKAGE.png?t=1529607952943&amp;width=789&amp;height=222&amp;name=INSTALL%20MSI%20PACKAGE.png 789w, https://www.cybereason.com/hs-fs/hubfs/INSTALL%20MSI%20PACKAGE.png?t=1529607952943&amp;width=1184&amp;height=333&amp;name=INSTALL%20MSI%20PACKAGE.png 1184w, https://www.cybereason.com/hs-fs/hubfs/INSTALL%20MSI%20PACKAGE.png?t=1529607952943&amp;width=1578&amp;height=444&amp;name=INSTALL%20MSI%20PACKAGE.png 1578w, https://www.cybereason.com/hs-fs/hubfs/INSTALL%20MSI%20PACKAGE.png?t=1529607952943&amp;width=1973&amp;height=555&amp;name=INSTALL%20MSI%20PACKAGE.png 1973w, https://www.cybereason.com/hs-fs/hubfs/INSTALL%20MSI%20PACKAGE.png?t=1529607952943&amp;width=2367&amp;height=666&amp;name=INSTALL%20MSI%20PACKAGE.png 2367w" sizes="(max-width: 789px) 100vw, 789px"></span></p>
+<p><span style="font-weight: 400;">While Metasploit allows for the packaging of executables as an msi file, the package format also allows for the embedding of vbscript and jscript payloads, making the msi a rather versatile payload container.</span></p>
+<p><span style="font-weight: 400;">Less successful forays into into abusing the Win32_Product included an attempt to replicate the "msiexec /y" command, which tries to register a dll file from the command line. This seems impossible to achieve using WMI. Another failed experiment was an attempt to hijack uninstaller command line fields in the registry, and then run those commands using the "Uninstall" method of WIn32_Product.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/UNINSTALL%20STRING.png?t=1529607952943&amp;width=785&amp;height=164&amp;name=UNINSTALL%20STRING.png" alt="UNINSTALL STRING" width="785" height="164" style="width: 785px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/UNINSTALL%20STRING.png?t=1529607952943&amp;width=393&amp;height=82&amp;name=UNINSTALL%20STRING.png 393w, https://www.cybereason.com/hs-fs/hubfs/UNINSTALL%20STRING.png?t=1529607952943&amp;width=785&amp;height=164&amp;name=UNINSTALL%20STRING.png 785w, https://www.cybereason.com/hs-fs/hubfs/UNINSTALL%20STRING.png?t=1529607952943&amp;width=1178&amp;height=246&amp;name=UNINSTALL%20STRING.png 1178w, https://www.cybereason.com/hs-fs/hubfs/UNINSTALL%20STRING.png?t=1529607952943&amp;width=1570&amp;height=328&amp;name=UNINSTALL%20STRING.png 1570w, https://www.cybereason.com/hs-fs/hubfs/UNINSTALL%20STRING.png?t=1529607952943&amp;width=1963&amp;height=410&amp;name=UNINSTALL%20STRING.png 1963w, https://www.cybereason.com/hs-fs/hubfs/UNINSTALL%20STRING.png?t=1529607952943&amp;width=2355&amp;height=492&amp;name=UNINSTALL%20STRING.png 2355w" sizes="(max-width: 785px) 100vw, 785px"></span></p>
+<p><span style="font-weight: 400;">Changing the UninstallString value to an arbitrary command line and invoking the "Uninstall" method does not seem to work</span></p>
+<h2>Malicious WMI Provider Loading</h2>
+<p><span style="font-weight: 400;">As mentioned above, WMI providers are where most class instances and methods are implemented. This means one can achieve code execution by loading a custom provider. A recent talk by Alexander Leary has supplied a method to register a WMI provider on a remote machine, using only WMI functions, and without needing to run any command lines beforehand. One of the shortcomings of this technique is the need to actually implement and deliver an actual (malicious) WMI provider dll to the machine. As we are not interested in our code successfully functioning as a WMI provider, but only in it getting loaded as one, we will describe the steps required to run any arbitrary command line as a WMI provider:</span></p>
+<p><span style="font-weight: 400;">First, we shall create a COM object - WMI providers are mostly implemented as in-process COM objects, but as we would like to run an arbitrary command line, we will write an out-of-process COM object registration as the basis of our provider.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hubfs/MALICIOUS%20WMI.webp?t=1529607952943" alt="MALICIOUS WMI" width="777" height="150" style="width: 777px; display: block; margin: 0px auto;"></span></p>
+<p><span style="font-weight: 400;">Next, we would need to register the provider itself. To do this, all we need to do is to create an instance of the __Win32Provider class, which represents registered WMI providers, on the remote machine.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hs-fs/hubfs/WIN32PROVIDERCLASS.png?t=1529607952943&amp;width=757&amp;height=425&amp;name=WIN32PROVIDERCLASS.png" alt="WIN32PROVIDERCLASS" width="757" height="425" style="width: 757px; display: block; margin: 0px auto;" srcset="https://www.cybereason.com/hs-fs/hubfs/WIN32PROVIDERCLASS.png?t=1529607952943&amp;width=379&amp;height=213&amp;name=WIN32PROVIDERCLASS.png 379w, https://www.cybereason.com/hs-fs/hubfs/WIN32PROVIDERCLASS.png?t=1529607952943&amp;width=757&amp;height=425&amp;name=WIN32PROVIDERCLASS.png 757w, https://www.cybereason.com/hs-fs/hubfs/WIN32PROVIDERCLASS.png?t=1529607952943&amp;width=1136&amp;height=638&amp;name=WIN32PROVIDERCLASS.png 1136w, https://www.cybereason.com/hs-fs/hubfs/WIN32PROVIDERCLASS.png?t=1529607952943&amp;width=1514&amp;height=850&amp;name=WIN32PROVIDERCLASS.png 1514w, https://www.cybereason.com/hs-fs/hubfs/WIN32PROVIDERCLASS.png?t=1529607952943&amp;width=1893&amp;height=1063&amp;name=WIN32PROVIDERCLASS.png 1893w, https://www.cybereason.com/hs-fs/hubfs/WIN32PROVIDERCLASS.png?t=1529607952943&amp;width=2271&amp;height=1275&amp;name=WIN32PROVIDERCLASS.png 2271w" sizes="(max-width: 757px) 100vw, 757px"></span></p>
+<p>There are three fields of importance in the __Win32Provider instance we would like to create:</p>
+<ul>
+<li><span style="font-weight: 400;">Name - A human-readable name for the provider, which will later allow us to reference it</span></li>
+<li><span style="font-weight: 400;">CLSID - The Class ID of our newly created COM object</span></li>
+<li><span style="font-weight: 400;">HostingModel - This field denotes how the COM object itself should be loaded - "NetworkServiceHost" will load the COM object as a library into a special host process under the "Network Service" user, "LocalSystemHost" will load it as a library in a host process under the system user, and "SelfHost" will try to load the provider as a stand-alone executable under the System user. As we would like to use an arbitrary command line, we would prefer to run our provider as an executable.</span></li>
+</ul>
+<p><span style="font-weight: 400;">Normally, a provider is loaded on demand, when one of the classes and methods it implements is called or queried (registration of method and instance providers is done via the __MethodProviderRegistration and __InstanceProviderRegistration classes), but our arbitrary executable obviously does not implement such things. Fortunately, the "MSFT_Providers" class (which enumerates loaded WMI providers) has a method called "Load", which allows us to load any WMI provider, regardless of demand. </span></p>
+<p><span style="font-weight: 400;">In addition, it seems that the first time the OS checks that our COM object actually implements a WMI provider is after the command has run, allowing us to execute our obviously fake provider object. It should be noted that the registration of a WMI provider with the SelfHost hosting model actually writes an alert to the event log, describing the creation of a sensitive provider (as it runs with System privileges). This log write can be evaded by using the NetworkServiceHostOrSelfHost hosting model, which at first tries to load the provider as a library (which we may simply omit from the registration), and when this fails (as there is no library to load), tries to load the provider as an executable, with the supplied command line, without writing to the event log.</span></p>
+<p><span style="font-weight: 400;"><img src="https://www.cybereason.com/hubfs/COMMAND%20LINE.webp?t=1529607952943" alt="COMMAND LINE" width="777" height="188" style="width: 777px; display: block; margin: 0px auto;"></span></p>
+<p><span style="font-weight: 400;">To recap, we are able to load our malicious command line as a WMI provider using the following steps:</span></p>
+<ul>
+<li><span style="font-weight: 400;">Create a new key under HKLM/SOFTWARE/Classes/CLSID/{SOMEGUID} (registry manipulation may be done through the StdRegProv WMI provider)</span></li>
+<li><span style="font-weight: 400;">Add a subkey of LocalServer32 with a "(default)" value of whatever command line you want to run (some nice powershell encoded command, for example)</span></li>
+<li><span style="font-weight: 400;">Create a new instance of the __Win32Provider class, with our CLSID as the CLSID field, and NetworkServiceHostOrSelfHost as the HostingModel</span></li>
+<li><span style="font-weight: 400;">Call the Load method of the MSFT_Providers class with the name of our newly created provider</span></li>
+<li><span style="font-weight: 400;">Relax and enjoy our needlessly complicated (but probably undetected) authenticated remote execution</span><span style="font-weight: 400;"></span></li>
+</ul>
+<span style="font-weight: 400;"></span><br><span style="font-weight: 400;"></span><img src="https://www.cybereason.com/hubfs/authenticated%20remote%20execution.webp?t=1529607952943" alt="authenticated remote execution" width="793" height="223" style="width: 793px; display: block; margin: 0px auto;"><br>
+<h2>Detection and Conclusion</h2>
+<p><span style="font-weight: 400;">While these techniques are relatively unknown and usually go undetected by most security products, Windows provides enough information about the WMI function to implement detections for each of the techniques discussed above. Both the WMI-Activity ETW provider and the WMI eventing system provide deep visibility into all WMI method calls, instance creations and queries, which is just enough information to determine if any sensitive WMI functionality was invoked. </span></p>
+<p><span style="font-weight: 400;">While the techniques we discussed abuse legitimate, documented functionality, they occur infrequently enough to be monitored on a per-action basis. We’d advice defenders to account for these techniques when trying to protect their organization from lateral movement and incorporate the multiple methods available to gain deeper visibility into WMI and possibly stop these and many other techniques abusing this feature.</span></p></span>
+                </article>
+            </div>
+            <div class="span2 post-sidebar">
+                
+                    <div class="post-topics-wrap">
+                        <h3>Topics</h3>
+                        
+                            
+                                <div class="post-tags"><a href="https://www.cybereason.com/blog/tag/research">Research</a></div>
+                            
+                        
+                            
+                        
+                    </div>
+                
+                
+                <div class="post-sidebar-inner">
+                    <h3>Share</h3>
+                    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                        <a class="a2a_button_facebook"><img src="//www.cybereason.com/hubfs/Cybereason%20Images/soc-blue-fb.svg?t=1529607952943" alt="facebook icon"></a>
+                        <a class="a2a_button_twitter"><img src="//www.cybereason.com/hubfs/Cybereason%20Images/soc-blue-tw.svg?t=1529607952943" alt="twitter icon"></a>
+                        <a class="a2a_button_linkedin"><img src="//www.cybereason.com/hubfs/Cybereason%20Images/soc-blue-li.svg?t=1529607952943" alt="linkedin icon"></a>
+                        <a class="a2a_dd" href="https://www.addtoany.com/share"><img src="//www.cybereason.com/hubfs/Cybereason%20Images/soc-blue-all.svg?t=1529607952943" alt="rss icon"></a>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready( function() {
+
+	var $sidebar        = $(".post-sidebar-inner"), 
+		$window         = $(window),
+		offset          = $sidebar.offset(),
+		topPadding      = $('.post-topics-wrap').outerHeight() + 50;
+		floatingHeight  = '',
+		postBodyPad     = parseFloat( $('.post-body').css('padding-bottom') );
+
+	$window.scroll(function() {
+	    nextElementTop  = $('#post-cta').offset().top;
+	    floatingHeight = $('.post-sidebar-inner').outerHeight();
+	    
+		if ($window.scrollTop() > offset.top) {
+		    if (nextElementTop - $window.scrollTop() - (postBodyPad*2) > floatingHeight) {
+    			$sidebar.stop().animate({
+    				top: $window.scrollTop() - offset.top + topPadding + 30
+    			});
+		    } else {
+		        $sidebar.stop().animate({
+    				top: nextElementTop - floatingHeight - (postBodyPad*2) - $('.post-body').offset().top
+		        });
+		    }
+		} else {
+			$sidebar.stop().animate({
+				top: topPadding
+			});
+		}
+	});
+	
+
+});
+</script></div>
+
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+  </div>
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-7 ">
+<div class="row-fluid ">
+<div id="post-cta" class="section-half row-fluid">
+<div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-8 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html " style="" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_151276506611034" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><div class="post-cta-inner">
+<h3 class="post-cta-text">Interested in how the Cybereason platform works?</h3><!--HubSpot Call-to-Action Code --><span class="hs-cta-wrapper" id="hs-cta-wrapper-c69f2360-4149-4639-aeaa-8672d831cf70"><span class="hs-cta-node hs-cta-c69f2360-4149-4639-aeaa-8672d831cf70" id="hs-cta-c69f2360-4149-4639-aeaa-8672d831cf70"><!--[if lte IE 8]><div id="hs-cta-ie-element"></div><![endif]--><a href="https://cta-redirect.hubspot.com/cta/redirect/3354902/c69f2360-4149-4639-aeaa-8672d831cf70" target="_blank"><img class="hs-cta-img" id="hs-cta-img-c69f2360-4149-4639-aeaa-8672d831cf70" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/3354902/c69f2360-4149-4639-aeaa-8672d831cf70.png" alt="Learn More"></a></span><script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script><script type="text/javascript"> hbspt.cta.load(3354902, 'c69f2360-4149-4639-aeaa-8672d831cf70', {}); </script></span><!-- end HubSpot Call-to-Action Code -->
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+  </div>
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-9 ">
+<div class="row-fluid ">
+<div class="section-half row-fluid recommended-posts-wrap"><div class="page-center">
+<div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-10 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html " style="" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_151260110755347" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><h2 class="recommended-header">More From the Blog</h2>
+<div class="row-fluid post-recent-related">
+<div class="span4">
+<div class="post-image" style="background:url(https://www.cybereason.com/hubfs/chris-davis-9963%20%282%29-1.jpg?t=1529607952943) center center no-repeat; background-size:cover;">
+<h2 class="c-white"><a class="c-white" href="https://www.cybereason.com/blog/wmi-lateral-movement-win32">No Win32_Process Needed – Expanding the WMI Lateral Movement Arsenal</a></h2>
+</div>
+<div class="section-half bg-white ta-center">
+<a class="button" href="https://www.cybereason.com/blog/wmi-lateral-movement-win32">Read More</a>
+</div>
+</div>
+<div class="span4">
+<div class="post-image" style="background:url(https://www.cybereason.com/hubfs/Honeypot_Header.jpg?t=1529607952943) center center no-repeat; background-size:cover;">
+<h2 class="c-white"><a class="c-white" href="https://www.cybereason.com/blog/botnets-honeypot-automation-cybersecurity">Attackers use botnets to break into networks faster</a></h2>
+</div>
+<div class="section-half bg-white ta-center">
+<a class="button" href="https://www.cybereason.com/blog/botnets-honeypot-automation-cybersecurity">Read More</a>
+</div>
+</div>
+<div class="span4">
+<div class="post-image" style="background:url(https://www.cybereason.com/hubfs/shutterstock_328195181.jpg?t=1529607952943) center center no-repeat; background-size:cover;">
+<h2 class="c-white"><a class="c-white" href="https://www.cybereason.com/blog/olympic-destroyer-winter-games-cyberattack-south-korea">Olympic Destroyer: Calculated Provocation or an Amateur's best shot?</a></h2>
+</div>
+<div class="section-half bg-white ta-center">
+<a class="button" href="https://www.cybereason.com/blog/olympic-destroyer-winter-games-cyberattack-south-korea">Read More</a>
+</div>
+</div>
+<div class="span4">
+<div class="post-image" style="background:url(https://www.cybereason.com/hubfs/chris-davis-9963%20%282%29-1.jpg?t=1529607952943) center center no-repeat; background-size:cover;">
+<h2 class="c-white"><a class="c-white" href="https://www.cybereason.com/blog/wmi-lateral-movement-win32">No Win32_Process Needed – Expanding the WMI Lateral Movement Arsenal</a></h2>
+</div>
+<div class="section-half bg-white ta-center">
+<a class="button" href="https://www.cybereason.com/blog/wmi-lateral-movement-win32">Read More</a>
+</div>
+</div>
+<div class="span4">
+<div class="post-image" style="background:url(https://www.cybereason.com/hubfs/Honeypot_Header.jpg?t=1529607952943) center center no-repeat; background-size:cover;">
+<h2 class="c-white"><a class="c-white" href="https://www.cybereason.com/blog/botnets-honeypot-automation-cybersecurity">Attackers use botnets to break into networks faster</a></h2>
+</div>
+<div class="section-half bg-white ta-center">
+<a class="button" href="https://www.cybereason.com/blog/botnets-honeypot-automation-cybersecurity">Read More</a>
+</div>
+</div>
+<div class="span4">
+<div class="post-image" style="background:url(https://www.cybereason.com/hubfs/shutterstock_328195181.jpg?t=1529607952943) center center no-repeat; background-size:cover;">
+<h2 class="c-white"><a class="c-white" href="https://www.cybereason.com/blog/olympic-destroyer-winter-games-cyberattack-south-korea">Olympic Destroyer: Calculated Provocation or an Amateur's best shot?</a></h2>
+</div>
+<div class="section-half bg-white ta-center">
+<a class="button" href="https://www.cybereason.com/blog/olympic-destroyer-winter-games-cyberattack-south-korea">Read More</a>
+</div>
+</div>
+</div>
+<a class="return-to-blog" href="https://www.cybereason.com/blog"><img src="//www.cybereason.com/hubfs/back-to-blog.svg?t=1529607952943" alt="back icon">Return to Blog</a>
+<script>
+function viewport() {
+var e = window, a = 'inner';
+if (!('innerWidth' in window )) {
+a = 'client';
+e = document.documentElement || document.body;
+}
+return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
+}
+$(document).ready( function() {
+if( viewport().width <= 768 ) {
+$('.post-recent-related').slick({
+arrows: false,
+dots: true
+});
+}
+});
+$(window).resize(function(){
+if( viewport().width <= 768 ) {
+$('.post-recent-related').slick({
+arrows: false,
+dots: true
+});
+}
+else{
+$('.post-recent-related').slick('unslick');
+}
+});
+</script></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div></div>
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-11 ">
+<div class="row-fluid ">
+<div id="footer-sub" class="section-half row-fluid"><div class="page-center">
+<div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-12 ">
+<div class="row-fluid ">
+<div class="span8 widget-span widget-type-blog_subscribe " style="" data-widget-type="blog_subscribe" data-x="0" data-w="8">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_151252275010095" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_blog_subscribe" style="" data-hs-cos-general-type="widget" data-hs-cos-type="blog_subscribe"><h3 id="hs_cos_wrapper_module_151252275010095_title" class="hs_cos_wrapper form-title" data-hs-cos-general-type="widget_field" data-hs-cos-type="text">Subscribe for Updates</h3>
+
+<div id="hs_form_target_module_151252275010095_6109"></div>
+
+
+
+</span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span4 widget-span widget-type-raw_html footer-share" style="" data-widget-type="raw_html" data-x="8" data-w="4">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_151259841540643" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><h3 class="share-title">Share <span class="visible-phone">the Blog</span></h3>
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_facebook"><img src="//www.cybereason.com/hubfs/Cybereason%20Images/soc-white-fb.svg?t=1529607952943" alt="facebook icon"></a>
+<a class="a2a_button_twitter"><img src="//www.cybereason.com/hubfs/Cybereason%20Images/soc-white-tw.svg?t=1529607952943" alt="twitter icon"></a>
+<a class="a2a_button_linkedin"><img src="//www.cybereason.com/hubfs/Cybereason%20Images/soc-white-li.svg?t=1529607952943" alt="linkedin"></a>
+<a class="a2a_dd" href="https://www.addtoany.com/share"><img src="//www.cybereason.com/hubfs/Cybereason%20Images/soc-white-all.svg?t=1529607952943" alt="rss icon"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.onclick = 1;
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div></div>
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end body -->
+</div><!--end body wrapper -->
+
+<div class="footer-container-wrapper">
+    <div class="footer-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-global_group " style="" data-widget-type="global_group" data-x="0" data-w="12">
+<!-- start coded_template: id:5355338610 path:generated_global_groups/5355338609.html -->
+<div class="" data-global-widget-path="generated_global_groups/5355338609.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="footer-menu-wrapper">
+<div id="footer-container" class="span12 widget-span widget-type-cell page-center" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell footer-sub-menu" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span4 widget-span widget-type-linked_image footer-logo" style="" data-widget-type="linked_image" data-x="0" data-w="4">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_150639913792660" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="linked_image"><a href="https://www.cybereason.com/" id="hs-link-module_150639913792660" style="border-width:0px;border:0px;"><img src="https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/cybereason%20logos/cybereason_registered_logo.png?t=1529607952943&amp;width=135&amp;name=cybereason_registered_logo.png" class="hs-image-widget " style="width:135px;border-width:0px;border:0px;" width="135" alt="cybereason_registered_logo.png" title="cybereason_registered_logo.png" srcset="https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/cybereason%20logos/cybereason_registered_logo.png?t=1529607952943&amp;width=68&amp;name=cybereason_registered_logo.png 68w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/cybereason%20logos/cybereason_registered_logo.png?t=1529607952943&amp;width=135&amp;name=cybereason_registered_logo.png 135w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/cybereason%20logos/cybereason_registered_logo.png?t=1529607952943&amp;width=203&amp;name=cybereason_registered_logo.png 203w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/cybereason%20logos/cybereason_registered_logo.png?t=1529607952943&amp;width=270&amp;name=cybereason_registered_logo.png 270w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/cybereason%20logos/cybereason_registered_logo.png?t=1529607952943&amp;width=338&amp;name=cybereason_registered_logo.png 338w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Files/images/cybereason%20logos/cybereason_registered_logo.png?t=1529607952943&amp;width=405&amp;name=cybereason_registered_logo.png 405w" sizes="(max-width: 135px) 100vw, 135px"></a></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span8 widget-span widget-type-simple_menu footer-menu" style="" data-widget-type="simple_menu" data-x="4" data-w="8">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_150639917073162" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_150639917073162" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul class="active-branch">
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.cybereason.co.jp" role="menuitem" target="_self">日本語</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/contact-us" role="menuitem" target="_self">Contact</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.cybereason.com/blog" role="menuitem" target="_self">Blog</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://malicious.life" role="menuitem" target="_self">Podcast</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.facebook.com/Cybereason/" role="menuitem" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://twitter.com/Cybereason/" role="menuitem" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.linkedin.com/company/3173675/" role="menuitem" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.youtube.com/channel/UCOm7AaB0HiNH4Phe66sK0Ew" role="menuitem" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell footer-mega-menu" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-5 ">
+<div class="row-fluid ">
+<div class="span2 widget-span widget-type-cell footer-item" style="" data-widget-type="cell" data-x="0" data-w="2">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-6 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-header " style="" data-widget-type="header" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_15064029802941099" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_header" style="" data-hs-cos-general-type="widget" data-hs-cos-type="header"><h4>Products</h4></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-7 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu " style="" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1506402636143408" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_1506402636143408" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/deep-detect-and-respond" role="menuitem" target="_self">Deep Detect &amp; Respond</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/deep-prevent" role="menuitem" target="_self">Deep Prevent</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/deep-investigate" role="menuitem" target="_self">Deep Investigate</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/deep-respond" role="menuitem" target="_self">Deep Respond</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://ransomfree.cybereason.com" role="menuitem" target="_self">RansomFree</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.cybereason.com/resources-demos" role="menuitem" target="_self">Demos</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+<div class="span2 widget-span widget-type-cell footer-item" style="" data-widget-type="cell" data-x="2" data-w="2">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-8 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-header " style="" data-widget-type="header" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_15064029788781098" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_header" style="" data-hs-cos-general-type="widget" data-hs-cos-type="header"><h4>Services</h4></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-9 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu " style="" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1506402634684407" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_1506402634684407" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/active-monitoring" role="menuitem" target="_self">Active Monitoring</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/adversary-hunting" role="menuitem" target="_self">Adversary Hunting</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/advanced-analysis" role="menuitem" target="_self">Advanced Analysis</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/deployment-and-training" role="menuitem" target="_self">Deployment and Training</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.cybereason.com/technical-account-management" role="menuitem" target="_self">Technical Account Management</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+<div class="span2 widget-span widget-type-cell footer-item" style="" data-widget-type="cell" data-x="4" data-w="2">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-10 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-header " style="" data-widget-type="header" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_15064029771801097" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_header" style="" data-hs-cos-general-type="widget" data-hs-cos-type="header"><h4>Platform</h4></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-11 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu " style="" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1506402633106406" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_1506402633106406" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/how-it-works" role="menuitem" target="_self">How It Works</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/deep-behavioral-intelligence-engine" role="menuitem" target="_self">Deep Behavioral Intel Engine</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/deep-sensor-architecture" role="menuitem" target="_self">Deep Sensor Architecture</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/complete-security-visibility" role="menuitem" target="_self">Complete Security Visibility</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/full-theater-view" role="menuitem" target="_self">Full Theater View</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/cybereason-security-practices" role="menuitem" target="_self">Compliance &amp; Certification</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+<div class="span2 widget-span widget-type-cell footer-item company" style="" data-widget-type="cell" data-x="6" data-w="2">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-12 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-header " style="" data-widget-type="header" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_15064029851211100" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_header" style="" data-hs-cos-general-type="widget" data-hs-cos-type="header"><h4>Company</h4></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-13 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu " style="" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1506402659993410" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_1506402659993410" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/our-company" role="menuitem" target="_self">Who We Are</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/careers" role="menuitem" target="_self">Careers</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/management" role="menuitem" target="_self">Management</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/newsroom" role="menuitem" target="_self">Newsroom</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/newsroom#awards" role="menuitem" target="_self">Awards</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/contact-us" role="menuitem" target="_self">Contact Us</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+<div class="span2 widget-span widget-type-cell footer-item" style="" data-widget-type="cell" data-x="8" data-w="2">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-14 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-header " style="" data-widget-type="header" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_15064029754811096" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_header" style="" data-hs-cos-general-type="widget" data-hs-cos-type="header"><h4><a href="/insights">Insights</a></h4></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-15 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu " style="" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1506402631532405" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_1506402631532405" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/insights/tag/webinars" role="menuitem" target="_self">Webinars</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/insights/tag/whitepaper" role="menuitem" target="_self">White Papers</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="/insights/tag/research" role="menuitem" target="_self">Research</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+<div class="span2 widget-span widget-type-cell footer-item ransomfree" style="" data-widget-type="cell" data-x="10" data-w="2">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-16 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-header " style="" data-widget-type="header" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_15064029732071094" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_header" style="" data-hs-cos-general-type="widget" data-hs-cos-type="header"><h4>Ransomfree</h4></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-17 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu " style="" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1506402656338409" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_1506402656338409" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://ransomfree.cybereason.com/" role="menuitem" target="_self">Free ransomware protection for your PC</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-18 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu footer-item partner" style="display: none;" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1506402760616411" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_1506402760616411" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="//www.cybereason.com/partnerships" role="menuitem" target="_self">Become a Partner</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-19 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu footer-item defenders" style="display: none;" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1524505835373186" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_1524505835373186" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="" aria-label="Navigation Menu">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.cybereason.com/the-defenders-movie" role="menuitem" target="_self">Learn about the movie</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-20 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-rich_text copyright" style="" data-widget-type="rich_text" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_150640742509883" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p><span>"Cybereason” and&nbsp;<img src="https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Logos/Cybereason%20Logo.png?t=1529607952943&amp;width=133&amp;name=Cybereason%20Logo.png" title="Cybereason logo" width="133" style="width: 133px;" alt="Cybereason logo" caption="false" data-constrained="true" srcset="https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Logos/Cybereason%20Logo.png?t=1529607952943&amp;width=67&amp;name=Cybereason%20Logo.png 67w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Logos/Cybereason%20Logo.png?t=1529607952943&amp;width=133&amp;name=Cybereason%20Logo.png 133w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Logos/Cybereason%20Logo.png?t=1529607952943&amp;width=200&amp;name=Cybereason%20Logo.png 200w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Logos/Cybereason%20Logo.png?t=1529607952943&amp;width=266&amp;name=Cybereason%20Logo.png 266w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Logos/Cybereason%20Logo.png?t=1529607952943&amp;width=333&amp;name=Cybereason%20Logo.png 333w, https://www.cybereason.com/hs-fs/hubfs/Cybereason%20Logos/Cybereason%20Logo.png?t=1529607952943&amp;width=399&amp;name=Cybereason%20Logo.png 399w" sizes="(max-width: 133px) 100vw, 133px"></span><span>&nbsp;are proprietary trademarks of Cybereason Inc.&nbsp; Cybereason</span><span style="font-size: 1.2em;">®</span><span>&nbsp;is federally registered in the United States and other countries</span><br>Copyright © 2018 Cybereason Inc. All rights reserved.</p>
+<p><span style="margin-bottom: 20px;"><a href="https://www.cybereason.com/terms-of-use">Terms of Use</a>&nbsp;| <a href="https://www.cybereason.com/privacy-policy">Privacy Policy</a></span></p>
+<p>&nbsp;</p></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+  </div>
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div><!-- end coded_template: id:5355338610 path:generated_global_groups/5355338609.html -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end footer -->
+</div><!--end footer wrapper -->
+
+    
+<script type="text/javascript" src="/hs/hsstatic/content_shared_assets/static-1.4076/js/public_common.js"></script>
+<script>
+(function () {
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/_hcms/perf', true /*async*/);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onreadystatechange = function () {
+                // do nothing.
+            };
+            var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            function populateNetworkInfo(name, connection, info) {
+                if (name in connection) {
+                    info[name] = connection[name];
+                }
+            }
+            var networkInfo = {};
+            if (connection) {
+                ['type', 'effectiveType', 'downlink', 'rtt'].forEach(function(name) {
+                    populateNetworkInfo(name, connection, networkInfo);
+                });
+            }
+            var perfData = {
+                url: location.href,
+                portal: 3354902,
+                content: 5764480077,
+                group: -1,
+                connection: networkInfo,
+                timing: performance.timing
+            };
+            xhr.send(JSON.stringify(perfData));
+        }, 3000);  // Execute this 3 seconds after onload.
+    });
+})();
+</script>
+
+<script src="/hs/hsstatic/keyboard-accessible-menu-flyouts/static-1.2/bundles/project.js"></script>
+
+    <!--[if lte IE 8]>
+    <script charset="utf-8" src="https://js.hsforms.net/forms/v2-legacy.js"></script>
+    <![endif]-->
+
+<script src="https://js.hsforms.net/forms/v2.js"></script>
+
+  <script>
+      hbspt.forms.create({
+          portalId: '3354902',
+          formId: '0caba5f8-036c-4fa7-83d6-166a0180e075',
+          formInstanceId: '6109',
+          pageId: 5764480077,
+          
+          pageName: 'No Win32_Process Needed – Expanding the WMI Lateral Movement Arsenal',
+          
+          contentType: 'blog-post',
+          
+          inlineMessage: "Thanks for Subscribing!",
+          
+          css: '',
+          target: '#hs_form_target_module_151252275010095_6109',
+          
+          formData: {
+            cssClass: 'hs-form stacked'
+          }
+      });
+  </script>
+
+
+<!-- Start of HubSpot Analytics Code -->
+<script type="text/javascript">
+var _hsq = _hsq || [];
+_hsq.push(["setContentType", "blog-post"]);
+_hsq.push(["setCanonicalUrl", "https:\/\/www.cybereason.com\/blog\/wmi-lateral-movement-win32"]);
+_hsq.push(["setPageId", "5764480077"]);
+_hsq.push(["setContentMetadata", {
+    "contentPageId": 5764480077,
+    "legacyPageId": "5764480077",
+    "contentFolderId": null,
+    "contentGroupId": 5272851739,
+    "abTestId": null,
+    "languageVariantId": 5764480077,
+    "languageCode": null
+}]);
+</script>
+
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/3354902.js"></script>
+<!-- End of HubSpot Analytics Code -->
+
+
+<script type="text/javascript">
+var hsVars = {
+    ticks: 1529773932320,
+    page_id: 5764480077,
+    content_group_id: 5272851739,
+    portal_id: 3354902,
+    app_hs_base_url: "https://app.hubspot.com",
+    language: "en",
+    analytics_page_type: "blog-post",
+    category_id: 3,
+    folder_id: 0
+}
+</script>
+
+
+
+
+
+<div id="fb-root"></div>
+ <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&status=0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+  window.___gcfg = {
+    lang: 'en-US',
+    parsetags: 'onload'
+  };
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ 
+
+
+    
+    <!-- Generated by the HubSpot Template Builder - template version 1.03 -->
+
+
+<!-- end coded_template: id:5467046831 path:generated_layouts/5467046824.html -->
+</body></html>

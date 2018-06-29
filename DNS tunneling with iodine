@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>DNS Tunneling with Iodine</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css?v=02ed25955f" />
+
+    <meta name="description" content="A walkthrough on setting up iodine for DNS Tunneling" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jmpesp.me/dns-tunnelling-with-iodine/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://jmpesp.me/dns-tunnelling-with-iodine/amp/" />
+    
+    <meta property="og:site_name" content="jmpesp.me" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="DNS Tunneling with Iodine" />
+    <meta property="og:description" content="A walkthrough on setting up iodine for DNS Tunneling" />
+    <meta property="og:url" content="https://jmpesp.me/dns-tunnelling-with-iodine/" />
+    <meta property="article:published_time" content="2018-03-15T09:32:05.000Z" />
+    <meta property="article:modified_time" content="2018-03-16T19:43:54.000Z" />
+    <meta property="article:tag" content="iodine" />
+    <meta property="article:tag" content="dns" />
+    <meta property="article:tag" content="tunneling" />
+    <meta property="article:tag" content="guide" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="DNS Tunneling with Iodine" />
+    <meta name="twitter:description" content="A walkthrough on setting up iodine for DNS Tunneling" />
+    <meta name="twitter:url" content="https://jmpesp.me/dns-tunnelling-with-iodine/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="m0rv4i" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="iodine, dns, tunneling, guide" />
+    <meta name="twitter:site" content="@robjbone" />
+    <meta name="twitter:creator" content="@robjbone" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "jmpesp.me",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://jmpesp.me/content/images/2018/03/video-games-space-invaders--512.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "m0rv4i",
+        "url": "https://jmpesp.me/author/m0rv4i/",
+        "sameAs": [
+            "https://twitter.com/robjbone"
+        ]
+    },
+    "headline": "DNS Tunneling with Iodine",
+    "url": "https://jmpesp.me/dns-tunnelling-with-iodine/",
+    "datePublished": "2018-03-15T09:32:05.000Z",
+    "dateModified": "2018-03-16T19:43:54.000Z",
+    "keywords": "iodine, dns, tunneling, guide",
+    "description": "A walkthrough on setting up iodine for DNS Tunneling",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jmpesp.me/"
+    }
+}
+    </script>
+
+    <script type="text/javascript" src="/public/ghost-sdk.min.js?v=02ed25955f"></script>
+<script type="text/javascript">
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "87decb2496fb"
+});
+</script>
+    <meta name="generator" content="Ghost 1.21" />
+    <link rel="alternate" type="application/rss+xml" title="jmpesp.me" href="https://jmpesp.me/rss/" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115922097-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115922097-1');
+</script>
+
+</head>
+<body class="post-template tag-iodine tag-dns tag-tunneling tag-guide">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="https://jmpesp.me"><img src="/content/images/2018/03/video-games-space-invaders--512.png" alt="jmpesp.me" /></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="https://jmpesp.me/">Home</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+                <a class="social-link social-link-tw" href="https://twitter.com/robjbone" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/https://jmpesp.me/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post tag-iodine tag-dns tag-tunneling tag-guide no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2018-03-15">15 March 2018</time>
+                        <span class="date-divider">/</span> <a href="/tag/iodine/">iodine</a>
+                </section>
+                <h1 class="post-full-title">DNS Tunneling with Iodine</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><p align="center">
+<img alt="Image Description" src="/content/images/2018/03/flat-800x800-075-f.u2.jpg" style="width: 300px; height:300px;">
+</p>
+<p>I recently set up DNS Tunneling on one of my VPSs. This technology is incredibly useful for bypassing captive portals, filters etc. as DNS is required for internet usage so egress on port 53 is almost always allowed on a network.</p>
+<p>While sometimes these DNS requests are restricted to whitelisted servers or only for specific domains you will usually find that DNS is completely unrestricted and as always, if we control both ends of the pipe then we can tunnel data through it.</p>
+<p>We could just set up an SSH server or similar on port 53, but in some cases the protocol will be filtered and your tunnel will fail. Tunneling over DNS then, seems like the best option.</p>
+<h2 id="iodine">Iodine</h2>
+<p>To do this, we're going to use a tool called <a href="http://code.kryo.se/iodine/">iodine</a>. Iodine consists of a DNS daemon we run on our server that listens for incoming DNS requests and unwraps the tunneled data. We then have a client that we run on the, well, client, that handles the other side.</p>
+<p>The client sets up the tunnel and exposes the server as a new tunneled IP. We can then use this normally, but for full tunneling we'll want to connect to it using SSH to set up a dynamic proxy. So technically we're going to set up an SSH tunnel over a DNS tunnel!</p>
+<h2 id="registeringyourdnsserver">Registering your DNS server</h2>
+<p>The first step will be to register our server as a DNS server. To do this we'll need a domain. <a href="https://godaddy.com">GoDaddy</a> has some cheap domains and has a privacy option so that our personal details aren't exposed by <code>whois</code> domain lookups.</p>
+<p>Once we have a domain we must enter an NS record for it in the domain control panel such as:</p>
+<pre><code>t1		IN	NS	ourdomain.com.		; note the dot!
+</code></pre>
+<p>If you already have a domain and want to use a different server for your iodine server, you can set up a subdomain <strong>first</strong> and register the IP of the iodine server, then point the NS record to this subdomain instead.</p>
+<pre><code>t1		IN	NS	t1ns.ourdomain.com.		
+t1ns		IN	A	&lt;iodine-server-ip&gt;
+</code></pre>
+<p>This can take some time to propagate, but while it's doing so we can spend some time...</p>
+<h2 id="settingupthedaemon">Setting up the daemon</h2>
+<p>The next step is to install iodine on the server. If you're using a debian-based distribution like me you can just do this using <code>apt install iodine</code>.</p>
+<p>We can run the iodine daemon using the following command:</p>
+<pre><code>iodined -fcP secretpassword 10.0.1.1 ourdomain.com
+</code></pre>
+<p>where</p>
+<ul>
+<li><code>-f</code> option tells it to run in the foreground</li>
+<li><code>-c</code> disables checking the client IP address on all incoming requests, which can avoid some issues</li>
+<li><code>-P secretpassword</code> details the shared secret between the client and the server for authentication</li>
+<li><code>10.0.1.1</code> is the IP the server will be given on the client on the <strong>tun</strong> interface. The client will be given the next IP in the range.</li>
+<li><code>ourdomain.com</code> is the domain name of the DNS server we set up earlier.</li>
+</ul>
+<p>Alternatively, if we want to set up iodine to run on start up you can enable the service using:</p>
+<pre><code>update-rc.d iodine enable
+</code></pre>
+<p>and</p>
+<pre><code>service iodine start
+</code></pre>
+<p>to start the service now. This will silently fail however until we set up the arguments to the daemon in the <code>/etc/defaults/iodine</code> file. In this file, we have to set</p>
+<ul>
+<li><code>START_IODINED</code> to <strong>true</strong></li>
+<li><code>IODINED_ARGS</code> to <strong>-c 10.0.1.1 ourdomain.com</strong></li>
+<li><code>IODINED_PASSWORD</code> to <strong>secretpassword</strong></li>
+</ul>
+<p>Running the process as a service has the added benefit of running as the <strong>iodine</strong> user, which was added during its install.</p>
+<h2 id="checkingtheconfig">Checking the config</h2>
+<p>Once everything is in place, we can check our config using the <a href="http://code.kryo.se/iodine/check-it/">iodine check page</a>.</p>
+<p>If everything looks correct but it's still not working, check that our traffic isn't being caught by any firewalls etc on the server.</p>
+<h2 id="runningtheclient">Running the client</h2>
+<p>On the client machine we then just have to run the iodine client. We can install <strong>iodine</strong> in the same manner as above and then run:</p>
+<pre><code>iodine -fP secretpassword ourdomain.com
+</code></pre>
+<p>and we should see some output followed by <code>Connection setup complete, transmitting data.</code> The server is then exposed locally on the <strong>tun</strong> interface with the ip <strong>10.0.1.1</strong>. Our DNS tunnel is complete!</p>
+<h2 id="settinguptheproxy">Setting up the proxy</h2>
+<p>In order to have our browser or other tools use the tunnel, we have to set up a proxy. We're going to use SSH dynamic port fowarding to create a SOCKS proxy locally that will tunnel all traffic over SSH to our server, with SSH using the DNS tunnel.</p>
+<p>Needless to say we'll need an SSH daemon running on our server. I'm going to assume that's already the case and if not there are plenty of guides already out there on how to do that.</p>
+<p>We can then set up the proxy by issuing:</p>
+<pre><code>ssh -N -D 8080 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097c7a6c7b493839273927382738">[email&#160;protected]</a>
+</code></pre>
+<p>where</p>
+<ul>
+<li><code>-N</code> instructs SSH not to start a shell, as we're just wanting to create the proxy</li>
+<li><code>-D</code> sets up the dynamic port forwarding, with the SOCKS proxy on port 8080</li>
+<li><code>user</code> is a user on our server</li>
+<li><code>10.0.1.1</code> is our iodine server on the <strong>tun</strong> interface</li>
+</ul>
+<p>Once this is done, we can just use the proxy in our browser. This can be done using, for example, the <strong>FoxyProxy</strong> extension in Firefox or Chrome. If all is successful, you should be able to check your IP in the browser and get back the IP of your server.</p>
+<h2 id="winning">Winning</h2>
+<p>From here we're good to go! We can crack open a beer, sit back and enjoy our tunneled internets.</p>
+</div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+                <section class="author-card">
+                    <section class="author-card-content">
+                        <h4 class="author-card-name"><a href="/author/m0rv4i/">m0rv4i</a></h4>
+                            <p>Read <a href="/author/m0rv4i/">more posts</a> by this author.</p>
+                    </section>
+                </section>
+                <div class="post-full-footer-right">
+                    <a class="author-card-button" href="/author/m0rv4i/">Read More</a>
+                </div>
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="/docker-for-hackers/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">Docker for Hackers</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>I recently wrote a company blog post on Docker for Hackers. It's a short intro and guide to using Docker as a test platform for penetration testers and hackers, check it out!</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+            <span class="post-card-author"><a href="/author/m0rv4i/">m0rv4i</a></span>
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jmpesp.me">
+                <img src="/content/images/2018/03/video-games-space-invaders--256.png" alt="jmpesp.me icon" />
+            <span>jmpesp.me</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">DNS Tunneling with Iodine</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=DNS%20Tunneling%20with%20Iodine&amp;url=https://jmpesp.me/dns-tunnelling-with-iodine/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jmpesp.me/dns-tunnelling-with-iodine/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jmpesp.me">jmpesp.me</a> &copy; 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="https://jmpesp.me">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/robjbone" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script><script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=02ed25955f"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+
+    
+
+</body>
+</html>

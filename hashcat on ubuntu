@@ -1,0 +1,916 @@
+
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+
+<!-- wp_header -->
+<title>How to Build a Password Cracker with NVidia GTX 1080TI &amp; GTX 1070 - Black Hills Information Security</title>
+<!-- Jetpack Site Verification Tags -->
+<meta name="google-site-verification" content="UA-71314509-1" />
+
+<!-- This site is optimized with the Yoast SEO plugin v7.6.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to Build a Password Cracker with NVidia GTX 1080TI &amp; GTX 1070 - Black Hills Information Security" />
+<meta property="og:description" content="Kent R. Ickler // The Task Update our in-house password cracking/hashing capabilities. Purchase a new cracking machine Update the old cracking system Stay within budget. Buy The Things: ASUS X99-E WS/USB 3.1 LGA 2011-v3 Intel X99 SATA 6Gb/s USB 3.1 USB 3.0 CEB Intel Motherboard QTY 1: $515 https://www.newegg.com/Product/Product.aspx?Item=N82E16813182968 EVGA GeForce GTX 1080 Ti FE &hellip;" />
+<meta property="og:url" content="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/" />
+<meta property="og:site_name" content="Black Hills Information Security" />
+<meta property="article:publisher" content="https://www.facebook.com/BlackHillsInfoSec/" />
+<meta property="article:author" content="https://www.facebook.com/BlackHillsInfoSec/" />
+<meta property="article:tag" content="Build" />
+<meta property="article:tag" content="Hash" />
+<meta property="article:tag" content="Hashcat" />
+<meta property="article:tag" content="Hashcat Benchmarks" />
+<meta property="article:tag" content="Nvidia GTX 1070" />
+<meta property="article:tag" content="password" />
+<meta property="article:tag" content="Password Cracker" />
+<meta property="article:tag" content="Password cracking" />
+<meta property="article:tag" content="Summer2017" />
+<meta property="article:tag" content="The Kraken" />
+<meta property="article:section" content="Red Team" />
+<meta property="article:published_time" content="2017-06-20T09:17:15-06:00" />
+<meta property="article:modified_time" content="2018-01-23T13:07:53-06:00" />
+<meta property="og:updated_time" content="2018-01-23T13:07:53-06:00" />
+<meta property="og:image" content="https://www.blackhillsinfosec.com/wp-content/uploads/2017/06/pasted-image-0-1.png" />
+<meta property="og:image:secure_url" content="https://www.blackhillsinfosec.com/wp-content/uploads/2017/06/pasted-image-0-1.png" />
+<meta property="og:image:width" content="487" />
+<meta property="og:image:height" content="652" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Kent R. Ickler // The Task Update our in-house password cracking/hashing capabilities. Purchase a new cracking machine Update the old cracking system Stay within budget. Buy The Things: ASUS X99-E WS/USB 3.1 LGA 2011-v3 Intel X99 SATA 6Gb/s USB 3.1 USB 3.0 CEB Intel Motherboard QTY 1: $515 https://www.newegg.com/Product/Product.aspx?Item=N82E16813182968 EVGA GeForce GTX 1080 Ti FE [&hellip;]" />
+<meta name="twitter:title" content="How to Build a Password Cracker with NVidia GTX 1080TI &amp; GTX 1070 - Black Hills Information Security" />
+<meta name="twitter:site" content="@bhinfosecurity" />
+<meta name="twitter:image" content="https://www.blackhillsinfosec.com/wp-content/uploads/2017/06/pasted-image-0-1.png" />
+<meta name="twitter:creator" content="@bhinfosecurity" />
+<script type='application/ld+json'>{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/www.blackhillsinfosec.com\/","sameAs":["https:\/\/www.facebook.com\/BlackHillsInfoSec\/","https:\/\/www.linkedin.com\/company\/black-hills-information-security","https:\/\/twitter.com\/bhinfosecurity"],"@id":"https:\/\/www.blackhillsinfosec.com\/#organization","name":"Black Hills Information Security","logo":"https:\/\/www.blackhillsinfosec.com\/wp-content\/uploads\/2017\/03\/BHIS_l.jpg"}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Black Hills Information Security &raquo; Feed" href="https://www.blackhillsinfosec.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Black Hills Information Security &raquo; Comments Feed" href="https://www.blackhillsinfosec.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Black Hills Information Security &raquo; How to Build a Password Cracker with NVidia GTX 1080TI &#038; GTX 1070 Comments Feed" href="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.blackhillsinfosec.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.6"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='themify-common-css'  href='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/themify/css/themify.common.min.css?ver=4.9.6' type='text/css' media='all' />
+<meta name="themify-framework-css" content="themify-framework-css" id="themify-framework-css">
+<meta name="builder-styles-css" content="" id="builder-styles-css">
+<link rel='stylesheet' id='jetpack-widget-social-icons-styles-css'  href='https://www.blackhillsinfosec.com/wp-content/plugins/jetpack/modules/widgets/social-icons/social-icons.css?ver=20170506' type='text/css' media='all' />
+<link rel='stylesheet' id='theme-style-css'  href='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/style.min.css?ver=1.6.9' type='text/css' media='all' />
+<link rel='stylesheet' id='themify-media-queries-css'  href='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/media-queries.min.css?ver=1.6.9' type='text/css' media='all' />
+<link rel='stylesheet' id='themify-customize-css'  href='https://www.blackhillsinfosec.com/wp-content/uploads/themify-customizer.css?ver=18.01.01.17.35.37' type='text/css' media='all' />
+<link rel='stylesheet' id='themify-google-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%7COpen+Sans%3A400%2C300%2C600%2C700%7CCopse&#038;subset=latin&#038;ver=4.9.6' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://www.blackhillsinfosec.com/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://www.blackhillsinfosec.com/wp-content/plugins/jetpack/css/jetpack.css?ver=6.2.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.blackhillsinfosec.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.blackhillsinfosec.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.blackhillsinfosec.com/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20150408'></script>
+<link rel='https://api.w.org/' href='https://www.blackhillsinfosec.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.blackhillsinfosec.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.blackhillsinfosec.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.9.6" />
+<link rel='shortlink' href='https://wp.me/p7lxjP-1yH' />
+<link rel="alternate" type="application/json+oembed" href="https://www.blackhillsinfosec.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.blackhillsinfosec.com%2Fbuild-password-cracker-nvidia-gtx-1080ti-gtx-1070%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.blackhillsinfosec.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.blackhillsinfosec.com%2Fbuild-password-cracker-nvidia-gtx-1080ti-gtx-1070%2F&#038;format=xml" />
+<script type="text/javascript"><!--
+function powerpress_pinw(pinw_url){window.open(pinw_url, 'PowerPressPlayer','toolbar=0,status=0,resizable=1,width=460,height=320');	return false;}
+//-->
+</script>
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<style type='text/css'>img#wpstats{display:none}</style>
+
+
+
+<link href="//www.blackhillsinfosec.com/wp-content/uploads/2016/03/BHIS-favicon.png" rel="shortcut icon" /> 
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+<script>
+/** This JavaScript snippet is here for compatibility with the old Wix-style links.
+ *  It works in conjunction with the Redirection plugin to divert all old links to
+ *  their new homes. */
+if(window.location.hash.lastIndexOf('!', 1) == 1) {window.location = window.location.href.replace('#!', '?redirect-');}
+</script>
+<title> Black Hills Information Security </title>
+<meta property ="og:title" />
+<meta name="twitter:title"/>
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@bhinfosecurity">
+<meta name="twitter:title" >
+<meta name="twitter:description">
+<meta name="twitter:image">
+<script>
+jQuery(window).load(function(){
+	var $ = jQuery;
+	Themify.LoadAsync( 'https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js', function(){
+		var $body = $('body');
+		$( '.tilt-3d' ).each( function(){
+			var $panel = $( this );
+			var $pContent = $('.module-text', $panel),
+				$img = $('.module-image', $panel);
+
+			function initTilt() {
+				TweenMax.set([$pContent, $img], { transformStyle: "preserve-3d" });
+
+				$body.mousemove(function(e) {
+					var sxPos = ( e.pageX - $panel.offset().left ) / $panel.width() * 100 - 100;
+					var syPos = ( e.pageY - $panel.offset().top ) / $panel.height() * 100 - 100;
+					TweenMax.to($pContent, 2, {
+						rotationY: 0.03 * sxPos,
+						rotationX: -0.03 * syPos,
+						transformPerspective: 500,
+						transformOrigin: "center center -400",
+						ease: Expo.easeOut
+					});
+					TweenMax.to($img, 2, {
+						rotationY: 0.03 * sxPos,
+						rotationX: -0.03 * syPos,
+						transformPerspective: 500,
+						transformOrigin: "center center -200",
+						ease: Expo.easeOut
+					});
+				});
+			};
+
+			initTilt();
+		} );
+
+	} );
+});
+</script>	<script type="text/javascript">
+		var tf_mobile_menu_trigger_point = 900;
+	</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style>
+	@-webkit-keyframes themifyAnimatedBG {
+		0% { background-color: #7b9696; }
+100% { background-color: #accfce; }
+50% { background-color: #9cbfbe; }
+33.333333333333% { background-color: #7b9696; }
+25% { background-color: #9cbfbe; }
+
+	}
+	@keyframes themifyAnimatedBG {
+		0% { background-color: #7b9696; }
+100% { background-color: #accfce; }
+50% { background-color: #9cbfbe; }
+33.333333333333% { background-color: #7b9696; }
+25% { background-color: #9cbfbe; }
+
+	}
+	#footerwrap,.themify_builder_row.animated-bg {
+		-webkit-animation: themifyAnimatedBG 25000ms infinite alternate;
+		animation: themifyAnimatedBG 25000ms infinite alternate;
+	}
+	</style>
+				<style type="text/css" id="wp-custom-css">
+				/*
+Welcome to Custom CSS!
+
+To learn how this works, see http://wp.me/PEmnE-Bt
+*/
+pre {
+	width: 550px;
+	min-width: 120px;
+	padding: 1em;
+	background-color: #f2f2f2;
+	overflow: auto;
+	font-size: 12px;
+	line-height: 1.4em;
+	border: 1px solid #808080;
+	border-radius: .5em;
+}			</style>
+		
+</head>
+
+<body class="post-template-default single single-post postid-5995 single-format-standard themify-fw-3-5-8 themify-corporate-1-6-9 skin-default not-ie default_width sidebar1 no-home no-touch has-fixed-header fixed-header builder-parallax-scrolling-active">
+<script type="text/javascript">
+	function themifyMobileMenuTrigger(e) {
+		if( document.body.clientWidth > 0 && document.body.clientWidth <= tf_mobile_menu_trigger_point ) {
+			document.body.classList.add( 'mobile_menu_active' );
+		} else {
+			document.body.classList.remove( 'mobile_menu_active' );
+		}
+	}
+	themifyMobileMenuTrigger();
+	document.addEventListener( 'DOMContentLoaded', function () {
+		jQuery( window ).on('tfsmartresize.tf_mobile_menu', themifyMobileMenuTrigger );
+	}, false );
+</script>
+<div id="pagewrap" class="hfeed site">
+
+	<div id="headerwrap">
+
+		
+		<header id="header" class="pagewidth clearfix" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
+
+        	
+			<div class="logo-wrap">
+				<div id="site-logo"><a href="https://www.blackhillsinfosec.com" title="Black Hills Information Security"><img src="https://www.blackhillsinfosec.com/wp-content/uploads/2016/03/BHIS-logo-web.png" alt="Black Hills Information Security" title="Black Hills Information Security" /></a></div>														<div id="site-description" class="site-description"><span>Penetration testing for Fortune 50 companies since 2008</span></div>
+							</div>
+
+			<a id="menu-icon" href="#mobile-menu"><span class="menu-icon-inner"></span></a>
+			<div id="mobile-menu" class="sidemenu sidemenu-off">
+
+					<div class="social-widget">
+						
+													<div class="rss"><a href="https://www.blackhillsinfosec.com/feed/"></a></div>
+											</div>
+					<!-- /.social-widget -->
+
+					<div id="searchform-wrap">
+											</div>
+					<!-- /searchform-wrap -->
+
+					<nav id="main-nav-wrap" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement">
+						<ul id="main-nav" class="main-nav clearfix menu-name-bhis-menu"><li id="menu-item-8364" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-8364"><a href="https://www.blackhillsinfosec.com/who-we-are/">About Us</a>
+<ul class="sub-menu">
+	<li id="menu-item-5456" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5456"><a href="https://www.blackhillsinfosec.com/about/security-analysts/">Security Guides</a></li>
+	<li id="menu-item-5454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5454"><a href="https://www.blackhillsinfosec.com/about/admin-staff/">Admin</a></li>
+	<li id="menu-item-5452" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5452"><a href="https://www.blackhillsinfosec.com/about/bountyhunters/">Bounty Hunters</a></li>
+	<li id="menu-item-5580" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5580"><a href="https://www.blackhillsinfosec.com/about/interns/">Interns</a></li>
+</ul>
+</li>
+<li id="menu-item-4745" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4745"><a href="https://www.blackhillsinfosec.com/contact-us/">Contact</a>
+<ul class="sub-menu">
+	<li id="menu-item-4439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4439"><a href="https://www.blackhillsinfosec.com/contact-us/contact/">Contact: Sales &#038; Service</a></li>
+	<li id="menu-item-4573" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4573"><a href="https://www.blackhillsinfosec.com/contact-us/dev-team-contact/">Contact: Dev Team</a></li>
+	<li id="menu-item-4446" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4446"><a href="http://eepurl.com/cH5P1P">Sign-Up</a></li>
+</ul>
+</li>
+<li id="menu-item-4432" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4432"><a href="https://www.blackhillsinfosec.com/services/">Services</a>
+<ul class="sub-menu">
+	<li id="menu-item-4586" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4586"><a href="https://www.blackhillsinfosec.com/?page_id=4426">All Services</a></li>
+	<li id="menu-item-4561" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4561"><a href="https://www.blackhillsinfosec.com/services/red-teaming/">Red Teaming</a></li>
+	<li id="menu-item-5427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5427"><a href="https://www.blackhillsinfosec.com/pci-qsa/">PCI QSA</a></li>
+</ul>
+</li>
+<li id="menu-item-4433" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4433"><a href="https://www.blackhillsinfosec.com/projects/">Projects</a>
+<ul class="sub-menu">
+	<li id="menu-item-4587" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4587"><a href="https://www.blackhillsinfosec.com/?page_id=4415">All Projects</a></li>
+	<li id="menu-item-4437" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4437"><a href="https://www.blackhillsinfosec.com/projects/rita/">RITA</a></li>
+	<li id="menu-item-4435" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4435"><a href="https://www.blackhillsinfosec.com/projects/books/">Books</a></li>
+</ul>
+</li>
+<li id="menu-item-4442" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-has-children menu-item-4442"><a href="https://www.blackhillsinfosec.com/blog/">Blog</a>
+<ul class="sub-menu">
+	<li id="menu-item-4434" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4434"><a href="https://www.blackhillsinfosec.com/blog/webcasts/">Webcasts</a></li>
+	<li id="menu-item-8776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8776"><a href="https://www.blackhillsinfosec.com/podcasts/">Podcasts</a></li>
+	<li id="menu-item-4591" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4591"><a href="https://www.blackhillsinfosec.com/blog/presentations/">Presentations</a></li>
+	<li id="menu-item-4623" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4623"><a href="https://www.blackhillsinfosec.com/blog/hack-naked-tv/">Web Shows</a></li>
+</ul>
+</li>
+<li id="menu-item-5757" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5757"><a href="https://www.blackhillsinfosec.com/events/">Events</a>
+<ul class="sub-menu">
+	<li id="menu-item-6475" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6475"><a href="https://www.wildwesthackinfest.com/">Wild West Hackin&#8217; Fest</a></li>
+	<li id="menu-item-6104" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6104"><a href="https://www.blackhillsinfosec.com/t-shirt-archive/">T-shirt Archive</a></li>
+</ul>
+</li>
+</ul>						<!-- /#main-nav -->
+					</nav>
+
+					<a id="menu-icon-close" href="#"></a>
+
+			</div>
+			<!-- /#mobile-menu -->
+
+			
+		</header>
+		<!-- /#header -->
+
+        
+	</div>
+	<!-- /#headerwrap -->
+
+	<div id="body" class="clearfix">
+
+		
+
+
+<!-- layout-container -->
+<div id="layout" class="pagewidth clearfix">
+
+		<!-- content -->
+	<div id="content" class="list-post">
+    	
+		
+
+<article id="post-5995" class="post clearfix post-5995 type-post status-publish format-standard has-post-thumbnail hentry category-red-team category-tool-red-team tag-build tag-hash tag-hashcat tag-hashcat-benchmarks tag-nvidia-gtx-1070 tag-password tag-password-cracker tag-password-cracking tag-summer2017 tag-the-kraken has-post-title has-post-date has-post-category has-post-tag has-post-comment no-post-author ">
+	
+	
+			<div class="post-date-wrap">
+			<time datetime="2017-06-20" class="post-date entry-date updated">
+				<span class="day">20</span>
+				<span class="month">Jun</span>
+				<span class="year">2017</span>
+			</time>
+		</div>
+	
+	<div class="post-content">
+
+					<p class="post-meta entry-meta">
+
+				
+									 <span class="post-category"><a href="https://www.blackhillsinfosec.com/category/red-team/" rel="tag">Red Team</a>, <a href="https://www.blackhillsinfosec.com/category/red-team/tool-red-team/" rel="tag">Red Team Tools</a></span>				
+									 <span class="post-tag"><a href="https://www.blackhillsinfosec.com/tag/build/" rel="tag">Build</a>, <a href="https://www.blackhillsinfosec.com/tag/hash/" rel="tag">Hash</a>, <a href="https://www.blackhillsinfosec.com/tag/hashcat/" rel="tag">Hashcat</a>, <a href="https://www.blackhillsinfosec.com/tag/hashcat-benchmarks/" rel="tag">Hashcat Benchmarks</a>, <a href="https://www.blackhillsinfosec.com/tag/nvidia-gtx-1070/" rel="tag">Nvidia GTX 1070</a>, <a href="https://www.blackhillsinfosec.com/tag/password/" rel="tag">password</a>, <a href="https://www.blackhillsinfosec.com/tag/password-cracker/" rel="tag">Password Cracker</a>, <a href="https://www.blackhillsinfosec.com/tag/password-cracking/" rel="tag">Password cracking</a>, <a href="https://www.blackhillsinfosec.com/tag/summer2017/" rel="tag">Summer2017</a>, <a href="https://www.blackhillsinfosec.com/tag/the-kraken/" rel="tag">The Kraken</a></span>				
+				
+			</p>
+		
+					 <h1 class="post-title entry-title"><a href="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/">How to Build a Password Cracker with NVidia GTX 1080TI &#038; GTX 1070</a> </h1>		
+		<div class="entry-content">
+
+			
+				<p class="c2"><span class="c0"><a href="https://www.blackhillsinfosec.com/?team=kent-ickler">Kent R. Ickler</a> //</span></p>
+<p class="c2"><strong><span class="c3">The Task</span></strong></p>
+<ul>
+<li>Update our in-house password cracking/hashing capabilities.
+<ul>
+<li>Purchase a new cracking machine</li>
+<li>Update the old cracking system</li>
+</ul>
+</li>
+<li>Stay within budget.</li>
+</ul>
+<p class="c2"><strong><span class="c3">Buy The Things:</span></strong></p>
+<ul>
+<li><span class="c0">ASUS X99-E WS/USB 3.1 LGA 2011-v3 Intel X99 SATA 6Gb/s USB 3.1 USB 3.0 CEB Intel Motherboard<br />
+</span><span class="c0">QTY 1: $515<br />
+</span><span class="c0"><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16813182968" target="_blank" rel="noopener">https://www.newegg.com/Product/Product.aspx?Item=N82E16813182968</a></span></li>
+<li class="c4"><span class="c0">EVGA GeForce GTX 1080 Ti FE DirectX 12 11G-P4-6390-KR<br />
+</span><span class="c0">QTY 4 @ $700 ~$2800<br />
+</span><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16814487335"><span class="c0">https://www.newegg.com/Product/Product.aspx?Item=N82E16814487335</span></a></li>
+<li><span class="c0">Intel Core i7-6800K Broadwell-E 6-Core 3.4 GHz LGA 2011-v3 140W BX80671I76800K Desktop Processor<br />
+</span><span class="c0">QTY 1: $440<br />
+</span><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16819117649"><span class="c0">https://www.newegg.com/Product/Product.aspx?Item=N82E16819117649</span></a></li>
+<li><span class="c0">G.SKILL TridentZ Series 64GB (4 x 16GB) 288-Pin DDR4 SDRAM DDR4 3200 (PC4 25600) Intel X99 Platform Desktop Memory Model F4-3200C16Q-64GTZKO<br />
+</span><span class="c0">QTY 1: $509<br />
+</span><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16820232331"><span class="c0">https://www.newegg.com/Product/Product.aspx?Item=N82E16820232331</span></a></li>
+<li class="c4"><span class="c0">MasterAir Pro 4 CPU Air Cooler with Continuous Direct Contact Technology 2.0 by Cooler Master<br />
+</span><span class="c0">QTY 1: $46 **<br />
+</span><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16835103229"><span class="c0">https://www.newegg.com/Product/Product.aspx?Item=N82E16835103229</span></a></li>
+<li><span class="c0">Athena Power RM-4U8G525 Black SGCC (T=1.2mm) 4U Rackmount Server Case 2 External 5.25&#8243; Drive Bays &#8211; OEM<br />
+</span><span class="c0">QTY 1: $250<br />
+</span><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16811192442"><span class="c0">https://www.newegg.com/Product/Product.aspx?Item=N82E16811192442</span></a></li>
+<li class="c4"><span class="c0">Rosewill 1600W Modular Gaming Power Supply, Continuous @ 50 Degree C, 80 PLUS GOLD Certified, SLI &amp; CrossFire Ready &#8211; HERCULES-1600S<br />
+QTY 1: $350<br />
+</span><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16817182251"><span class="c0">https://www.newegg.com/Product/Product.aspx?Item=N82E16817182251</span></a></li>
+<li class="c4"><span class="c0">SAMSUNG 850 EVO 2.5&#8243; 500GB SATA III 3-D Vertical Internal Solid State Drive (SSD) MZ-75E500B/AM<br />
+QTY 1: $200 **<br />
+</span><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16820147373">https://www.newegg.com/Product/Product.aspx?Item=N82E16820147373</a></li>
+</ul>
+<p><em>Total for new password cracking machine<br />
+<span class="c0">$5110</span></em></p>
+<p class="c2"><strong><span class="c3">A Few Quick Lessons</span></strong></p>
+<p class="c2 c6">The CPU cooler doesn’t actually clear the case cover. This was OK because we don’t want to suffocate the GPU’s and I hadn’t planned on placing the cover on the unit anyway.  The case was specifically chosen as it was rack-mount with enough room for the motherboard to fit and properly support the four dual slot GPUs. A CPU cooler more fitting might be something like this: <a href="https://www.newegg.com/Product/Product.aspx?Item=9SIA1K65BT9403"><span class="c9">https://www.newegg.com/Product/Product.aspx?Item=9SIA1K65BT9403</span></a></p>
+<p class="c2 c6"><span class="c0">The motherboard selected was chosen in part for its support on the M.2 SSD support. Unfortunately, it doesn&#8217;t support SATA M.2, which was what I had mistakenly purchased. It does support PCIE M.2 for those looking. In the build list above, you will note I have replaced the data storage with a Samsung 500GB SSD. You’ll also notice in the photos that I have temporarily used a PNY SSD that we had “laying around”.</span></p>
+<p class="c2"><strong><span class="c3">The Build</span></strong></p>
+<p class="c2 c6"><span class="c0">Piecing the equipment together is pretty straight forward. The most complicated part was mounting the CPU cooler/fan. The cooler supports multiple CPU formats and consequently comes with multiple mounts that must be manipulated in such a way to work with the LGA 2011-v3 socket.</span></p>
+<p class="c2"><img class="aligncenter" title="" src="https://lh5.googleusercontent.com/DZMI0L3iCUrEbMrPmUpYChb4irqhpsR63TWwN80YlTAxjlVrV8rPqs1N3wQTOlYrsgV4ZUQScPPn3PgUnwfD5gVSDWulQKkv-XsN3NHULwtbAPN7w_l-TTk5t4Zx7dfkwO6eEQlV" alt="" /></p>
+<p class="c2" style="text-align: center;"><em><span class="c0">Motherboard</span></em></p>
+<p class="c2"><img class="aligncenter" title="" src="https://lh6.googleusercontent.com/zJnmFTmk8mu5HXGKOn8yECEutfWOpIItOTdC8HOrTdAMpt_wlK-YLcojwL5P7Sq7wCX8kdUBoTlIkpeWGAQepTNvmLEWva8ppSEN_ybQlRQGohHh_UMYQtkmcHLpDL2ocMQl9NwM" alt="" /></p>
+<p class="c2" style="text-align: center;"><em><span class="c0">Installing Motherboard in case  Note M.2 SATA installed (see above)</span></em></p>
+<p class="c2"><img class="aligncenter" title="" src="https://lh4.googleusercontent.com/nUs-sBQgHSuqRifpQU0h4HOsj7Dfg6NBxFlF9r7RniUXtjVGHi-slOdifRhFRKYk6-SSqrw6SE_lMp5s2yC7AZa2CavwyrEp41cnOThRG6bM7p5rQRWZ1A7G2MRT2MCwabKJ7JUN" alt="" /></p>
+<p class="c2" style="text-align: center;"><em><span class="c0">CPU &amp; CPU Fan fitment, note does not clear case top.</span></em></p>
+<p class="c2"><img class="aligncenter" title="" src="https://lh6.googleusercontent.com/ZVuRRs7qdxAGFvglWtjOVECUZyqDFY4RRnjCZ8B6czlAFghKCjAYNy45ELWmIPY8eG3JsbknXbKc8XMDbC9GtgIqrqZwlL0eizkM0md_UKJF4ECzolh9tz_kILBeG1mvpmVmi7bY" alt="" /></p>
+<p class="c2" style="text-align: center;"><em><span class="c0">Add Power Supply and Ram</span></em></p>
+<p class="c2"><img class="aligncenter" title="" src="https://lh5.googleusercontent.com/5Bn9r_k6MbJ1PGI5kKD3QcHV_EgLBMtiGflOCy3ZXp06y3yo1i0vtC5pgw7wV2hV9T-gww2NtkjF7Y1iGV_nZnF1c5DxKtuELawlgMZL9jYDAsmT87qhvmeL_UGMbweSjPfXLokc" alt="" /></p>
+<p class="c2" style="text-align: center;"><em><span class="c0">GPU’s to install</span></em></p>
+<p class="c2"><img class="aligncenter" title="" src="https://lh4.googleusercontent.com/3-ttxyUkam6hYVWf4L7ge2BdLIL533G-eYxtsNGu-boe6iPrfsbgwgLUWm3kyNSn75n064KmPLMaz4zzJOa_8I4sc0V6OODM58LGI6gLCBfqS6WsFgNIlifG_IsZi_FebDNDG3FN" alt="" /></p>
+<p class="c2" style="text-align: center;"><em><span class="c0">GPU Installed, ready to be cabled</span></em></p>
+<p class="c2"><img class="aligncenter" title="" src="https://lh6.googleusercontent.com/MatwMDfIZY7bhrac4h9e_EX-tVt_82bpEvRuBwCiWMM-BOI2mfz8Awnib6EYquWBuEaBdj6EIsr63acALEl3aZLSfwLNfbuHlcaPu1AYXpE2A4kxfYfEJwSTnLajAnYF5ROuOkTJ" alt="" /></p>
+<p class="c2" style="text-align: center;"><em><span class="c0">GPU’s cabled and readied.  Note PNY SSD (see above)</span></em></p>
+<p class="c2"><span class="c3"><strong>The Software</strong></span></p>
+<p class="c2"><em><span class="c3">Nvidia and Linux are happy together!</span></em></p>
+<ul>
+<li class="c2 c6"><span class="c0">Ubuntu 16.04 LTS server distro with full disk encryption </span></li>
+<li class="c2 c6"><span class="c0">Nvidia drivers directly from the Nvidia website </span></li>
+<li class="c2 c6"><span class="c0">Hashcat 3.5 </span></li>
+</ul>
+<p><span class="c0">This took about 15-30 minutes. The Nvidia driver&#8217;s worked great on Ubuntu 16.04 and I didn&#8217;t have any driver-headaches getting Hashcat to run.</span></p>
+<p><strong>The Older Brother</strong></p>
+<p class="c2"><em><span class="c3">Updating an older cracking-machine</span></em></p>
+<p class="c2 c6"><span class="c0"> We were under budget and used the excess funds to buy GPU’s to replace our old password cracking machine’s water-cooled AMD 290x’s. We chose to replace those 4 GPUs with Nvidia GTX 1070 Founders Edition.</span></p>
+<ul>
+<li class="c4 c6"><span class="c0">EVGA GeForce GTX 1070 08G-P4-6170-RX Founders Edition, 8GB GDDR5, LED, DX12 OSD Support (PXOC) Graphics Card<br />
+QTY4 @$400 ~ $1200<br />
+</span><a href="https://www.newegg.com/Product/Product.aspx?Item=N82E16814487326"><span class="c0">https://www.newegg.com/Product/Product.aspx?Item=N82E16814487326</span></a></li>
+</ul>
+<p class="c2"><strong><span class="c3">The Benchmark Numbers</span></strong></p>
+<p><span class="c0">The result of this project was a new password cracking machine capable of over 208GH/sec NTLM and a refurbished machine capable of an other 119 GH/sec NTLM.</span></p>
+<p>Combined, our password cracking/hashing capability just topped 327GH/sec for NTLM hashes. That&#8217;s 327,000,000,000 password attempts per second.<br />
+Not bad if comparing our investment to the $21,000 <a href="https://sagitta.pw/hardware/gpu-compute-nodes/brutalis/">Brutalis</a> that has been seeing 334 GH/sec.</p>
+<p>&nbsp;</p>
+<p class="c2"><strong><span class="c3">The Benchmark Previews</span></strong></p>
+<p><span class="c0">During the design and product selection, I was a bit annoyed by the lack of public benchmarks for the GTX 1080TI and GTX 1070 cards. Our next post will be exclusively listing our benchmarks from our two most powerful cracking rigs.</span></p>
+<p class="c2"><span class="c11">Full Benchmarks on the second part of this blog post!</span></p>
+<p>&nbsp;</p>
+<pre>OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce GTX 1080 Ti, 2793/11172 MB allocatable, 28MCU
+* Device #2: GeForce GTX 1080 Ti, 2793/11172 MB allocatable, 28MCU
+* Device #3: GeForce GTX 1080 Ti, 2793/11172 MB allocatable, 28MCU
+* Device #4: GeForce GTX 1080 Ti, 2792/11169 MB allocatable, 28MCU
+
+Hashtype: MD4
+
+Speed.Dev.#1.....: 53850.2 MH/s (69.76ms)
+Speed.Dev.#2.....: 54047.7 MH/s (69.51ms)
+Speed.Dev.#3.....: 52955.5 MH/s (70.94ms)
+Speed.Dev.#4.....: 53750.1 MH/s (69.86ms)
+Speed.Dev.#*.....:   214.6 GH/s
+
+Hashtype: MD5
+
+Speed.Dev.#1.....: 31103.4 MH/s (60.39ms)
+Speed.Dev.#2.....: 31676.5 MH/s (59.26ms)
+Speed.Dev.#3.....: 30600.9 MH/s (61.33ms)
+Speed.Dev.#4.....: 31198.4 MH/s (60.20ms)
+Speed.Dev.#*.....:   124.6 GH/s
+
+</pre>
+<pre>OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce GTX 1070, 2028/8112 MB allocatable, 15MCU
+* Device #2: GeForce GTX 1070, 2028/8114 MB allocatable, 15MCU
+* Device #3: GeForce GTX 1070, 2028/8114 MB allocatable, 15MCU
+* Device #4: GeForce GTX 1070, 2028/8114 MB allocatable, 15MCU
+
+Hashtype: MD4
+
+Speed.Dev.#1.....: 33622.2 MH/s (59.85ms)
+Speed.Dev.#2.....: 32953.6 MH/s (61.07ms)
+Speed.Dev.#3.....: 33108.6 MH/s (60.78ms)
+Speed.Dev.#4.....: 34089.1 MH/s (59.02ms)
+Speed.Dev.#*.....:   133.8 GH/s
+
+Hashtype: MD5
+
+Speed.Dev.#1.....: 18534.9 MH/s (54.28ms)
+Speed.Dev.#2.....: 17880.8 MH/s (55.68ms)
+Speed.Dev.#3.....: 18188.7 MH/s (55.32ms)
+Speed.Dev.#4.....: 18401.1 MH/s (54.66ms)
+Speed.Dev.#*.....: 73005.5 MH/s</pre>
+<p class="c2" style="text-align: center;"><em style="text-align: center;"><span class="c0"><br />
+Top: Nvidia 1080TIs password cracker</span></em><img class="aligncenter" title="" src="https://lh6.googleusercontent.com/LH8c_3d-jRqUSnIOxyZiLnehDT60yd5N8u3rMpjbFX056dMqkx6PFJ4GZirysYqW3x5pCSCAcZ-OC0_qktImqJterXkm3WbzIw9tHbg4rX9Cu5mPEeqZk5vSuUM2GviRUs8ZyoEb" alt="" /></p>
+<p class="c2" style="text-align: center;"><em><span class="c0">Bottom: Nvidia GTX 1070 password cracker</span></em></p>
+<p class="c2"><strong><span class="c0">The Links</span></strong></p>
+<p class="c2">Hashcat: <a href="https://hashcat.net/">https://hashcat.net/</a></p>
+<p class="c2">NVidia Drivers: <a href="http://www.nvidia.com/Download/index.aspx"><span class="c9">http://www.nvidia.com/Download/index.aspx</span></a></p>
+<p class="c2">Ubuntu 16.04: <a href="https://www.ubuntu.com/download/server"><span class="c9">https://www.ubuntu.com/download/server</span></a></p>
+<p class="c2"><span class="c0">Benchmark</span>s:<a href="https://www.blackhillsinfosec.com/?p=6000">Here!</a></p>
+<p>______</p>
+<p><span class="c0">Follow Kent on Twitter <a href="http://www.twitter.com/Krelkci">@Krelkci</a></span></p>
+<div id="themify_builder_content-5995" data-postid="5995" class="themify_builder_content themify_builder_content-5995 themify_builder">
+
+    </div>
+<!-- /themify_builder_content --><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-5995" class="share-twitter sd-button share-icon no-text" href="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-5995" class="share-linkedin sd-button share-icon no-text" href="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span></span><span class="sharing-screen-reader-text">Click to share on LinkedIn (Opens in new window)</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-5995" class="share-facebook sd-button share-icon no-text" href="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon no-text" href="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/#print" target="_blank" title="Click to print"><span></span><span class="sharing-screen-reader-text">Click to print (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>
+			
+		</div><!-- /.entry-content -->
+
+		
+	</div>
+	<!-- /.post-content -->
+	
+</article>
+<!-- /.post -->
+
+		
+		
+		
+		<div class="post-nav clearfix">
+			<span class="prev"><a href="https://www.blackhillsinfosec.com/__trashed/" rel="prev"><span class="arrow"></span> WEBCAST: A Powerful New Tool &#8211; PowerLine!</a></span>			<span class="next"><a href="https://www.blackhillsinfosec.com/hashcat-benchmarks-nvidia-gtx-1080ti-gtx-1070-hashcat-benchmarks/" rel="next"><span class="arrow"></span> Hashcat Benchmarks for Nvidia GTX 1080TI &#038; GTX 1070 Hashcat Benchmarks</a></span>		</div>
+		<!-- /.post-nav -->
+
+	
+					
+
+		
+			</div>
+	<!-- /content -->
+    
+
+    
+    <aside id="sidebar" itemscope="itemscope" itemtype="https://schema.org/WPSidebar">
+
+            
+            <div id="themify-social-links-1007" class="widget themify-social-links"><h4 class="widgettitle">Follow Us</h4><ul class="social-links horizontal">
+							<li class="social-link-item facebook font-icon icon-medium">
+								<a href="https://www.facebook.com/BlackHillsInfoSec" ><i class="fa fa-facebook-square" style="color: #000000;"></i>  </a>
+							</li>
+							<!-- /themify-link-item -->
+							<li class="social-link-item twitter font-icon icon-medium">
+								<a href="http://twitter.com/BHinfoSecurity" ><i class="fa fa-twitter-square" style="color: #000000;"></i>  </a>
+							</li>
+							<!-- /themify-link-item -->
+							<li class="social-link-item linkedin font-icon icon-medium">
+								<a href="http://www.linkedin.com/company/black-hills-information-security" ><i class="fa fa-linkedin-square" style="color: #000000;"></i>  </a>
+							</li>
+							<!-- /themify-link-item -->
+							<li class="social-link-item youtube font-icon icon-medium">
+								<a href="https://www.youtube.com/channel/UCJ2U9Dq9NckqHMbcUupgF0A?nohtml5=False" ><i class="fa fa-youtube-square" style="color: #000000;"></i>  </a>
+							</li>
+							<!-- /themify-link-item --></ul></div><div id="media_image-2" class="widget widget_media_image"><a href="https://www.blackhillsinfosec.com/30-things-to-get-you-started/"><img width="300" height="300" src="https://www.blackhillsinfosec.com/wp-content/uploads/2018/05/start-here-widget-300x300.png" class="image wp-image-8600  attachment-medium size-medium" alt="" style="max-width: 100%; height: auto;" srcset="https://www.blackhillsinfosec.com/wp-content/uploads/2018/05/start-here-widget-300x300.png 300w, https://www.blackhillsinfosec.com/wp-content/uploads/2018/05/start-here-widget-150x150.png 150w, https://www.blackhillsinfosec.com/wp-content/uploads/2018/05/start-here-widget.png 350w" sizes="(max-width: 300px) 100vw, 300px" /></a></div><div id="search-3" class="widget widget_search"><h4 class="widgettitle">Looking For Something?</h4><form method="get" id="searchform" action="https://www.blackhillsinfosec.com/">
+
+	<i class="icon-search"></i>
+
+	<input type="text" name="s" id="s" title="Search" value="" />
+
+</form></div><div id="blog_subscription-2" class="widget jetpack_subscription_widget"><h4 class="widgettitle">Subscribe to the BHISblog</h4>
+			<form action="#" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-2">
+				<div id="subscribe-text"><p>Don't get left in the dark! Enter your email address and every time a post goes live you'll get instant notification! We'll also add you to our webcast list, so you won't miss our occasional emails about upcoming events! (We promise, we're not spammy!)</p>
+</div>					<p id="subscribe-email">
+						<label id="jetpack-subscribe-label" for="subscribe-field-blog_subscription-2">
+							Email Address						</label>
+						<input type="email" name="email" required="required" class="required" value="" id="subscribe-field-blog_subscription-2" placeholder="Email Address" />
+					</p>
+
+					<p id="subscribe-submit">
+						<input type="hidden" name="action" value="subscribe" />
+						<input type="hidden" name="source" value="https://www.blackhillsinfosec.com/build-password-cracker-nvidia-gtx-1080ti-gtx-1070/" />
+						<input type="hidden" name="sub-type" value="widget" />
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-2" />
+												<input type="submit" value="Subscribe" name="jetpack_subscriptions_widget" />
+					</p>
+							</form>
+
+			<script>
+			/*
+			Custom functionality for safari and IE
+			 */
+			(function( d ) {
+				// In case the placeholder functionality is available we remove labels
+				if ( ( 'placeholder' in d.createElement( 'input' ) ) ) {
+					var label = d.querySelector( 'label[for=subscribe-field-blog_subscription-2]' );
+						label.style.clip 	 = 'rect(1px, 1px, 1px, 1px)';
+						label.style.position = 'absolute';
+						label.style.height   = '1px';
+						label.style.width    = '1px';
+						label.style.overflow = 'hidden';
+				}
+
+				// Make sure the email value is filled in before allowing submit
+				var form = d.getElementById('subscribe-blog-blog_subscription-2'),
+					input = d.getElementById('subscribe-field-blog_subscription-2'),
+					handler = function( event ) {
+						if ( '' === input.value ) {
+							input.focus();
+
+							if ( event.preventDefault ){
+								event.preventDefault();
+							}
+
+							return false;
+						}
+					};
+
+				if ( window.addEventListener ) {
+					form.addEventListener( 'submit', handler, false );
+				} else {
+					form.attachEvent( 'onsubmit', handler );
+				}
+			})( document );
+			</script>
+				
+</div><div id="themify-list-categories-2" class="widget list-categories"><h4 class="widgettitle">Browse by category</h4><select  name='cat' id='themify-list-categories-2-cats' class='postform' >
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="994">Blue Team&nbsp;&nbsp;(39)</option>
+	<option class="level-0" value="1003">Blue Team Tools&nbsp;&nbsp;(20)</option>
+	<option class="level-0" value="1001">C2&nbsp;&nbsp;(21)</option>
+	<option class="level-0" value="1008">External/Internal&nbsp;&nbsp;(39)</option>
+	<option class="level-0" value="1095">Finding&nbsp;&nbsp;(2)</option>
+	<option class="level-0" value="993">Fun &amp; Games&nbsp;&nbsp;(17)</option>
+	<option class="level-0" value="991">General InfoSec Tips &amp; Tricks&nbsp;&nbsp;(18)</option>
+	<option class="level-0" value="28">How-To&nbsp;&nbsp;(53)</option>
+	<option class="level-0" value="1004">Hunt Teaming&nbsp;&nbsp;(6)</option>
+	<option class="level-0" value="252">Informational&nbsp;&nbsp;(18)</option>
+	<option class="level-0" value="990">InfoSec 101&nbsp;&nbsp;(45)</option>
+	<option class="level-0" value="1018">InfoSec 201&nbsp;&nbsp;(28)</option>
+	<option class="level-0" value="1019">InfoSec 301&nbsp;&nbsp;(9)</option>
+	<option class="level-0" value="1011">Mobile&nbsp;&nbsp;(3)</option>
+	<option class="level-0" value="4">News&nbsp;&nbsp;(16)</option>
+	<option class="level-0" value="1078">Password Cracking&nbsp;&nbsp;(3)</option>
+	<option class="level-0" value="1012">Password Spray&nbsp;&nbsp;(5)</option>
+	<option class="level-0" value="1006">Phishing&nbsp;&nbsp;(7)</option>
+	<option class="level-0" value="999">Physical&nbsp;&nbsp;(6)</option>
+	<option class="level-0" value="1109">Podcasts&nbsp;&nbsp;(3)</option>
+	<option class="level-0" value="1007">Recon&nbsp;&nbsp;(4)</option>
+	<option class="level-0" value="998">Red Team&nbsp;&nbsp;(127)</option>
+	<option class="level-0" value="1002">Red Team Tools&nbsp;&nbsp;(46)</option>
+	<option class="level-0" value="1010">Social Engineering&nbsp;&nbsp;(3)</option>
+	<option class="level-0" value="1009">Web App&nbsp;&nbsp;(12)</option>
+	<option class="level-0" value="421">Webcasts&nbsp;&nbsp;(42)</option>
+	<option class="level-0" value="1005">Wireless&nbsp;&nbsp;(6)</option>
+</select>
+		
+			<script type='text/javascript'>
+			/* <![CDATA[ */
+				function onCatChange() {
+					var dropdown = document.getElementById('themify-list-categories-2-cats'),
+						catSelected = dropdown.options[dropdown.selectedIndex].value;
+					if ( catSelected > 0 ) {
+						location.href = "https://www.blackhillsinfosec.com/?cat="+catSelected;
+					}
+				}
+				document.getElementById('themify-list-categories-2-cats').onchange = onCatChange;
+			/* ]]> */
+			</script>
+		
+		</div><div id="themify-feature-posts-1004" class="widget feature-posts"><h4 class="widgettitle">Recent Posts</h4><ul class="feature-posts-list"><li><a aria-hidden="true" href="https://www.blackhillsinfosec.com/running-hashcat-on-ubuntu-18-04-server-with-1080ti/"><img src="https://www.blackhillsinfosec.com/wp-content/uploads/2018/06/hashcat-ubuntu-small-50x50.jpg" width="50" height="50" class="post-img wp-post-image wp-image-8872" alt="" srcset="https://www.blackhillsinfosec.com/wp-content/uploads/2018/06/hashcat-ubuntu-small-50x50.jpg 50w, https://www.blackhillsinfosec.com/wp-content/uploads/2018/06/hashcat-ubuntu-small-150x150.jpg 150w, https://www.blackhillsinfosec.com/wp-content/uploads/2018/06/hashcat-ubuntu-small-221x221.jpg 221w" sizes="(max-width: 50px) 100vw, 50px" /></a><a href="https://www.blackhillsinfosec.com/running-hashcat-on-ubuntu-18-04-server-with-1080ti/" class="feature-posts-title">Running HashCat on Ubuntu 18.04 Server with 1080TI</a> <br /><span class="post-excerpt">Derrick Rauch and Kent Ickler// First, to see what our</span></li><li><a aria-hidden="true" href="https://www.blackhillsinfosec.com/cors-lite/"><img src="https://www.blackhillsinfosec.com/wp-content/uploads/2018/06/CORS-Lite-blog-50x50.jpg" width="50" height="50" class="post-img wp-post-image wp-image-8855" alt="CORS Lite blog" srcset="https://www.blackhillsinfosec.com/wp-content/uploads/2018/06/CORS-Lite-blog-50x50.jpg 50w, https://www.blackhillsinfosec.com/wp-content/uploads/2018/06/CORS-Lite-blog-150x150.jpg 150w, https://www.blackhillsinfosec.com/wp-content/uploads/2018/06/CORS-Lite-blog-221x221.jpg 221w" sizes="(max-width: 50px) 100vw, 50px" /></a><a href="https://www.blackhillsinfosec.com/cors-lite/" class="feature-posts-title">CORS Lite</a> <br /><span class="post-excerpt">Dakota Nelson// Cross Origin Request Sharing (CORS) is</span></li><li><a href="https://www.blackhillsinfosec.com/podcast-testing-g-suites-with-mailsniper/" class="feature-posts-title">PODCAST: Testing G Suites with MailSniper</a> <br /><span class="post-excerpt">Matt Toussain goes through how Mailsniper can be the</span></li></ul></div><div id="tag_cloud-2" class="widget widget_tag_cloud"><h4 class="widgettitle">Browse by topic</h4><div class="tagcloud"><a href="https://www.blackhillsinfosec.com/tag/anti-virus/" class="tag-cloud-link tag-link-163 tag-link-position-1" style="font-size: 13.911111111111pt;" aria-label="anti-virus (11 items)">anti-virus</a>
+<a href="https://www.blackhillsinfosec.com/tag/av/" class="tag-cloud-link tag-link-53 tag-link-position-2" style="font-size: 13.911111111111pt;" aria-label="AV (11 items)">AV</a>
+<a href="https://www.blackhillsinfosec.com/tag/av-bypass/" class="tag-cloud-link tag-link-633 tag-link-position-3" style="font-size: 9.2444444444444pt;" aria-label="AV bypass (5 items)">AV bypass</a>
+<a href="https://www.blackhillsinfosec.com/tag/blue-team/" class="tag-cloud-link tag-link-44 tag-link-position-4" style="font-size: 13.288888888889pt;" aria-label="Blue Team (10 items)">Blue Team</a>
+<a href="https://www.blackhillsinfosec.com/tag/burp/" class="tag-cloud-link tag-link-66 tag-link-position-5" style="font-size: 8pt;" aria-label="Burp (4 items)">Burp</a>
+<a href="https://www.blackhillsinfosec.com/tag/bypassing-av/" class="tag-cloud-link tag-link-205 tag-link-position-6" style="font-size: 11.111111111111pt;" aria-label="bypassing AV (7 items)">bypassing AV</a>
+<a href="https://www.blackhillsinfosec.com/tag/c2/" class="tag-cloud-link tag-link-166 tag-link-position-7" style="font-size: 14.377777777778pt;" aria-label="C2 (12 items)">C2</a>
+<a href="https://www.blackhillsinfosec.com/tag/cylance/" class="tag-cloud-link tag-link-722 tag-link-position-8" style="font-size: 9.2444444444444pt;" aria-label="Cylance (5 items)">Cylance</a>
+<a href="https://www.blackhillsinfosec.com/tag/digital-ocean/" class="tag-cloud-link tag-link-556 tag-link-position-9" style="font-size: 10.333333333333pt;" aria-label="Digital Ocean (6 items)">Digital Ocean</a>
+<a href="https://www.blackhillsinfosec.com/tag/encryption/" class="tag-cloud-link tag-link-73 tag-link-position-10" style="font-size: 10.333333333333pt;" aria-label="encryption (6 items)">encryption</a>
+<a href="https://www.blackhillsinfosec.com/tag/hacking/" class="tag-cloud-link tag-link-80 tag-link-position-11" style="font-size: 9.2444444444444pt;" aria-label="hacking (5 items)">hacking</a>
+<a href="https://www.blackhillsinfosec.com/tag/hardware-hacking/" class="tag-cloud-link tag-link-398 tag-link-position-12" style="font-size: 9.2444444444444pt;" aria-label="hardware hacking (5 items)">hardware hacking</a>
+<a href="https://www.blackhillsinfosec.com/tag/hashcat/" class="tag-cloud-link tag-link-794 tag-link-position-13" style="font-size: 10.333333333333pt;" aria-label="Hashcat (6 items)">Hashcat</a>
+<a href="https://www.blackhillsinfosec.com/tag/infosec/" class="tag-cloud-link tag-link-130 tag-link-position-14" style="font-size: 13.288888888889pt;" aria-label="infosec (10 items)">infosec</a>
+<a href="https://www.blackhillsinfosec.com/tag/it-security/" class="tag-cloud-link tag-link-37 tag-link-position-15" style="font-size: 8pt;" aria-label="it security (4 items)">it security</a>
+<a href="https://www.blackhillsinfosec.com/tag/linux/" class="tag-cloud-link tag-link-107 tag-link-position-16" style="font-size: 11.888888888889pt;" aria-label="Linux (8 items)">Linux</a>
+<a href="https://www.blackhillsinfosec.com/tag/mailsniper/" class="tag-cloud-link tag-link-504 tag-link-position-17" style="font-size: 10.333333333333pt;" aria-label="MailSniper (6 items)">MailSniper</a>
+<a href="https://www.blackhillsinfosec.com/tag/microsoft/" class="tag-cloud-link tag-link-318 tag-link-position-18" style="font-size: 13.288888888889pt;" aria-label="Microsoft (10 items)">Microsoft</a>
+<a href="https://www.blackhillsinfosec.com/tag/ms-word/" class="tag-cloud-link tag-link-551 tag-link-position-19" style="font-size: 8pt;" aria-label="MS Word (4 items)">MS Word</a>
+<a href="https://www.blackhillsinfosec.com/tag/nessus/" class="tag-cloud-link tag-link-49 tag-link-position-20" style="font-size: 9.2444444444444pt;" aria-label="Nessus (5 items)">Nessus</a>
+<a href="https://www.blackhillsinfosec.com/tag/nmap/" class="tag-cloud-link tag-link-263 tag-link-position-21" style="font-size: 8pt;" aria-label="Nmap (4 items)">Nmap</a>
+<a href="https://www.blackhillsinfosec.com/tag/outlook/" class="tag-cloud-link tag-link-549 tag-link-position-22" style="font-size: 8pt;" aria-label="Outlook (4 items)">Outlook</a>
+<a href="https://www.blackhillsinfosec.com/tag/owa/" class="tag-cloud-link tag-link-505 tag-link-position-23" style="font-size: 10.333333333333pt;" aria-label="OWA (6 items)">OWA</a>
+<a href="https://www.blackhillsinfosec.com/tag/password/" class="tag-cloud-link tag-link-111 tag-link-position-24" style="font-size: 10.333333333333pt;" aria-label="password (6 items)">password</a>
+<a href="https://www.blackhillsinfosec.com/tag/passwords/" class="tag-cloud-link tag-link-72 tag-link-position-25" style="font-size: 14.377777777778pt;" aria-label="passwords (12 items)">passwords</a>
+<a href="https://www.blackhillsinfosec.com/tag/password-spraying/" class="tag-cloud-link tag-link-57 tag-link-position-26" style="font-size: 11.111111111111pt;" aria-label="password spraying (7 items)">password spraying</a>
+<a href="https://www.blackhillsinfosec.com/tag/pen-testing/" class="tag-cloud-link tag-link-102 tag-link-position-27" style="font-size: 17.644444444444pt;" aria-label="pen-testing (20 items)">pen-testing</a>
+<a href="https://www.blackhillsinfosec.com/tag/penetration-testing/" class="tag-cloud-link tag-link-101 tag-link-position-28" style="font-size: 16.711111111111pt;" aria-label="penetration testing (17 items)">penetration testing</a>
+<a href="https://www.blackhillsinfosec.com/tag/pentest/" class="tag-cloud-link tag-link-114 tag-link-position-29" style="font-size: 12.666666666667pt;" aria-label="pentest (9 items)">pentest</a>
+<a href="https://www.blackhillsinfosec.com/tag/pentesting/" class="tag-cloud-link tag-link-67 tag-link-position-30" style="font-size: 22pt;" aria-label="Pentesting (39 items)">Pentesting</a>
+<a href="https://www.blackhillsinfosec.com/tag/phishing/" class="tag-cloud-link tag-link-260 tag-link-position-31" style="font-size: 11.111111111111pt;" aria-label="phishing (7 items)">phishing</a>
+<a href="https://www.blackhillsinfosec.com/tag/powershell/" class="tag-cloud-link tag-link-240 tag-link-position-32" style="font-size: 17.022222222222pt;" aria-label="PowerShell (18 items)">PowerShell</a>
+<a href="https://www.blackhillsinfosec.com/tag/privacy/" class="tag-cloud-link tag-link-245 tag-link-position-33" style="font-size: 9.2444444444444pt;" aria-label="privacy (5 items)">privacy</a>
+<a href="https://www.blackhillsinfosec.com/tag/red-team/" class="tag-cloud-link tag-link-43 tag-link-position-34" style="font-size: 13.911111111111pt;" aria-label="Red Team (11 items)">Red Team</a>
+<a href="https://www.blackhillsinfosec.com/tag/red-teaming/" class="tag-cloud-link tag-link-273 tag-link-position-35" style="font-size: 12.666666666667pt;" aria-label="red teaming (9 items)">red teaming</a>
+<a href="https://www.blackhillsinfosec.com/tag/social-engineering/" class="tag-cloud-link tag-link-261 tag-link-position-36" style="font-size: 10.333333333333pt;" aria-label="social engineering (6 items)">social engineering</a>
+<a href="https://www.blackhillsinfosec.com/tag/steganography/" class="tag-cloud-link tag-link-517 tag-link-position-37" style="font-size: 8pt;" aria-label="steganography (4 items)">steganography</a>
+<a href="https://www.blackhillsinfosec.com/tag/tool/" class="tag-cloud-link tag-link-681 tag-link-position-38" style="font-size: 10.333333333333pt;" aria-label="tool (6 items)">tool</a>
+<a href="https://www.blackhillsinfosec.com/tag/tools/" class="tag-cloud-link tag-link-221 tag-link-position-39" style="font-size: 10.333333333333pt;" aria-label="tools (6 items)">tools</a>
+<a href="https://www.blackhillsinfosec.com/tag/ubuntu/" class="tag-cloud-link tag-link-757 tag-link-position-40" style="font-size: 9.2444444444444pt;" aria-label="Ubuntu (5 items)">Ubuntu</a>
+<a href="https://www.blackhillsinfosec.com/tag/vpn/" class="tag-cloud-link tag-link-341 tag-link-position-41" style="font-size: 9.2444444444444pt;" aria-label="VPN (5 items)">VPN</a>
+<a href="https://www.blackhillsinfosec.com/tag/vulnerabilities/" class="tag-cloud-link tag-link-50 tag-link-position-42" style="font-size: 9.2444444444444pt;" aria-label="Vulnerabilities (5 items)">Vulnerabilities</a>
+<a href="https://www.blackhillsinfosec.com/tag/webcast/" class="tag-cloud-link tag-link-604 tag-link-position-43" style="font-size: 19.044444444444pt;" aria-label="webcast (25 items)">webcast</a>
+<a href="https://www.blackhillsinfosec.com/tag/webcasts/" class="tag-cloud-link tag-link-664 tag-link-position-44" style="font-size: 13.911111111111pt;" aria-label="webcasts (11 items)">webcasts</a>
+<a href="https://www.blackhillsinfosec.com/tag/windows/" class="tag-cloud-link tag-link-411 tag-link-position-45" style="font-size: 10.333333333333pt;" aria-label="Windows (6 items)">Windows</a></div>
+</div><div id="archives-3" class="widget widget_archive"><h4 class="widgettitle">Archives</h4>		<label class="screen-reader-text" for="archives-dropdown-3">Archives</label>
+		<select id="archives-dropdown-3" name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'>
+			
+			<option value="">Select Month</option>
+				<option value='https://www.blackhillsinfosec.com/2018/06/'> June 2018 &nbsp;(11)</option>
+	<option value='https://www.blackhillsinfosec.com/2018/05/'> May 2018 &nbsp;(10)</option>
+	<option value='https://www.blackhillsinfosec.com/2018/04/'> April 2018 &nbsp;(9)</option>
+	<option value='https://www.blackhillsinfosec.com/2018/03/'> March 2018 &nbsp;(10)</option>
+	<option value='https://www.blackhillsinfosec.com/2018/02/'> February 2018 &nbsp;(9)</option>
+	<option value='https://www.blackhillsinfosec.com/2018/01/'> January 2018 &nbsp;(7)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/12/'> December 2017 &nbsp;(7)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/11/'> November 2017 &nbsp;(8)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/10/'> October 2017 &nbsp;(9)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/09/'> September 2017 &nbsp;(8)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/08/'> August 2017 &nbsp;(10)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/07/'> July 2017 &nbsp;(9)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/06/'> June 2017 &nbsp;(7)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/05/'> May 2017 &nbsp;(6)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/04/'> April 2017 &nbsp;(9)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/03/'> March 2017 &nbsp;(13)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/02/'> February 2017 &nbsp;(8)</option>
+	<option value='https://www.blackhillsinfosec.com/2017/01/'> January 2017 &nbsp;(12)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/12/'> December 2016 &nbsp;(10)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/11/'> November 2016 &nbsp;(15)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/10/'> October 2016 &nbsp;(11)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/09/'> September 2016 &nbsp;(12)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/08/'> August 2016 &nbsp;(13)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/07/'> July 2016 &nbsp;(12)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/06/'> June 2016 &nbsp;(12)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/05/'> May 2016 &nbsp;(11)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/04/'> April 2016 &nbsp;(12)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/03/'> March 2016 &nbsp;(12)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/02/'> February 2016 &nbsp;(10)</option>
+	<option value='https://www.blackhillsinfosec.com/2016/01/'> January 2016 &nbsp;(8)</option>
+	<option value='https://www.blackhillsinfosec.com/2015/12/'> December 2015 &nbsp;(5)</option>
+	<option value='https://www.blackhillsinfosec.com/2015/11/'> November 2015 &nbsp;(2)</option>
+	<option value='https://www.blackhillsinfosec.com/2015/10/'> October 2015 &nbsp;(2)</option>
+	<option value='https://www.blackhillsinfosec.com/2015/08/'> August 2015 &nbsp;(1)</option>
+	<option value='https://www.blackhillsinfosec.com/2015/07/'> July 2015 &nbsp;(3)</option>
+	<option value='https://www.blackhillsinfosec.com/2015/06/'> June 2015 &nbsp;(1)</option>
+	<option value='https://www.blackhillsinfosec.com/2015/04/'> April 2015 &nbsp;(1)</option>
+	<option value='https://www.blackhillsinfosec.com/2015/03/'> March 2015 &nbsp;(1)</option>
+
+		</select>
+		</div>
+            
+    </aside>
+    <!-- /#sidebar -->
+
+    
+</div>
+<!-- /layout-container -->
+
+
+	    </div>
+	<!-- /body -->
+
+	<div id="footerwrap">
+
+		<div id="footer-inner">
+
+						<footer id="footer" class="pagewidth" itemscope="itemscope" itemtype="https://schema.org/WPFooter">
+				
+				<div class="back-top clearfix">
+					<div class="arrow-up">
+						<a href="#header"></a>
+					</div>
+				</div>
+
+				<div class="footer-logo-wrapper clearfix">
+					<div id="footer-logo"><a href="https://www.blackhillsinfosec.com" title="Black Hills Information Security"><span>Black Hills Information Security</span></a></div>					<!-- /footer-logo -->
+
+					<div class="footer-text clearfix">
+						<div class="one"><font face="open sans"><p>115 W. Hudson St. Spearfish, SD 57783  |  701-484-BHIS<BR> &copy; 2018
+<p></font></div>						<div class="two"> </div>					</div>
+					<!-- /footer-text -->
+				</div>
+				<!-- /.footer-logo-wrapper -->
+
+									<div class="footer-social-widgets">
+						<div id="themify-social-links-1006" class="widget themify-social-links"><strong class="widgettitle">Links</strong><ul class="social-links horizontal">
+							<li class="social-link-item facebook font-icon icon-medium">
+								<a href="https://www.facebook.com/BlackHillsInfoSec" ><i class="fa fa-facebook-square" style="color: #000000;"></i>  </a>
+							</li>
+							<!-- /themify-link-item -->
+							<li class="social-link-item twitter font-icon icon-medium">
+								<a href="http://twitter.com/BHinfoSecurity" ><i class="fa fa-twitter-square" style="color: #000000;"></i>  </a>
+							</li>
+							<!-- /themify-link-item -->
+							<li class="social-link-item linkedin font-icon icon-medium">
+								<a href="http://www.linkedin.com/company/black-hills-information-security" ><i class="fa fa-linkedin-square" style="color: #000000;"></i>  </a>
+							</li>
+							<!-- /themify-link-item -->
+							<li class="social-link-item youtube font-icon icon-medium">
+								<a href="https://www.youtube.com/channel/UCJ2U9Dq9NckqHMbcUupgF0A?nohtml5=False" ><i class="fa fa-youtube-square" style="color: #000000;"></i>  </a>
+							</li>
+							<!-- /themify-link-item --></ul></div><div id="search-4" class="widget widget_search"><strong class="widgettitle">Search the site</strong><form method="get" id="searchform" action="https://www.blackhillsinfosec.com/">
+
+	<i class="icon-search"></i>
+
+	<input type="text" name="s" id="s" title="Search" value="" />
+
+</form></div>					</div>
+					<!-- /.footer-social-widgets -->
+				
+				<div class="footer-nav-wrap clearfix">
+									</div>
+				<!-- /.footer-nav-wrap -->
+
+				
+	<div class="footer-widgets clearfix">
+
+								<div class="col3-1 first">
+							</div>
+								<div class="col3-1 ">
+							</div>
+								<div class="col3-1 ">
+							</div>
+		
+	</div>
+	<!-- /.footer-widgets -->
+
+
+							</footer>
+			<!-- /#footer -->
+			
+		</div>
+		<!-- /.footer-inner -->
+
+	</div>
+	<!-- /#footerwrap -->
+
+</div>
+<!-- /#pagewrap -->
+
+
+<!-- SCHEMA BEGIN --><script type="application/ld+json">[{"@context":"https:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/www.blackhillsinfosec.com\/build-password-cracker-nvidia-gtx-1080ti-gtx-1070\/"},"headline":"How to Build a Password Cracker with NVidia GTX 1080TI &#038; GTX 1070","datePublished":"2017-06-20T09:17:15+00:00","dateModified":"2017-06-20T09:17:15+00:00","author":{"@type":"Person","name":"BHIS"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"","width":0,"height":0}},"description":"Kent R. Ickler \/\/ The Task Update our in-house password cracking\/hashing capabilities. Purchase a new cracking machine Update the old cracking system Stay within budget. Buy The Things: ASUS X99-E WS\/USB 3.1 LGA 2011-v3 Intel X99 SATA 6Gb\/s USB 3.1 USB 3.0 CEB Intel Motherboard QTY 1: $515 https:\/\/www.newegg.com\/Product\/Product.aspx?Item=N82E16813182968 EVGA GeForce GTX 1080 Ti FE [&hellip;]","commentCount":"1","image":{"@type":"ImageObject","url":"https:\/\/www.blackhillsinfosec.com\/wp-content\/uploads\/2017\/06\/pasted-image-0-1.png","width":487,"height":652},"comment":[{"@type":"Comment","author":{"@type":"Person","name":"Carrie Roberts"},"text":"Awesome and highly valuable blog post. Thank you so much for sharing!"}]}]</script><!-- /SCHEMA END --><!-- wp_footer -->
+	<div style="display:none">
+	</div>
+<script>
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-71314509-1', 'auto');
+ ga('send', 'pageview');
+
+</script>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.blackhillsinfosec.com\/build-password-cracker-nvidia-gtx-1080ti-gtx-1070\/":5995};
+	</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var themify_vars = {"version":"3.5.8","url":"https:\/\/www.blackhillsinfosec.com\/wp-content\/themes\/themify-corporate\/themify","map_key":null,"includesURL":"https:\/\/www.blackhillsinfosec.com\/wp-includes\/","isCached":"on","minify":{"css":{"themify-icons":1,"themify.framework":1,"lightbox":1,"themify-builder-style":1},"js":{"backstretch.themify-version":1,"bigvideo":1,"themify.dropdown":1,"themify.builder.script":1,"themify.scroll-highlight":1,"themify-youtube-bg":1,"themify.parallaxit":1,"themify.ticks":1}}};
+var tbLocalScript = {"isAnimationActive":"1","isParallaxActive":"1","isParallaxScrollActive":"1","animationInviewSelectors":[".module.wow",".module_row.wow",".builder-posts-wrap > .post.wow"],"backgroundSlider":{"autoplay":5000,"speed":2000},"animationOffset":"100","videoPoster":"https:\/\/www.blackhillsinfosec.com\/wp-content\/themes\/themify-corporate\/themify\/themify-builder\/img\/blank.png","backgroundVideoLoop":"yes","builder_url":"https:\/\/www.blackhillsinfosec.com\/wp-content\/themes\/themify-corporate\/themify\/themify-builder","framework_url":"https:\/\/www.blackhillsinfosec.com\/wp-content\/themes\/themify-corporate\/themify","version":"3.5.8","fullwidth_support":"1","fullwidth_container":"body","loadScrollHighlight":"1","addons":[],"breakpoints":{"tablet_landscape":[769,"1280"],"tablet":[681,"768"],"mobile":"680"},"ticks":{"tick":30,"ajaxurl":"https:\/\/www.blackhillsinfosec.com\/wp-admin\/admin-ajax.php","postID":5995}};
+var themifyScript = {"lightbox":{"lightboxSelector":".themify_lightbox","lightboxOn":true,"lightboxContentImages":false,"lightboxContentImagesSelector":"","theme":"pp_default","social_tools":false,"allow_resize":true,"show_title":false,"overlay_gallery":false,"screenWidthNoLightbox":600,"deeplinking":false,"contentImagesAreas":"","gallerySelector":".gallery-icon > a","lightboxGalleryOn":true},"lightboxContext":"body"};
+var tbScrollHighlight = {"fixedHeaderSelector":"#headerwrap.fixed-header","speed":"900","navigation":"#main-nav","scrollOffset":"0"};
+/* ]]> */
+</script>
+<script type='text/javascript' defer="defer" src='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/themify/js/main.min.js?ver=3.5.8'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201826'></script>
+<script type='text/javascript' defer="defer" src='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/js/excanvas.min.js?ver=4.9.6'></script>
+<script type='text/javascript' defer="defer" src='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/themify/js/themify.sidemenu.min.js?ver=1.6.9'></script>
+<script type='text/javascript' defer="defer" src='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/js/jquery.isotope.min.js?ver=1.6.9'></script>
+<script type='text/javascript' defer="defer" src='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/js/jquery.smartresize.min.js?ver=1.6.9'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var themifyScript = {"lightbox":{"lightboxSelector":".themify_lightbox","lightboxOn":true,"lightboxContentImages":false,"lightboxContentImagesSelector":"","theme":"pp_default","social_tools":false,"allow_resize":true,"show_title":false,"overlay_gallery":false,"screenWidthNoLightbox":600,"deeplinking":false,"contentImagesAreas":"","gallerySelector":".gallery-icon > a","lightboxGalleryOn":true},"lightboxContext":"#pagewrap","fixedHeader":"fixed-header","sticky_header":"","chart":{"trackColor":"#f2f2f2","scaleColor":false,"lineCap":"butt","rotate":0,"size":170,"lineWidth":22,"animate":2000}};
+/* ]]> */
+</script>
+<script type='text/javascript' defer="defer" src='https://www.blackhillsinfosec.com/wp-content/themes/themify-corporate/js/themify.script.min.js?ver=1.6.9'></script>
+<script type='text/javascript' src='https://www.blackhillsinfosec.com/wp-includes/js/comment-reply.min.js?ver=4.9.6'></script>
+<script type='text/javascript' src='https://www.blackhillsinfosec.com/wp-includes/js/wp-embed.min.js?ver=4.9.6'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.blackhillsinfosec.com/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=6.2.1'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+</script>
+<script type='text/javascript' src='https://stats.wp.com/e-201826.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.2.1',blog:'108567321',post:'5995',tz:'-6',srv:'www.blackhillsinfosec.com'} ]);
+	_stq.push([ 'clickTrackerInit', '108567321', '5995' ]);
+</script>
+
+
+
+</body>
+</html>

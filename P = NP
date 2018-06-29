@@ -1,0 +1,2143 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="http://news.mit.edu/sites/mit.edu.newsoffice/themes/mitnews/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="description" content="The most notorious problem in theoretical computer science remains open, but the attempts to solve it have led to profound insights." />
+<meta name="keywords" content="Computational complexity theory, Theoretical computer science, Explained, P vs. NP" />
+<meta name="news_keywords" content="Computational complexity theory, Theoretical computer science, Explained, P vs. NP" />
+<link rel="image_src" href="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/article_cover_image_small/public/images/2009/20100816151036-0.jpg" />
+<meta name="apple-itunes-app" content="app-id=353590319" />
+<meta property="twitter:title" content="Explained: P vs. NP" />
+<meta property="twitter:image" content="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/og/public/images/2009/20100816151036-0.jpg" />
+<meta name="twitter:site" content="@mit" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:site:id" content="15460048" />
+<meta property="og:author" content="Larry Hardesty, MIT News Office" />
+<meta property="og:image" content="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/og/public/images/2009/20100816151036-0.jpg" />
+<meta property="og:title" content="Explained: P vs. NP" />
+<meta property="og:description" content="The most notorious problem in theoretical computer science remains open, but the attempts to solve it have led to profound insights." />
+<meta property="og:site_name" content="MIT News" />
+<meta property="fb:page_id" content="126533127390327" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://news.mit.edu/2009/explainer-pnp" />
+
+            <link rel="canonical" href="http://news.mit.edu/2009/explainer-pnp" />
+    
+        <title>Explained: P vs. NP | MIT News</title>
+        <link type="text/css" rel="stylesheet" href="http://news.mit.edu/sites/mit.edu.newsoffice/files/css/css_lQaZfjVpwP_oGNqdtWCSpJT1EMqXdMiU84ekLLxQnc4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://news.mit.edu/sites/mit.edu.newsoffice/files/css/css_u9Cn6xFPfn6NvRqMGUV6k10stVTR4AGT7eontS75hX4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://news.mit.edu/sites/mit.edu.newsoffice/files/css/css_Zo1r09piXtl5JhJOMD7hQCiB0jhDpHLlkhIEB61cQvE.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://news.mit.edu/sites/mit.edu.newsoffice/files/css/css_502yvhEh6BvWPgq152oqjZLJjkC9qL9hgUh4mgEiyvQ.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://news.mit.edu/sites/mit.edu.newsoffice/files/css/css_zNjEyTXCUgBk3ONK7sNDw6HXxFbc1qFGL2hJ9UXp9Nw.css" media="print" />
+    <script type="text/javascript" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/js/js_A01mE0OOkhISVSQubhhc-km--VAXp6zYCwpcghpBC28.js"></script>
+<script type="text/javascript" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/js/js_vnpVdvVVC3esFhe5pUFFpitcfPa22s6kgCid6sguM9g.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"mitnews","theme_token":"VNAJDpfZPgr28FmxRaYJNL7j50nGr-2I7kdQZjA7Yi4","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/js\/vendor\/flexslider\/jquery.flexslider-min.js":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/js\/vendor\/fancybox\/source\/jquery.fancybox.pack.js":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/js\/vendor\/waypoints\/waypoints.min.js":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/js\/vendor\/waypoints\/waypoints-sticky.min.js":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/js\/vendor\/modernizr-2.6.2.min.js":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/js\/main.js":1},"css":{"modules\/system\/system.base.css":1,"sites\/all\/modules\/contri\/date\/date_api\/date.css":1,"sites\/all\/modules\/contri\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/contri\/views\/css\/views.css":1,"sites\/all\/modules\/contri\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/contri\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/custom\/shib_auth\/shib_auth.css":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/js\/vendor\/flexslider\/flexslider.css":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/js\/vendor\/fancybox\/source\/jquery.fancybox.css":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/css\/main.css":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/css\/normalize.css":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/css\/site.css":1,"sites\/mit.edu.newsoffice\/themes\/mitnews\/css\/print.css":1}}});
+//--><!]]>
+</script>
+    <script type="text/javascript" src="//use.typekit.net/tzb4pde.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body class="" >
+
+        
+
+
+<div itemscope itemtype="http://schema.org/Article" id="site-wrapper">
+        <header>
+    <div id="site-header-nav-wrapper">
+        <div id="site-header-nav" class="clearfix">
+            <ul id="top-menu-bar" class="clearfix">
+                <li class="logo-mit">
+                    <a href="http://web.mit.edu" target="_blank" onClick="ga('send', 'event', 'topbar', 'click', 'mit logo');">
+                        <span class="logo"></span>
+                        Massachusetts Institute of Technology
+                    </a>
+                </li>
+                            </ul>
+            <div id="follow-social-menu" class="clearfix">
+
+                <ul id="top-menu-items">
+                    <li><a href="/" onClick="ga('send', 'event', 'topbar', 'click', 'news');">News</a></li>
+                    <li><a href="https://www.youtube.com/mit" target="_blank" onClick="ga('send', 'event', 'topbar', 'click', 'video');">Video</a></li>
+                    <li><a href="http://connect.mit.edu" target="_blank" onClick="ga('send', 'event', 'topbar', 'click', 'social');">Social</a></li>
+                </ul>
+
+                <div class="label">Follow MIT</div>
+                <ul id="follow-social-items">
+                    <li><a class="rss" href="/rss" onClick="ga('send', 'event', 'topbar', 'click', 'rss');"><span>MIT News RSS</span></a></li>
+                    <li><a class="twitter" target="_blank" href="https://twitter.com/mit" onClick="ga('send', 'event', 'topbar', 'click', 'twiiter');"><span>Follow MIT on Twitter</span></a></li>
+                    <li><a class="facebook" target="_blank" href="https://www.facebook.com/MITnews" onClick="ga('send', 'event', 'topbar', 'click', 'facebook');"><span>Follow MIT on Facebook</span></a></li>
+                    <li><a class="googleplus" target="_blank" href="https://plus.google.com/+mit?rel=author" onClick="ga('send', 'event', 'topbar', 'click', 'google+');"><span>Follow MIT on Google+</span></a></li>
+                    <li><a class="instagram" target="_blank" href="http://instagram.com/mitpics" onClick="ga('send', 'event', 'topbar', 'click', 'instagram');"><span>Follow MIT on Instagram</span></a></li>
+                    <li><a class="flickr" target="_blank" href="http://www.flickr.com/photos/cpsphotolibrary" onClick="ga('send', 'event', 'topbar', 'click', 'flickr');"><span>Follow MIT on Flickr</span></a></li>
+                    <li><a class="youtube" target="_blank" href="https://www.youtube.com/mit" onClick="ga('send', 'event', 'topbar', 'click', 'youtube');"><span>Follow MIT on YouTube</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </header>
+    <nav>
+    <div id="site-header-area-wrapper">
+        <div id="site-header-area" class="clearfix">
+            <div id="site-header">
+                <a class="mit-logo-button" href="http://web.mit.edu" target="_blank"></a>
+                <img alt="MIT News Office" id="logo-mit-news-img" src="/sites/default/themes/mitnews/img/logo-mit-news-b.png" />
+                <a id="logo-mit-news" href="/">
+                                            <h2>MIT News Office</h2>
+                                    </a>
+                <a id="header-browse-button" href="#site-browse-area"></a>
+                <a id="search-button" href="#site-search-area"></a>
+            </div>
+
+            <div id="options-wrapper" class="clearfix">
+                <div id="site-browse-button-area">
+                    <a id="browse-button" href="#site-browse-area">Browse</a>
+                    <span class="text">or</span>
+                </div>
+                <div id="site-search-area">
+                    <div class="wrapper clearfix">
+                        <form action="/search" method="get" id="form-search" accept-charset="UTF-8">
+                            <input title="Enter the keyword you wish to search for." type="text" id="keyword" name="keyword" placeholder="Search"  />
+                            <input type="submit" id="submit-search" name="" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="site-browse-area">
+                <h2 class="title">Browse</h2>
+                <ul id="browse-options" class="clearfix">
+                    <li class="clearfix">
+                        <a class="browse-option" href="#"><h3>Most Popular</h3></a>
+                        <div class="browse-content">
+                        <div class="view view-browse-news-by-popularity view-id-browse_news_by_popularity view-display-id-block_browse_news_by_popularity view-dom-id-e88b9c048ae3a712d3cd04ba3cab0a40">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-popular">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/vanu-bose-software-pioneer-mit-corporation-member-dies-52-1111"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Vanu-Bose.jpg?itok=_whXxOv4" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_popularity_item"><a href="/2017/vanu-bose-software-pioneer-mit-corporation-member-dies-52-1111">Vanu Bose, software pioneer and MIT Corporation member, dies at 52 </a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/droplets-levitate-liquid-surfaces-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Mixing-Droplets-A1.jpg?itok=2CU1eWQ1" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_popularity_item"><a href="/2017/droplets-levitate-liquid-surfaces-1115">How to float your coffee creamer</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/year-of-many-firsts-mit-energy-hackathon-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/mit-energy-hackathon-2017.png?itok=B5N8lEAD" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_popularity_item"><a href="/2017/year-of-many-firsts-mit-energy-hackathon-1117">A year of many firsts for the MIT Energy Hackathon</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even clearfix">  
+          <a href="/2017/mary-clare-beytagh-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Beytagh-MaryClare.jpg?itok=FVUhG4lI" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_popularity_item"><a href="/2017/mary-clare-beytagh-1113">Mary Clare Beytagh: Finding poetry in medicine</a></span>  </li>
+          <li class="views-row views-row-5 views-row-odd clearfix">  
+          <a href="/2017/stephen-carpenter-using-art-disrupt-systems-oppression-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/BSCarpenter_.jpeg?itok=6lGB01l6" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_popularity_item"><a href="/2017/stephen-carpenter-using-art-disrupt-systems-oppression-1115">Using art to disrupt systems of oppression</a></span>  </li>
+          <li class="views-row views-row-6 views-row-even clearfix">  
+          <a href="/2017/mit-and-lamborghini-developing-terzo-millenio-electric-car-of-the-future-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/terzo-millenio-lamborghini-mit-concept-electric-car-2017.jpg?itok=8kYbkSRm" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_popularity_item"><a href="/2017/mit-and-lamborghini-developing-terzo-millenio-electric-car-of-the-future-1117">MIT researchers collaborate with Lamborghini to develop an electric car of the future </a></span>  </li>
+          <li class="views-row views-row-7 views-row-odd clearfix">  
+          <a href="/2017/mit-construct-new-cutting-edge-wright-brothers-wind-tunnel-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Wright-Brothers-Wind-Tunnel-00_1.jpeg?itok=0dHLsRrO" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_popularity_item"><a href="/2017/mit-construct-new-cutting-edge-wright-brothers-wind-tunnel-1113">MIT to construct new, cutting-edge Wright Brothers Wind Tunnel</a></span>  </li>
+          <li class="views-row views-row-8 views-row-even views-row-last clearfix">  
+          <a href="/2017/gut-microbes-can-protect-against-high-blood-pressure-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Salt-Microbiome.jpg?itok=qkiQAQIN" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_popularity_item"><a href="/2017/gut-microbes-can-protect-against-high-blood-pressure-1115">Gut microbes can protect against high blood pressure</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <a class="browse-option" href="/topics"><h3>By Topic</h3></a>
+                        <div class="browse-content">
+                            <div class="view view-browse-news-by-topics view-id-browse_news_by_topics view-display-id-block_browse_news_by_topics view-dom-id-62f414c92f23f50c95026db9355c4718">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-by-terms">          <li class="views-row views-row-1 views-row-odd views-row-first">  
+          <span class="browse-news-term"><a href="/topic/computer-science-and-artificial-intelligence-laboratory-csail">Computer Science and Artificial Intelligence Laboratory (CSAIL)</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-74546509887ff72836010c18647a4de4">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/AI%20and%20the%20Future%20of%20Work_%2020_preview_0.jpeg?itok=UKvA9X4k" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107">Summit discusses impact of machines on jobs, productivity, and the global economy </a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/faster-big-data-analysis-tensor-algebra-1031"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Tensor-Algebra.jpg?itok=EXYQeh67" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/faster-big-data-analysis-tensor-algebra-1031">Faster big-data analysis</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/crowdsourcing-big-data-analysis-1030"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Crowdsource-Features.jpg?itok=gGG4O9Zo" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/crowdsourcing-big-data-analysis-1030">Crowdsourcing big-data analysis</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/new-high-capacity-data-caches-more-efficient-1023"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Fast-Cache.jpg?itok=lEXm9MhB" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/new-high-capacity-data-caches-more-efficient-1023">Selective memory</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-2 views-row-even">  
+          <span class="browse-news-term"><a href="/topic/computer-vision">Computer vision</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-5d15c40e4051f25baf08f6302f0d860d">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/mit-csail-new-system-teleoperating-robots-virtual-reality-1009"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/CSAIL-VR-robot-control-system-2017-MIT-00.jpg?itok=GZ5zjT2f" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-csail-new-system-teleoperating-robots-virtual-reality-1009">Teleoperating robots with virtual reality</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/artificial-intelligence-for-your-blind-spot-mit-csail-cornercameras-1009"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/cornercamera-penumbra-mit-csail-00.png?itok=568PpNcA" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-for-your-blind-spot-mit-csail-cornercameras-1009">An algorithm for your blind spot </a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/new-leadership-for-mit-ibm-watson-ai-lab-antonio-torralba-0920"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-IBM-antonio-torralba-2017.jpeg?itok=XX7VjLKv" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/new-leadership-for-mit-ibm-watson-ai-lab-antonio-torralba-0920">New leadership for MIT-IBM Watson AI Lab</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/artificial-intelligence-suggests-recipes-based-on-food-photos-0720"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/ingredients-recipe-artificial-intelligence-mit-csail-00.jpg?itok=bmmjVYrH" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-suggests-recipes-based-on-food-photos-0720">Artificial intelligence suggests recipes based on food photos</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-3 views-row-odd">  
+          <span class="browse-news-term"><a href="/topic/electrical-engineering-computer-science-eecs">Electrical Engineering &amp; Computer Science (eecs)</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-1f5e9718deea20a38554439e9d2bcf38">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017mit-meet-bridging-middle-east-divide-with-technology-1114"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MEET-summer-2017-MIT-00_0.jpeg?itok=jmHZ4ZBG" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017mit-meet-bridging-middle-east-divide-with-technology-1114">Bridging the divide with technology</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/visiting-professor-anita-hill-leads-conversations-about-title-ix-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/anita-hill-race-gender-imperative-mit-2017.jpg?itok=Y69j1z_j" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/visiting-professor-anita-hill-leads-conversations-about-title-ix-1113">Visiting Professor Anita Hill leads conversations about Title IX</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/vanu-bose-software-pioneer-mit-corporation-member-dies-52-1111"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Vanu-Bose.jpg?itok=_whXxOv4" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/vanu-bose-software-pioneer-mit-corporation-member-dies-52-1111">Vanu Bose, software pioneer and MIT Corporation member, dies at 52 </a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/AI%20and%20the%20Future%20of%20Work_%2020_preview_0.jpeg?itok=UKvA9X4k" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107">Summit discusses impact of machines on jobs, productivity, and the global economy </a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-4 views-row-even">  
+          <span class="browse-news-term"><a href="/topic/imaging">Imaging</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-8e2f9ff602bdb153887a4966e82519d6">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/artificial-intelligence-for-your-blind-spot-mit-csail-cornercameras-1009"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/cornercamera-penumbra-mit-csail-00.png?itok=568PpNcA" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-for-your-blind-spot-mit-csail-cornercameras-1009">An algorithm for your blind spot </a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/mit-lincoln-laboratory-lassos-sensors-defend-aircraft-against-laser-strikes-0928"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Lincoln-Labs-team-building-aircraft-laser-attack-sensors-MIT-00.JPG?itok=yE1-DDd9" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-lincoln-laboratory-lassos-sensors-defend-aircraft-against-laser-strikes-0928">Developing sensors to defend aircraft against lasers</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/fast-noninvasive-technique-probing-cells-may-reveal-disease-0803"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Cell-Moves-1.jpg?itok=s2mcBKQy" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/fast-noninvasive-technique-probing-cells-may-reveal-disease-0803">Fast, noninvasive technique for probing cells may reveal disease</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/metal-free-mri-contrast-agent-could-be-safer-some-patients-0712"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Safer-MRI.jpg?itok=1qotyFrh" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/metal-free-mri-contrast-agent-could-be-safer-some-patients-0712">Metal-free MRI contrast agent could be safer for some patients</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-5 views-row-odd views-row-last">  
+          <span class="browse-news-term"><a href="/topic/research">Research</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-e8e55692c561f98a4850a39ae467ea4f">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/mit-and-lamborghini-developing-terzo-millenio-electric-car-of-the-future-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/terzo-millenio-lamborghini-mit-concept-electric-car-2017.jpg?itok=8kYbkSRm" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-and-lamborghini-developing-terzo-millenio-electric-car-of-the-future-1117">MIT researchers collaborate with Lamborghini to develop an electric car of the future </a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/helping-mexico-design-effective-climate-policy-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/cop23-together-for-climate-solutions-2017.jpg?itok=IJtv63cY" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/helping-mexico-design-effective-climate-policy-1117">Helping Mexico design an effective climate policy</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/new-way-store-thermal-energy-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Phase-Transformation-Storage-01.jpg?itok=FzoIzKIw" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/new-way-store-thermal-energy-1117">A new way to store thermal energy</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/map-energy-momentum-electrons-beneath-material-surface-1116"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Electron-tunnels-1.jpg?itok=plRtjiho" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/map-energy-momentum-electrons-beneath-material-surface-1116">A new window into electron behavior</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>                            <div class="link-more">
+                            <a href="/topics">See All Topics</a>                            </div>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <a class="browse-option" href="#"><h3>By School</h3></a>
+                        <div class="browse-content">
+                        <div class="view view-browse-news-by-schools view-id-browse_news_by_schools view-display-id-block_browse_news_by_schools view-dom-id-7d0fb814dd3fb82921888e2758d7cc88">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-by-terms">          <li class="views-row views-row-1 views-row-odd views-row-first">  
+          <span class="browse-news-term"><a href="/architecture-and-planning">School of Architecture + Planning</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-2b26744537ac0dd1605de9a82a0f8442">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/martin-rein-longtime-professor-urban-studies-and-planning-dies-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/martin-rein-mit-dusp-A1.jpg?itok=UIrVD1Ml" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/martin-rein-longtime-professor-urban-studies-and-planning-dies-1115">Martin Rein, former professor of urban studies and planning, dies at 89</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/stephen-carpenter-using-art-disrupt-systems-oppression-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/BSCarpenter_.jpeg?itok=6lGB01l6" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/stephen-carpenter-using-art-disrupt-systems-oppression-1115">Using art to disrupt systems of oppression</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/mit-researchers-release-evaluation-solar-pumps-used-irrigation-and-salt-mining-india-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/d-lab-cite-mit-solar-pumps-01.JPG?itok=48l5dimr" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-researchers-release-evaluation-solar-pumps-used-irrigation-and-salt-mining-india-1113"> MIT researchers release evaluation of solar pumps for irrigation and salt mining in India </a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/next-generation-optogenetic-molecules-control-single-neurons-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Single-Cell-Optogenetics.jpg?itok=D03josXX" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/next-generation-optogenetic-molecules-control-single-neurons-1113">Next-generation optogenetic molecules control single neurons</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-2 views-row-even">  
+          <span class="browse-news-term"><a href="/engineering">School of Engineering</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-bd2b4b4e79385364e149ad2a0064f338">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/mit-and-lamborghini-developing-terzo-millenio-electric-car-of-the-future-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/terzo-millenio-lamborghini-mit-concept-electric-car-2017.jpg?itok=8kYbkSRm" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-and-lamborghini-developing-terzo-millenio-electric-car-of-the-future-1117">MIT researchers collaborate with Lamborghini to develop an electric car of the future </a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/mit-lab-on-a-chip-demonstrates-hidden-fluid-flow-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Professor-Ruben-Juanes-rock-on-a-chip-class-MIT-00.jpg?itok=a8m5EKsL" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-lab-on-a-chip-demonstrates-hidden-fluid-flow-1117">Show the flow</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/mit-ian-schneider-engineering-brighter-future-for-renewables-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Ian-Schneider-energy-market-design-MIT-00.png?itok=wWuUuYFe" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-ian-schneider-engineering-brighter-future-for-renewables-1117">Engineering a brighter future</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/new-way-store-thermal-energy-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Phase-Transformation-Storage-01.jpg?itok=FzoIzKIw" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/new-way-store-thermal-energy-1117">A new way to store thermal energy</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-3 views-row-odd">  
+          <span class="browse-news-term"><a href="/humanities-arts-and-social-sciences">School of Humanities, Arts, and Social Sciences</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-36d7b25b9637f8a6861bb14445e8a422">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/3-questions-lisa-parks-drones-warfare-and-media-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Drone-Warefare-LisaParks.jpg?itok=ZETBzAJ3" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/3-questions-lisa-parks-drones-warfare-and-media-1117">3 Questions: Lisa Parks on drones, warfare, and the media</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/mit-bustani-middle-east-seminar-tackles-issues-statehood-1116"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/2017-Bustani-Seminar-Peter-Krause-Lecture-MIT-00.jpg?itok=qSX8P-LG" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-bustani-middle-east-seminar-tackles-issues-statehood-1116">Tackling complex Middle East statehood issues</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017mit-meet-bridging-middle-east-divide-with-technology-1114"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MEET-summer-2017-MIT-00_0.jpeg?itok=jmHZ4ZBG" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017mit-meet-bridging-middle-east-divide-with-technology-1114">Bridging the divide with technology</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/nancy-rose-appointed-head-of-mit-department-of-economics-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/nancy-rose-mit-economics-2017.jpeg?itok=gT-ajKn8" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/nancy-rose-appointed-head-of-mit-department-of-economics-1113">Nancy Rose appointed head of MIT Department of Economics</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-4 views-row-even">  
+          <span class="browse-news-term"><a href="/management">Sloan School of Management</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-fa1858a82263058deeadc290438c10a2">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/nancy-rose-appointed-head-of-mit-department-of-economics-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/nancy-rose-mit-economics-2017.jpeg?itok=gT-ajKn8" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/nancy-rose-appointed-head-of-mit-department-of-economics-1113">Nancy Rose appointed head of MIT Department of Economics</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/AI%20and%20the%20Future%20of%20Work_%2020_preview_0.jpeg?itok=UKvA9X4k" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107">Summit discusses impact of machines on jobs, productivity, and the global economy </a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/mit-energy-initiative-creates-robust-energy-research-community-1107"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Energy-Past-Future-borders-01%20small.png?itok=wiuAXJ55" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-energy-initiative-creates-robust-energy-research-community-1107">Strong current of energy runs through MIT</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/3q-robert-armstrong-10-years-of-energy-research-at-mit-1107"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/mit-energy-initiative-mitei-10-years-00_1.png?itok=qDepv6EZ" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/3q-robert-armstrong-10-years-of-energy-research-at-mit-1107">3Q: Robert Armstrong on 10 years of energy research at MIT</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-5 views-row-odd views-row-last">  
+          <span class="browse-news-term"><a href="/science">School of Science</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-28493fddb74da34885030f53c0196601">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/mit-and-lamborghini-developing-terzo-millenio-electric-car-of-the-future-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/terzo-millenio-lamborghini-mit-concept-electric-car-2017.jpg?itok=8kYbkSRm" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-and-lamborghini-developing-terzo-millenio-electric-car-of-the-future-1117">MIT researchers collaborate with Lamborghini to develop an electric car of the future </a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/map-energy-momentum-electrons-beneath-material-surface-1116"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Electron-tunnels-1.jpg?itok=plRtjiho" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/map-energy-momentum-electrons-beneath-material-surface-1116">A new window into electron behavior</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/stress-can-lead-risky-decisions-1116"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Bad-Decisions.jpg?itok=t-1XSUvn" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/stress-can-lead-risky-decisions-1116">Stress can lead to risky decisions</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/mit-alumna-megan-miranda-taking-biological-approach-to-writing-fiction-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Megan-Colpitts-Miranda-02-alumna-author-MIT-00_1.jpg?itok=RLGidRua" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-alumna-megan-miranda-taking-biological-approach-to-writing-fiction-1115">A scientific approach to writing fiction</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>                        <!--<a href="/schools">See All Schools</a> -->
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <a class="browse-option" href="/departments"><h3>By Department</h3></a>
+                        <div class="browse-content">
+                            <div class="view view-browse-news-by-departments view-id-browse_news_by_departments view-display-id-block_browse_news_by_departments view-dom-id-9e04e7dcd672215e36dda8a819786053">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-by-terms">          <li class="views-row views-row-1 views-row-odd views-row-first">  
+          <span class="browse-news-term"><a href="/department/urban-studies-and-planning">Urban Studies and Planning</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-375071a3b1af3d0ead6f425a01d77170">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/martin-rein-longtime-professor-urban-studies-and-planning-dies-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/martin-rein-mit-dusp-A1.jpg?itok=UIrVD1Ml" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/martin-rein-longtime-professor-urban-studies-and-planning-dies-1115">Martin Rein, former professor of urban studies and planning, dies at 89</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/stephen-carpenter-using-art-disrupt-systems-oppression-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/BSCarpenter_.jpeg?itok=6lGB01l6" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/stephen-carpenter-using-art-disrupt-systems-oppression-1115">Using art to disrupt systems of oppression</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/mit-researchers-release-evaluation-solar-pumps-used-irrigation-and-salt-mining-india-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/d-lab-cite-mit-solar-pumps-01.JPG?itok=48l5dimr" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-researchers-release-evaluation-solar-pumps-used-irrigation-and-salt-mining-india-1113"> MIT researchers release evaluation of solar pumps for irrigation and salt mining in India </a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/faculty-additions-and-promotions-school-architecture-and-planning-1107"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/mit-school-architecture-planning-faculty-promotions-2017.jpg?itok=jG4cIUM_" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/faculty-additions-and-promotions-school-architecture-and-planning-1107">Faculty additions and promotions at the School of Architecture and Planning</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-2 views-row-even">  
+          <span class="browse-news-term"><a href="/department/biological-engineering">Biological Engineering</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-a903e881f6a2b11d73fb26b9c27d1d7b">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/gut-microbes-can-protect-against-high-blood-pressure-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Salt-Microbiome.jpg?itok=qkiQAQIN" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/gut-microbes-can-protect-against-high-blood-pressure-1115">Gut microbes can protect against high blood pressure</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/next-generation-optogenetic-molecules-control-single-neurons-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Single-Cell-Optogenetics.jpg?itok=D03josXX" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/next-generation-optogenetic-molecules-control-single-neurons-1113">Next-generation optogenetic molecules control single neurons</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/synthetic-circuits-can-harvest-light-energy-solar-power-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-DNA-Scaffold.jpg?itok=7EwiiNuN" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/synthetic-circuits-can-harvest-light-energy-solar-power-1113">Synthetic circuits can harvest light energy</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/sixteen-mit-grad-students-named-siebel-scholars-1101"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Siebel-Students-2017.jpeg?itok=Wsk_agV-" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/sixteen-mit-grad-students-named-siebel-scholars-1101">Sixteen MIT grad students are named to the Siebel Scholars class of 2018 </a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-3 views-row-odd">  
+          <span class="browse-news-term"><a href="/department/earth-atmospheric-and-planetary-sciences">Earth, Atmospheric and Planetary Sciences</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-cb21aa81db7b8395edf6ffd7b74c512d">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/texas-odds-harvey-scale-rainfall-increase-end-century-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Hurricane-Harvey.jpg?itok=oygKK6wO" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/texas-odds-harvey-scale-rainfall-increase-end-century-1113">Texas’ odds of Harvey-scale rainfall to increase by end of century</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/mit-professor-susan-solomon-examines-history-environmental-successes-1109"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/2017-John-Carlson-lecture-Susan%20Solomon-MIT-00.jpeg?itok=6PJxlnNo" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-professor-susan-solomon-examines-history-environmental-successes-1109">A brief history of environmental successes</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/faculty-profile-noelle-selin-1023"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Noelle-Selin-A1.jpg?itok=rHSc5P2d" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/faculty-profile-noelle-selin-1023">Noelle Selin: Tracing toxins around the world</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/research-explores-deep-waters-spiraling-upward-around-antarctica-0926"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/3-D-model-southern-ocean-water-circulation-trajectories-study-MIT-00.png?itok=yFSe6Esk" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/research-explores-deep-waters-spiraling-upward-around-antarctica-0926">Deep waters spiral upward around Antarctica</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-4 views-row-even">  
+          <span class="browse-news-term"><a href="/department/mathematics">Mathematics</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-d62cbb426a98c7130e66a0c0eeb398b0">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/droplets-levitate-liquid-surfaces-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Mixing-Droplets-A1.jpg?itok=2CU1eWQ1" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/droplets-levitate-liquid-surfaces-1115">How to float your coffee creamer</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/ocean-sound-waves-may-reveal-location-incoming-objects-1026"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-TrackingWaves.jpg?itok=2t4uA0x5" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/ocean-sound-waves-may-reveal-location-incoming-objects-1026">Ocean sound waves may reveal location of incoming objects</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/course-helps-girls-botswana-avoid-hiv-sugar-daddies-1025"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Young1ove-01.jpg?itok=37yye4su" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/course-helps-girls-botswana-avoid-hiv-sugar-daddies-1025">Course helps girls in Botswana avoid HIV and “sugar daddies” </a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/mit-school-of-science-welcomes-new-faculty-members-1010"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/mit-school-of-science-fall-2017-new-professors_0.jpg?itok=OFn0q-D3" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-school-of-science-welcomes-new-faculty-members-1010">School of Science welcomes new faculty members</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-5 views-row-odd views-row-last">  
+          <span class="browse-news-term"><a href="/department/biology">Biology</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-9de521c37a1a2ed1cc396a088fe09227">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/mit-alumna-megan-miranda-taking-biological-approach-to-writing-fiction-1115"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Megan-Colpitts-Miranda-02-alumna-author-MIT-00_1.jpg?itok=RLGidRua" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-alumna-megan-miranda-taking-biological-approach-to-writing-fiction-1115">A scientific approach to writing fiction</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/mary-clare-beytagh-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Beytagh-MaryClare.jpg?itok=FVUhG4lI" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mary-clare-beytagh-1113">Mary Clare Beytagh: Finding poetry in medicine</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/mit-physician-sophia-yen-founds-online-birth-control-service-pandia-health-1109"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Sophia-Yen-Pandia-founder-MIT-A1.jpg?itok=Ie0neiGh" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-physician-sophia-yen-founds-online-birth-control-service-pandia-health-1109">Physician founds online birth control service</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/key-nutrient-sensor-identified-cellular-pathway-mtor-1109"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/David-Sabatini-mTOR-methionine-sensor.jpeg?itok=qP6f7FRI" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/key-nutrient-sensor-identified-cellular-pathway-mtor-1109">New player in cellular signaling</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>                            <div class="link-more">
+                            <a href="/departments">See All Departments</a>                            </div>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <a class="browse-option" href="/research-centers"><h3>By Center, Lab, & Program</h3></a>
+                        <div class="browse-content">
+                            <div class="view view-browse-news-by-research-centers view-id-browse_news_by_research_centers view-display-id-block_browse_news_by_research_centers view-dom-id-adddc3769e8e36f5a91b2689f8c09ec2">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-by-terms">          <li class="views-row views-row-1 views-row-odd views-row-first">  
+          <span class="browse-news-term"><a href="/topic/csail">Computer Science and Artificial Intelligence Laboratory (CSAIL)</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-d80a0024d3cf27f35354ecce425e4605">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/AI%20and%20the%20Future%20of%20Work_%2020_preview_0.jpeg?itok=UKvA9X4k" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107">Summit discusses impact of machines on jobs, productivity, and the global economy </a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/faster-big-data-analysis-tensor-algebra-1031"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Tensor-Algebra.jpg?itok=EXYQeh67" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/faster-big-data-analysis-tensor-algebra-1031">Faster big-data analysis</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/new-high-capacity-data-caches-more-efficient-1023"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Fast-Cache.jpg?itok=lEXm9MhB" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/new-high-capacity-data-caches-more-efficient-1023">Selective memory</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/how-we-determine-blame-1017"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Counterfact-1.jpg?itok=GsCEpVFy" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/how-we-determine-blame-1017">How we determine who’s to blame</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-2 views-row-even">  
+          <span class="browse-news-term"><a href="/centers-labs-programs/biomimetics-robotics-lab">Biomimetics Robotics Lab</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-c9a89090cb87b5d7817fb7e855a31ac9">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2016/faculty-profile-sangbae-kim-1216"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2016/MIT-SangbaeKim-A1.jpg?itok=HmLH1Ckv" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2016/faculty-profile-sangbae-kim-1216">Taking a leap in bioinspired robotics</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2016/tenured-engineers-0510"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2016/tenured-mit-engineers-2016.png?itok=O6NkwKNt" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2016/tenured-engineers-0510"> The tenured engineers of 2016</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd views-row-last clearfix">  
+          <a href="/2014/mit-cheetah-robot-runs-jumps-0915"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2014/MIT-Cheetah-A1.jpg?itok=8ApGeKR1" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2014/mit-cheetah-robot-runs-jumps-0915">Bound for robotic glory</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-3 views-row-odd">  
+          <span class="browse-news-term"><a href="/topic/research-laboratory-electronics">Research Laboratory of Electronics</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-f7ae1bef6e5be852cb15ae4466bbc029">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/visiting-professor-anita-hill-leads-conversations-about-title-ix-1113"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/anita-hill-race-gender-imperative-mit-2017.jpg?itok=Y69j1z_j" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/visiting-professor-anita-hill-leads-conversations-about-title-ix-1113">Visiting Professor Anita Hill leads conversations about Title IX</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/gene-circuit-switches-inside-cancer-cells-triggers-immune-attack-1019"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Cancer-Immuno-01.jpg?itok=bBlORX5v" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/gene-circuit-switches-inside-cancer-cells-triggers-immune-attack-1019">Gene circuit switches on inside cancer cells, triggers immune attack</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/artificial-intelligence-for-your-blind-spot-mit-csail-cornercameras-1009"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/cornercamera-penumbra-mit-csail-00.png?itok=568PpNcA" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-for-your-blind-spot-mit-csail-cornercameras-1009">An algorithm for your blind spot </a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/researchers-clarify-mystery-about-proposed-battery-material-0815"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Lithium-i-1.jpg?itok=H1Soaz3X" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/researchers-clarify-mystery-about-proposed-battery-material-0815">Researchers clarify mystery about proposed battery material</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-4 views-row-even">  
+          <span class="browse-news-term"><a href="/topic/csail">Computer Science and Artificial Intelligence Laboratory (CSAIL)</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-fd0496ef05b1ec87d2e55f44fd5a58d2">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/AI%20and%20the%20Future%20of%20Work_%2020_preview_0.jpeg?itok=UKvA9X4k" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/artificial-intelligence-summit-discusses-impact-of-machines-on-jobs-productivity-global-economy-1107">Summit discusses impact of machines on jobs, productivity, and the global economy </a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/faster-big-data-analysis-tensor-algebra-1031"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Tensor-Algebra.jpg?itok=EXYQeh67" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/faster-big-data-analysis-tensor-algebra-1031">Faster big-data analysis</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/new-high-capacity-data-caches-more-efficient-1023"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Fast-Cache.jpg?itok=lEXm9MhB" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/new-high-capacity-data-caches-more-efficient-1023">Selective memory</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2017/how-we-determine-blame-1017"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-Counterfact-1.jpg?itok=GsCEpVFy" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/how-we-determine-blame-1017">How we determine who’s to blame</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+          <li class="views-row views-row-5 views-row-odd views-row-last">  
+          <span class="browse-news-term"><a href="/centers-labs-programs/technology-and-policy-program">Technology and Policy Program</a></span>    
+          <div class="view view-browse-news-by-term view-id-browse_news_by_term view-display-id-default view-dom-id-0cf3dda8dde5ff7d83ba11bd96ec19fa">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+          <ul class="browse-news-items">          <li class="views-row views-row-1 views-row-odd views-row-first clearfix">  
+          <a href="/2017/helping-mexico-design-effective-climate-policy-1117"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/cop23-together-for-climate-solutions-2017.jpg?itok=IJtv63cY" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/helping-mexico-design-effective-climate-policy-1117">Helping Mexico design an effective climate policy</a></span>  </li>
+          <li class="views-row views-row-2 views-row-even clearfix">  
+          <a href="/2017/mit-interns-help-develop-wearable-air-quality-sensor-plume-labs-0929"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/MIT-France-Intern-at-work.jpeg?itok=c1yfEJk7" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/mit-interns-help-develop-wearable-air-quality-sensor-plume-labs-0929">Clearing the air</a></span>  </li>
+          <li class="views-row views-row-3 views-row-odd clearfix">  
+          <a href="/2017/clearing-old-smoke-0112"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2017/Nick%20Mabey%202016_v2.jpg?itok=HjI0-50j" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2017/clearing-old-smoke-0112">Clearing the Old Smoke</a></span>  </li>
+          <li class="views-row views-row-4 views-row-even views-row-last clearfix">  
+          <a href="/2016/four-mit-students-named-schwarzman-scholars-1202"><img typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/browse_news_image/public/images/2016/MIT-Schwarzman-Scholars.jpg?itok=zZnGKfAk" width="90" height="60" alt="" /></a>    
+          <span class="browse_news_by_term_item"><a href="/2016/four-mit-students-named-schwarzman-scholars-1202">Four MIT students named Schwarzman Scholars</a></span>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>  </li>
+      </ul>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>                            <div class="link-more">
+                            <a href="/research-centers">See All Centers, Labs, &amp; Programs</a>                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <p class="other-options">
+                                            <a href="/user/login">Login</a>
+                                        <span class="text">or</span>
+                    <a href="/subscribe-newsletter">Subscribe Newsletter</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    </nav>
+
+<article>
+
+<div id="site-content-area-wrapper">
+    <div id="site-content-area">
+
+
+        
+        <div class="view view-news-article-top-slideshow-flexslider view-id-news_article_top_slideshow_flexslider view-display-id-block article-top-slideshow-flexslider view-dom-id-ad95b65d2e55c595a33f89410ef26474">
+
+    <div class="view-header-section">
+        <div class="view-header-section-wrapper">
+    
+        
+  
+    
+
+
+
+
+    
+        </div>
+    </div> <!-- end of view-header-section -->
+    
+    <div class="view-main-section">
+    
+      <div class="view-content">
+      <div class="flexslider">    <ul class="slides">          <li class="">  
+          <div class="slide-wrapper">    
+          <div class="image"><img src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/news_article_image_top_slideshow/public/images/2009/20100816151036-0_0.jpg?itok=q0vbdDe8" title="" alt="" /></div>    
+          <div class="descr"><div class="text"></div><a class="top-slideshow-full" rel="top-slideshow" href="http://news.mit.edu/sites/mit.edu.newsoffice/files/images/2009/20100816151036-0_0.jpg">Full Screen</a></div>    
+          </div>  </li>
+      </ul></div>    </div>
+  
+  
+  
+  
+  
+      </div>
+</div>
+        
+        <header>
+        <div class="content-sides-padding">
+
+            <div class="article-header">
+
+                                    <h1 itemprop="name headline" class="article-heading">Explained: P vs. NP</h1>
+                
+                <img class="article-cover-image" itemprop="image" typeof="foaf:Image" src="http://news.mit.edu/sites/mit.edu.newsoffice/files/styles/article_cover_image_small/public/images/2009/20100816151036-0.jpg?itok=cLWkNFFM" width="228" height="152" alt="" title="" />
+                <p id="article-summary"><span itemprop="description">The most notorious problem in theoretical computer science remains open, but the attempts to solve it have led to profound insights.</span>
+
+                                </p>
+            </div>
+        </div>
+        </header>
+
+        <div class="columns-container-1 clearfix">
+
+            <div class="column-1">
+
+                <div id="info-section" class="clearfix content-sides-padding">
+                <div class="left">
+                    <p>
+                        <span itemprop="author">Larry Hardesty, MIT News Office</span>
+                        <br />
+                        <span itemprop="datePublished" content="2009-10-29">October 29, 2009</span>
+                    </p>
+                </div>
+
+                <div class="right">
+                    <div class="options">
+                                        <a id="button-share" href="#share-choices"><span>Share</span></a>
+                    </div>
+                </div>
+                </div>
+
+                
+                <div class="share-article">
+                    <h3>Share</h3>
+
+                    <div id="share-choices" class="clearfix">
+
+                                        <div class="addthis_toolbox addthis_default_style addthis_32x32_style"  addthis:url="http://mitne.ws/1wi0LnC">
+                    <a class="addthis_button_facebook"></a>
+                    <a class="addthis_button_twitter"></a>
+                    <a class="addthis_button_google_plusone_share"></a>
+                    <a class="addthis_button_reddit"></a>
+                    <a class="addthis_button_stumbleupon"></a>
+                    <a class="addthis_button_linkedin"></a>
+                    <a class="addthis_button_email"></a>
+                    <a class="addthis_button_print"></a>
+                    <a class="addthis_button_compact"></a>
+                    </div>
+                    <h3 class="label comment">Comment</h3>
+                    <a class="button_commment" href="#separator-comments"><span>Leave a comment</span></a>
+
+                    </div>
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e43d5194319780c"></script>
+                </div>
+
+                <div itemprop="articleBody" id="article-body-main" class="content-sides-padding">
+                      <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    
+
+<div class="field field-name-field-article-content field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even"><p><i>Science and technology journalists pride themselves on the ability to explain complicated ideas in accessible ways, but there are some technical principles that we encounter so often in our reporting that paraphrasing them or writing around them begins to feel like missing a big part of the story. So in a new series of articles called "Explained," MIT News Office staff will explain some of the core ideas in the areas they cover, as reference points for future reporting on MIT research.</i></p>
+<p>In the 1995 Halloween episode of <i>The Simpsons</i>, Homer Simpson finds a portal to the mysterious Third Dimension behind a bookcase, and desperate to escape his in-laws, he plunges through. He finds himself wandering across a dark surface etched with green gridlines and strewn with geometric shapes, above which hover strange equations. One of these is the deceptively simple assertion that P = NP.</p>
+<p>In fact, in a 2002 poll, 61 mathematicians and computer scientists said that they thought P probably didn’t equal NP, to only nine who thought it did — and of those nine, several told the pollster that they took the position just to be contrary. But so far, no one’s been able to decisively answer the question one way or the other. Frequently called the most important outstanding question in theoretical computer science, the equivalency of P and NP is one of the seven problems that the Clay Mathematics Institute will give you a million dollars for proving — or disproving. Roughly speaking, P is a set of relatively easy problems, and NP is a set that includes what seem to be very, very hard problems, so P = NP would imply that the apparently hard problems actually have relatively easy solutions. But the details are more complicated.</p>
+<p>Computer science is largely concerned with a single question: How long does it take to execute a given algorithm? But computer scientists don’t give the answer in minutes or milliseconds; they give it relative to the number of elements the algorithm has to manipulate.</p>
+<p>Imagine, for instance, that you have an unsorted list of numbers, and you want to write an algorithm to find the largest one. The algorithm has to look at all the numbers in the list: there’s no way around that. But if it simply keeps a record of the largest number it’s seen so far, it has to look at each entry only once. The algorithm’s execution time is thus directly proportional to the number of elements it’s handling — which computer scientists designate N. Of course, most algorithms are more complicated, and thus less efficient, than the one for finding the largest number in a list; but many common algorithms have execution times proportional to N<sup>2</sup>, or N times the logarithm of N, or the like.</p>
+<p>A mathematical expression that involves N’s and N<sup>2</sup>s and N’s raised to other powers is called a polynomial, and that’s what the “P” in “P = NP” stands for. P is the set of problems whose solution times are proportional to polynomials involving N's.</p>
+<p>Obviously, an algorithm whose execution time is proportional to N<sup>3</sup> is slower than one whose execution time is proportional to N. But such differences dwindle to insignificance compared to another distinction, between polynomial expressions — where N is the number being raised to a power — and expressions where a number is raised to the Nth power, like, say, 2<sup>N</sup>.</p>
+<p>If an algorithm whose execution time is proportional to N takes a second to perform a computation involving 100 elements, an algorithm whose execution time is proportional to N<sup>3</sup> takes almost three hours. But an algorithm whose execution time is proportional to 2<sup>N</sup> takes 300 quintillion years. And that discrepancy gets much, much worse the larger N grows.</p>
+<p>NP (which stands for nondeterministic polynomial time) is the set of problems whose solutions can be verified in polynomial time. But as far as anyone can tell, many of those problems take exponential time to solve. Perhaps the most famous exponential-time problem in NP, for example, is finding prime factors of a large number. Verifying a solution just requires multiplication, but solving the problem seems to require systematically trying out lots of candidates.</p>
+<p>So the question “Does P equal NP?” means “If the solution to a problem can be verified in polynomial time, can it be found in polynomial time?” Part of the question’s allure is that the vast majority of NP problems whose solutions seem to require exponential time are what’s called NP-complete, meaning that a polynomial-time solution to one can be adapted to solve all the others. And in real life, NP-complete problems are fairly common, especially in large scheduling tasks. The most famous NP-complete problem, for instance, is the so-called traveling-salesman problem: given N cities and the distances between them, can you find a route that hits all of them but is shorter than … whatever limit you choose to set?</p>
+<p>Given that P probably doesn’t equal NP, however — that efficient solutions to NP problems will probably never be found — what’s all the fuss about? Michael Sipser, the head of the MIT Department of Mathematics and a member of the Computer Science and Artificial Intelligence Lab’s Theory of Computation Group (TOC), says that the P-versus-NP problem is important for deepening our understanding of computational complexity.</p>
+<p>“A major application is in the cryptography area,” Sipser says, where the security of cryptographic codes is often ensured by the complexity of a computational task. The RSA cryptographic scheme, which is commonly used for secure Internet transactions — and was invented at MIT — “is really an outgrowth of the study of the complexity of doing certain number-theoretic computations,” Sipser says.</p>
+<p>Similarly, Sipser says, “the excitement around quantum computation really boiled over when Peter Shor” — another TOC member — “discovered a method for factoring numbers on a quantum computer. Peter's breakthrough inspired an enormous amount of research both in the computer science community and in the physics community.” Indeed, for a while, Shor’s discovery sparked the hope that quantum computers, which exploit the counterintuitive properties of extremely small particles of matter, could solve NP-complete problems in polynomial time. But that now seems unlikely: the factoring problem is actually one of the few hard NP problems that is not known to be NP-complete.</p>
+<p>Sipser also says that “the P-versus-NP problem has become broadly recognized in the mathematical community as a mathematical question that is fundamental and important and beautiful. I think it has helped bridge the mathematics and computer science communities.”</p>
+<p>But if, as Sipser says, “complexity adds a new wrinkle on old problems” in mathematics, it’s changed the questions that computer science asks. “When you’re faced with a new computational problem,” Sipser says, “what the theory of NP-completeness offers you is, instead of spending all of your time looking for a fast algorithm, you can spend half your time looking for a fast algorithm and the other half of your time looking for a proof of NP-completeness.”</p>
+<p>Sipser points out that some algorithms for NP-complete problems exhibit exponential complexity only in the worst-case scenario and that, in the average case, they can be more efficient than polynomial-time algorithms. But even there, NP-completeness “tells you something very specific,” Sipser says. “It tells you that if you’re going to look for an algorithm that’s going to work in every case and give you the best solution, you’re doomed: don’t even try. That’s useful information.”</p>
+</div></div></div>
+<hr id="separator-comments" />
+
+<section>
+    <div id="article-tags">
+        <p><strong class="label">Topics:</strong> <span class="tags"><a href="/topic/computational-complexity-theory">Computational complexity theory</a><span class="comma">, </span><a href="/topic/theoretical-computer-science">Theoretical computer science</a><span class="comma">, </span><a href="/topic/explained">Explained</a><span class="comma">, </span><a href="/topic/p-vs-np">P vs. NP</a></span></p>
+    </div>
+</section>
+
+
+<section>
+    <div id="article-comments" />
+    <div class="comments">
+          <h2 class="title">Comments</h2>
+        
+  <a id="comment-25054"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Patrick McGovern      </p>
+      <p class="comment-time">
+        October 29, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>N=1</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25055"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Jim      </p>
+      <p class="comment-time">
+        October 29, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Donuts = MMMMmmm..</p>
+<p>That is the only true homer simpson equation.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25056"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Adam Hufangel      </p>
+      <p class="comment-time">
+        October 29, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>As time approches infinity P=NP, the problem is really solving a relative problem in a non-relative plain, in this case infinte time.</p>
+<p>If Time reaches infinite amounts, it's only logical to assume that every possible option to solving the problem has been exhasted, and eventually a solution, or in some cases the lack there-of would be discovered.</p>
+<p>Also given an infinite amount of time and a finite set of options to derive the solution it's only logical to beleive that not only would the solution be discovered, but also the most easiest method at arriving at said solution.... thus P=NP</p>
+<p>To be totally honest string theory pretty much makes this NP=P, but I don't think we have enough comment space for that.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25057"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        James Falk      </p>
+      <p class="comment-time">
+        October 29, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>P=NP if P = 2*pi radians or 360 degrees and N is an integer value....or, in fact, there is a family of similar solutions if P= k * 2pi where 'k' is any integer value.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25058"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Nirmal Vijay      </p>
+      <p class="comment-time">
+        October 30, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Pi = Not Pie</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25059"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Jacques Lapeyre      </p>
+      <p class="comment-time">
+        October 30, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>((P=NP)=NP)=P</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25060"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        NPierre de Fermat      </p>
+      <p class="comment-time">
+        October 30, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>I have discovered a truly marvelous proof of this, which this comment form is too narrow to contain.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25061"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Carl Thompson      </p>
+      <p class="comment-time">
+        October 30, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>I like turtles.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25062"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Jack Mckinney      </p>
+      <p class="comment-time">
+        November 2, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>p=o,and or n=0,and or both = 0.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25063"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Rolly      </p>
+      <p class="comment-time">
+        November 3, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>??????????</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25064"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        TL Winslow      </p>
+      <p class="comment-time">
+        November 10, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>It's like when you try to make a chess-playing program. You have to either go with total brute force, trying every possible move for each side all the way to the end before deciding your first move, which takes the life of the Universe or something, or you have to be satisfied with looking ahead n moves only. But the rub is that at the nth move you have to evaluate the board, and if it's not a mate you have to assign a quality score to the position, which is insanely impossible, since for instance a position that has one queen less than another would have to be given a far lower score, yet that move might be a queen sacrifice that wins if only you had gone to the n+1 or n+2 level to check. So chess is easy to compute that somebody won, but impossible to find a way to win in polynomial time. QED, and don't waste your life on silly kid games.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25065"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Ritesh      </p>
+      <p class="comment-time">
+        December 18, 2009       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Assume P=NP</p>
+<p>Divide both sides by P.</p>
+<p>therefore 1=N</p>
+<p>Hence P=NP only if N=1</p>
+<p>      P!=NP for N&gt;1</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25066"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        John Gowers      </p>
+      <p class="comment-time">
+        June 28, 2010       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>You can't divide both sides by P without considering that P could equal 0.</p>
+<p>Corrected proof:</p>
+<p>P = NP</p>
+<p>NP - P = 0</p>
+<p>P(N - 1) = 0</p>
+<p>P = 0, N = 1.</p>
+<p>i.e. [If P and N were variables],</p>
+<p>P = NP if and only if P = 0 OR N = 1.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25067"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Brauh      </p>
+      <p class="comment-time">
+        July 14, 2010       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Why is such a question posed about form in the first place, I mean like an attempt to encapsulate a class of 'closed form'?</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25068"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Brauh      </p>
+      <p class="comment-time">
+        July 14, 2010       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>We can dismiss with this petty algebraic mockery assuming P, N, or NP are the variables and their product.</p>
+<p>Mathematicians, like the Geologists, have simply monikered their own "K.T. Boundary"; and the mathematicians have called it their P.'=' N.P. boundary for their philosophy.  So put away your graphic calculators you are way..way..way, out of your league.  Please observe:</p>
+<p>Title:</p>
+<p>Handbook of theoretical computer science / edited by Jan van Leeuwen.</p>
+<p>Publisher:</p>
+<p>Amsterdam ; New York : Elsevier ; Cambridge, Mass. : MIT Press, 1990.</p>
+<p>ISBN:</p>
+<p>0262220407 (MIT Press : set)</p>
+<p>0262220385 (MIT Press : v. A)</p>
+<p>0262220393 (MIT Press : v. B)</p>
+<p>0444880755 (U.S. : set)</p>
+<p>0444880712 (U.S. : v. A)</p>
+<p>0444880747 (U.S. : v. B)</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25069"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Justin      </p>
+      <p class="comment-time">
+        December 9, 2011       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>I noticed in the video lecture of P vs NP by Mr. Sipser that the analogy used was that of finding a needle in a hay stack.  And that the way you could find it easily is to simply use a magnet.  This analogy has some flaws in that the needle has different properties than the hay does, it's metal.  You could burn the hay stack but that requires you to destroy all other possibilities, you lose information.  You could use a metal detector but anyone who's ever used one knows that you don't find what you're looking for immediately; this is what probabilities do for you.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25070"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Civil Alerts      </p>
+      <p class="comment-time">
+        January 3, 2012       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>P=NP has been solved using Energy Loop Theory formulation... <a href="http://www.google.com/search?q=energy+loop+theory" rel="nofollow">http://www.google.com/search?q...</a></p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25071"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Jonathan      </p>
+      <p class="comment-time">
+        June 26, 2012       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>From a novel theoretical perspective in the book,  THE OBELUS SET THEORY OF EQUITY DISTRIBUTION , set concept(s) of the fundamental process of sharing has been used to provide a simple proof for the equality or non-equality between the class of P and NP class. It turns out that P is equal to NP!</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25072"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Randall Lee Reetz      </p>
+      <p class="comment-time">
+        September 11, 2012       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>I can't believe that the author of this educational post used the symbol "N" in an attempt to clarify P vs. NP. What a hot mess! In P vs. NP, "N" stands for "non" as in non-poynomial. To obfuscate this already confusing topic by using N to denote "the number of operations" is more than a little laughable. Especially, when the whole point of this series is "explanation". Are there any editors on the staff? Peer review? A girlfriend or husband or co-worker willing to check for clarity?</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25073"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        henry lepe      </p>
+      <p class="comment-time">
+        December 4, 2012       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>the traveling salesman is not n!but</p>
+<p>the sum of (n-i) from i=0 to n-1</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25074"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        henry lepe      </p>
+      <p class="comment-time">
+        December 28, 2012       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>proof of goldbach</p>
+<p>take an nxn tableas n goes to infinity.</p>
+<p>p(n) is the nth prime. process al p(n),n=&gt; 2.process p(k)+p(n) in column</p>
+<p>k-1 starting in row p(k)+p(2).example:</p>
+<p>column1       Column k-1</p>
+<p>p(2)+p(2)</p>
+<p>p(2)+p(3)</p>
+<p>    .</p>
+<p>    .          p(k)+p(2)</p>
+<p>    .          p(k)+P(3)</p>
+<p>                   .</p>
+<p>                   .</p>
+<p>P(2)+p(n)          .</p>
+<p>               p(k)+p(n)</p>
+<p>etc.for an inite number of rows an columns. For goldbach to be false there</p>
+<p>would have to be at least one empty even row. this procedure makes an empty</p>
+<p>even row impossible. therefore all even numbers=&gt;6 are accounted for. then just add 2+2=4</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25075"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        henry lepe      </p>
+      <p class="comment-time">
+        January 2, 2013       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>proof of goldbach</p>
+<p>a nXn table as n goes to infinity</p>
+<p>indentation correction</p>
+<p>p(k)+p(n) ,n=&gt;2 is processed in column k-1 starting in row p(k)+p(2) example</p>
+<p>column 1...... column k-1</p>
+<p>p(2)+p(2)</p>
+<p>p(2)+p(3)</p>
+<p>   .</p>
+<p>   ...........  p(k)+p(2)</p>
+<p>   ...........  p(k)+p(2)</p>
+<p>   .</p>
+<p>P(2)+p(n)</p>
+<p>  ............. p(k)+p(n)</p>
+<p>    .</p>
+<p>    .</p>
+<p>etC. for an infinite number of rows and an infinite number of columns. For Goldbach to be false there would have to be at least one empty even row.  This</p>
+<p>procedure makes an empty even row impossible. Therefore all even numbers</p>
+<p>=&gt; 6 are accounted for. Then just add</p>
+<p>2+2=4</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25076"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Joel      </p>
+      <p class="comment-time">
+        March 12, 2013       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>If you Google... P = NP   Math Question you'll find its worth a million if solved.</p>
+<p> With the help of my son theryn.... I think we solved it.</p>
+<p>N = 0</p>
+<p>P = P</p>
+<p>P = 0P</p>
+<p>0 = infi</p>
+<p>Hence P = NP if NP = infi 0</p>
+<p>P=NP is  nothing or space.</p>
+<p>Space = Time</p>
+<p>Time = Light</p>
+<p>Light = Time Space</p>
+<p>P = Light  NP = Time Space</p>
+<p>Solution is</p>
+<p>Light &gt;Time Space or P= Measured Time Space</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25077"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Anthony Vossman      </p>
+      <p class="comment-time">
+        October 15, 2013       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>We immediately see:</p>
+<p>One algorithm to deliver a general NP problem/question and one algorithm to provide a general solution. versus... One algorithm to deliver a particular example and one algorithm to verify that particular example.</p>
+<p>Therefore we have an analysis required for four algorithms of which only three can necessarily be considered verifiably P and already fully grounded on a particular axiomatic foundation. There is still one open algorithm to fully establish and fully account for, i.e., the general proof.</p>
+<p>So, P = NP requires circle-squaring for now, therefore P not= NP until a general polynomial time NP proof is found, if that can be done. Finally, since this analysis itself requires an algorithm, we may be dealing with quintic impossibility here.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25078"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Peter      </p>
+      <p class="comment-time">
+        October 18, 2013       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Seems to me mathematics is a field limited to imagination.</p>
+<p>   P = n  p</p>
+<p>Water= 5 H20 thinking of it in this nature you may make different connections as to possible solution sets to this problem. The only relationships or values these variables have are the ones we give them.</p>
+<p>So in this instance I have used the common term for water and the Chemical make up and n would be the quantity. Regardless of how much water you have it is still water.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25079"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        nicolae marius      </p>
+      <p class="comment-time">
+        May 10, 2014       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>The first choise</p>
+<p>A man (Bob) is a Turing machine and a women (Any) is input data. Then transition function is "what he tells them AFTER START" to acceptance state.</p>
+<p>For a deterministic Turing machine the inputa data is Any.</p>
+<p>For a nodeterministic Turing machine Bob has before START two women: Any and Ana and he must chosse befor START one of them.</p>
+<p>If he choose Any is ok, but if he chooses ANA?,</p>
+<p>Can we compare the complexity of two problems?</p>
+<p>That means Nondeterministic Turing machine input change prior to START?</p>
+<p>Smiling man. It's just an anecdote</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25080"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Callum Britton      </p>
+      <p class="comment-time">
+        May 19, 2014       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>I believe that P=NP; I am 12 years old but I still have a view. NP is non deterministic but that is because we cannot work it out. Our computers cannot solve it. we cannot solve them quickly... supposedly; what if there is a solution to these which do not make us go through every possibility. Take the millennium problem for instance: (I may not be correct but bare with me) It seems so hard because we have 400 students to sort. But what if we have a method: What I have done is:</p>
+<p>1. Put the two sections/amounts that you have to split ,which is students in this case, into ratio: 300:100 which is 3:1</p>
+<p>2. Put this into fraction: 3/1 which is 3</p>
+<p>3. Put 3 to the power of the normal amount which is 3^400</p>
+<p>This could potentially be the answer but I am not guaranteeing anything.</p>
+<p>3. Then do</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25081"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Zack Y.      </p>
+      <p class="comment-time">
+        August 11, 2014       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Its unlikely that P=NP with classical computation, but I think we might find an algorithm to do it with quantum computers. Somehow N qubits can do 2^N (or more) operations simultaneously, and physicists still have no clear answer as to what is doing that work. Some will straight up tell you, like David Deutsch, that the ops are running in parallel universes, other evidence points to quantum systems being influenced by future events.</p>
+<p>The assumption going into P=NP is that future computations cannot influence current ones. If Quantum Physics shows that that's EXACTLY how nature does things, you can have P=NP: the eventual solution could be used to generate itself!.</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25082"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        asdf      </p>
+      <p class="comment-time">
+        September 30, 2014       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>The answer is simple. -pi alpha</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25083"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Emmanuel Xagorarakis      </p>
+      <p class="comment-time">
+        May 27, 2015       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>I wish to announce the genuine solution to the P vs NP Problem (that is P does not equal NP). The solution by solid proof is included, among other solutions, in my<br />published number theory, free-accessed at:</p>
+<p><a href="http://www.saitabooks.eu/2015/01/ebook.134.html" rel="nofollow">www.saitabooks.eu/2015/01/eboo...</a></p>
+<p>Having proven what a (pure) number is, the essential criterion has come to surface; the true numeric function of addition/subtraction, and the fact that the<br />multiplication/division has to absolutely be interpreted as addition/subtraction (unit-by-unit elementary function) so that there actually exists a function of multiplication or division. Simple: the computer counts 1 2 3 4 5, but it doesn't count 12.345, which constitutes a division, thus a factorial deed. The numeric nature is this of addition, not multiplication. Multiplication is the basis for any factorial counting. Yet, e.g. 2x3=6 cannot be considered as existent unless there exists the statement 2+2+2=6. The latter holds all the essence of 6. The former bears no meaning at all when it is about pure numbers.</p>
+<p>Responsible critique is always welcome!</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25084"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        Weatherlawyer      </p>
+      <p class="comment-time">
+        June 26, 2015       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>If I have understood the idea it is not a problem of computation so much as expertise. A chef knowing what ingredient is missing or a perfumer knowing what ingredients are included?</p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-25085"></a>
+<div class="comment-entry">
+
+    <div class="submitted">
+      <p class="commenter-name">
+        sudhir ghimire      </p>
+      <p class="comment-time">
+        January 2, 2016       </p>
+    </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+    <!--
+        -->
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/2009/explainer-pnp" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Does it not depend on the starting point ?because when we check the solution we have already assume or built the algorithm. so it doesnot start at the same level of computation than solving the problem.To check the problem doesnot start at the same level of computation. So it sometime is not even the same problem. So n and np can be either way. Meaning any step could include more or less steps or even same number of step depending on where we start the problem from. </p>
+</div></div></div>    </div> <!-- /.content -->
+
+  </div> <!-- /.comment-text -->
+</div>
+    
+    </div>
+    </div>
+</section>
+  </div>
+</div>
+  </div>
+                </div>
+            </div>
+
+            <div class="column-2">
+
+
+                
+                                <section>
+                <div class="additional-info">
+                    <h3>Related</h3>
+                    <ul><li><a target="_blank" class="external" href="http://theory.csail.mit.edu/">MIT Theory of Computation Group</a></li><li><a target="_blank" class="external" href="http://scottaaronson.com/blog/?p=122">Scott Aaronson’s reasons to think that P does not equal NP</a></li></ul>                </div>
+                </section>
+                
+                            </div>
+        </div>
+
+    </div>
+</div>
+
+</article>
+
+  <div class="region region-content-footer">
+    <div id="block-mitnews-news-collection-block-latest-news-for-article" class="block block-mitnews-news-collection">
+
+    
+  <div class="content">
+    <div id="latest-news-content-block"></div>  </div>
+</div>
+  </div>
+
+    <footer>
+    
+    
+
+    <div id="site-footer-area-wrapper">
+    
+        <div id="site-footer-area">
+            
+            <div class="container clearfix">
+                <div id="site-footer-about">
+                    <h2>About This Website</h2>
+            
+                    <p>This Website is maintained by the MIT News Office, part of the <a href="http://comms.mit.edu" target="_blank">Office of Communications</a>.</p>
+                    
+                    <div class="clearfix">
+                    <ul class="column">
+                        <li><a href="/about">About the MIT News Office</a></li>
+                        <li><a href="/press">MIT News Press Center</a></li>
+                        <li><a href="/press/inquiries">Press Inquiries</a></li>
+                        <li><a href="/press/filming-guidelines">Filming Guidelines</a></li>
+                        <li><a href="http://comms.mit.edu" target="_blank">Office of Communications</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/terms-of-use">Terms of Use</a></li>
+                    </ul>
+            
+                    <ul class="column">
+                        <li><a href="/rss">RSS</a></li>
+                        <li><a href="https://twitter.com/mit" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.facebook.com/MITnews" target="_blank">Facebook</a></li>
+                        <li><a href="https://plus.google.com/+mit/posts" target="_blank">Google+</a></li>
+                        <li><a href="http://instagram.com/mitpics" target="_blank">Instagram</a></li>
+                        <li><a href="http://www.flickr.com/photos/cpsphotolibrary" target="_blank">Flickr</a></li>
+                        <li><a href="https://www.youtube.com/mit" target="_blank">YouTube</a></li>
+                    </ul>
+            
+                    <ul class="column">
+                        <li><a href="http://web.mit.edu/" target="_blank">MIT Homepage</a></li>
+                        <li><a href="https://www.youtube.com/mit" target="_blank">MIT Video</a></li>
+                        <li><a href="http://connect.mit.edu/" target="_blank">MIT Connect</a></li>
+                        <li><a href="http://resources.mit.edu/" target="_blank">MIT Resources</a></li>
+                        <li><a href="http://events.mit.edu/" target="_blank">Events Calendar</a></li>
+                    </ul>  
+            
+                    <ul class="column">
+                        <li><a href="http://web.mit.edu/aboutmit/" target="_blank">About MIT</a></li>
+                        <li><a href="http://web.mit.edu/admissions/" target="_blank">Admissions</a></li>
+                        <li><a href="http://alum.mit.edu" target="_blank">Alumni</a></li>
+                        <li><a href="http://web.mit.edu/education/" target="_blank">Education</a></li>
+                        <li><a href="http://web.mit.edu/research/" target="_blank">Labs and Centers</a></li>                     
+                    </ul>
+                    </div>
+                </div>
+            
+                <div id="site-footer-resources">
+                    <h2>Resources</h2>
+                    <ul class="buttons">
+                        <li><a href="/user/login?destination=user/campus-news/submit">Submit Campus News</a></li>
+                        <li><a href="/user/login?destination=user/pitch-story/submit">Pitch a Story</a></li>
+                        <li><a href="/subscribe-newsletter">Sign Up for Newsletter</a></li>
+                        <li><a href="/press/subscribe-to-press-releases">Subscribe to Press Releases</a></li>
+                        <li><a href="/terms-of-use">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="container clearfix">
+                <div class="right">
+                    <a id="button-give-to-mit" href="/give-to-mit" target="_blank">GIVE TO MIT</a>
+                </div>            
+                <div class="left clearfix">
+                    <a class="footer-logo" href="http://web.mit.edu" target="_blank">Massachusetts Institute of Technology</a>
+                    <div class="footer-logo-text">
+                    <p>
+                    <a href="/about">MIT News Office</a> 
+                    &bull; 
+                    <a href="http://whereis.mit.edu/?go=11" target="_blank">Building 11-400</a><br />
+                    <a href="http://web.mit.edu" target="_blank">Massachusetts Institute of Technology</a> 
+                    &bull; 
+                    Cambridge, MA 02139-4307
+                    </p>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+    </div>
+    
+    </footer>
+
+</div>
+
+<div class="back-to-top"><a href="#"><span>Back to the top</span></a></div>
+    
+</body>
+</html>

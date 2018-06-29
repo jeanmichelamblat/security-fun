@@ -1,0 +1,933 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if IE 7]>
+<html id="ie7" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<![endif]-->
+<!--[if (gt IE 7) | (!IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!--<![endif]-->
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Cracking Encrypted PDFs &#8211; Part 1 | Didier Stevens</title>
+
+	<style type="text/css" media="screen">
+		@import url( https://s0.wp.com/wp-content/themes/pub/rubric/style.css );
+	</style>
+
+	<link rel="pingback" href="https://blog.didierstevens.com/xmlrpc.php" />
+			<script src='https://r-login.wordpress.com/remote-login.php?action=js&amp;host=blog.didierstevens.com&amp;id=264765&amp;t=1514390196&amp;back=https%3A%2F%2Fblog.didierstevens.com%2F2017%2F12%2F26%2Fcracking-encrypted-pdfs-part-1%2F' type="text/javascript"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			if ( 'function' === typeof WPRemoteLogin ) {
+				document.cookie = "wordpress_test_cookie=test; path=/";
+				if ( document.cookie.match( /(;|^)\s*wordpress_test_cookie\=/ ) ) {
+					WPRemoteLogin();
+				}
+			}
+		/* ]]> */
+		</script>
+		<link rel='dns-prefetch' href='//s2.wp.com' />
+<link rel='dns-prefetch' href='//s1.wp.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//didierstevens.wordpress.com' />
+<link rel="alternate" type="application/rss+xml" title="Didier Stevens &raquo; Feed" href="https://blog.didierstevens.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Didier Stevens &raquo; Comments Feed" href="https://blog.didierstevens.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Didier Stevens &raquo; Cracking Encrypted PDFs &#8211; Part&nbsp;1 Comments Feed" href="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s2.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1505864856h&ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='all-css-0-1' href='https://s2.wp.com/_static/??-eJyNkdFuwyAMRX9oHspWrd3DtG8B4hG3BqPgKOvfjzSpqnYT2gu6F+4xxpg5g5ekmNTECTJPgVIxc/YSoURiPD+4Z1/Kk/kbYzphMUfUbP0JLq4VH5GtYg9Zij64FuZlxLofs9UlEbEni4yxxlrYTH3Aek+NbBoUv5tIzG/XixY51Fc1O1sH5VwesRSoa6Qpgg61tza3taaSt2EUPTP+ByniyTJQjdybFSaTRNfDq2hVDSjA4q2SpDsDX2xpbH+mYwlVhsuEb7YFWb8Ud3a8qV/xdXxm2JnA4iwvgc/40e3e9y+Hrnvtjj+R8gr7?cssminify=yes' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s1.wp.com/_static/??-eJyFj90KwjAMhV/IrAw6xQvxWWoXS2r/bNoNfXo70At1KARCTr4cTsScgIJ2dUQWttW1Yr49W2d5I34B4MlkVbDzFF6wjqFgKAvr44kcQmXMyjStGZ3jCpciF4/MDVrZvkeiMBHOfzGLJSl9gYxM9y9XXyG5aiiwyOjaAyMsGT6mdnX0h17uh36Qcre1DyuucHk='></script>
+<link rel='stylesheet' id='all-css-0-2' href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style.css?m=1377793621h&cssminify=yes' type='text/css' media='all' />
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://didierstevens.wordpress.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='New Tool: format-bytes.py' href='https://blog.didierstevens.com/2017/12/19/new-tool-format-bytes-py/' />
+<link rel='next' title='Cracking Encrypted PDFs &#8211; Part&nbsp;2' href='https://blog.didierstevens.com/2017/12/27/cracking-encrypted-pdfs-part-2/' />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/" />
+<link rel='shortlink' href='https://wp.me/p16Sp-1ua' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fblog.didierstevens.com%2F2017%2F12%2F26%2Fcracking-encrypted-pdfs-part-1%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fblog.didierstevens.com%2F2017%2F12%2F26%2Fcracking-encrypted-pdfs-part-1%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Cracking Encrypted PDFs &#8211; Part 1" />
+<meta property="og:url" content="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/" />
+<meta property="og:description" content="In this series of blog posts, I&#8217;ll explain how I decrypted the encrypted PDFs shared by John August (John wanted to know how easy it is to crack encrypted PDFs, and started a challenge). Here…" />
+<meta property="article:published_time" content="2017-12-26T17:15:49+00:00" />
+<meta property="article:modified_time" content="2017-12-26T17:15:49+00:00" />
+<meta property="og:site_name" content="Didier Stevens" />
+<meta property="og:image" content="https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png" />
+<meta property="og:image:width" content="994" />
+<meta property="og:image:height" content="221" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Cracking Encrypted PDFs &#8211; Part&nbsp;1" />
+<meta name="twitter:image" content="https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48" />
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48" />
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png" />
+<link rel='openid.server' href='https://didierstevens.wordpress.com/?openidserver=1' />
+<link rel='openid.delegate' href='https://didierstevens.wordpress.com/' />
+<link rel="search" type="application/opensearchdescription+xml" href="https://blog.didierstevens.com/osd.xml" title="Didier Stevens" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+		<style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style>
+		<style type="text/css">
+.widget_twitter li {
+	word-wrap: break-word;
+}
+</style>
+<meta name="application-name" content="Didier Stevens" /><meta name="msapplication-window" content="width=device-width;height=device-height" /><meta name="msapplication-tooltip" content="(blog \&#039;DidierStevens)" /><meta name="msapplication-task" content="name=Subscribe;action-uri=https://blog.didierstevens.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="title" content="Cracking Encrypted PDFs &#8211; Part&nbsp;1 | Didier Stevens on WordPress.com" />
+<meta name="description" content="In this series of blog posts, I&#039;ll explain how I decrypted the encrypted PDFs shared by John August (John wanted to know how easy it is to crack encrypted PDFs, and started a challenge). Here is how I decrypted the &quot;easy&quot; PDF (encryption_test). From John&#039;s blog post, I know the password is random and short.&hellip;" />
+<style type="text/css">
+#header{
+	background: url(https://didierstevens.files.wordpress.com/2009/08/blog-header.png) no-repeat top right;
+}
+#header a {
+	color:#B54141;
+}
+</style>
+<link rel="amphtml" href="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/amp/" /><style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+
+<body class="post-template-default single single-post postid-5714 single-format-standard mp6 customizer-styles-applied highlander-enabled highlander-light">
+<div id="rap">
+<h1 id="header"><a href="https://blog.didierstevens.com/">Didier Stevens</a></h1>
+
+<div id="content">
+<!-- end header -->
+
+
+<h2>Tuesday 26 December 2017</h2>
+<div class="post-5714 post type-post status-publish format-standard hentry category-encryption category-forensics category-hacking category-pdf" id="post-5714">
+	 <h3 class="storytitle">
+			Cracking Encrypted PDFs &#8211; Part&nbsp;1		 </h3>
+	<div class="meta">Filed under:  <a href="https://blog.didierstevens.com/category/encryption/" rel="category tag">Encryption</a>,<a href="https://blog.didierstevens.com/category/forensics/" rel="category tag">Forensics</a>,<a href="https://blog.didierstevens.com/category/hacking/" rel="category tag">Hacking</a>,<a href="https://blog.didierstevens.com/category/pdf/" rel="category tag">PDF</a> &#8212; Didier Stevens @ 17:15 <br /></div>
+
+	<div class="storycontent">
+		<p>In this series of blog posts, I&#8217;ll explain how I decrypted the <a href="https://johnaugust.com/2014/try-to-open-this-pdf">encrypted PDFs shared by John August</a> (John wanted to know how easy it is to crack encrypted PDFs, and started a challenge).</p>
+<p>Here is how I decrypted the &#8220;easy&#8221; PDF (encryption_test).</p>
+<p>From John&#8217;s blog post, I know the password is random and short. So first, let&#8217;s check out how the PDF is encrypted.</p>
+<p><a href="https://blog.didierstevens.com/programs/pdf-tools/">pdfid.py</a> confirms the PDF is encrypted (name /Encrypt):</p>
+<p><a href="https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png"><img data-attachment-id="5724" data-permalink="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/20171225-103147/" data-orig-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png?w=638&#038;h=330" data-orig-size="638,330" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20171225-103147" data-image-description="" data-medium-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png?w=638&#038;h=330?w=300" data-large-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png?w=638&#038;h=330?w=638" class="alignnone size-full wp-image-5724" src="https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png?w=638&#038;h=330" alt="" width="638" height="330" srcset="https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png 638w, https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png?w=128&amp;h=66 128w, https://didierstevens.files.wordpress.com/2017/12/20171225-103147.png?w=300&amp;h=155 300w" sizes="(max-width: 638px) 100vw, 638px" /></a></p>
+<p><a href="https://blog.didierstevens.com/programs/pdf-tools/">pdf-parser.py</a> can tell us more:</p>
+<p><a href="https://didierstevens.files.wordpress.com/2017/12/20171225-103309.png"><img data-attachment-id="5725" data-permalink="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/20171225-103309/" data-orig-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103309.png?w=675&#038;h=308" data-orig-size="675,308" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20171225-103309" data-image-description="" data-medium-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103309.png?w=675&#038;h=308?w=300" data-large-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103309.png?w=675&#038;h=308?w=675" class="alignnone size-full wp-image-5725" src="https://didierstevens.files.wordpress.com/2017/12/20171225-103309.png?w=675&#038;h=308" alt="" width="675" height="308" srcset="https://didierstevens.files.wordpress.com/2017/12/20171225-103309.png 675w, https://didierstevens.files.wordpress.com/2017/12/20171225-103309.png?w=128&amp;h=58 128w, https://didierstevens.files.wordpress.com/2017/12/20171225-103309.png?w=300&amp;h=137 300w" sizes="(max-width: 675px) 100vw, 675px" /></a></p>
+<p>The encryption info is in object 26:</p>
+<p><a href="https://didierstevens.files.wordpress.com/2017/12/20171225-103407.png"><img data-attachment-id="5726" data-permalink="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/20171225-103407/" data-orig-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103407.png?w=652&#038;h=391" data-orig-size="652,391" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20171225-103407" data-image-description="" data-medium-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103407.png?w=652&#038;h=391?w=300" data-large-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103407.png?w=652&#038;h=391?w=652" class="alignnone size-full wp-image-5726" src="https://didierstevens.files.wordpress.com/2017/12/20171225-103407.png?w=652&#038;h=391" alt="" width="652" height="391" srcset="https://didierstevens.files.wordpress.com/2017/12/20171225-103407.png 652w, https://didierstevens.files.wordpress.com/2017/12/20171225-103407.png?w=128&amp;h=77 128w, https://didierstevens.files.wordpress.com/2017/12/20171225-103407.png?w=300&amp;h=180 300w" sizes="(max-width: 652px) 100vw, 652px" /></a></p>
+<p>From this I can conclude that the standard encryption filter was used. This encryption method uses a 40-bit key (usually indicated by a dictionary entry: /Length 40, but this is missing here).</p>
+<p>PDFs can be encrypted for confidentiality (requiring a so-called user password /U) or for <a href="https://en.wikipedia.org/wiki/Digital_rights_management">DRM</a> (using a so-called owner password /O). PDFs encrypted with a user password can only be opened by providing this password. PDFs encrypted with a owner password can be opened without providing a password, but some restrictions will apply (for example, printing could be disabled).</p>
+<p><a href="http://qpdf.sourceforge.net/">QPDF</a> can be used to determine if the PDF is protected with a user password or an owner password:</p>
+<p><a href="https://didierstevens.files.wordpress.com/2017/12/20171225-103943.png"><img data-attachment-id="5727" data-permalink="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/20171225-103943/" data-orig-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103943.png?w=725&#038;h=178" data-orig-size="725,178" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20171225-103943" data-image-description="" data-medium-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103943.png?w=725&#038;h=178?w=300" data-large-file="https://didierstevens.files.wordpress.com/2017/12/20171225-103943.png?w=725&#038;h=178?w=725" class="alignnone size-full wp-image-5727" src="https://didierstevens.files.wordpress.com/2017/12/20171225-103943.png?w=725&#038;h=178" alt="" width="725" height="178" srcset="https://didierstevens.files.wordpress.com/2017/12/20171225-103943.png 725w, https://didierstevens.files.wordpress.com/2017/12/20171225-103943.png?w=128&amp;h=31 128w, https://didierstevens.files.wordpress.com/2017/12/20171225-103943.png?w=300&amp;h=74 300w" sizes="(max-width: 725px) 100vw, 725px" /></a></p>
+<p>This output (invalid password) tells us the PDF document is encrypted with a user password.</p>
+<p>I&#8217;ve written some <a href="https://blog.didierstevens.com/2015/04/15/pdf-password-cracking-with-john-the-ripper/">blog posts</a> about decrypting PDFs, but because we need to perform a brute-force attack here (it&#8217;s a short random password), this time I&#8217;m going to use <a href="https://hashcat.net/hashcat/">hashcat</a> to crack the password.</p>
+<p>First we need to extract the hash to crack from the PDF. I&#8217;m using <a href="https://github.com/truongkma/ctf-tools/blob/master/John/run/pdf2john.py">pdf2john.py</a> to do this. Remark that John the Ripper (Jumbo version) is now using <a href="https://github.com/magnumripper/JohnTheRipper/blob/bleeding-jumbo/run/pdf2john.pl">pdf2john.pl</a> (a Perl program), because there were some issues with the Python program (pdf2john.py). For example, it would not properly generate a hash for 40-bit keys when the /Length name was not specified (like is the case here). However, I use a patched version of pdf2john.py that properly handles default 40-bit keys.</p>
+<p>Here&#8217;s how we extract the hash:</p>
+<p><a href="https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png"><img data-attachment-id="5728" data-permalink="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/20171225-105343/" data-orig-file="https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png?w=994&#038;h=221" data-orig-size="994,221" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20171225-105343" data-image-description="" data-medium-file="https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png?w=994&#038;h=221?w=300" data-large-file="https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png?w=994&#038;h=221?w=994" class="alignnone size-full wp-image-5728" src="https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png?w=994&#038;h=221" alt="" width="994" height="221" srcset="https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png 994w, https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png?w=128&amp;h=28 128w, https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png?w=300&amp;h=67 300w, https://didierstevens.files.wordpress.com/2017/12/20171225-105343.png?w=768&amp;h=171 768w" sizes="(max-width: 994px) 100vw, 994px" /></a></p>
+<p>This format is suitable for John the Ripper, but not for hashcat. For hashcat, just the hash is needed (field 2), and no other fields.</p>
+<p>Let&#8217;s extract field 2 (you can use awk instead of csv-cut.py):</p>
+<p><a href="https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png"><img data-attachment-id="5729" data-permalink="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/20171225-105659/" data-orig-file="https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png?w=994&#038;h=228" data-orig-size="994,228" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20171225-105659" data-image-description="" data-medium-file="https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png?w=994&#038;h=228?w=300" data-large-file="https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png?w=994&#038;h=228?w=994" class="alignnone size-full wp-image-5729" src="https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png?w=994&#038;h=228" alt="" width="994" height="228" srcset="https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png 994w, https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png?w=128&amp;h=29 128w, https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png?w=300&amp;h=69 300w, https://didierstevens.files.wordpress.com/2017/12/20171225-105659.png?w=768&amp;h=176 768w" sizes="(max-width: 994px) 100vw, 994px" /></a></p>
+<p>I&#8217;m storing the output in file &#8220;encryption_test &#8211; CONFIDENTIAL.hash&#8221;.</p>
+<p>And now we can finally use hashcat. This is the command I&#8217;m using:</p>
+<pre>hashcat-4.0.0\hashcat64.exe --potfile-path=encryption_test.pot -m 10400 -a 3 -i "encryption_test - CONFIDENTIAL.hash" ?a?a?a?a?a?a</pre>
+<p>I&#8217;m using the following options:</p>
+<ul>
+<li>&#8211;potfile-path=encryption_test.pot : I prefer using a dedicated pot file, but this is optional</li>
+<li>-m 10400 : this hash mode is suitable to crack the <span style="text-decoration:underline;">password</span> used for 40-bit PDF encryption</li>
+<li>-a 3 : I perform a brute force attack (since it&#8217;s a random password)</li>
+<li>?a?a?a?a?a?a : I&#8217;m providing a mask for 6 alphanumeric characters (I want to brute-force passwords up to 6 alphanumeric characters, I&#8217;m assuming when John mentions a short password, it&#8217;s not longer than 6 characters)</li>
+<li>-i : this incremental option makes that the set of generated password is not only 6 characters long, but also 1, 2, 3, 4 and 5 characters long</li>
+</ul>
+<p>And here is the result:</p>
+<p><a href="https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png"><img data-attachment-id="5730" data-permalink="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/20171225-111644/" data-orig-file="https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png?w=1024&#038;h=495" data-orig-size="1090,527" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20171225-111644" data-image-description="" data-medium-file="https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png?w=1024&#038;h=495?w=300" data-large-file="https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png?w=1024&#038;h=495?w=1090" class="alignnone size-full wp-image-5730" src="https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png?w=1024&#038;h=495" alt="" width="1024" height="495" srcset="https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png?w=1024&amp;h=495 1024w, https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png?w=128&amp;h=62 128w, https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png?w=300&amp;h=145 300w, https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png?w=768&amp;h=371 768w, https://didierstevens.files.wordpress.com/2017/12/20171225-111644.png 1090w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p>The recovered password is 1806. We can confirm this with QPDF:</p>
+<p><a href="https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png"><img data-attachment-id="5731" data-permalink="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/20171225-111258/" data-orig-file="https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png?w=899&#038;h=344" data-orig-size="899,344" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20171225-111258" data-image-description="" data-medium-file="https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png?w=899&#038;h=344?w=300" data-large-file="https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png?w=899&#038;h=344?w=899" class="alignnone size-full wp-image-5731" src="https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png?w=899&#038;h=344" alt="" width="899" height="344" srcset="https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png 899w, https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png?w=128&amp;h=49 128w, https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png?w=300&amp;h=115 300w, https://didierstevens.files.wordpress.com/2017/12/20171225-111258.png?w=768&amp;h=294 768w" sizes="(max-width: 899px) 100vw, 899px" /></a></p>
+<p>Conclusion: PDFs protected with a 4 character user password using 40-bit encryption can be cracked in a couple of seconds using free, open-source tools.</p>
+<p>FYI, I used the following <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPU</a>: GeForce GTX 980M, 2048/8192 MB allocatable, 12MCU</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled"><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-264765-5714-5a43c2b471994' data-src='//widgets.wp.com/likes/#blog_id=264765&amp;post_id=5714&amp;origin=didierstevens.wordpress.com&amp;obj_id=264765-5714-5a43c2b471994' data-name='like-post-frame-264765-5714-5a43c2b471994'><h3 class='sd-title'>Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading">Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>	</div>
+
+	<div class="feedback">
+                        <a href="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/#comments">Comments (3)</a>	</div>
+
+</div>
+
+
+<h2 id="comments">3 Comments	<a href="#postcomment" title="Leave a comment">&raquo;</a>
+</h2>
+
+<ol id="commentlist">
+<li class="comment even thread-even depth-1 highlander-comment" id="comment-384897">
+	<div id="div-comment-384897">
+		<div class="comment-author vcard">
+						<p>I assume that 1806 is the recovered password for the user hash.  I may be mis-interpreting what you have posted, but bare with me.<br />
+Is there a reason that it didn&#8217;t solve for the owner hash?  Did your qpdf not check for an owner pw because you didn&#8217;t specify it?  pdf-parser.py did return a hash for an owner value.<br />
+If you knew there was no owner pw, why pass those hashes to John and hascat?<br />
+&#8230;and finally 🙂  How well does the test go if you cannot give it the number of characters to test for (which is normally the case in the wild).</p>
+			<p><cite>Comment by <span class="fn">Anonymous</span> &#8212; Tuesday 26 December 2017 @ <a href="#comment-384897">19:12</a></cite> 				<span class="reply">
+									</span>
+			</p>
+		</div>
+	</div>
+</li><!-- #comment-## -->
+<li class="comment byuser comment-author-didierstevens bypostauthor odd alt thread-odd thread-alt depth-1 highlander-comment" id="comment-384899">
+	<div id="div-comment-384899">
+		<div class="comment-author vcard">
+						<p>There is a /O entry (&#8220;the owner hash&#8221;), but there is no owner password. The algorithms that calculates the value for the /U and /O dictionary entries always produce a value, even if the user password or the owner password is empty. If the owner password is empty, the algorithm for the /O entry (algorithm 3) will use the user password.</p>
+<p>There is no need to crack the owner password if one has been specified: qpdf can decrypt a PDF protected with a owner password without having to provide that password to qpdf. You don&#8217;t need that password to decrypt the PDF, just like you don&#8217;t need that password to open that PDF with a PDF reader.</p>
+<p>For your last question: you&#8217;ll have to wait for part 2 tomorrow (00:00 UTC) 🙂 I will decrypt a PDF protected with a 32 character long random password.</p>
+			<p><cite>Comment by <span class="fn"><a href='https://didierstevens.wordpress.com/' rel='external nofollow' class='url'>Didier Stevens</a></span> &#8212; Tuesday 26 December 2017 @ <a href="#comment-384899">20:12</a></cite> 				<span class="reply">
+									</span>
+			</p>
+		</div>
+	</div>
+</li><!-- #comment-## -->
+<li class="pingback even thread-even depth-1 highlander-comment" id="comment-384909">
+	<div id="div-comment-384909">
+		<div class="comment-author vcard">
+						<p>[&#8230;] cracking the &#8220;easy&#8221; PDF of John&#8217;s challenge, I&#8217;m cracking the &#8220;tough&#8221; PDF [&#8230;]</p>
+			<p><cite>Pingback by <span class="fn"><a href='https://blog.didierstevens.com/2017/12/27/cracking-encrypted-pdfs-part-2/' rel='external nofollow' class='url'>Cracking Encrypted PDFs &#8211; Part 2 | Didier Stevens</a></span> &#8212; Wednesday 27 December 2017 @ <a href="#comment-384909">0:00</a></cite> 				<span class="reply">
+									</span>
+			</p>
+		</div>
+	</div>
+</li><!-- #comment-## -->
+</ol>
+	<div class="navigation">
+		<div class="alignleft"></div>
+		<div class="alignright"></div>
+	</div>
+	<br />
+
+	<p><a href="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/feed/"><abbr title="Really Simple Syndication">RSS</abbr> feed for comments on this post.</a>	<a href="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/trackback/" rel="trackback">TrackBack <abbr title="Uniform Resource Identifier">URI</abbr></a>
+</p>
+
+	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply (comments are moderated) <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2017/12/26/cracking-encrypted-pdfs-part-1/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://blog.didierstevens.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="9af7679197" /><input type="hidden" name="_wp_http_referer" value="/2017/12/26/cracking-encrypted-pdfs-part-1/" />
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest" />
+
+<div class="comment-form-field comment-textarea">
+	<label for="comment">Enter your comment here...</label>
+	<div id="comment-form-comment"><textarea id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="" alt="Gravatar" width="25" class="no-grav" />
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name</label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value="" /></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="" alt="WordPress.com Logo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" />
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="" alt="Twitter picture" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" />
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="" alt="Facebook photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" />
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="" alt="Google+ photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" />
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p><p class="post-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog"  style="display: inline;">Notify me of new posts via email.</label></p></div>
+
+
+
+
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='5714' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="0840ab60ae" /></p>
+<input type="hidden" name="genseq" value="1514390196" />
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="26"/></p>			</form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+
+
+<!-- begin footer -->
+</div>
+
+
+<!-- begin sidebar -->
+<div id="menu">
+
+<ul>
+<li id="text-2" class="widget widget_text"><h2 class="widgettitle">Didier Stevens Labs</h2>
+			<div class="textwidget"><a href="http://DidierStevensLabs.com"><img src="https://didierstevens.files.wordpress.com/2014/01/dsl-new-2-100.png" alt="Didier Stevens Labs" width="100" height="114" class="alignnone size-full wp-image-3673" /><a><br><a href="http://DidierStevensLabs.com"><b>Visit my company, Didier Stevens Labs</b><a></div>
+		</li>
+<li id="pages-2" class="widget widget_pages"><h2 class="widgettitle">Pages</h2>
+		<ul>
+			<li class="page_item page-item-2"><a href="https://blog.didierstevens.com/about/">About</a></li>
+<li class="page_item page-item-3931"><a href="https://blog.didierstevens.com/didier-stevens-suite/">Didier Stevens Suite</a></li>
+<li class="page_item page-item-36"><a href="https://blog.didierstevens.com/links/">Links</a></li>
+<li class="page_item page-item-2583"><a href="https://blog.didierstevens.com/my-software/">My Software</a></li>
+<li class="page_item page-item-4"><a href="https://blog.didierstevens.com/professional/">Professional</a></li>
+<li class="page_item page-item-35 page_item_has_children"><a href="https://blog.didierstevens.com/programs/">Programs</a>
+<ul class='children'>
+	<li class="page_item page-item-1217"><a href="https://blog.didierstevens.com/programs/ariad/">Ariad</a></li>
+	<li class="page_item page-item-3330"><a href="https://blog.didierstevens.com/programs/authenticode-tools/">Authenticode Tools</a></li>
+	<li class="page_item page-item-48"><a href="https://blog.didierstevens.com/programs/binary-tools/">Binary Tools</a></li>
+	<li class="page_item page-item-324"><a href="https://blog.didierstevens.com/programs/castoggle/">CASToggle</a></li>
+	<li class="page_item page-item-314"><a href="https://blog.didierstevens.com/programs/disitool/">Disitool</a></li>
+	<li class="page_item page-item-107"><a href="https://blog.didierstevens.com/programs/eicargen/">EICARgen</a></li>
+	<li class="page_item page-item-183"><a href="https://blog.didierstevens.com/programs/extractscripts/">ExtractScripts</a></li>
+	<li class="page_item page-item-127"><a href="https://blog.didierstevens.com/programs/filegen/">FileGen</a></li>
+	<li class="page_item page-item-2478"><a href="https://blog.didierstevens.com/programs/heaplocker/">HeapLocker</a></li>
+	<li class="page_item page-item-3066"><a href="https://blog.didierstevens.com/programs/network-appliance-forensic-toolkit/">Network Appliance Forensic&nbsp;Toolkit</a></li>
+	<li class="page_item page-item-1663"><a href="https://blog.didierstevens.com/programs/nokia-time-lapse-photography/">Nokia Time Lapse&nbsp;Photography</a></li>
+	<li class="page_item page-item-3916"><a href="https://blog.didierstevens.com/programs/oledump-py/">oledump.py</a></li>
+	<li class="page_item page-item-55"><a href="https://blog.didierstevens.com/programs/ollystepnsearch/">OllyStepNSearch</a></li>
+	<li class="page_item page-item-837"><a href="https://blog.didierstevens.com/programs/pdf-tools/">PDF Tools</a></li>
+	<li class="page_item page-item-2001"><a href="https://blog.didierstevens.com/programs/shellcode/">Shellcode</a></li>
+	<li class="page_item page-item-199"><a href="https://blog.didierstevens.com/programs/spidermonkey/">SpiderMonkey</a></li>
+	<li class="page_item page-item-232"><a href="https://blog.didierstevens.com/programs/translate/">Translate</a></li>
+	<li class="page_item page-item-91"><a href="https://blog.didierstevens.com/programs/usbvirusscan/">USBVirusScan</a></li>
+	<li class="page_item page-item-42"><a href="https://blog.didierstevens.com/programs/userassist/">UserAssist</a></li>
+	<li class="page_item page-item-3648"><a href="https://blog.didierstevens.com/programs/virustotal-tools/">VirusTotal Tools</a></li>
+	<li class="page_item page-item-124"><a href="https://blog.didierstevens.com/programs/xorsearch/">XORSearch &amp; XORStrings</a></li>
+	<li class="page_item page-item-3918"><a href="https://blog.didierstevens.com/programs/yara-rules/">YARA Rules</a></li>
+	<li class="page_item page-item-133"><a href="https://blog.didierstevens.com/programs/zipencryptftp/">ZIPEncryptFTP</a></li>
+</ul>
+</li>
+<li class="page_item page-item-2932 page_item_has_children"><a href="https://blog.didierstevens.com/public-drafts/">Public Drafts</a>
+<ul class='children'>
+	<li class="page_item page-item-2935"><a href="https://blog.didierstevens.com/public-drafts/cisco-tricks/">Cisco Tricks</a></li>
+</ul>
+</li>
+<li class="page_item page-item-202"><a href="https://blog.didierstevens.com/reverse-engineering-mentoring/">Reverse Engineering Mentoring</a></li>
+<li class="page_item page-item-151"><a href="https://blog.didierstevens.com/screencasts-videos/">Screencasts &amp; Videos</a></li>
+		</ul>
+		</li>
+<li id="search-2" class="widget widget_search"><form role="search" method="get" id="searchform" class="searchform" action="https://blog.didierstevens.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></li>
+<li id="top-posts-2" class="widget widget_top-posts"><h2 class="widgettitle">Top Posts</h2>
+<ul>				<li>
+										<a href="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/" class="bump-view" data-bump-view="tp">
+						Cracking Encrypted PDFs - Part 1					</a>
+									</li>
+							<li>
+										<a href="https://blog.didierstevens.com/2017/12/27/cracking-encrypted-pdfs-part-2/" class="bump-view" data-bump-view="tp">
+						Cracking Encrypted PDFs - Part 2					</a>
+									</li>
+							<li>
+										<a href="https://blog.didierstevens.com/2015/03/30/howto-make-your-own-cert-with-openssl-on-windows/" class="bump-view" data-bump-view="tp">
+						Howto: Make Your Own Cert With OpenSSL on Windows					</a>
+									</li>
+							<li>
+										<a href="https://blog.didierstevens.com/programs/pdf-tools/" class="bump-view" data-bump-view="tp">
+						PDF Tools					</a>
+									</li>
+							<li>
+										<a href="https://blog.didierstevens.com/2008/12/30/howto-make-your-own-cert-with-openssl/" class="bump-view" data-bump-view="tp">
+						Howto: Make Your Own Cert With OpenSSL					</a>
+									</li>
+			</ul></li>
+<li id="categories-1" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-2427"><a href="https://blog.didierstevens.com/category/net/" >.NET</a>
+</li>
+	<li class="cat-item cat-item-21043934"><a href="https://blog.didierstevens.com/category/010-editor/" >010 Editor</a>
+</li>
+	<li class="cat-item cat-item-290"><a href="https://blog.didierstevens.com/category/announcement/" >Announcement</a>
+</li>
+	<li class="cat-item cat-item-134289"><a href="https://blog.didierstevens.com/category/arduino/" >Arduino</a>
+</li>
+	<li class="cat-item cat-item-567478309"><a href="https://blog.didierstevens.com/category/bash-bunny/" >Bash Bunny</a>
+</li>
+	<li class="cat-item cat-item-9247"><a href="https://blog.didierstevens.com/category/beta/" >Beta</a>
+</li>
+	<li class="cat-item cat-item-21416447"><a href="https://blog.didierstevens.com/category/bpmtk/" >bpmtk</a>
+</li>
+	<li class="cat-item cat-item-11198"><a href="https://blog.didierstevens.com/category/certification/" >Certification</a>
+</li>
+	<li class="cat-item cat-item-114613718"><a href="https://blog.didierstevens.com/category/didier-stevens-labs/" >Didier Stevens Labs</a>
+</li>
+	<li class="cat-item cat-item-1252421"><a href="https://blog.didierstevens.com/category/eee-pc/" >Eee PC</a>
+</li>
+	<li class="cat-item cat-item-6474"><a href="https://blog.didierstevens.com/category/encryption/" >Encryption</a>
+</li>
+	<li class="cat-item cat-item-384"><a href="https://blog.didierstevens.com/category/entertainment/" >Entertainment</a>
+</li>
+	<li class="cat-item cat-item-98119"><a href="https://blog.didierstevens.com/category/fellow-bloggers/" >Fellow Bloggers</a>
+</li>
+	<li class="cat-item cat-item-62455"><a href="https://blog.didierstevens.com/category/forensics/" >Forensics</a>
+</li>
+	<li class="cat-item cat-item-1816"><a href="https://blog.didierstevens.com/category/hacking/" >Hacking</a>
+</li>
+	<li class="cat-item cat-item-79"><a href="https://blog.didierstevens.com/category/hardware/" >Hardware</a>
+</li>
+	<li class="cat-item cat-item-415890379"><a href="https://blog.didierstevens.com/category/maldoc/" >maldoc</a>
+</li>
+	<li class="cat-item cat-item-15593"><a href="https://blog.didierstevens.com/category/malware/" >Malware</a>
+</li>
+	<li class="cat-item cat-item-8249"><a href="https://blog.didierstevens.com/category/my-software/" >My Software</a>
+</li>
+	<li class="cat-item cat-item-877911"><a href="https://blog.didierstevens.com/category/n800/" >N800</a>
+</li>
+	<li class="cat-item cat-item-7426"><a href="https://blog.didierstevens.com/category/networking/" >Networking</a>
+</li>
+	<li class="cat-item cat-item-891"><a href="https://blog.didierstevens.com/category/nonsense/" >Nonsense</a>
+</li>
+	<li class="cat-item cat-item-876320"><a href="https://blog.didierstevens.com/category/nslu2/" >nslu2</a>
+</li>
+	<li class="cat-item cat-item-1902"><a href="https://blog.didierstevens.com/category/osx/" >OSX</a>
+</li>
+	<li class="cat-item cat-item-47759"><a href="https://blog.didierstevens.com/category/pdf/" >PDF</a>
+</li>
+	<li class="cat-item cat-item-64"><a href="https://blog.didierstevens.com/category/personal/" >Personal</a>
+</li>
+	<li class="cat-item cat-item-224855"><a href="https://blog.didierstevens.com/category/physical-security/" >Physical Security</a>
+</li>
+	<li class="cat-item cat-item-10386"><a href="https://blog.didierstevens.com/category/poll/" >Poll</a>
+</li>
+	<li class="cat-item cat-item-473"><a href="https://blog.didierstevens.com/category/puzzle/" >Puzzle</a>
+</li>
+	<li class="cat-item cat-item-46973"><a href="https://blog.didierstevens.com/category/quickpost/" >Quickpost</a>
+</li>
+	<li class="cat-item cat-item-49333"><a href="https://blog.didierstevens.com/category/reverse-engineering/" >Reverse Engineering</a>
+</li>
+	<li class="cat-item cat-item-27216"><a href="https://blog.didierstevens.com/category/rfid/" >RFID</a>
+</li>
+	<li class="cat-item cat-item-1568824"><a href="https://blog.didierstevens.com/category/shellcode/" >Shellcode</a>
+</li>
+	<li class="cat-item cat-item-300967"><a href="https://blog.didierstevens.com/category/smart-card/" >smart card</a>
+</li>
+	<li class="cat-item cat-item-652"><a href="https://blog.didierstevens.com/category/spam/" >Spam</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="https://blog.didierstevens.com/category/technology/" >technology</a>
+</li>
+	<li class="cat-item cat-item-854673"><a href="https://blog.didierstevens.com/category/ultraedit/" >UltraEdit</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://blog.didierstevens.com/category/uncategorized/" >Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-3251"><a href="https://blog.didierstevens.com/category/update/" >Update</a>
+</li>
+	<li class="cat-item cat-item-65966"><a href="https://blog.didierstevens.com/category/vulnerabilities/" >Vulnerabilities</a>
+</li>
+	<li class="cat-item cat-item-4305"><a href="https://blog.didierstevens.com/category/wifi/" >WiFi</a>
+</li>
+	<li class="cat-item cat-item-729864"><a href="https://blog.didierstevens.com/category/windows-7/" >Windows 7</a>
+</li>
+	<li class="cat-item cat-item-4502980"><a href="https://blog.didierstevens.com/category/windows-8/" >Windows 8</a>
+</li>
+	<li class="cat-item cat-item-3003"><a href="https://blog.didierstevens.com/category/windows-vista/" >Windows Vista</a>
+</li>
+	<li class="cat-item cat-item-686916"><a href="https://blog.didierstevens.com/category/wireshark/" >Wireshark</a>
+</li>
+		</ul>
+</li>
+<li id="text-1" class="widget widget_text">			<div class="textwidget"><a href="https://blog.didierstevens.com/feed/" title="RSS"><img src="https://i0.wp.com/radio.weblogs.com/0001011/images/xml.gif" border="0" width="36"></a>
+</div>
+		</li>
+<li id="blog-stats-2" class="widget widget_blog-stats"><h2 class="widgettitle">Blog Stats</h2>
+		<ul>
+			<li>4,868,775 hits</li>
+		</ul>
+		</li>
+<li id="twitter-2" class="widget widget_twitter"><h2 class="widgettitle"><a href='http://twitter.com/DidierStevens'>Twitter @DidierStevens</a></h2>
+<ul class='tweets'>
+			<li>
+				And here is part 2: cracking the key of an encrypted PDF: <a href="https://blog.didierstevens.com/2017/12/27/cracking-encrypted-pdfs-part-2/"> blog.didierstevens.com/2017/12/27/cra…</a> 				<a href="http://twitter.com/DidierStevens/statuses/945807349880623104" class="timesince">15&nbsp;hours&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				New blog post &quot;Cracking Encrypted PDFs – Part 1&quot; <a href="https://blog.didierstevens.com/2017/12/26/cracking-encrypted-pdfs-part-1/"> blog.didierstevens.com/2017/12/26/cra…</a> <a href="https://t.co/YeCnxh6JX3" rel="nofollow">https://t.co/YeCnxh6JX3</a> 				<a href="http://twitter.com/DidierStevens/statuses/945705392910290944" class="timesince">22&nbsp;hours&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				RT @<a href='http://twitter.com/dualcoremusic'>dualcoremusic</a>: We are #1 in hip-hop/rap and currently #6 overall on Bandcamp. Thank you so much!!! ❤️ <a href="https://t.co/iJmJLX9iHZ" rel="nofollow">https://t.co/iJmJLX9iHZ</a> 				<a href="http://twitter.com/DidierStevens/statuses/945439536779284480" class="timesince">1&nbsp;day&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				RT @<a href='http://twitter.com/sans_isc'>sans_isc</a>: Dealing with obfuscated RTF files <a href="http://i5c.us/2BCParr"> i5c.us/2BCParr</a> 				<a href="http://twitter.com/DidierStevens/statuses/945435022525456384" class="timesince">1&nbsp;day&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				RT @<a href='http://twitter.com/adulau'>adulau</a>: As the number of devices, equipments or sensors increased in the 433.9 MHz band, I&#039;m wondering if this could be used to fingerp… 				<a href="http://twitter.com/DidierStevens/statuses/945434504277168129" class="timesince">1&nbsp;day&nbsp;ago</a>
+			</li>
+
+			</ul></li>
+<li id="archives-2" class="widget widget_archive"><h2 class="widgettitle">Archives</h2>
+		<ul>
+			<li><a href='https://blog.didierstevens.com/2017/12/'>December 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/11/'>November 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/10/'>October 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/09/'>September 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/08/'>August 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/07/'>July 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/06/'>June 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/05/'>May 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/04/'>April 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/03/'>March 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/02/'>February 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2017/01/'>January 2017</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/12/'>December 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/11/'>November 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/10/'>October 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/09/'>September 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/08/'>August 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/07/'>July 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/06/'>June 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/05/'>May 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/04/'>April 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/03/'>March 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/02/'>February 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2016/01/'>January 2016</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/12/'>December 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/11/'>November 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/10/'>October 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/09/'>September 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/08/'>August 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/07/'>July 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/06/'>June 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/05/'>May 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/04/'>April 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/03/'>March 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/02/'>February 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2015/01/'>January 2015</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/12/'>December 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/11/'>November 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/10/'>October 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/09/'>September 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/08/'>August 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/07/'>July 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/06/'>June 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/05/'>May 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/04/'>April 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/03/'>March 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/02/'>February 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2014/01/'>January 2014</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/12/'>December 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/11/'>November 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/10/'>October 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/09/'>September 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/08/'>August 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/07/'>July 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/06/'>June 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/05/'>May 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/04/'>April 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/03/'>March 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/02/'>February 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2013/01/'>January 2013</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/12/'>December 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/11/'>November 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/10/'>October 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/09/'>September 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/08/'>August 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/07/'>July 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/06/'>June 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/05/'>May 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/04/'>April 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/03/'>March 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/02/'>February 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2012/01/'>January 2012</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/12/'>December 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/11/'>November 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/10/'>October 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/09/'>September 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/08/'>August 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/07/'>July 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/06/'>June 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/05/'>May 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/04/'>April 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/03/'>March 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/02/'>February 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2011/01/'>January 2011</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/12/'>December 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/11/'>November 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/10/'>October 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/09/'>September 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/08/'>August 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/07/'>July 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/06/'>June 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/05/'>May 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/04/'>April 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/03/'>March 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/02/'>February 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2010/01/'>January 2010</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/12/'>December 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/11/'>November 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/10/'>October 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/09/'>September 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/08/'>August 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/07/'>July 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/06/'>June 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/05/'>May 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/04/'>April 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/03/'>March 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/02/'>February 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2009/01/'>January 2009</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/12/'>December 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/11/'>November 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/10/'>October 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/09/'>September 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/08/'>August 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/07/'>July 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/06/'>June 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/05/'>May 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/04/'>April 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/03/'>March 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/02/'>February 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2008/01/'>January 2008</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/12/'>December 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/11/'>November 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/10/'>October 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/09/'>September 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/08/'>August 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/07/'>July 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/06/'>June 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/05/'>May 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/04/'>April 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/03/'>March 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/02/'>February 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2007/01/'>January 2007</a></li>
+	<li><a href='https://blog.didierstevens.com/2006/12/'>December 2006</a></li>
+	<li><a href='https://blog.didierstevens.com/2006/11/'>November 2006</a></li>
+	<li><a href='https://blog.didierstevens.com/2006/10/'>October 2006</a></li>
+	<li><a href='https://blog.didierstevens.com/2006/09/'>September 2006</a></li>
+	<li><a href='https://blog.didierstevens.com/2006/08/'>August 2006</a></li>
+	<li><a href='https://blog.didierstevens.com/2006/07/'>July 2006</a></li>
+	<li><a href='https://blog.didierstevens.com/2006/06/'>June 2006</a></li>
+		</ul>
+		</li>
+<li id="calendar-2" class="widget widget_calendar"><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar">
+	<caption>December 2017</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="Monday">M</th>
+		<th scope="col" title="Tuesday">T</th>
+		<th scope="col" title="Wednesday">W</th>
+		<th scope="col" title="Thursday">T</th>
+		<th scope="col" title="Friday">F</th>
+		<th scope="col" title="Saturday">S</th>
+		<th scope="col" title="Sunday">S</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="https://blog.didierstevens.com/2017/11/">&laquo; Nov</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next" class="pad">&nbsp;</td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="4" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td>
+	</tr>
+	<tr>
+		<td>4</td><td>5</td><td><a href="https://blog.didierstevens.com/2017/12/06/" aria-label="Posts published on December 6, 2017">6</a></td><td>7</td><td>8</td><td>9</td><td><a href="https://blog.didierstevens.com/2017/12/10/" aria-label="Posts published on December 10, 2017">10</a></td>
+	</tr>
+	<tr>
+		<td><a href="https://blog.didierstevens.com/2017/12/11/" aria-label="Posts published on December 11, 2017">11</a></td><td>12</td><td>13</td><td><a href="https://blog.didierstevens.com/2017/12/14/" aria-label="Posts published on December 14, 2017">14</a></td><td>15</td><td>16</td><td><a href="https://blog.didierstevens.com/2017/12/17/" aria-label="Posts published on December 17, 2017">17</a></td>
+	</tr>
+	<tr>
+		<td><a href="https://blog.didierstevens.com/2017/12/18/" aria-label="Posts published on December 18, 2017">18</a></td><td><a href="https://blog.didierstevens.com/2017/12/19/" aria-label="Posts published on December 19, 2017">19</a></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td>
+	</tr>
+	<tr>
+		<td>25</td><td><a href="https://blog.didierstevens.com/2017/12/26/" aria-label="Posts published on December 26, 2017">26</a></td><td id="today"><a href="https://blog.didierstevens.com/2017/12/27/" aria-label="Posts published on December 27, 2017">27</a></td><td>28</td><td>29</td><td>30</td><td>31</td>
+	</tr>
+	</tbody>
+	</table></div></li>
+
+</ul>
+
+</div>
+
+
+<p class="credit"><cite> <a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a></cite></p>
+
+</div>
+
+<!--  -->
+	<div style="display:none">
+	</div>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/didierstevens.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/didierstevens.wordpress.com\/wp-login.php?action=logout&_wpnonce=be9295e336","homeURL":"https:\/\/blog.didierstevens.com\/","postID":"5714","gravDefault":"mystery","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s2.wp.com/_static/??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1479964158j'></script>
+
+	<div id="carousel-reblog-box">
+		<form action="#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post" />
+				<input type="hidden" id="carousel-reblog-blog-id" value="264765" />
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://blog.didierstevens.com" />
+				<input type="hidden" id="carousel-reblog-blog-title" value="Didier Stevens" />
+				<input type="hidden" id="carousel-reblog-post-url" value="" />
+				<input type="hidden" id="carousel-reblog-post-title" value="" />
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="d71dd04087" /><input type="hidden" name="_wp_http_referer" value="/2017/12/26/cracking-encrypted-pdfs-part-1/" />		</form>
+
+		<div class="arrow"></div>
+	</div>
+<script type='text/javascript' src='https://platform.twitter.com/widgets.js?ver=20111117'></script>
+<link rel='stylesheet' id='all-css-0-3' href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel.css?m=1481571546h&cssminify=yes' type='text/css' media='all' />
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript'>
+/* <![CDATA[ */
+var actionbardata = {"siteID":"264765","siteName":"Didier Stevens","siteURL":"https:\/\/blog.didierstevens.com","icon":"<img alt='' src='https:\/\/s1.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/rubric","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/didierstevens.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fblog.didierstevens.com%2F2017%2F12%2F26%2Fcracking-encrypted-pdfs-part-1%2F","themeURL":"","xhrURL":"https:\/\/blog.didierstevens.com\/wp-admin\/admin-ajax.php","nonce":"1479a1ae9a","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"dae793f5b1\" \/>","referer":"https:\/\/blog.didierstevens.com\/2017\/12\/26\/cracking-encrypted-pdfs-part-1\/","canFollow":"1","feedID":"267095","statusMessage":"","customizeLink":"https:\/\/didierstevens.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fdidierstevens.wordpress.com%2F2017%2F12%2F26%2Fcracking-encrypted-pdfs-part-1%2F","postID":"5714","shortlink":"https:\/\/wp.me\/p16Sp-1ua","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/blog.didierstevens.com\/5714","statsLink":"https:\/\/wordpress.com\/stats\/post\/5714\/blog.didierstevens.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Rubric","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 603 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/didierstevens.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fblog.didierstevens.com%2F2017%2F12%2F26%2Fcracking-encrypted-pdfs-part-1%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/blog.didierstevens.com\/wp-admin\/admin-ajax.php","nonce":"0bd1ad8f16","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"0","login_url":"https:\/\/didierstevens.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fblog.didierstevens.com%2F2017%2F12%2F26%2Fcracking-encrypted-pdfs-part-1%2F","blog_id":"264765","local_comments_commenting_as":"<fieldset><label for=\"email\">Email<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=264765&v=wpcom&tz=0&user_id=0&subd=didierstevens","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s0.wp.com/_static/??-eJyVUEkOwjAM/BCpQVAQB8RTUEgNJM2GnbD8HiOx9IAqcYo1m8eBa1YmxYKxgGPo8GIN5lvjeAIDKlSVfT3ayOBtjwznihVPOnYe6S220fjaCSlBJoUgRkWY/b0JNo4k6k54tdcEQXNBkkmlCxLZZ9gH+zOhkDY9j5lMsSk+TZ/p1yWcv+WHuJMvoPvraYaqH7uMplQZPTgsWXqpNzDWr7ccsKh5M4WdbIZDoiD6bdjM2ul6vlq0y9Y9APBPpxM='></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>		<iframe src='https://widgets.wp.com/likes/master.html?ver=20170206#ver=20170206' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+		<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+<script src="//stats.wp.com/w.js?56" type="text/javascript" async defer></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'264765','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'264765','v':'wpcom','tz':'0','user_id':'0','post':'5714','subd':'didierstevens'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGNrd29+Smw0TDhnZmRTK0hlRi9QSGh6bi9GXVhBJWIlZlR5U1JMLU8/MkNtblkvY1dMVEs1QkdjayZ2U0g9LzAsWVFHW28/U0JfcD9SNVZobUxCQ0cwP0RJPWxXdC9GcXVQVCxyXUJUNV1YVGYyTUdRTyxiU056RWkyaEZKejUyLE80YWFZdStuRj1rVlNlbFE2Q3MxdXpqMHNZT3RbQ1VsbGN2L0xzWy54NWtiMzEwMC8mT21JMHV4OWpTMD80VjVoNz9dWHNJNUx5UyxmMHRqdDdjeHR2PVpneEFSY3l0aCxjQ3FbR3gtdlVndkVwSHU5M0JrTjB1Q2lyd2FldXJ4SmkmOH5ZSFJPVUNKeDdJM2FO'}]);
+_stq.push([ 'clickTrackerInit', '264765', '5714' ]);
+	</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script></body>
+</html>
+<!--
+	generated 103 seconds ago
+	generated in 0.166 seconds
+	served from batcache in 0.001 seconds
+	expires in 197 seconds
+-->
